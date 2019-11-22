@@ -1,0 +1,317 @@
+% macros are -*-latex-*- ones
+
+%% macros about using categories
+\DeclareMathOperator{\oboperator}{Ob}
+\newcommand{\ob}[1]{\oboperator{#1}}
+\DeclareMathOperator{\moroperator}{Mor}
+\newcommand{\mor}[1]{\moroperator\left(#1\right)}
+\newcommand{\op}[1]{{#1}^{\mathrm{op}}}
+\newcommand{\comma}[2]{\left( #1 \mathbin{\downarrow} #2 \right)}
+%\newcommand{\slice}[2]{\comma{#1}{#2}}
+\newcommand{\slice}[2]{{#1}\kern-.5pt/\kern-1pt{#2}}
+%\newcommand{\coslice}[2]{\comma{#2}{#1}}
+\newcommand{\coslice}[2]{#2\kern-.5pt\backslash\kern-1pt#1}
+\newcommand{\localize}[2]{{#2}^{-1}{#1}}
+%\newcommand{\id}[1]{\mathrm{id}_{#1}}
+\newcommand{\final}{1}
+\newcommand{\initial}{0}
+\newcommand{\psh}[1]{\widehat{#1}}
+\DeclareMathOperator{\Pshoperator}{Psh}
+\newcommand{\Psh}[1]{\Pshoperator(#1)}
+\DeclareMathOperator{\Shoperator}{Sh}
+\newcommand{\Sh}[1]{\Shoperator(#1)}
+%\newcommand{\fiber}[2]{{#1}_{#2}}
+\newcommand{\fiberprod}[3]{{#1}\times_{#3}{#2}}
+\newcommand{\indout}[1]{\left\langle{#1}\right\rangle}
+\newcommand{\indin}[1]{\left({#1}\right)}
+\newcommand{\elemcat}[2][\null]{\int_{#1}{#2}}
+\DeclareMathOperator*{\limoperator}{lim}
+\renewcommand{\lim}[2][\null]{\limoperator_{#1}\left( #2 \right)}
+\DeclareMathOperator*{\colimoperator}{colim}
+\newcommand{\colim}[2][\null]{\colimoperator_{#1}\left( #2 \right)}
+\newcommand{\limend}[1]{\int_{#1}}
+\newcommand{\colimend}[1]{\int^{#1}}
+\newcommand{\tens}{\mathbin \odot}
+\newcommand{\cotens}{\mathbin \pitchfork}
+%\newcommand{\adjoint}{\dashv}
+\newcommand{\leftadjto}{\dashv}
+\newcommand{\rightadjto}{\vdash}
+\newcommand{\adjarrows}{\rightleftarrows}
+\newcommand{\adjointarrows}{\rightleftarrows}
+\newcommand{\ladjointmap}[2][]{{#2}_{#1}^\natural}
+\newcommand{\radjointmap}[2][]{{#2}_{#1}^\flat}
+\DeclareMathOperator{\spanoperator}{Span}
+\newcommand{\catspan}[3][\null]{\spanoperator_{#1}\left(#2,#3\right)}
+\DeclareMathOperator{\homoperator}{Hom}
+% \renewcommand{\hom}[3][\null]{%
+%         \ifx#1\null%
+%                 \homoperator\left(#2,#3\right)%
+%         \else #1\left(#2,#3\right) \fi}
+\DeclareMathOperator{\Homoperator}{\underline{Hom}}
+%\newcommand{\Hom}[3][\null]{\Homoperator_{#1}\left(#2,#3\right)}
+\newcommand{\Arr}[1]{\operatorname{Arr}(#1)}
+\DeclareMathOperator{\functorcatoperator}{Fun}
+\DeclareMathOperator{\pseudofunctorcatoperator}{PFun}
+\newcommand{\functorcat}[3][\null]{%
+  \ifx#1\null%
+  \functorcatoperator\left({#2},{#3}\right)%
+  \else\Homoperator(#2,#3)%
+  \fi%
+}
+\newcommand{\pseudofunctorcat}[3][\null]{%
+  \ifx#1\null%
+  \pseudofunctorcatoperator\left({#2},{#3}\right)%
+  \else\Homoperator(#2,#3)%
+  \fi%
+}
+\DeclareMathOperator{\opfiboperator}{OpFib}
+\newcommand{\opfib}[1]{%
+  \opfiboperator\left({#1}\right)%
+}
+\DeclareMathOperator{\bifiboperator}{BiFib}
+\newcommand{\bifib}[1]{%
+  \bifiboperator\left({#1}\right)%
+}
+\newcommand{\mono}{\hookrightarrow}
+\newcommand{\epi}{\twoheadrightarrow}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\yoneda}[2][\null]{\mathfrak h^{#1}_{#2}}
+\newcommand{\fromsum}[2]{\langle #1,#2 \rangle}
+\newcommand{\toprod}[2]{\langle #1,#2 \rangle}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\walkingcospan}{%
+  \tikz[anchor=base,baseline,scale=.2]{%
+    \draw[thick] (0,0) -| (1,1);%
+  }%
+}
+\DeclareMathOperator{\nerveoperator}{N}
+\newcommand{\nerve}[1]{\nerveoperator{#1}}
+
+%% macros about bifibrational stuff
+\DeclareMathOperator{\cartoperator}{Cart}
+\newcommand{\cart}[3][\null]{\rho^{#1}_{#2,#3}}
+\newcommand{\cartz}{\rho}
+% \newcommand{\cart}[3][\null]{\cartoperator_{#1}\left(#2,#3\right)}
+\DeclareMathOperator{\cocartoperator}{Cocart}
+\newcommand{\cocart}[3][\null]{\lambda^{#1}_{#2,#3}}
+\newcommand{\cocartz}{\lambda}
+% \newcommand{\cocart}[3][\null]{\cocartoperator_{#1}\left(#2,#3\right)}
+\newcommand{\push}[2]{{#1}_!#2}
+\newcommand{\pull}[2]{{#1}^\ast#2}
+\newcommand{\pushfact}[1]{{#1}_{\triangleright}}
+\newcommand{\pullfact}[1]{{#1}^{\triangleleft}}
+\newcommand{\middlefact}[3]{\vphantom{#1}_{#2}{#1}^{#3}}
+\newcommand{\bigluing}[1]{\mathcal G\kern -.1em\ell\left(#1\right)}
+\newcommand{\pseudo}[1]{\tilde{#1}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\groth}[1]{\operatorname{\mathfrak{G}}({#1})}
+\newcommand{\comp}[1]{\left\{#1\right\}}
+\newcommand{\codtribe}[1]{\mathfrak p_{#1}}
+\DeclareMathOperator{\subsetoperator}{Sub}
+\newcommand{\Sub}[1]{\subsetoperator(#1)}
+
+%% macros about Kan extensions
+\newcommand{\restr}[1]{{#1}^\ast}
+\newcommand{\lkan}[1]{{#1}_!}
+\newcommand{\rkan}[1]{{#1}_\ast}
+
+
+%% macros about formatting categories
+\newcommand{\cat}[1]{\mathscr{#1}}
+\newcommand{\concrete}[1]{\mymathsf{#1}}
+% \newcommand{\Set}{\concrete{Set}}
+% \newcommand{\Clan}{\concrete{Clan}}
+% \newcommand{\RelClan}{\concrete{RelClan}}
+% \newcommand{\Top}{\concrete{Top}}
+% \newcommand{\Grpd}{\concrete{Grpd}}
+% \newcommand{\Grp}{\concrete{Grp}}
+% \newcommand{\Cat}{\concrete{Cat}}
+% \newcommand{\Adj}{\concrete{Adj}}
+% \newcommand{\Quil}{\concrete{Quil}}
+% \newcommand{\Mod}{\concrete{Mod}}
+% \newcommand{\CAT}{\concrete{CAT}}
+% \newcommand{\Comp}{\concrete{Comp}}
+% \newcommand{\sSet}{\boldsymbol{\cat S}}
+\newcommand{\lincat}[1]{\mathbf{#1}}
+\newcommand{\abgrp}[1]{{#1}_{\mathrm{ab}}}
+\DeclareMathOperator{\lawthmodoperator}{Mod}
+\newcommand{\lawthmod}[2][\null]{%
+  \lawthmodoperator_{#2}
+  \ifx#1\null%
+  \null%
+  \else%
+  {\left(#1\right)}%
+  \fi%
+}
+\newcommand{\finset}{\aleph_0}
+
+%% simplicial stuff
+\newcommand{\simpcat}{\boldsymbol\Delta}
+\newcommand{\standsimp}[1]{\simpcat[#1]}
+\newcommand{\simplicial}[1]{\boldsymbol{s}#1}
+\newcommand{\face}[3][\null]{%
+  \ifx#1\null%
+  \partial_{#2}^{#3}%
+  \else%
+  \lexponent{\mathrm{d}_{#2}^{#3}}{#1}%
+  \fi%
+}
+\newcommand{\degen}[3][\null]{%
+  \ifx#1\null%
+  \sigma_{#2}^{#3}%
+  \else%
+  \lexponent{\mathrm{s}_{#2}^{#3}}{#1}%
+  \fi%
+}
+
+%% macros about model categories
+\newcommand{\Ho}[2][\null]{\mathbf{Ho}_{\rm #1}\left( #2 \right)}
+\newcommand{\class}[1]{\mathfrak{#1}}
+\newcommand{\fib}{\mathrm{Fib}}
+\newcommand{\cof}{\mathrm{Cof}}
+%\newcommand{\weq}{\mathrm{W}}
+\newcommand{\worth}[1][\null]{\mathbin{%
+    \tikz[scale=.2,anchor=base,baseline]{%
+      \draw (0,0) -- (1,0) -- (1,1) -- (0,1) -- (0,0) -- (1,1);%
+    }_{#1}%
+  }%
+}%
+\newcommand{\sorth}[1][\null]{
+  \mathbin{\perp_{#1}}
+}%
+\newcommand{\bifibrant}[1]{{#1^{\rm cf}}}
+\newcommand{\fibrant}[1]{{#1^{\rm f}}}
+\newcommand{\cofibrant}[1]{{#1^{\rm c}}}
+\newcommand{\fibrantrep}[1]{\mathfrak j_{#1}}
+\newcommand{\cofibrantrep}[1]{\mathfrak q_{#1}}
+\newcommand{\fibrantrepz}{\fibrantrep\null}
+\newcommand{\cofibrantrepz}{\cofibrantrep\null}
+\DeclareMathOperator*{\lderivoperator}{\mathbf L}
+\DeclareMathOperator*{\rderivoperator}{\mathbf R}
+\newcommand{\lderiv}[1]{\lderivoperator#1}
+\newcommand{\rderiv}[1]{\rderivoperator#1}
+\newcommand{\htpyclass}[1]{\left[ #1 \right]}
+\newcommand{\htpyhom}[3][\null]{\pi\left(#2,#3\right)_{#1}}
+\newcommand{\htpyquotient}[1]{\pi\,{#1}}
+% \newcommand{\htpyhom}[3][\null]{\left[ #2,#3 \right]_{#1}}
+\DeclareMathOperator*{\derivfwoperator}{\mathbf D}
+\newcommand{\derivfw}[1]{\derivfwoperator{#1}}
+\newcommand{\disc}[1]{#1_{\rm d}}
+%\newcommand{\triv}[1]{#1_{\rm triv}}
+\newcommand{\fiberwise}[1]{#1_{\rm fw}}
+\newcommand{\lexponent}[2]{\vphantom{#1}^{#2}{#1}}
+\newcommand{\llp}[1]{\lexponent{#1}{\worth}}
+\newcommand{\rlp}[1]{{#1}^{\worth}}
+\newcommand{\wllp}[2][\null]{\lexponent{#2}{\worth[#1]}}
+\newcommand{\wrlp}[2][\null]{{#2}^{\worth[#1]}}
+\newcommand{\sllp}[2][\null]{\lexponent{#2}{\sorth[#1]}}
+\newcommand{\srlp}[2][\null]{{#2}^{\sorth[#1]}}
+\newcommand{\lhmtp}{\mathrel{\sim_\ell}}
+\newcommand{\rhmtp}{\mathrel{\sim_r}}
+\newcommand{\hmtp}{\mathrel{\sim}}
+\newcommand{\iso}{\cong}
+\newcommand{\htpyeq}{\simeq}
+
+%% macros dealing with Reedy stuff
+\newcommand{\deginf}[2]{#1_{#2}}
+\DeclareMathOperator{\latchingoperator}{L}
+\newcommand{\latch}{\latchingoperator}
+\newcommand{\latching}[1]{\latchingoperator_{#1}}
+\DeclareMathOperator{\matchingoperator}{M}
+\newcommand{\match}{\matchingoperator}
+\newcommand{\matching}[1]{\matchingoperator_{#1}}
+
+%% macros about set-theoretic stuff
+\newcommand{\universe}[1]{\mathbb{#1}}
+\newcommand{\powerset}[1]{\operatorname{\mathcal P}\left(#1\right)}
+
+%% macros about type theoretic stuff
+\newcommand{\theory}[1]{\mathbb{#1}}
+\newcommand{\Var}{\mymathsf{Var}}
+\newcommand{\entails}{\mathrel{\vdash}}
+\newcommand{\defequal}{\mathrel{\equiv}}
+\newcommand{\type}[1]{{#1}\ \mymathsf{type}}
+\newcommand{\ctxt}[1]{{#1}\ \mymathsf{context}}
+\newcommand{\subs}[3]{{#1}\left[#2\!\gets\!#3\right]}
+\newcommand{\freevar}[1]{\mymathsf{fv}\left(#1\right)}
+\newcommand{\alphabet}[1]{\mathcal{#1}}
+\newcommand{\shift}[2][\null]{\mymathsf{pr}_{#2}^{#1}}
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\idsymbol}{\mathrm{Id}}
+\newcommand{\eqsymbol}{\mathrm{Eq}}
+\newcommand{\sumsymbol}{\Sigma}
+\newcommand{\prodsymbol}{\Pi}
+\newcommand{\sumtype}[2]{\sumsymbol_{#1}#2}
+\newcommand{\prodtype}[2]{\prodsymbol_{#1}#2}
+\newcommand{\locprod}[2]{\prodsymbol_{#1}{#2}}
+\newcommand{\idtype}[3][\null]{\operatorname{\idsymbol}_{#1}\left(#2,#3\right)}
+\newcommand{\eqtype}[3][\null]{\operatorname{\eqsymbol}_{#1}\left(#2,#3\right)}
+%\newcommand{\refl}[1]{\mymathsf{refl}_{#1}}
+\newcommand{\jidoperator}{\mymathsf{j}}
+\newcommand{\jid}[4]{\jidoperator(#1,#2,#3,#4)}
+\newcommand{\transid}[2]{\mymathsf{trans}_{#1}\ifx#2\null\null\else(#2)\fi}
+\newcommand{\name}[1]{\ulcorner{#1}\urcorner}
+\newcommand{\recnat}[1]{\ifx#1\null\mymathsf{rec}\else\mymathsf{rec}(#1)\fi}
+\newcommand{\sing}[1]{\mymathsf{isContr}(#1)}
+\newcommand{\hequiv}[1]{\mymathsf{isEquiv}(#1)}
+\newcommand{\idisequiv}[1]{\mymathsf{idIsEquiv}_{#1}}
+\newcommand{\idtoeq}{\mymathsf{IdtoEq}}
+\newcommand{\rewrite}[1][\null]{\mathrel{\rightsquigarrow}_{#1}}
+%% semantics
+\newcommand{\sem}[1]{\llbracket#1\rrbracket}
+\newcommand{\domsem}[1]{\sem{#1}_0}
+\newcommand{\codsem}[1]{\sem{#1}_1}
+\newcommand{\loctribe}[2]{{#1}\,(#2)}
+\newcommand{\locreltribe}[3]{\mathrm P_{#3}{#1}\,(#2)}
+
+%% macros about general math
+\DeclareMathOperator{\autoperator}{Aut}
+%\newcommand{\aut}[1]{\autoperator\left(#1\right)}
+\newcommand{\quotient}[2]{\left. {#1} \middle / {#2} \right.}
+\newcommand*\from{:}
+\newcommand*\cocolon{%
+  \nobreak
+  \mskip6mu plus1mu
+  \mathpunct{}%
+  \nonscript
+  \mkern-\thinmuskip
+  {:}%
+  \mskip2mu
+  \relax
+}
+\newcommand*\cofrom{:}
+\DeclareMathOperator{\im}{im}
+\newcommand{\blank}{\mathord{-}}
+\newcommand{\Naturals}{\mathbb{N}}
+%\newcommand{\doteq}[1][]{\mathrel{\cdot=_{#1}}}
+
+%% macros about general typesetting
+\newcommand{\define}[1]{\emph{#1}}
+\newcommand{\showcase}[1]{\textbf{#1}}
+\newcommand{\nb}[1]{\nobreakdash#1}
+
+\newcommand{\mltt}{{\sc mltt}}%
+\newcommand{\wfs}{\textsc{wfs}}
+
+%% theorems typesetting
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{theorem_french*}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{claim*}{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{definition_french*}{Définition}
+\newtheorem{defprop}[theorem]{Definition-Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{\sc Remark}
+\newtheorem{notation}[theorem]{\sc Notation}
+\newtheorem{vocabulary}[theorem]{\sc Terminology}
+\newtheorem{example}[theorem]{\sc Example(s)}
+\newtheorem{cexample}[theorem]{\sc Counterexample(s)}
