@@ -272,15 +272,15 @@ defined as follows.
   e_0(x)&\jdeq x \quad\text{the identity equivalence}
 \\\nonumber
 \\\nonumber
-  e_1(N)&\jdeq S \quad\text{flipping the poles}\\
-  e_1(S)&\jdeq N\\
-  e_1(\mrd(x))&= \mrd(x)^{-1}\quad\text{reversing the meridians}
+  e_1(N)&\jdeq N \quad\text{keeping the poles}\\
+  e_1(S)&\jdeq S\\
+  e_1(\mrd(\base))&= \mrd(\base)\\
+  e_1(\mrd(\Sloop))&= \mrd(\Sloop^{-1})\quad\text{reversing orientation of meridians}
 \\\nonumber
 \\\nonumber
-  e_2(N)&\jdeq N \quad\text{keeping the poles}\\
-  e_2(S)&\jdeq S\\
-  e_2(\mrd(\base))&= \mrd(\base)^{-1}\\
-  e_2(\mrd(\Sloop))&= \mrd(\Sloop)^{-1}\quad\text{reversing orientation of meridians}
+  e_2(N)&\jdeq S \quad\text{flipping the poles}\\
+  e_2(S)&\jdeq N\\
+  e_2(\mrd(x))&= \mrd(x)^{-1}\quad\text{reversing the meridians}
 \\\nonumber
 \\\nonumber
   e_3(N)&\jdeq S \quad\text{flipping the poles}\\
@@ -292,7 +292,18 @@ defined as follows.
 One would expect $e_1=e_2$ and $e_0=e_3$.
 
 \begin{proof}
-We show $e_1(x)=e_2(x)$ for all $x:\Sp$ by suspension induction.
+We construct $f(x):T(x)\defeq(e_1(x)=e_2(x))$ for all $x:\Sp$ by 
+suspension induction. We take $n\defeq\mrd(\base):(N=S)\jdeq T(N)$ and 
+$s\defeq\mrd(\base)^{-1}:(S=N)\jdeq T(S)$. 
+We have to give $m(z): n=^T_{\mrd(z)}s$
+for all $z:\Sc$. The latter type is equivalent to
+$P(z)\defeq(\mrd(z)^{-1}\cdot n\cdot e_1(\mrd(z))^{-1} = s)$.
+We apply circle induction:
+$m(\base): P(\base)$ can easily be given by path algebra,
+as $P(\base)$ is equivalent to 
+$\mrd(\base)^{-1}\cdot n\cdot\mrd(\base)^{-1} = s$.
+It remains to give $m(\Sloop): m(\base)=^P_{\Sloop}m(\base)$.	
+
 \end{proof}
 
 
