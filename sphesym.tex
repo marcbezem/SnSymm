@@ -55,6 +55,8 @@ The other component contains ...
 Moreover, these two components are equivalent.
 \end{abstract}
 
+
+\section{The circle}
 In this document, we shall establish an equivalence
 between the type of equalities of $\Sc$ with itself and the sum type
 of $\Sc$ with itself. We work in intuitionistic Martin-Löf's type
@@ -94,24 +96,11 @@ proving
 \end{equation}
 As usual, we shall denote $f:\Sc\weq\Sc$ for a map $f:\Sc\to \Sc $
 such that the proposition $\isEq(f)$ is non-empty instead of the more
-honest $(f,!):\Sc \weq \Sc$. This is harmful for that there is an
-equivalence:
+honest $(f,!):\Sc \weq \Sc$. 
+This is harmless as the first projection is an equivalence
 \begin{equation}
-  ((f,!) =_{\Sc \weq \Sc} (g,!)) \simeq (f=_{\Sc \to \Sc}g)
+  ((f,!) =_{\Sc \weq \Sc} (g,!)) \simeq (f=_{\Sc \to \Sc}g).
 \end{equation}
-% First define a maps $\iota_1: \Sc \to (\Sc \weq \Sc)$ through
-% equivalence~(\ref{eq:3}) by:
-% \begin{enumerate}
-% \item first, let $\iota_1 (\base) \defequi \id_{\Sc}$,
-% \item now define $\iota_1(\Sloop) : \id_{\Sc} = \id_{\Sc}$ by function
-%   extensionality as an element of $\prod_{x:\Sc}x = x$; in order to do
-%   so, one can use $\Sc$-induction by providing
-%   $\Sloop : \base = \base$ and then a pathover
-%   $p:\pathover {\Sloop} {} \Sloop {\Sloop}$; the transport
-%   over $\Sloop$ in the type family $x\mapsto (x=x)$ being simply
-%   $\Sloop \blank {\inv\Sloop}$, one can take $p$ to be the witness of
-%   path algebra that indeed $\Sloop \Sloop {\inv \Sloop} = \Sloop$.
-% \end{enumerate}
 
 Recall that for each $x:\Sc$ one has an equivalence:
 \begin{equation}
@@ -244,36 +233,8 @@ $(\Sc \weq \Sc)$.
       \left(\sum_{x:\Sc}\base=x\right)
     \end{equation}
     The type on the right is a singleton, hence contractible. This
-    conclude the case $k=1$.
-    % We claim that $(\base, \refl {\id_\Sc})$ is a center of
-    % contraction. That is one wants to prove that for all $x:\Sc$,
-    % there is an element of
-    % \begin{equation}
-    %   \label{eq:7}
-    %   T(x) \defequi \prod_{p:\id_\Sc=\iota_1(x)}(\base,\refl {\id_\Sc})=(x,p)
-    % \end{equation}
-    % We shall use $\Sc$-induction by first providing such an element
-    % $\kappa$ for the case $x\jdeq \base$, and then providing a
-    % pathover in $\pathover \kappa {} \Sloop \kappa$:
-    % \begin{enumerate}[label=\arabic*.]
-    % \item given $p:\id_\Sc=\iota_1(\base)\jdeq \id_\Sc$, consider the
-    %   path $p(\base): \base = \base$; then the transport of
-    %   $\refl {\Sc}$ above that path is the composite path
-    %   $p \refl{\id_\Sc}$ which is equal to $p$ through path
-    %   algebra. In other term, we found an element of
-    %   $\kappa: (\base,\refl {\id_\Sc})=(\base,p)$, namely:
-    %   \begin{displaymath}
-    %     \kappa\defequi (p(\base), ! : p\refl{\id_\Sc} = p)
-    %   \end{displaymath}
-    % \item We need to find an element of
-    %   $\trp {T,\Sloop} (\kappa) = \kappa$. But $T$ is a type family of
-    %   the form $x\mapsto \prod_{y:B(x)}{C(x,y)}$ with $B: S^1 \to \U$
-    %   and $C : (\sum_{x:S^1}B(x)) \to \U$. Hence one can use heavy
-    %   transport and
-    %   $\trp{T,\Sloop}\kappa = (p \mapsto \trp {\Sloop} \kappa
-    %   (\trp{\Sloop} p) )$         
-    % \end{enumerate}
-  \item The case $k=-1$ is completely similar to the case $k=1$. We
+    concludes the case $k=1$.
+      \item The case $k=-1$ is completely similar to the case $k=1$. We
     now have a proof that $\phi = -\id_\Sc$, hence we shall prove that
     $\iscontr(\inv\iota(-\id_\Sc))$. From there one can determine that
     the first component of in (\ref{eq:fiber-iota-two-components}) is
@@ -285,6 +246,24 @@ $(\Sc \weq \Sc)$.
     recognizing a singleton.
   \end{enumerate}
 \end{proof}
+
+\section{The sphere}
+\newcommand{\Sp}{S^2}\newcommand{\mrd}{\mathit{merid}}
+We define the sphere $\Sp$ as the suspension $\Sigma\Sc$ of the circle.
+The suspension of a type $A$ is a higher inductive type 
+with two point constructors and path constructors indexed by $A$:
+\begin{align}
+  \label{eq:1}
+  N &: \Sigma A \quad\text{the `North pole'}\\
+  S &: \Sigma A \quad\text{the `South pole'}\\
+  \mrd &: A \to N =_{\Sigma A} S \quad\text{the `meridians'}
+\end{align}
+Suspensions enjoy a inductive property: given a type family
+$T : \Sigma A \to \U$, elements $n:T(N)$ and $s:T(S)$, and paths
+$m(a) : n=_{\mrd(a)}s$ for all $a:A$, 
+suspension induction provides a dependent
+function $f : \prod_{x:\Sc}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
+and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$. 
 
 \end{document}
 
