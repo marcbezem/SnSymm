@@ -107,7 +107,7 @@ Recall that for each $x:\Sc$ one has an equivalence:
   \label{eq:8}
   f_x : (\base = \base) \to (x=x)
 \end{equation}
-Indeed, such a map $x\mapsto f_x$ is defines by $\Sc$-induction by
+Indeed, such a map $x\mapsto f_x$ is defined by $\Sc$-induction by
 setting $f_{\base} \defequi \id$ and $f_{\Sloop}$ to be the proof that
 postcomposing with the conjugation $\Sloop \blank \inv\Sloop$ is the
 identity. In particular one can easily prove that
@@ -253,18 +253,50 @@ We define the sphere $\Sp$ as the suspension $\Sigma\Sc$ of the circle.
 The suspension of a type $A$ is a higher inductive type 
 with two point constructors and path constructors indexed by $A$:
 \begin{align}
-  \label{eq:1}
+  \label{eq:suspension}
   N &: \Sigma A \quad\text{the `North pole'}\\
   S &: \Sigma A \quad\text{the `South pole'}\\
-  \mrd &: A \to N =_{\Sigma A} S \quad\text{the `meridians'}
+  \mrd &: A \to (N =_{\Sigma A} S) \quad\text{the `meridians'}
 \end{align}
 Suspensions enjoy a inductive property: given a type family
 $T : \Sigma A \to \U$, elements $n:T(N)$ and $s:T(S)$, and paths
 $m(a) : n=_{\mrd(a)}s$ for all $a:A$, 
 suspension induction provides a dependent
 function $f : \prod_{x:\Sc}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
-and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$. 
+and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$.
 
+Four equivalences $\Sp\to\Sp$ that will be used in the sequel are
+defined as follows. 
+\begin{align}
+  \label{eq:S2symmetries}
+  e_0(x)&\jdeq x \quad\text{the identity equivalence}
+\\\nonumber
+\\\nonumber
+  e_1(N)&\jdeq S \quad\text{flipping the poles}\\
+  e_1(S)&\jdeq N\\
+  e_1(\mrd(x))&= \mrd(x)^{-1}\quad\text{reversing the meridians}
+\\\nonumber
+\\\nonumber
+  e_2(N)&\jdeq N \quad\text{keeping the poles}\\
+  e_2(S)&\jdeq S\\
+  e_2(\mrd(\base))&= \mrd(\base)^{-1}\\
+  e_2(\mrd(\Sloop))&= \mrd(\Sloop)^{-1}\quad\text{reversing orientation of meridians}
+\\\nonumber
+\\\nonumber
+  e_3(N)&\jdeq S \quad\text{flipping the poles}\\
+  e_3(S)&\jdeq N\\
+  e_3(\mrd(\base))&= \mrd(\base)^{-1}\quad\text{reversing the meridians, and}\\
+  e_3(\mrd(\Sloop))&= \ap{\mrd(\_)^{-1}}(\Sloop)\quad\text{reversing their orientation}
+\end{align}
+
+One would expect $e_1=e_2$ and $e_0=e_3$.
+
+\begin{proof}
+We show $e_1(x)=e_2(x)$ for all $x:\Sp$ by suspension induction.
+\end{proof}
+
+
+%canonical equivalences $f_x : (\base=\base)\to(x=x)$ from (\ref{eq:8}).
 \end{document}
 
 % LocalWords: isomorphisms automorphisms morphisms
