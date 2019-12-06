@@ -248,22 +248,151 @@ $(\Sc \weq \Sc)$.
 \end{proof}
 
 \section{The sphere}
-\newcommand{\Sp}{S^2}\newcommand{\mrd}{\mathit{merid}}
-We define the sphere $\Sp$ as the suspension $\Sigma\Sc$ of the circle.
+\newcommand{\Sp}{S^2}%
+\newcommand{\mrd}{\mathit{merid}}%
+\newcommand{\susp}[1]{\operatorname{\Sigma}{#1}}%
+%
+We define the sphere $\Sp$ as the suspension $\susp\Sc$ of the circle.
 The suspension of a type $A$ is a higher inductive type 
 with two point constructors and path constructors indexed by $A$:
 \begin{align}
   \label{eq:suspension}
-  N &: \Sigma A \quad\text{the `North pole'}\\
-  S &: \Sigma A \quad\text{the `South pole'}\\
-  \mrd &: A \to (N =_{\Sigma A} S) \quad\text{the `meridians'}
+  N &: \susp A \quad\text{the `North pole'}\\
+  S &: \susp A \quad\text{the `South pole'}\\
+  \mrd &: A \to (N =_{\susp A} S) \quad\text{the `meridians'}
 \end{align}
 Suspensions enjoy a inductive property: given a type family
-$T : \Sigma A \to \U$, elements $n:T(N)$ and $s:T(S)$, and paths
+$T : \susp A \to \U$, elements $n:T(N)$ and $s:T(S)$, and paths
 $m(a) : n=_{\mrd(a)}s$ for all $a:A$, 
 suspension induction provides a dependent
 function $f : \prod_{x:\Sc}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
 and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$.
+
+\subsection{Winding numbers}
+\label{sec:winding-numbers}
+\def\hopffam{\mathcal H}%
+\def\loopspace#1{\operatorname{\Omega_{#1}}}%
+
+The goal of this section is to provide for each map $\Sp \to \Sp$ a
+{\em degree} in $\ZZ$. The first step is to a map
+$\loopspace 2 \Sp \to \loopspace 1 \Sc$. The construction of such a
+map is known material that can be tracked back at least to Brunerie's
+thesis. However, we are not only interested in the existence of such a
+map or its defining properties but by its actual computation. We shall
+then follow carefully the construction of the Hopf fibration provided
+by Brunerie an dkeep track of the actual formula for the map of
+interest.
+
+Consider the type family $\hopffam : \Sp \to \U$ defined by induction
+as follows:
+\begin{equation}
+  \label{eq:7}
+  \begin{aligned}
+    \hopffam (N) &\defequi \Sc
+    \\
+    \hopffam (S) &\defequi \Sc
+    \\
+    \hopffam (\mrd(x)) &\defis \iota_1(x)
+  \end{aligned}
+\end{equation}
+Denote $X$ for the total space of the type family $\hopffam$. One can
+show that $X$ is equivalent to the 3-sphere $\susp \Sp$, but this
+shall not prove useful here. Hence we keep the neutral notation $X$ to
+avoid confusion. The projection $\fst : X\to \Sp$ is referred as the
+Hopf fibration in the literature and we should keep the naming in that
+document.
+
+If one equip $\Sc$ with the point $\base$, $\Sp$ with the point $N$
+and $X$ with the point $(N,\base)$, then $\hopffam$ becomes a pointed
+type family and the Hopf fibration a pointed map whose fiber at the
+selected point $N$ is $\Sc$. In other words, one get a fiber sequence
+as follows:
+\begin{equation}
+  \label{eq:9}
+  \begin{tikzcd}
+    \Sc \rar["i"] & X \rar["\fst"] & \Sp
+  \end{tikzcd}
+\end{equation}
+The first map $i:\Sc \to X$ is simply the inclusion $z\mapsto
+(N,z)$. This induces a fiber sequence at the level of loop spaces:
+\begin{equation}
+  \label{eq:12}
+  \begin{tikzcd}
+    \loopspace 1 \Sc \rar["\loopspace 1 i"] & \loopspace 1 X \rar["\loopspace 1 \fst"] & \loopspace 1 \Sp
+  \end{tikzcd}
+\end{equation}
+Indeed, $\loopspace 1 \Sc$ identifies with the fiber of
+$\loopspace 1 \fst$ through the following equivalences:
+\begin{align}
+  \inv {(\loopspace 1 \fst)} {(\refl N)}
+  &\jdeq \sum_{(q,p):\loopspace 1 X}\refl N = (\loopspace 1 \fst)(q,p)
+  \\
+  &\weq \sum_{q:N=N}\sum_{p:\pathover \base {\hopffam} q \base}\refl N = q
+  \\
+  &\weq \sum_{q:N=N}(\refl N = q)\times(\trp{\hopffam, q}(\base) =\base)
+  \\
+  &\weq (\base = \base) \jdeq \loopspace 1 \Sc
+\end{align}
+Following the equivalence from $\loopspace 1 \Sc$ back to the fiber is
+simply the function $p \mapsto ((\refl N,p),\refl{\refl N})$. Hence,
+by postcomposing with the first projection, one gets
+$p \mapsto (\refl N, p)$ which is indeed
+$\loopspace 1 i: \loopspace 1 \Sc \to \loopspace 1 X$.
+
+We are now interested in the fiber of $\loopspace 1 i$. Indeed,
+\begin{align}
+  \inv {(\loopspace 1 i)} {(\refl N,\refl\base)}
+  &\weq \sum_{p:\base = \base}(\refl N,\refl\base) = (\refl N,p)
+  \\
+  &\weq \sum_{\alpha:\refl N = \refl N}\sum_{p:\base=\base}\trp {T,\alpha}(\refl \base) = p \label{eq:type-fam-trp}
+  \\
+  &\weq (\refl N = \refl N) \jdeq \loopspace 2 \Sp
+\end{align}
+where the type family $T:\loopspace 1 \Sp \to \U$ in
+(\ref{eq:type-fam-trp}) is given by
+$e\mapsto {(\pathover \base \hopffam e \base)}$. The equivalence from
+$\loopspace 2 \Sp$ back to the actual fiber is given by:
+\begin{equation}
+  \begin{aligned}
+    \loopspace 2 \Sp &\to \sum_{p:\base = \base}(\refl N,\refl\base) =
+    (\refl N,p)
+    \\
+    \alpha &\mapsto \left(\trp{T,\alpha}(\refl\base), \left(\alpha,
+        \refl{\trp{T,\alpha}(\refl\base)}\right)\right)
+  \end{aligned}
+\end{equation}
+The map of interest is the composition of this equivalence with the
+first projection to $\loopspace 1 \Sc$, which is then simply
+$\alpha \mapsto \trp{T,\alpha}(\refl \base)$. All that remains to do
+is to determine the transport in the type family $T$, so that one can
+explicitize further the map $\loopspace 2 \Sp \to \loopspace 1 \Sc$
+described above.
+
+For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
+transport
+$\trp{T,\alpha}:(\trp{H,e}(\base) = base) \to (\trp{H,e'}(\base) =
+\base)$ identifies with the following function:
+\begin{equation}
+  \begin{aligned}
+    {t_\alpha}: (\trp{H,e}(\base) = base) &\to (\trp{H,e'}(\base) = \base)
+    \\
+    p &\mapsto p\cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
+  \end{aligned}
+\end{equation}
+This is shown by induction on $\alpha$: indeed,
+$\ap{\trp{H,-}(\base)}(\refl{e}) \jdeq \refl{\trp{H,e}(\base)}$; hence
+path algebra provides a proof of $t_{\refl{e}}(p) = p$. So in
+particular when $\alpha:\refl N = \refl N$, one gets
+\begin{equation}
+  \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
+  = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
+\end{equation}
+
+
+
+
+\subsection{Symmetries of the sphere}
+\label{sec:symmetries-sphere}
 
 Four equivalences $\Sp\to\Sp$ that will be used in the sequel are
 defined as follows. 
