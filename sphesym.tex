@@ -420,17 +420,48 @@ In the sequel we will have to deal with the following situation.
 Let $A$ be a type with elements $a, b, c : A$ and 1- and 2-paths as follows:
 %
 \begin{align*}
-  p &: a = b,       &       r &: b = c \\
-  q &: a = b,       &       s &: b = c \\
-  \alpha &: p = q,  &   \beta &: r = s.
+  p &: a = b       &       r &: b = c \\
+  q &: a = b       &       s &: b = c \\
+  \alpha &: p = q  &   \beta &: r = s
 \end{align*}
+%
 We define the \emph{horizontal composition} of $\alpha$ and $\beta$ as 
 a path $\beta\cdot_h\alpha: rp=sq$.
 First observe that $\ap{r\_}(\alpha):rp=rq$.
 Then observe that $\ap{\_q}(\beta):rq=sq$.
 Now define $\beta\cdot_h\alpha \defeq \ap{\_q}(\beta)\ap{r\_}(\alpha)$,
 the ordinary, \emph{vertical} composition of the previous two paths,
-which indeed gives a path $rp=sq$. 
+which indeed gives a path $rp=sq$. Horizontal composition enjoys many of
+properties of ordinary composition, modulo some easy equivalences.
+For example, in the situation above, if $\beta\jdeq\refl{r}$,
+the type of $\alpha$ is $p=q$, whereas the type of $\refl{r}\cdot_h\alpha$
+is $rp=rq$. However, by induction on $r$ one easily gets an equivalence
+$e_r : (p=q) \to (rp=rq)$ and proves $e_r(\alpha)=\refl{r}\cdot_h\alpha$.
+Similar equivalences can be constructed for associativity and other laws
+of path algebra for horizontal composition. In order to stay well-typed
+we mention the equivalences, but leave their construction to the reader.
+
+We apply horizontal composition in the following situation:
+%
+\begin{align*}
+  p &: a = b       &   p^{-1}       &: b=a           & q     &: a = b \\
+  q &: a = b       &                &                & p     &: a = b \\
+  \alpha &: p = q, &   \refl{p^{-1}}&: p^{-1}=p^{-1} & \beta &: q = p
+\end{align*}
+% 
+In this situation, the composition $\alpha\beta$ has type $q=q$.
+The horizontal composition $(\beta\cdot_h\refl{p^{-1}})\cdot_h\alpha$
+has type $(qp^{-1})p = (p^{-1}p)q$. By induction on $p$ one constructs
+an equivalence 
+\[
+e_p: (q=q)\to((qp^{-1})p = (p^{-1}p)q)
+\]
+such that (note the change of order) 
+\[
+e_p(\alpha\beta)=(\beta\cdot_h\refl{p^{-1}})\cdot_h\alpha.
+\]
+The latter equality is easily proved by induction on $\beta$.
+
 
 
 \begin{proof}
