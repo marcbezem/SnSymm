@@ -398,27 +398,40 @@ Four equivalences $\Sp\to\Sp$ that will be used in the sequel are
 defined as follows. 
 \begin{align}
   \label{eq:S2symmetries}
-  e_0(x)&\jdeq x \quad\text{the identity equivalence}
-\\\nonumber
-\\\nonumber
+  e_0(x)&\jdeq x \quad\text{the identity equivalence}\\
+\nonumber\\
   e_1(N)&\jdeq N \quad\text{keeping the poles}\\
   e_1(S)&\jdeq S\\
   e_1(\mrd(\base))&= \mrd(\base)\\
-  e_1(\mrd(\Sloop))&= \mrd(\Sloop^{-1})\quad\text{reversing orientation of meridians}
-\\\nonumber
-\\\nonumber
+  e_1(\mrd(\Sloop))&= \mrd(\Sloop^{-1})\quad\text{reversing rotation of meridians}\\
+\nonumber\\
   e_2(N)&\jdeq S \quad\text{flipping the poles}\\
   e_2(S)&\jdeq N\\
-  e_2(\mrd(x))&= \mrd(x)^{-1}\quad\text{reversing the meridians}
-\\\nonumber
-\\\nonumber
+  e_2(\mrd(x))&= \mrd(x)^{-1}\quad\text{reversing the meridians}\\
+\nonumber\\
   e_3(N)&\jdeq S \quad\text{flipping the poles}\\
   e_3(S)&\jdeq N\\
   e_3(\mrd(\base))&= \mrd(\base)^{-1}\quad\text{reversing the meridians, and}\\
-  e_3(\mrd(\Sloop))&= \ap{\mrd(\_)^{-1}}(\Sloop)\quad\text{reversing their orientation}
+  e_3(\mrd(\Sloop))&= \ap{\mrd(\_)^{-1}}(\Sloop^{-1})\quad\text{reversing their rotation}
 \end{align}
+One would expect $e_1=e_2$ and $e_0=e_3$, which will turn out to be true.
 
-One would expect $e_1=e_2$ and $e_0=e_3$.
+In the sequel we will have to deal with the following situation.
+Let $A$ be a type with elements $a, b, c : A$ and 1- and 2-paths as follows:
+%
+\begin{align*}
+  p &: a = b,       &       r &: b = c \\
+  q &: a = b,       &       s &: b = c \\
+  \alpha &: p = q,  &   \beta &: r = s.
+\end{align*}
+We define the \emph{horizontal composition} of $\alpha$ and $\beta$ as 
+a path $\beta\cdot_h\alpha: rp=sq$.
+First observe that $\ap{r\_}(\alpha):rp=rq$.
+Then observe that $\ap{\_q}(\beta):rq=sq$.
+Now define $\beta\cdot_h\alpha \defeq \ap{\_q}(\beta)\ap{r\_}(\alpha)$,
+the ordinary, \emph{vertical} composition of the previous two paths,
+which indeed gives a path $rp=sq$. 
+
 
 \begin{proof}
 We construct $f(x):T(x)\defeq(e_1(x)=e_2(x))$ for all $x:\Sp$ by 
