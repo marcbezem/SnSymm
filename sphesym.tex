@@ -414,7 +414,7 @@ defined as follows.
   e_3(\mrd(\base))&= \mrd(\base)^{-1}\quad\text{reversing the meridians, and}\\
   e_3(\mrd(\Sloop))&= \ap{\mrd(\_)^{-1}}(\Sloop^{-1})\quad\text{reversing their rotation}
 \end{align}
-One would expect $e_1=e_2$ and $e_0=e_3$, which will turn out to be true.
+One would expect $e_1=e_2$ and $e_0=e_3$ and both will turn out to be true.
 
 In the sequel we will have to deal with the following situation.
 Let $A$ be a type with elements $a, b, c : A$ and 1- and 2-paths as follows:
@@ -462,7 +462,8 @@ e_p(\alpha\beta)=(\beta\cdot_h\refl{p^{-1}})\cdot_h\alpha.
 \]
 The latter equality is easily proved by induction on $\beta$.
 
-
+\begin{lemma} $e_1 = e_2$.
+\end{lemma}
 
 \begin{proof}
 We construct $f(x):T(x)\defeq(e_1(x)=e_2(x))$ for all $x:\Sp$ by 
@@ -475,8 +476,32 @@ We apply circle induction:
 $m(\base): P(\base)$ can easily be given by path algebra,
 as $P(\base)$ is equivalent to 
 $\mrd(\base)^{-1}\cdot n\cdot\mrd(\base)^{-1} = s$.
-It remains to give $m(\Sloop): m(\base)=^P_{\Sloop}m(\base)$.	
+It remains to give $m(\Sloop): m(\base)=^P_{\Sloop}m(\base)$.
 
+Note first that $P$ is a identity type family with a function on the left
+and a constant on the right. This means that transport in $P$ along $p$
+is given by prefixing as follows:
+\[
+\trp{p}(q) = (\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p)^{-1} \cdot q.
+\]
+By induction on $p:\base=z$ one proves that (PICTURE!)
+\[
+(\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p) = 
+\_\!\!^{-1}(\mrd(p)) \cdot_h \refl{n} \cdot_h\  \_\!\!^{-1}(e_1(\mrd(p))).
+\]
+Taking $p\jdeq{\Sloop}$ in the rhs gives
+\[
+\_\!^{-1}(\mrd(\Sloop)) \cdot_h \refl{n} \cdot_h\  \_\!^{-1}(\mrd(\Sloop^{-1})),
+\]
+which is the special case of the horizontal composition that can be futher
+simplified to
+\[
+e_{\mrd(\base)}(\_\!^{-1}(\mrd(\Sloop^{-1})) \cdot\_\!^{-1}(\mrd(\Sloop)) = 
+e_{\mrd(\base)}(\_\!^{-1}(\refl{\mrd(\base)})).
+\]
+The latter path is a reflexivity path, so that $\trp{\Sloop}$ actually is
+homotopic to the identity function. Hence we can take for 
+$m(\Sloop): m(\base)=^P_{\Sloop}m(\base)$ a simple transport of $\refl{m(\base)}$.
 \end{proof}
 
 
