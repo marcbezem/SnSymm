@@ -253,7 +253,7 @@ $(\Sc \weq \Sc)$.
 \newcommand{\susp}[1]{\operatorname{\Sigma}{#1}}%
 %
 We define the sphere $\Sp$ as the suspension $\susp\Sc$ of the circle.
-The suspension of a type $A$ is a higher inductive type 
+The suspension $\susp A$ of a type $A$ is a higher inductive type 
 with two point constructors and path constructors indexed by $A$:
 \begin{align}
   \label{eq:suspension}
@@ -265,8 +265,8 @@ Suspensions enjoy a inductive property: given a type family
 $T : \susp A \to \U$, elements $n:T(N)$ and $s:T(S)$, and paths
 $m(a) : n=_{\mrd(a)}s$ for all $a:A$, 
 suspension induction provides a dependent
-function $f : \prod_{x:\Sc}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
-and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$.
+function $f : \prod_{x:\susp A}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
+and paths $p_f(a): f(\mrd(a)) = m(a)$ for all $a:A$.
 
 \subsection{Winding numbers}
 \label{sec:winding-numbers}
@@ -276,11 +276,11 @@ and paths $p(a): f(\mrd(a)) = m(a)$ for all $a:A$.
 The goal of this section is to provide for each map $\Sp \to \Sp$ a
 {\em degree} in $\ZZ$. The first step is to a map
 $\loopspace 2 \Sp \to \loopspace 1 \Sc$. The construction of such a
-map is known material that can be tracked back at least to Brunerie's
+map in HoTT is known material that can be tracked back at least to Brunerie's
 thesis. However, we are not only interested in the existence of such a
-map or its defining properties but by its actual computation. We shall
+map or its defining properties but in its actual computation. We shall
 then follow carefully the construction of the Hopf fibration provided
-by Brunerie an dkeep track of the actual formula for the map of
+by Brunerie and keep track of the actual formula for the map of
 interest.
 
 Consider the type family $\hopffam : \Sp \to \U$ defined by induction
@@ -292,7 +292,7 @@ as follows:
     \\
     \hopffam (S) &\defequi \Sc
     \\
-    \hopffam (\mrd(x)) &\defis \iota_1(x)
+    \hopffam (\mrd(x)) &\defis \iota_1(x) \quad\text{defined above}
   \end{aligned}
 \end{equation}
 Denote $X$ for the total space of the type family $\hopffam$. One can
@@ -365,16 +365,16 @@ The map of interest is the composition of this equivalence with the
 first projection to $\loopspace 1 \Sc$, which is then simply
 $\alpha \mapsto \trp{T,\alpha}(\refl \base)$. All that remains to do
 is to determine the transport in the type family $T$, so that one can
-explicitize further the map $\loopspace 2 \Sp \to \loopspace 1 \Sc$
+make explicit further the map $\loopspace 2 \Sp \to \loopspace 1 \Sc$
 described above.
 
 For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
 transport
-$\trp{T,\alpha}:(\trp{H,e}(\base) = base) \to (\trp{H,e'}(\base) =
+$\trp{T,\alpha}:(\trp{H,e}(\base) = \base) \to (\trp{H,e'}(\base) =
 \base)$ identifies with the following function:
 \begin{equation}
   \begin{aligned}
-    {t_\alpha}: (\trp{H,e}(\base) = base) &\to (\trp{H,e'}(\base) = \base)
+    {t_\alpha}: (\trp{H,e}(\base) = \base) &\to (\trp{H,e'}(\base) = \base)
     \\
     p &\mapsto p\cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
   \end{aligned}
@@ -387,7 +387,12 @@ particular when $\alpha:\refl N = \refl N$, one gets
   \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
   = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
 \end{equation}
-
+A useful simplification is $\trp{H,\mrd(x)}(\base)=\iota_1(x)(\base)\jdeq x$.
+This gives us 
+\[
+\ap{\trp{H,-}(\base)}(\mrd(l)) = \ap{\trp{H,\mrd(\blank)}(\base)}(l) = l
+\]
+for any $l:z=z$.
 
 
 
@@ -414,7 +419,7 @@ defined as follows.
   e_3(\mrd(\base))&= \mrd(\base)^{-1}\quad\text{reversing the meridians, and}\\
   e_3(\mrd(\Sloop))&= \ap{\mrd(\_)^{-1}}(\Sloop^{-1})\quad\text{reversing their rotation}
 \end{align}
-One would expect $e_1=e_2$ and $e_0=e_3$ and both will turn out to be true.
+One would expect $e_1=e_2$ and $e_0=e_3$ (??!) and both will turn out to be true.
 
 In the sequel we will have to deal with the following situation.
 Let $A$ be a type with elements $a, b, c : A$ and 1- and 2-paths as follows:
