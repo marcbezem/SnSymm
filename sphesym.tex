@@ -467,7 +467,7 @@ e_p(\alpha\beta)=(\beta\cdot_h\refl{p^{-1}})\cdot_h\alpha.
 \]
 The latter equality is easily proved by induction on $\beta$.
 
-\begin{lemma} $e_1 = e_2$.
+\begin{lemma} We have $e_1 = e_2$ and $e_0 \neq e_2$.
 \end{lemma}
 
 \begin{proof}
@@ -487,7 +487,7 @@ Note first that $P$ is a identity type family with a function on the left
 and a constant on the right. This means that transport in $P$ along $p$
 is given by prefixing as follows:
 \[
-\trp{p}(q) = (\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p)^{-1} \cdot q.
+\trp{p}(q) = q \cdot (\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p)^{-1}.
 \]
 By induction on $p:\base=z$ one proves that (PICTURE!)
 \[
@@ -500,13 +500,40 @@ Taking $p\jdeq{\Sloop}$ in the rhs gives
 \]
 which is the special case of the horizontal composition that can be futher
 simplified to
-\[
+\begin{align}
+  \label{eq:trp-for-e1=e2}
 e_{\mrd(\base)}(\_\!^{-1}(\mrd(\Sloop^{-1})) \cdot\_\!^{-1}(\mrd(\Sloop)) = 
 e_{\mrd(\base)}(\_\!^{-1}(\refl{\mrd(\base)})).
-\]
+\end{align}
 The latter path is a reflexivity path, so that $\trp{\Sloop}$ actually is
 homotopic to the identity function. Hence we can take for 
 $m(\Sloop): m(\base)=^P_{\Sloop}m(\base)$ a simple transport of $\refl{m(\base)}$.
+
+The second statement of the lemma, $(e_0 = e_2)\to\false$, is a proposition.
+We have that $N=S$ is connected (as $\pi_1 \Sc$ is contractible),
+and this will allow us to reuse a large part of the the proof of $e_1 = e_2$.
+Assume we are given $f(x):R(x)\defeq(e_0(x)=e_2(x))$ for all $x:\Sp$.
+We are to prove $\false$. Since  $N=S$ is connected, we can assume $f(N)=n\jdeq\mrd(\base):(N=S)\jdeq R(N)$ and 
+$f(S)=s\jdeq\mrd(\base)^{-1}:(S=N)\jdeq R(S)$. 
+We also have have $f(\mrd(z)): n=^R_{\mrd(z)}s$
+for all $z:\Sc$. The latter type is equivalent to
+$Q(z)\defeq(\mrd(z)^{-1}\cdot n\cdot \mrd(z)^{-1} = s)$.
+Thus we get in particular $f'(\mrd(\base)): Q(\base)$ and 
+$f'(\mrd(\Sloop)): f'(\mrd(\base))=^Q_{\Sloop}f'(\mrd(\base))$
+for some transport $f'$ of $f$.
+Transport in the family $Q$ goes like transport in $P$ with $e_1$
+replaced by $e_0$, which is $\id$. 
+This means that the rhs of Eq.\ref{eq:trp-for-e1=e2} becomes
+$p_{02}\defeq e_{\mrd(\base)}(\_\!^{-1}(\mrd(\Sloop\cdot\Sloop)))$.
+Transport in $Q$ is equivalent to precompostion with the inverse of $p_{02}$,
+and hence $f'(\mrd(\Sloop)): f'(\mrd(\base))=^Q_{\Sloop}f'(\mrd(\base))$
+leads to a contradiction if we show
+$\mrd(\Sloop\cdot\Sloop) \neq \mrd(\refl{\base})$.
+We do this in the next paragraph.
+
+
+
+
 \end{proof}
 
 
