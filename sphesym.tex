@@ -344,7 +344,8 @@ We are now interested in the fiber of $\loopspace 1 i$. Indeed,
   \inv {(\loopspace 1 i)} {(\refl N,\refl\base)}
   &\weq \sum_{p:\base = \base}(\refl N,\refl\base) = (\refl N,p)
   \\
-  &\weq \sum_{\alpha:\refl N = \refl N}\sum_{p:\base=\base}\trp {T,\alpha}(\refl \base) = p \label{eq:type-fam-trp}
+  &\weq \sum_{\alpha:\refl N = \refl N}\sum_{p:\base=\base}\trp {T,\alpha}(\refl \base)
+ = p \label{eq:type-fam-trp}
   \\
   &\weq (\refl N = \refl N) \jdeq \loopspace 2 \Sp
 \end{align}
@@ -383,15 +384,15 @@ This is shown by induction on $\alpha$: indeed,
 $\ap{\trp{H,-}(\base)}(\refl{e}) \jdeq \refl{\trp{H,e}(\base)}$; hence
 path algebra provides a proof of $t_{\refl{e}}(p) = p$. So in
 particular when $\alpha:\refl N = \refl N$, one gets
-\begin{equation}
+\begin{equation}\label{eq:trp-Ta(refl)}
   \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
   = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
 \end{equation}
 A useful simplification is $\trp{H,\mrd(x)}(\base)=\iota_1(x)(\base)\jdeq x$.
 This gives us 
-\[
+\begin{equation}\label{eq:trp-Hmrd)}
 \ap{\trp{H,-}(\base)}(\mrd(l)) = \ap{\trp{H,\mrd(\blank)}(\base)}(l) = l
-\]
+\end{equation}
 for any $l:z=z$.
 
 
@@ -531,7 +532,12 @@ leads to a contradiction if we show
 $\mrd(\Sloop\cdot\Sloop) \neq \mrd(\refl{\base})$.
 We do this in the next paragraph.
 
-
+The following step was suggested by Nikolai Kraus.
+Composing with $\mrd(\base)^{-1}$ is an equivalence
+from $N=S$ to $N=N$. Applying this equivalence on paths gives an 
+equivalence $e: \mrd(\base)=\mrd(\base)$ to $\refl{N}=\refl{N}$.
+Assume $\mrd(\Sloop\cdot\Sloop) = \mrd(\refl{\base})$.
+These are 2-paths of type $\mrd(\base)=\mrd(\base)$. ...
 
 
 \end{proof}
