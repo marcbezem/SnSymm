@@ -276,12 +276,12 @@ and paths $p_f(a): f(\mrd(a)) = m(a)$ for all $a:A$.
 The goal of this section is to provide for each map $\Sp \to \Sp$ a
 {\em degree} in $\ZZ$. The first step is to a map
 $\loopspace 2 \Sp \to \loopspace 1 \Sc$. The construction of such a
-map in HoTT is known material that can be tracked back at least to Brunerie's
-thesis. However, we are not only interested in the existence of such a
-map or its defining properties but in its actual computation. We shall
-then follow carefully the construction of the Hopf fibration provided
-by Brunerie and keep track of the actual formula for the map of
-interest.
+map in HoTT is known material that can be tracked back at least to
+Brunerie's thesis. However, we are not only interested in the
+existence of such a map or its defining properties but in its actual
+computation. We shall then follow carefully the construction of the
+Hopf fibration provided by Brunerie and keep track of the actual
+formula for the map of interest.
 
 Consider the type family $\hopffam : \Sp \to \U$ defined by induction
 as follows:
@@ -314,7 +314,9 @@ as follows:
   \end{tikzcd}
 \end{equation}
 The first map $i:\Sc \to X$ is simply the inclusion $z\mapsto
-(N,z)$. This induces a fiber sequence at the level of loop spaces:
+(N,z)$.
+
+This induces a fiber sequence at the level of loop spaces:
 \begin{equation}
   \label{eq:12}
   \begin{tikzcd}
@@ -388,6 +390,7 @@ particular when $\alpha:\refl N = \refl N$, one gets
   \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
   = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
 \end{equation}
+
 A useful simplification is $\trp{H,\mrd(z)}(\base)=\iota_1(z)(\base)\jdeq z$.
 This gives us 
 \begin{equation}\label{eq:trp-Hmrd)}
@@ -395,7 +398,21 @@ This gives us
 \end{equation}
 for any $l:z=z$. DO WE HAVE (29) ALSO FOR $\alpha:\mrd(\base)=\mrd(\base)$?
 
-
+In particular, the family $\hopffam$ yields a map
+$\tau : (N=S) \to \Sc$ defined as follows:
+\begin{equation}
+  \label{eq:15}
+  \tau(p) \defequi \trp{H,p}(\base)  
+\end{equation}
+This function acts particularly nicely on the elements of the form
+$\mrd(\Sloop^k)$ for some integer $k$, as it is stated in the following
+lemma.
+\begin{lemma}
+  $w\circ \ap{\mrd} = \id_\Sc$ 
+\end{lemma}
+\begin{proof}
+ {}  
+\end{proof}
 
 \subsection{Symmetries of the sphere}
 \label{sec:symmetries-sphere}
@@ -490,11 +507,26 @@ is given by prefixing as follows:
 \[
 \trp{p}(q) = q \cdot (\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p)^{-1}.
 \]
-By induction on $p:\base=z$ one proves that (PICTURE!)
+By induction on $p:\base=z$ one proves that
 \[
 (\mrd(\_)^{-1}\cdot n \cdot e_1(\mrd(\_))^{-1})(p) = 
 \_\!\!^{-1}(\mrd(p)) \cdot_h \refl{n} \cdot_h\  \_\!\!^{-1}(e_1(\mrd(p))).
 \]
+\begin{center}
+  \begin{tikzpicture}
+    \matrix (m) [matrix of nodes, column sep=9em] {
+      S & N & S & N \\
+    };%
+    \draw[->] (m-1-1.north) to[bend left=60] node[above, name=Afrom] {$\inv{\mrd(\base)}$} (m-1-2.north);%
+    \draw[->] (m-1-1.south) to[bend right=60] node[below, name=Ato] {$\inv{e_1(\mrd(z))}$} (m-1-2.south);%
+    \draw[cell] (Afrom) to node[fill=white] {$\inv{\_}(e_1(\mrd(p)))$} (Ato);%
+    \draw[->] (m-1-2) to node[above] {$\mrd(\base)$} (m-1-3);%
+    \draw[->] (m-1-3.north) to[bend left=60] node[above, name=Bfrom] {$\inv{\mrd(\base)}$} (m-1-4.north);%
+    \draw[->] (m-1-3.south) to[bend right=60] node[below, name=Bto] {$\inv{\mrd(z)}$} (m-1-4.south);%
+    \draw[cell] (Bfrom) to node[fill=white] {$\inv{\_}(\mrd(p))$} (Bto);%
+  \end{tikzpicture}
+\end{center}
+
 Taking $p\jdeq{\Sloop}$ in the rhs gives
 \[
 \_\!^{-1}(\mrd(\Sloop)) \cdot_h \refl{n} \cdot_h\  \_\!^{-1}(\mrd(\Sloop^{-1})),
