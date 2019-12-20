@@ -251,6 +251,13 @@ $(\Sc \weq \Sc)$.
 \newcommand{\Sp}{S^2}%
 \newcommand{\mrd}{\mathit{merid}}%
 \newcommand{\susp}[1]{\operatorname{\Sigma}{#1}}%
+\newcommand{\Truncset}[1]{\Trunc{#1}_0}%
+\newcommand{\truncset}[1]{\trunc{#1}_0}%
+\newcommand{\Truncprop}[1]{\Trunc{#1}}%
+\newcommand{\truncprop}[1]{\trunc{#1}}%
+\newcommand{\ptdto}{\to_\ast}%
+\newcommand{\flip}{\operatorname{flip}}%
+\newcommand{\conncomp}[2]{{#1}_{(#2)}}%
 %
 We define the sphere $\Sp$ as the suspension $\susp\Sc$ of the circle.
 The suspension $\susp A$ of a type $A$ is a higher inductive type 
@@ -268,20 +275,83 @@ suspension induction provides a dependent
 function $f : \prod_{x:\susp A}T(x)$ such that $f(N) \jdeq n$, $f(S) \jdeq s$,
 and paths $p_f(a): f(\mrd(a)) = m(a)$ for all $a:A$.
 
-\subsection{Winding numbers}
+\subsection{Roadmap}
+\label{sec:roadmap}
+
+For the sphere $\Sp$, topological intuitions make very unlikely to
+construct a proof of $(\Sp + \Sp) \weq (\Sp = \Sp)$. We shall target a
+lesser goal: prove that $(\Sp = \Sp)$ has two equivalent connected
+components, and investigate some of the elements of both these
+components. Through univalence, it is enough to do so for the type
+$(\Sp \weq \Sp)$. The first step is to provide a dependent function
+\begin{equation}
+  \label{eq:14}
+  \prod_{f:\Sp \weq \Sp} \Truncprop{e_0=f} + \Truncprop{e_1=f}
+\end{equation}
+where $e_0$ and $e_1$ are two equivalences to be defined afterwards
+that embody the role of $\id_\Sc$ and $-\id_\Sc$ in the case of
+$\Sc$. One of the key property is that $e_0 \neq e_1$, so that for
+each $f: \Sp \weq \Sp$, the type
+$P(f) \defequi \Truncprop{e_0=f} + \Truncprop{e_1=f}$ is a
+proposition. Hence, for a given $f$, in proving $P(f)$ one might as
+well suppose a path $f_0: N = f(N)$ instead of the mere fact that
+$\Truncprop{N=f(N)}$. In other words, one can suppose that $f$ is a
+pointed equivalence. We shall show how to produce a map\footnote{This
+  map is {\tt \color{red} (should be)} related to the usual degree of
+  pointed endomaps of $\Sp$ as follows: for $f:\Sp \ptdto \Sp$, under
+  the equivalence $\pi_2(\Sp) \weq \zet \weq (\base = \base)$, the
+  induced group morphism $\pi_2(f)$ identifies with $\ap{\phi(f)}$.}
+\begin{equation}
+  \label{eq:18}
+  \phi: (\Sp \ptdto \Sp) \to (\Sc \to \Sc)
+\end{equation}
+such that $\phi(\id_{\Sp},\refl N) = \id_\Sc$ and such that
+$\phi(g\circ f) = \phi(g) \circ \phi(f)$. (In other words, $\phi$ is a
+morphism of monoids.) In particular $\phi$ sends pointed equivalences
+to equivalences $\Sc \weq \Sc$, which we already know to be merely
+equal either to $\id_\Sc$ or $-\id_\Sc$. From the definition of $e_0$
+and $e_1$, it will be obvious that $\phi(e_0) = \id_\Sc$ and
+$\phi(e_1) = -\id_\Sc$. The proposition (\ref{eq:14}) will be
+eventually proved once it is shown that
+$\Truncprop{\phi(f) = \phi(g)} \implies \Truncprop{f=g}$.
+
+The second step is to prove that the component
+$\sum_{f:\Sp \weq \Sp}\Truncprop{e_0=f}$ is equivalent to
+$\sum_{f:\Sp \weq \Sp}\Truncprop{e_1=f}$. For that purpose, we shall
+construct a map $\flip : (\Sp \to \Sp) \to (\Sp \Sp)$ where $\flip(f)$
+is defined by induction as follows:
+\begin{equation}
+  \label{eq:19}
+  \begin{aligned}
+    \flip(f)(N) &\defequi f(N)
+    \\
+    \flip(f)(S) &\defequi f(S)
+    \\
+    \flip(f)(\mrd(\base)) &\defis f(\mrd(\base))
+    \\
+    \flip(f)(\mrd(\Sloop)) &\defis \inv{f(\mrd(\Sloop))}
+  \end{aligned}
+\end{equation}
+This is an equivalence, as it is its own pseudoinverse. In addition,
+it is easily seen that $\flip(e_0) = \flip(e_1)$. Hence, $\flip$ is an
+equivalence that sends the connected component at $e_0$ into the
+connected component at $e_1$. The equivalence from
+$\conncomp{(\Sp\weq\Sp)}{e_0}$ to $\conncomp{(\Sp\weq\Sp)}{e_1}$ is
+obtained by restraining $\flip$ to $\conncomp{(\Sp\weq\Sp)}{e_0}$, and
+co-restraining it to $\conncomp{(\Sp\weq\Sp)}{e_1}$.
+
+\subsection{Degree}
 \label{sec:winding-numbers}
 \def\hopffam{\mathcal H}%
 \def\loopspace#1{\operatorname{\Omega_{#1}}}%
 
-The goal of this section is to provide for each map $\Sp \to \Sp$ a
-{\em degree} in $\ZZ$. The first step is to a map
+In associating a degree in $\ZZ$ to very pointed map $\Sp \to \Sp$,
+the first step is usually to define a map
 $\loopspace 2 \Sp \to \loopspace 1 \Sc$. The construction of such a
 map in HoTT is known material that can be tracked back at least to
-Brunerie's thesis. However, we are not only interested in the
-existence of such a map or its defining properties but in its actual
-computation. We shall then follow carefully the construction of the
-Hopf fibration provided by Brunerie and keep track of the actual
-formula for the map of interest.
+Brunerie's thesis. It goes through the construction of a
+type-theoretical version of the Hopf fibration that we shall follow
+carefully.
 
 Consider the type family $\hopffam : \Sp \to \U$ defined by induction
 as follows:
@@ -298,15 +368,21 @@ as follows:
 Denote $X$ for the total space of the type family $\hopffam$. One can
 show that $X$ is equivalent to the 3-sphere $\susp \Sp$, but this
 shall not prove useful here. Hence we keep the neutral notation $X$ to
-avoid confusion. The projection $\fst : X\to \Sp$ is referred as the
-Hopf fibration in the literature and we should keep the naming in that
-document.
+avoid confusion. By analogy with the topological situation, the
+projection $\fst : X\to \Sp$ is referred as the Hopf fibration in the
+literature.
 
 If one equip $\Sc$ with the point $\base$, $\Sp$ with the point $N$
 and $X$ with the point $(N,\base)$, then $\hopffam$ becomes a pointed
 type family and the Hopf fibration a pointed map whose fiber at the
-selected point $N$ is $\Sc$. In other words, one get a fiber sequence
-as follows:
+selected point $N$ is equivalent to $\Sc$.
+\begin{definition}
+  A {\em fiber sequence} is a sequence of pointed maps
+  $F \overset i \to B \overset f \to A$ together with an equivalence
+  $\varphi : F \weq \inv f(\pt_A)$ such that $i = \fst \varphi$.
+\end{definition}
+Given that definition, the Hopf fibration gives a fiber sequence as
+follows:
 \begin{equation}
   \label{eq:9}
   \begin{tikzcd}
@@ -316,15 +392,34 @@ as follows:
 The first map $i:\Sc \to X$ is simply the inclusion $z\mapsto
 (N,z)$.
 
-This induces a fiber sequence at the level of loop spaces:
+The usual argument is to apply the following lemma:
+\begin{lemma}
+  \label{lemma:fiber-seq-omega}%
+  If $F\overset i \to B \overset f \to A$ is a fiber sequence, then
+  for every $n:\NN$, the following is a fiber sequence:
+  \begin{equation}
+    \label{eq:20}
+    \begin{tikzcd}
+      \loopspace n F \rar["\loopspace n i"] & \loopspace n B
+      \rar["\loopspace n \fst"] & \loopspace n A
+    \end{tikzcd}    
+  \end{equation}
+  And the fiber of $\loopspace n i$ identifies with
+  $\loopspace {n+1} A$.
+\end{lemma}
+Applying the lemma for the Hopf fiber sequence and $n=1$ will provide
+the wanted map $\loopspace 2 \Sp \to \loopspace 1 \Sc$.
+
+If we study the proof-term of lemma~\ref{lemma:fiber-seq-omega}
+closely in our instance of the Hopf fibration, the induced fiber
+sequence at the level of path spaces:
 \begin{equation}
   \label{eq:12}
   \begin{tikzcd}
     \loopspace 1 \Sc \rar["\loopspace 1 i"] & \loopspace 1 X \rar["\loopspace 1 \fst"] & \loopspace 1 \Sp
   \end{tikzcd}
 \end{equation}
-Indeed, $\loopspace 1 \Sc$ identifies with the fiber of
-$\loopspace 1 \fst$ through the following equivalences:
+is obtained through the following equivalences:
 \begin{align}
   \inv {(\loopspace 1 \fst)} {(\refl N)}
   &\jdeq \sum_{(q,p):\loopspace 1 X}\refl N = (\loopspace 1 \fst)(q,p)
@@ -339,9 +434,9 @@ Following the equivalence from $\loopspace 1 \Sc$ back to the fiber is
 simply the function $p \mapsto ((\refl N,p),\refl{\refl N})$. Hence,
 by postcomposing with the first projection, one gets
 $p \mapsto (\refl N, p)$ which is indeed
-$\loopspace 1 i: \loopspace 1 \Sc \to \loopspace 1 X$.
-
-We are now interested in the fiber of $\loopspace 1 i$. Indeed,
+$\loopspace 1 i: \loopspace 1 \Sc \to \loopspace 1 X$. The type we are
+most interested in the fiber of $\loopspace 1 i$, for which the
+proof-term of lemma~\ref{lemma:fiber-seq-omega} is computed as follow:
 \begin{align}
   \inv {(\loopspace 1 i)} {(\refl N,\refl\base)}
   &\weq \sum_{p:\base = \base}(\refl N,\refl\base) = (\refl N,p)
@@ -368,7 +463,7 @@ The map of interest is the composition of this equivalence with the
 first projection to $\loopspace 1 \Sc$, which is then simply
 $\alpha \mapsto \trp{T,\alpha}(\refl \base)$. All that remains to do
 is to determine the transport in the type family $T$, so that one can
-make explicit further the map $\loopspace 2 \Sp \to \loopspace 1 \Sc$
+make explicit further the map $\eta:\loopspace 2 \Sp \to \loopspace 1 \Sc$
 described above.
 
 For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
@@ -390,29 +485,137 @@ particular when $\alpha:\refl N = \refl N$, one gets
   \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
   = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
 \end{equation}
-
-A useful simplification is $\trp{H,\mrd(z)}(\base)=\iota_1(z)(\base)\jdeq z$.
-This gives us 
-\begin{equation}\label{eq:trp-Hmrd)}
-\ap{\trp{H,-}(\base)}(\mrd(l)) = \ap{\trp{H,\mrd(\blank)}(\base)}(l) = l
+In the end, the map $\eta\from \loopspace 2 \Sp \to \loopspace 1 \Sc$
+is $\inv{(\blank)} \circ \ap \theta$ where $\theta : (N=N) \to \Sc$ is the function defined by
+\begin{equation}
+  \label{eq:17}
+  \theta(p) \defequi \trp{\hopffam,p}(\base)
 \end{equation}
-for any $l:z=z$. DO WE HAVE (29) ALSO FOR $\alpha:\mrd(\base)=\mrd(\base)$?
+For practical reason, we prefer to work directly with
+$\ap\theta\from \loopspace 2 \Sp \to \loopspace 1 \Sc$. This does not
+matter much as $\inv{(\blank)}$ is an equivalence
+$\loopspace 1 \Sc \weq \loopspace 1 \Sc$, hence every property that
+$\ap\theta$ will enjoy, $\eta$ will also.
 
-In particular, the family $\hopffam$ yields a map
-$\tau : (N=S) \to \Sc$ defined as follows:
+Recall now the adjoint pair $\susp{}\dashv\loopspace{}$, which
+provides a first equivalence
+\begin{equation}
+  \label{eq:24}
+  \begin{tikzcd}[%
+    /tikz/column 1/.append style={anchor=base east},%
+    /tikz/column 2/.append style={anchor=base west}]
+    (\Sp \ptdto \Sp) \rar["\weq"] & (\Sc \ptdto \loopspace 1 \Sp)
+    \\
+    (f,f_0) \rar[mapsto] & \inv{\left(f(\mrd(\base)) \cdot
+        f_0\right)}\cdot f(\mrd(\blank))\cdot f_0
+  \end{tikzcd}
+\end{equation}
+where in the right hand side, we left out the path from $\refl N$ to
+the function taken at $\base$ as it is path algebra. The universal
+property of the circle now establish a second equivalence:
+\begin{equation}
+  \label{eq:25}
+  \begin{tikzcd}[%
+    /tikz/column 1/.append style={anchor=base east},%
+    /tikz/column 2/.append style={anchor=base west}]
+    (\Sc \ptdto \loopspace 1 \Sp) \rar["\weq"] & \loopspace 2 \Sp
+    \\
+    (g,g_0) \rar[mapsto] & \inv{g_0} \cdot g(\Sloop)\cdot g_0
+  \end{tikzcd}
+\end{equation}
+Notice that for any $p,q:N=f(S)$,
+\begin{equation}
+  \inv{q} \cdot p = \inv{\mrd(\base)} \cdot (\inv{(q\circ \inv{\mrd(\base)})} \cdot p)
+\end{equation}
+Hence, if we denote
+$c_{f,f_0}: r \mapsto \inv{(f(\mrd(\base))\cdot
+  f_0\cdot\inv{\mrd(\base)})} \cdot r \cdot f_0$, then the equivalence
+of (\ref{eq:24}) is equal to
+$(f,f_0) \mapsto (\inv{\mrd(\base)}\cdot
+c_{f,f_0}(f(\mrd(-))),\pi_{f,f_0})$ where
+$\pi_{f,f_0} = \ap{\inv{\mrd(\base)}\cdot \blank}(\varpi_{f,f_0})
+\cdot \varepsilon$ where
+$\varepsilon: \refl N = \inv{\mrd(\base)}\cdot \mrd(\base)$ and
+$\varpi_{f,f_0}:\mrd(\base) = c_{f,f_0}(f(\mrd(\base)))$ are both
+paths from path algebra.
+
+Then the composition of equivalences (\ref{eq:24}) and (\ref{eq:25})
+is equal to the following equivalence:
+\begin{equation}
+  \begin{tikzcd}[%
+    /tikz/column 1/.append style={anchor=base east},%
+    /tikz/column 2/.append style={anchor=base west}]
+    (\Sp \ptdto \Sp) \rar["\weq"] & \loopspace 2 \Sp
+    \\
+    (f,f_0) \rar[mapsto] & \inv{\pi_{f,f_0}} \cdot \left(
+      \inv{\mrd(\base)} \cdot \blank \right)
+    \left(c_{f,f_0}(f(\mrd(\Sloop)))\right) \cdot \pi_{f,f_0}
+  \end{tikzcd}
+\end{equation}
+
+The degree function $d: (\Sp \ptdto \Sp) \to \loopspace 1 \Sc$ is then
+defined as the composition of this equivalence with $\ap\theta$. It
+holds that ({\tt \color{red} No it does not, need to correct up until
+  equation (\ref{eq:15})}):
+\begin{align}
+  \label{eq:21}
+  d(f,f_0)
+  &=
+    \ap\theta\left(
+    \left(
+    \inv{\mrd(\base)} \cdot \blank
+    \right)
+    \left(
+    c_{f,f_0}(f(\mrd(\Sloop)))
+    \right)
+    \right)
+  \\
+  &= \ap{\theta(\inv{\mrd(\base)} \cdot \blank)}
+    \left(
+    c_{f,f_0}(f(\mrd(\Sloop)))
+    \right)
+\end{align}
+Now remark that $\trp{H,\mrd(\base)} = \id_\Sc$, so that
+$\theta(\inv{\mrd(\base)}\cdot \blank)$ is equal to the function:
+\begin{equation}
+  \label{eq:22}
+  \tau : (N=S) \to \Sc, \quad p \mapsto \trp{\hopffam,p}(\base)
+\end{equation}
+Hence we can simplify the expression of the degree function as:
+\begin{equation}
+  \label{eq:23}
+  d(f,f_0) = \ap\tau\left(c_{f,f_0}f(\mrd(\Sloop))\right)
+\end{equation}
+
+\begin{definition}
+  Given a map $f\from \Sp \to \Sp$ and a path $f_0 : N = f(N)$, define
+  $\phi(f,f_0)$ to be the composition
+  \begin{equation}
+    \label{eq:13}
+    \begin{tikzcd}
+      \Sc \rar["\mrd"] & N=S \rar["f"] & f(N) = f(S) \rar["c_f"] & N =
+      S \rar["\tau"] & \Sc
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+One can sum up what is above as follows:
 \begin{equation}
   \label{eq:15}
-  \tau(p) \defequi \trp{H,p}(\base)  
+  d = \ap{\phi(\blank)}(\Sloop)
 \end{equation}
-This function acts particularly nicely on the elements of the form
-$\mrd(\Sloop^k)$ for some integer $k$, as it is stated in the following
-lemma.
-\begin{lemma}
-  $w\circ \ap{\mrd} = \id_\Sc$ 
-\end{lemma}
-\begin{proof}
- {}  
-\end{proof}
+
+Remark that the function $\tau$ is actually a retraction for $\mrd$:
+indeed, $\trp{\hopffam, \mrd(x)} = \hopffam (\mrd(x)) = \iota_1(x)$
+and $\iota_1(x)$ sends $\base$ to $x$ by definition, so
+$\tau(\mrd(x)) = x$ for every $x:\Sc$. As $c_{\id,\refl N}=\id_{N=S}$,
+it follows that:
+\begin{equation}
+  d(\id, \refl N) = \ap\tau(\ap\mrd(\Sloop)) = \Sloop
+\end{equation}
+
+
+
+
 
 \subsection{Symmetries of the sphere}
 \label{sec:symmetries-sphere}
