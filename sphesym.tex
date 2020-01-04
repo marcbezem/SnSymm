@@ -426,7 +426,7 @@ is obtained through the following equivalences:
   \\
   &\weq \sum_{q:N=N}\sum_{p:\pathover \base {\hopffam} q \base}\refl N = q
   \\
-  &\weq \sum_{q:N=N}(\refl N = q)\times(\trp{\hopffam, q}(\base) =\base)
+  &\weq \sum_{q:N=N}(\refl N = q)\times(\trp[\hopffam]{q} (\base) =\base)
   \\
   &\weq (\base = \base) \jdeq \loopspace 1 \Sc
 \end{align}
@@ -441,7 +441,7 @@ proof-term of lemma~\ref{lemma:fiber-seq-omega} is computed as follow:
   \inv {(\loopspace 1 i)} {(\refl N,\refl\base)}
   &\weq \sum_{p:\base = \base}(\refl N,\refl\base) = (\refl N,p)
   \\
-  &\weq \sum_{\alpha:\refl N = \refl N}\sum_{p:\base=\base}\trp {T,\alpha}(\refl \base)
+  &\weq \sum_{\alpha:\refl N = \refl N}\sum_{p:\base=\base}\trp [T]{\alpha}(\refl \base)
  = p \label{eq:type-fam-trp}
   \\
   &\weq (\refl N = \refl N) \jdeq \loopspace 2 \Sp
@@ -455,8 +455,8 @@ $\loopspace 2 \Sp$ back to the actual fiber is given by:
     \loopspace 2 \Sp &\to \sum_{p:\base = \base}(\refl N,\refl\base) =
     (\refl N,p)
     \\
-    \alpha &\mapsto \left(\trp{T,\alpha}(\refl\base), \left(\alpha,
-        \refl{\trp{T,\alpha}(\refl\base)}\right)\right)
+    \alpha &\mapsto \left(\trp[T]{\alpha}(\refl\base), \left(\alpha,
+        \refl{\trp[T]{\alpha}(\refl\base)}\right)\right)
   \end{aligned}
 \end{equation}
 The map of interest is the composition of this equivalence with the
@@ -468,28 +468,28 @@ described above.
 
 For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
 transport
-$\trp{T,\alpha}:(\trp{H,e}(\base) = \base) \to (\trp{H,e'}(\base) =
+$\trp{T,\alpha}:(\trp[\hopffam]{e}(\base) = \base) \to (\trp[\hopffam]{e'}(\base) =
 \base)$ identifies with the following function:
 \begin{equation}
   \begin{aligned}
-    {t_\alpha}: (\trp{H,e}(\base) = \base) &\to (\trp{H,e'}(\base) = \base)
+    {t_\alpha}: (\trp[\hopffam]{e}(\base) = \base) &\to (\trp[\hopffam]{e'}(\base) = \base)
     \\
-    p &\mapsto p\cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
+    p &\mapsto p\cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
   \end{aligned}
 \end{equation}
 This is shown by induction on $\alpha$: indeed,
-$\ap{\trp{H,-}(\base)}(\refl{e}) \jdeq \refl{\trp{H,e}(\base)}$; hence
+$\ap{\trp[\hopffam]{\blank}(\base)}(\refl{e}) \jdeq \refl{\trp[\hopffam]{e}(\base)}$; hence
 path algebra provides a proof of $t_{\refl{e}}(p) = p$. So in
 particular when $\alpha:\refl N = \refl N$, one gets
 \begin{equation}\label{eq:trp-Ta(refl)}
-  \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
-  = \inv{\left(\ap{\trp{H,-}(\base)}(\alpha)\right)}
+  \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
+  = \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
 \end{equation}
 In the end, the map $\eta\from \loopspace 2 \Sp \to \loopspace 1 \Sc$
 is $\inv{(\blank)} \circ \ap \theta$ where $\theta : (N=N) \to \Sc$ is the function defined by
 \begin{equation}
   \label{eq:17}
-  \theta(p) \defequi \trp{\hopffam,p}(\base)
+  \theta(p) \defequi \trp[\hopffam]{p}(\base)
 \end{equation}
 For practical reason, we prefer to work directly with
 $\ap\theta\from \loopspace 2 \Sp \to \loopspace 1 \Sc$. This does not
@@ -579,7 +579,7 @@ Now remark that $\trp{H,\mrd(\base)} = \id_\Sc$, so that
 $\theta(\inv{\mrd(\base)}\cdot \blank)$ is equal to the function:
 \begin{equation}
   \label{eq:22}
-  \tau : (N=S) \to \Sc, \quad p \mapsto \trp{\hopffam,p}(\base)
+  \tau : (N=S) \to \Sc, \quad p \mapsto \trp[\hopffam]{p}(\base)
 \end{equation}
 Hence we can simplify the expression of the degree function as:
 \begin{equation}
@@ -605,7 +605,7 @@ One can sum up what is above as follows:
 \end{equation}
 
 Remark that the function $\tau$ is actually a retraction for $\mrd$:
-indeed, $\trp{\hopffam, \mrd(x)} = \hopffam (\mrd(x)) = \iota_1(x)$
+indeed, $\trp[\hopffam]{\mrd(x)} = \hopffam (\mrd(x)) = \iota_1(x)$
 and $\iota_1(x)$ sends $\base$ to $x$ by definition, so
 $\tau(\mrd(x)) = x$ for every $x:\Sc$. As $c_{\id,\refl N}=\id_{N=S}$,
 it follows that:
@@ -771,8 +771,8 @@ leads to a contradiction if we show
 $\mrd(\Sloop\cdot\Sloop) \neq \mrd(\refl{\base})$.
 Assume $\mrd(\Sloop\cdot\Sloop) = \mrd(\refl{\base})$.
 These are 2-paths of type $\mrd(\base)=\mrd(\base)$.
-Since $\hopffam(\mrd{x})(\base) = \iota_1(x)(\base) = x$ for all $x:\Sc$
-it follows that $\Sloop\cdot\Sloop = \refl{\base}$ which is absurd. CHECK
+Since $\hopffam(\mrd(x))(\base) = \iota_1(x)(\base) = x$ for all $x:\Sc$
+it follows that $\Sloop\cdot\Sloop = \refl{\base}$, which is absurd. CHECK
 
 The proof of $e_0 = e_3$ is similar to that of $e_1 = e_2$, with some
 technical adjustments for the different functions. We leave these to the
