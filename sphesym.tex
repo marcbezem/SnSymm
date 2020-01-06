@@ -905,6 +905,37 @@ technical adjustments for the different functions. We leave these to the
 reader. We come back to this when we discuss $\Trunc{e_0 = e_3}$.
 \end{proof}
 
+
+\begin{example}\label{exa:degree-k-function}
+We define a canonical pointed map and calculate its degree.
+\begin{align}
+  \label{eq:deg-k-func}
+  d_k(N)&\jdeq N \quad\text{keeping the poles, $\refl{N}: N=d_k(N)$}\\
+  d_k(S)&\jdeq S\\
+  d_k(\mrd(\base))&= \mrd(\base)\\
+  d_k(\mrd(\Sloop))&= \mrd(\Sloop^{k})\quad\text{$k$-fold rotation of meridians}
+\end{align}
+The corresponding function $\varphi_{d_k,\refl{N}}: \Sc \to (N=N)$ is:
+\[
+{\refl{N}}^{-1} \cdot d_k(\mrd(\base))^{-1}\cdot d_k(\mrd(\blank))\cdot \refl{N}
+\]
+We postcompose $\varphi_{d_k,\refl{N}}$ with $\trp[\hopffam]{\blank}(\base)$
+in order to get a function $d'_k :  \Sc \to \Sc$.
+Transport along the refexivity paths is the identity. 
+Transport in $\hopffam$ along $d_k(\mrd(\base))^{-1}$ is $\iota_{\base}$,
+which is also the identity. It remains to transport along $d_k(\mrd(\blank))$.
+Here we cannot say much in general. 
+However, we easily get $d'_k(\base)=\base$.
+We use again that
+$\hopffam(\mrd(x))(\base) = \iota_1(x)(\base) = x$ for all $x:\Sc$.
+Consequently, $\trp[\hopffam]{ \mrd(\Sloop^{k})} =  \Sloop^{k}$,
+and $d'_k(\Sloop)$ is a conjugate of $\Sloop^{k}$ CHECK.
+This makes sense as a degree $k$ function.
+
+
+\end{example}
+
+
 \section*{Acknowledgements}
 We thank Nicolai Kraus for the insight that
 $\mrd(\Sloop\cdot\Sloop) \neq \mrd(\refl{\base})$.
