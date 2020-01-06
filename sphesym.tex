@@ -498,120 +498,245 @@ $\loopspace 1 \Sc \weq \loopspace 1 \Sc$, hence every property that
 $\ap\theta$ will enjoy, $\eta$ will also.
 
 Recall now the adjoint pair $\susp{}\dashv\loopspace{}$, which
-provides a first equivalence
+provides an equivalence
 \begin{equation}
   \label{eq:24}
   \begin{tikzcd}[%
     /tikz/column 1/.append style={anchor=base east},%
     /tikz/column 2/.append style={anchor=base west}]
-    (\Sp \ptdto \Sp) \rar["\weq"] & (\Sc \ptdto \loopspace 1 \Sp)
+    \blank^\natural : (\Sp \ptdto \Sp) \rar["\weq"] & (\Sc \ptdto
+    \loopspace 1 \Sp)
     \\
-    (f,f_0) \rar[mapsto] & \inv{\left(f(\mrd(\base)) \cdot
-        f_0\right)}\cdot f(\mrd(\blank))\cdot f_0
+    (f,f_0) \rar[mapsto] & (\varphi_{f,f_0}, \pi_{f,f_0})
   \end{tikzcd}
 \end{equation}
-where in the right hand side, we left out the path from $\refl N$ to
-the function taken at $\base$ as it is path algebra. The universal
-property of the circle now establish a second equivalence:
+where in the right hand side
+$\varphi_{f,f_0} \defequi\inv{f_0}\cdot \inv{f(\mrd(\base))}\cdot
+f(\mrd(\blank))\cdot f_0$ and the path $\pi_{f,f_0}$ is defined as the
+composition of the following elementary path algebra steps:
+\begin{equation}
+  \label{eq:16}
+  \refl N = \inv{f_0}f_0 = \inv{f_0}\refl {f(N)} f_0 =  \inv{f_0}\inv{f(\mrd(\base))}f(\mrd(\base)) f_0
+\end{equation}
+Remark that for two pointed functions $(f,f_0)$ and $(g,g_0)$, path
+algebra and functoriality of $g$ yields a path, call it
+$c_{f,f_0,g,g_0}$, in:
+\begin{equation}
+  \begin{aligned}
+    \varphi_{gf,g(f_0)g_0} %
+    &= \inv{(g(f_0)g_0)}\inv{gf(\mrd(\base))} gf(\mrd(\blank))
+    g(f_0)g_0
+    \\
+    &= \inv{g_0}\inv{g(f_0)}\inv{gf(\mrd(\base))} gf(\mrd(\blank))
+    g(f_0)g_0
+    \\
+    &= \inv{g_0} \cdot \ap g (\varphi_{f,f_0}(\blank)) \cdot g_0
+    \\
+    &\jdeq \loopspace 1 (g,g_0) \circ \varphi_{f,f_0}
+  \end{aligned}\label{eq:26}
+\end{equation}
+Now, the transport of $\pi_{gf,g(f_0)g_0}$ along $c_{f,f_0,g,g_0}$ in
+the type family $h\mapsto (\refl N = h(\base))$ is simply given by the
+composition $c_{f,f_0,g,g_0}\pi_{gf,g(f_0)g_0}$. Compare it to the
+path $\ap{\loopspace 1{(g,g_0)}}(\pi_{f,f_0})\varpi$ where $\varpi$ is
+the path $\refl N = \inv{g_0}g_0 = \inv{g_0}\refl{g(N)}g_0$ coming
+from path algebra. Both are equal from compatibility of path algebra
+with functoriality of function. In other words:
+\begin{equation}
+  \label{eq:27}
+  {\left((g,g_0)\circ (f,f_0)\right)}^\natural = \loopspace 1 (g,g_0) \circ (f,f_0)^\natural 
+\end{equation}
+And in particular for any pointed map $(f,f_0)$ one has an element of
+\begin{displaymath}
+  (f,f_0)^\natural = \loopspace 1 (f,f_0) \circ
+  (\id_{\Sp},\refl N)^\natural
+\end{displaymath}
+
+Now recall that the universal property of the circle establishes fro
+any type $A$ an equivalence:
 \begin{equation}
   \label{eq:25}
   \begin{tikzcd}[%
     /tikz/column 1/.append style={anchor=base east},%
     /tikz/column 2/.append style={anchor=base west}]
-    (\Sc \ptdto \loopspace 1 \Sp) \rar["\weq"] & \loopspace 2 \Sp
+    \lambda_{A}: (\Sc \ptdto A) \rar["\weq"] & \loopspace 1 A
     \\
-    (g,g_0) \rar[mapsto] & \inv{g_0} \cdot g(\Sloop)\cdot g_0
+    (h,h_0) \rar[mapsto] & \inv{h_0} \cdot h(\Sloop)\cdot h_0
   \end{tikzcd}
 \end{equation}
-Notice that for any $p,q:N=f(S)$,
-\begin{equation}
-  \inv{q} \cdot p = \inv{\mrd(\base)} \cdot (\inv{(q\circ \inv{\mrd(\base)})} \cdot p)
-\end{equation}
-Hence, if we denote
-$c_{f,f_0}: r \mapsto \inv{(f(\mrd(\base))\cdot
-  f_0\cdot\inv{\mrd(\base)})} \cdot r \cdot f_0$, then the equivalence
-of (\ref{eq:24}) is equal to
-$(f,f_0) \mapsto (\inv{\mrd(\base)}\cdot
-c_{f,f_0}(f(\mrd(-))),\pi_{f,f_0})$ where
-$\pi_{f,f_0} = \ap{\inv{\mrd(\base)}\cdot \blank}(\varpi_{f,f_0})
-\cdot \varepsilon$ where
-$\varepsilon: \refl N = \inv{\mrd(\base)}\cdot \mrd(\base)$ and
-$\varpi_{f,f_0}:\mrd(\base) = c_{f,f_0}(f(\mrd(\base)))$ are both
-paths from path algebra.
+In particular, when $A$ is $\loopspace 1 \Sp$, one can compose
+$\lambda_{\loopspace 1 \Sp}$ with $\blank^\natural$ to find an
+equivalence from $(\Sp \ptdto \Sp)$ to $\loopspace 2 \Sp$.
 
-Then the composition of equivalences (\ref{eq:24}) and (\ref{eq:25})
-is equal to the following equivalence:
+The HoTT-book proves that the map
+$\ap \theta:\loopspace 2 \Sp \to \loopspace 1 \Sc$ is (equivalent to)
+the set-truncation map of $\loopspace 2 \Sp$. Denote $\Phi$ for the
+equivalence $\loopspace 1 \Sc \weq \ZZ$, and define the degree of a
+pointed function $(f,f_0)$ to be
 \begin{equation}
-  \begin{tikzcd}[%
-    /tikz/column 1/.append style={anchor=base east},%
-    /tikz/column 2/.append style={anchor=base west}]
-    (\Sp \ptdto \Sp) \rar["\weq"] & \loopspace 2 \Sp
+  \label{eq:28}
+  d(f,f_0) \defequi \Phi\left(\ap\theta\left(
+      \lambda_{\loopspace 1 \Sp}\left((f,f_0)^\natural\right)
+    \right)\right)
+\end{equation}
+Hence $\ZZ$ is equivalent to the set-truncation of $(\Sp \ptdto \Sp)$
+and the function $d: (\Sp \ptdto \Sp) \to \ZZ$ is the truncation of
+element under this equivalence. In other words, it means that two
+pointed functions are in the same connected component of
+$\Sp \ptdto \Sp$ if and only if they have the same degree.
+
+To conclude that equivalences are merely equal to either $\id_\Sp$ or
+$-\id_\Sp$, one still need to prove that equivalences have degree
+either $1$ or $-1$. This will be achieved if we manage to prove that
+$d$ maps compositions to products in $\ZZ$. We shall exploit a kind of
+naturality of the equivalence defined in (\ref{eq:25}): namely if
+$\ell:A \ptdto B$, then it defines a map
+$\ell^\ast : (\Sc\ptdto A) \to (\Sc \ptdto B)$ by postcomposition and
+$\ap \ell \circ \lambda_A = \lambda_B \circ \ell^\ast$ is
+inhabited. Define now $\bar d: (\Sp \ptdto \Sp) \to (\Sc \ptdto \Sc)$
+as follows:
+\begin{equation}
+  \label{eq:29}
+  \bar d(f,f_0) \defequi \theta\circ(f,f_0)^\natural
+\end{equation}
+The situation is better summarized in the following commutative
+diagram:
+\begin{equation}
+  \label{eq:30}
+  \begin{tikzcd}
+    {} & (\Sc \ptdto \Sc) \rar["\lambda_{\Sc}","\weq"swap] &
+    \loopspace 1 \Sc \rar["\Phi","\weq"swap] & \ZZ
     \\
-    (f,f_0) \rar[mapsto] & \inv{\pi_{f,f_0}} \cdot \left(
-      \inv{\mrd(\base)} \cdot \blank \right)
-    \left(c_{f,f_0}(f(\mrd(\Sloop)))\right) \cdot \pi_{f,f_0}
+    (\Sp \ptdto \Sp) \rar["\blank^\natural","\weq"swap] \ar[ur,bend
+    left,"\bar d"] \ar[urrr, bend
+    right=90,"d"swap] & (\Sc \ptdto \loopspace 1 \Sp)
+    \rar["\lambda_{\loopspace 1 \Sp}","\weq"swap] \uar["\theta^\ast"]
+    & \loopspace 2 \Sp \uar["\ap\theta"swap] & 
   \end{tikzcd}
 \end{equation}
-
-The degree function $d: (\Sp \ptdto \Sp) \to \loopspace 1 \Sc$ is then
-defined as the composition of this equivalence with $\ap\theta$. It
-holds that ({\tt \color{red} No it does not, need to correct up until
-  equation (\ref{eq:15})}):
-\begin{align}
-  \label{eq:21}
-  d(f,f_0)
-  &=
-    \ap\theta\left(
-    \left(
-    \inv{\mrd(\base)} \cdot \blank
-    \right)
-    \left(
-    c_{f,f_0}(f(\mrd(\Sloop)))
-    \right)
-    \right)
-  \\
-  &= \ap{\theta(\inv{\mrd(\base)} \cdot \blank)}
-    \left(
-    c_{f,f_0}(f(\mrd(\Sloop)))
-    \right)
-\end{align}
-Now remark that $\trp{H,\mrd(\base)} = \id_\Sc$, so that
-$\theta(\inv{\mrd(\base)}\cdot \blank)$ is equal to the function:
+Now remark that under the equivalence $\Phi\lambda_\Sc$,
+multiplication in $\ZZ$ corresponds to composition in
+$\Sc \ptdto \Sc$, as proved in the first section. {\tt \color{red}
+  (Maybe we should make that a lemma somewhere.)} %
+Hence, $d$ maps composition to product if and only if $\bar d$
+preserves composition. Taking equation~(\ref{eq:27}) into account, one
+needs to prove that for pointed functions $(f,f_0)$ and $(g,g_0)$, the
+following type is inhabited:
 \begin{equation}
-  \label{eq:22}
-  \tau : (N=S) \to \Sc, \quad p \mapsto \trp{\hopffam,p}(\base)
-\end{equation}
-Hence we can simplify the expression of the degree function as:
-\begin{equation}
-  \label{eq:23}
-  d(f,f_0) = \ap\tau\left(c_{f,f_0}f(\mrd(\Sloop))\right)
+  \label{eq:31}
+  \theta \circ \loopspace 1 {(g,g_0)} \circ (f,f_0)^\natural
+  = \theta \circ (g,g_0)^\natural \circ \theta \circ (f,f_0)^\natural  
 \end{equation}
 
-\begin{definition}
-  Given a map $f\from \Sp \to \Sp$ and a path $f_0 : N = f(N)$, define
-  $\phi(f,f_0)$ to be the composition
-  \begin{equation}
-    \label{eq:13}
-    \begin{tikzcd}
-      \Sc \rar["\mrd"] & N=S \rar["f"] & f(N) = f(S) \rar["c_f"] & N =
-      S \rar["\tau"] & \Sc
-    \end{tikzcd}
-  \end{equation}
-\end{definition}
-One can sum up what is above as follows:
-\begin{equation}
-  \label{eq:15}
-  d = \ap{\phi(\blank)}(\Sloop)
-\end{equation}
+% There is a simpler goal though: to prove that $\bar d$ maps pointed
+% equivalences to pointed equivalences. Take $(f,f_0): \Sp \ptdto \Sp$
+% such that $f$ is an equivalence, and write $g$ for its pseudo
+% inverse. We are targeting to prove that $\bar d(f,f_0)$ is an
+% equivalence, so we might assume that $g$ is pointed as well. One wants
+% to prove that for any $y\in \Sc$, the fiber
+% $\inv{\left( \theta \circ \varphi_{f,f_0} \right)} (y)$ is
+% contractible. The latter type depending on $y$ is a proposition, so we
+% take advantage of the connectedness of $\Sc$ and we verify it only on
+% the point $\base$. Because
+% $\pi_{f,f_0}: \refl N = \varphi_{f,f_0}(\base)$, the transport over
+% $\varphi_{f,f_0}(\base)$ in $\hopffam$ is trivial and the fiber
+% $\inv{\left( \theta \circ \varphi_{f,f_0} \right)} (\base)$ contains
+% the element $(\base, \ap \theta (\pi_{f,f_0}))$. For any other point
+% $(x,p)$ of this fiber, one gets
+% $p: \base = \theta(\varphi_{f,f_0}(x))$.
 
-Remark that the function $\tau$ is actually a retraction for $\mrd$:
-indeed, $\trp{\hopffam, \mrd(x)} = \hopffam (\mrd(x)) = \iota_1(x)$
-and $\iota_1(x)$ sends $\base$ to $x$ by definition, so
-$\tau(\mrd(x)) = x$ for every $x:\Sc$. As $c_{\id,\refl N}=\id_{N=S}$,
-it follows that:
-\begin{equation}
-  d(\id, \refl N) = \ap\tau(\ap\mrd(\Sloop)) = \Sloop
-\end{equation}
+%% -----------------------
+%% OLD STUFF, MAYBE USEFUL
+%% -----------------------
+% Notice that for any $p,q:N=f(S)$,
+% \begin{equation}
+%   \inv{q} \cdot p = \inv{\mrd(\base)} \cdot (\inv{(q\circ \inv{\mrd(\base)})} \cdot p)
+% \end{equation}
+% Hence, if we denote
+% $c_{f,f_0}: r \mapsto \inv{(f(\mrd(\base))\cdot
+%   f_0\cdot\inv{\mrd(\base)})} \cdot r \cdot f_0$, then the equivalence
+% of (\ref{eq:24}) is equal to
+% $(f,f_0) \mapsto (\inv{\mrd(\base)}\cdot
+% c_{f,f_0}(f(\mrd(-))),\pi_{f,f_0})$ where
+% $\pi_{f,f_0} = \ap{\inv{\mrd(\base)}\cdot \blank}(\varpi_{f,f_0})
+% \cdot \varepsilon$ where
+% $\varepsilon: \refl N = \inv{\mrd(\base)}\cdot \mrd(\base)$ and
+% $\varpi_{f,f_0}:\mrd(\base) = c_{f,f_0}(f(\mrd(\base)))$ are both
+% paths from path algebra.
+
+% Then the composition of equivalences (\ref{eq:24}) and (\ref{eq:25})
+% is equal to the following equivalence:
+% \begin{equation}
+%   \begin{tikzcd}[%
+%     /tikz/column 1/.append style={anchor=base east},%
+%     /tikz/column 2/.append style={anchor=base west}]
+%     (\Sp \ptdto \Sp) \rar["\weq"] & \loopspace 2 \Sp
+%     \\
+%     (f,f_0) \rar[mapsto] & \inv{\pi_{f,f_0}} \cdot \left(
+%       \inv{\mrd(\base)} \cdot \blank \right)
+%     \left(c_{f,f_0}(f(\mrd(\Sloop)))\right) \cdot \pi_{f,f_0}
+%   \end{tikzcd}
+% \end{equation}
+
+% The degree function $d: (\Sp \ptdto \Sp) \to \loopspace 1 \Sc$ is then
+% defined as the composition of this equivalence with $\ap\theta$. It
+% holds that ({\tt \color{red} No it does not, need to correct up until
+%   equation (\ref{eq:15})}):
+% \begin{align}
+%   \label{eq:21}
+%   d(f,f_0)
+%   &=
+%     \ap\theta\left(
+%     \left(
+%     \inv{\mrd(\base)} \cdot \blank
+%     \right)
+%     \left(
+%     c_{f,f_0}(f(\mrd(\Sloop)))
+%     \right)
+%     \right)
+%   \\
+%   &= \ap{\theta(\inv{\mrd(\base)} \cdot \blank)}
+%     \left(
+%     c_{f,f_0}(f(\mrd(\Sloop)))
+%     \right)
+% \end{align}
+% Now remark that $\trp{H,\mrd(\base)} = \id_\Sc$, so that
+% $\theta(\inv{\mrd(\base)}\cdot \blank)$ is equal to the function:
+% \begin{equation}
+%   \label{eq:22}
+%   \tau : (N=S) \to \Sc, \quad p \mapsto \trp{\hopffam,p}(\base)
+% \end{equation}
+% Hence we can simplify the expression of the degree function as:
+% \begin{equation}
+%   \label{eq:23}
+%   d(f,f_0) = \ap\tau\left(c_{f,f_0}f(\mrd(\Sloop))\right)
+% \end{equation}
+
+% \begin{definition}
+%   Given a map $f\from \Sp \to \Sp$ and a path $f_0 : N = f(N)$, define
+%   $\phi(f,f_0)$ to be the composition
+%   \begin{equation}
+%     \label{eq:13}
+%     \begin{tikzcd}
+%       \Sc \rar["\mrd"] & N=S \rar["f"] & f(N) = f(S) \rar["c_f"] & N =
+%       S \rar["\tau"] & \Sc
+%     \end{tikzcd}
+%   \end{equation}
+% \end{definition}
+% One can sum up what is above as follows:
+% \begin{equation}
+%   \label{eq:15}
+%   d = \ap{\phi(\blank)}(\Sloop)
+% \end{equation}
+
+% Remark that the function $\tau$ is actually a retraction for $\mrd$:
+% indeed, $\trp{\hopffam, \mrd(x)} = \hopffam (\mrd(x)) = \iota_1(x)$
+% and $\iota_1(x)$ sends $\base$ to $x$ by definition, so
+% $\tau(\mrd(x)) = x$ for every $x:\Sc$. As $c_{\id,\refl N}=\id_{N=S}$,
+% it follows that:
+% \begin{equation}
+%   d(\id, \refl N) = \ap\tau(\ap\mrd(\Sloop)) = \Sloop
+% \end{equation}
 
 
 
