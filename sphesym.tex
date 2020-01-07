@@ -343,7 +343,6 @@ co-restraining it to $\conncomp{(\Sp\weq\Sp)}{e_1}$.
 \subsection{Degree}
 \label{sec:winding-numbers}
 \def\hopffam{\mathcal H}%
-\def\loopspace#1{\operatorname{\Omega_{#1}}}%
 
 In associating a degree in $\ZZ$ to very pointed map $\Sp \to \Sp$,
 the first step is usually to define a map
@@ -898,7 +897,7 @@ $\mrd(\Sloop\cdot\Sloop) \neq \mrd(\refl{\base})$.
 Assume $\mrd(\Sloop\cdot\Sloop) = \mrd(\refl{\base})$.
 These are 2-paths of type $\mrd(\base)=\mrd(\base)$.
 Since $\hopffam(\mrd(x))(\base) = \iota_1(x)(\base) = x$ for all $x:\Sc$
-it follows that $\Sloop\cdot\Sloop = \refl{\base}$, which is absurd. CHECK
+it follows that $\Sloop\cdot\Sloop = \refl{\base}$, which is absurd.
 
 The proof of $e_0 = e_3$ is similar to that of $e_1 = e_2$, with some
 technical adjustments for the different functions. We leave these to the
@@ -929,8 +928,9 @@ However, we easily get $d'_k(\base)=\base$.
 We use again that
 $\hopffam(\mrd(x))(\base) = \iota_1(x)(\base) = x$ for all $x:\Sc$.
 Consequently, $\trp[\hopffam]{ \mrd(\Sloop^{k})} =  \Sloop^{k}$,
-and $d'_k(\Sloop)$ is a conjugate of $\Sloop^{k}$ CHECK.
-This makes sense as a degree $k$ function.
+and $d'_k(\Sloop)$ is a conjugate of $\Sloop^{k}$.
+This makes sense as a degree $k$ function, 
+and includes $e_0$ ($k=1$) and $e_1$ ($k=-1$).
 
 
 \end{example}
