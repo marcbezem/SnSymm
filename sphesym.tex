@@ -57,6 +57,7 @@ Moreover, these two components are equivalent.
 
 
 \section{The circle}
+\label{sec:circle-case}%
 In this document, we shall establish an equivalence
 between the type of equalities of $\Sc$ with itself and the sum type
 of $\Sc$ with itself. We work in intuitionistic Martin-Löf's type
@@ -248,11 +249,11 @@ $(\Sc \weq \Sc)$.
 \end{proof}
 
 \section{The sphere}
-\newcommand{\Sp}{S^2}%
+\newcommand{\Sp}{{S^2}}%
 \newcommand{\mrd}{\mathit{merid}}%
 \newcommand{\susp}[1]{\operatorname{\Sigma}{#1}}%
-\newcommand{\Truncset}[1]{\Trunc{#1}_0}%
-\newcommand{\truncset}[1]{\trunc{#1}_0}%
+\newcommand{\Truncset}[1]{{\Trunc{#1}}_0}%
+\newcommand{\truncset}[1]{{\trunc{#1}}_0}%
 \newcommand{\Truncprop}[1]{\Trunc{#1}}%
 \newcommand{\truncprop}[1]{\trunc{#1}}%
 \newcommand{\ptdto}{\to_\ast}%
@@ -318,7 +319,7 @@ $\Truncprop{\phi(f) = \phi(g)} \implies \Truncprop{f=g}$.
 The second step is to prove that the component
 $\sum_{f:\Sp \weq \Sp}\Truncprop{e_0=f}$ is equivalent to
 $\sum_{f:\Sp \weq \Sp}\Truncprop{e_1=f}$. For that purpose, we shall
-construct a map $\flip : (\Sp \to \Sp) \to (\Sp \Sp)$ where $\flip(f)$
+construct a map $\flip : (\Sp \to \Sp) \to (\Sp \to \Sp)$ where $\flip(f)$
 is defined by induction as follows:
 \begin{equation}
   \label{eq:19}
@@ -344,7 +345,7 @@ co-restraining it to $\conncomp{(\Sp\weq\Sp)}{e_1}$.
 \label{sec:winding-numbers}
 \def\hopffam{\mathcal H}%
 
-In associating a degree in $\ZZ$ to very pointed map $\Sp \to \Sp$,
+In associating a degree in $\ZZ$ to every pointed map $\Sp \to \Sp$,
 the first step is usually to define a map
 $\loopspace 2 \Sp \to \loopspace 1 \Sc$. The construction of such a
 map in HoTT is known material that can be tracked back at least to
@@ -460,14 +461,14 @@ $\loopspace 2 \Sp$ back to the actual fiber is given by:
 \end{equation}
 The map of interest is the composition of this equivalence with the
 first projection to $\loopspace 1 \Sc$, which is then simply
-$\alpha \mapsto \trp{T,\alpha}(\refl \base)$. All that remains to do
+$\alpha \mapsto \trp[T]{\alpha}(\refl \base)$. All that remains to do
 is to determine the transport in the type family $T$, so that one can
 make explicit further the map $\eta:\loopspace 2 \Sp \to \loopspace 1 \Sc$
 described above.
 
 For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
 transport
-$\trp{T,\alpha}:(\trp[\hopffam]{e}(\base) = \base) \to (\trp[\hopffam]{e'}(\base) =
+$\trp[T]{\alpha}:(\trp[\hopffam]{e}(\base) = \base) \to (\trp[\hopffam]{e'}(\base) =
 \base)$ identifies with the following function:
 \begin{equation}
   \begin{aligned}
@@ -481,7 +482,7 @@ $\ap{\trp[\hopffam]{\blank}(\base)}(\refl{e}) \jdeq \refl{\trp[\hopffam]{e}(\bas
 path algebra provides a proof of $t_{\refl{e}}(p) = p$. So in
 particular when $\alpha:\refl N = \refl N$, one gets
 \begin{equation}\label{eq:trp-Ta(refl)}
-  \trp{T,\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
+  \trp[T]{\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
   = \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
 \end{equation}
 In the end, the map $\eta\from \loopspace 2 \Sp \to \loopspace 1 \Sc$
@@ -563,19 +564,38 @@ any type $A$ an equivalence:
     (h,h_0) \rar[mapsto] & \inv{h_0} \cdot h(\Sloop)\cdot h_0
   \end{tikzcd}
 \end{equation}
+An inverse equivalence for $\lambda_A$ is simply mapping a loop
+$\ell : \pt_A = \pt_A$ to the map $\Sc \to A$ defined by induction as
+$\base \mapsto \pt_A$ and $\Sloop \mapsto \ell$ pointed by
+$\refl{\pt_A}$. Remark also that for any pointed maps
+$(f,f_0):\Sc \ptdto A$ and $(g,g_0):A \ptdto A$,
+\begin{equation}
+  \label{eq:32}
+  \lambda_A((g,g_0)\circ (f,f_0)) = \inv{g_0} \inv{g(f_0)} g(f(\Sloop)) g(f_0) g_0
+  = \loopspace 1 (g,g_0) ( \lambda_A(f,f_0) )
+\end{equation}
 In particular, when $A$ is $\loopspace 1 \Sp$, one can compose
 $\lambda_{\loopspace 1 \Sp}$ with $\blank^\natural$ to find an
-equivalence from $(\Sp \ptdto \Sp)$ to $\loopspace 2 \Sp$.
+equivalence from $(\Sp \ptdto \Sp)$ to $\loopspace 2 \Sp$, which,
+through equations~(\ref{eq:27}) and~(\ref{eq:32}) maps a composition
+of the form $(g,g_0)\circ (f,f_0)$ to
+$\loopspace 2 (g,g_0)(\lambda_{\loopspace 1 \Sp}(f,f_0)^\natural)$. In
+particular, it follows that
+\begin{equation}
+  \label{eq:34}
+  \lambda_{\loopspace 1 \Sp}\left((f,f_0)^\natural\right) = \loopspace 2 {(f,f_0)} (\ap{\mrd(\base)\cdot \mrd(\blank)}(\Sloop))
+\end{equation}
 
 The HoTT-book proves that the map
 $\ap \theta:\loopspace 2 \Sp \to \loopspace 1 \Sc$ is (equivalent to)
-the set-truncation map of $\loopspace 2 \Sp$. Denote $\Phi$ for the
+the set-truncation map of $\loopspace 2 \Sp$, or equivalently that
+$\Truncset {\ap \theta}$ is an equivalence. Denote $\Phi$ for the
 equivalence $\loopspace 1 \Sc \weq \ZZ$, and define the degree of a
 pointed function $(f,f_0)$ to be
 \begin{equation}
   \label{eq:28}
   d(f,f_0) \defequi \Phi\left(\ap\theta\left(
-      \lambda_{\loopspace 1 \Sp}\left((f,f_0)^\natural\right)
+      \lambda_{\loopspace 1 \Sp}\left(((f,f_0)^\natural\right))
     \right)\right)
 \end{equation}
 Hence $\ZZ$ is equivalent to the set-truncation of $(\Sp \ptdto \Sp)$
@@ -583,14 +603,15 @@ and the function $d: (\Sp \ptdto \Sp) \to \ZZ$ is the truncation of
 element under this equivalence. In other words, it means that two
 pointed functions are in the same connected component of
 $\Sp \ptdto \Sp$ if and only if they have the same degree.
+% To conclude that equivalences are merely equal to either $\id_\Sp$ or
+% $-\id_\Sp$, one still need to prove that equivalences have degree
+% either $1$ or $-1$. This will be achieved if we manage to prove that
+% $d$ maps compositions to products in $\ZZ$. For that we shall 
 
-To conclude that equivalences are merely equal to either $\id_\Sp$ or
-$-\id_\Sp$, one still need to prove that equivalences have degree
-either $1$ or $-1$. This will be achieved if we manage to prove that
-$d$ maps compositions to products in $\ZZ$. We shall exploit a kind of
-naturality of the equivalence defined in (\ref{eq:25}): namely if
-$\ell:A \ptdto B$, then it defines a map
-$\ell^\ast : (\Sc\ptdto A) \to (\Sc \ptdto B)$ by postcomposition and
+Now remark that that there is a kind of naturality for the equivalence
+defined in (\ref{eq:25}): namely if $\ell:A \ptdto B$, then it defines
+a map $\ell^\ast : (\Sc\ptdto A) \to (\Sc \ptdto B)$ by
+postcomposition and
 $\ap \ell \circ \lambda_A = \lambda_B \circ \ell^\ast$ is
 inhabited. Define now $\bar d: (\Sp \ptdto \Sp) \to (\Sc \ptdto \Sc)$
 as follows:
@@ -614,19 +635,134 @@ diagram:
   \end{tikzcd}
 \end{equation}
 
-Now remark that under the equivalence $\Phi\lambda_\Sc$,
-multiplication in $\ZZ$ corresponds to composition in
-$\Sc \ptdto \Sc$, as proved in the first section. {\tt \color{red}
-  (Maybe we should make that a lemma somewhere.)} %
-Hence, $d$ maps composition to product if and only if $\bar d$
-preserves composition. Taking equation~(\ref{eq:27}) into account, one
-needs to prove that for pointed functions $(f,f_0)$ and $(g,g_0)$, the
-following type is inhabited:
+Because $d$ is a set-truncation map of $\Sp\ptdto\Sp$, then so is
+$\bar d$. Recall from section~\ref{sec:circle-case} that pointed
+equivalences $\Sc \ptdto \Sc$ are equal to either $\id_\Sc$ or
+$-\id_\Sc$.\footnote{\color{red}This only appears in the proof of the
+  main result and not as an independent lemma. It should be
+  corrected.}  And because $\bar d(\id_\Sp) = \id_\Sc$ and
+$\bar d(-\id_\Sp) = -\id_\Sc$ (to be shown in full details later), it
+is enough to prove that $\bar d$ maps equivalences to equivalences to
+conclude. Let us shall that by proving $\bar d$ preserves composition
+of pointed maps. Any pointed map $(f,f_0): \Sp \ptdto \Sp$ induces a
+map
 \begin{equation}
-  \label{eq:31}
-  \theta \circ \loopspace 1 {(g,g_0)} \circ (f,f_0)^\natural
-  = \theta \circ (g,g_0)^\natural \circ \theta \circ (f,f_0)^\natural  
+  \label{eq:33}
+  \pi_2(f,f_0)\defequi \Truncset {\loopspace 2 (f,f_0)}: \Truncset{\loopspace 2 \Sp} \to \Truncset{\loopspace 2 \Sp}
 \end{equation}
+which, by definition, has the property that the following diagram
+commutes:
+\begin{equation}
+  \label{eq:35}
+  \begin{tikzcd}
+    \loopspace 2 \Sp \rar["{\loopspace 2 (f,f_0)}"]
+    \dar["\truncset\blank"swap] & \loopspace 2 \Sp
+    \dar["\truncset\blank"]
+    \\
+    \Truncset{\loopspace 2 \Sp} \rar["{\pi_2 (f,f_0)}"swap] & \Truncset{\loopspace 2 \Sp}
+  \end{tikzcd}
+\end{equation}
+In particular, one has that
+$\ap \theta \circ \loopspace 2 (f,f_0) = \Truncset{\ap\theta} \circ
+\pi_2(f,f_0) \circ \truncset\blank$. Now by definition
+$\Truncset{\ap\theta} \circ \truncset\blank \jdeq \ap \theta$, and
+$\Truncset{\ap\theta}$ being an equivalence, it follows that
+$\truncset \blank = \inv{\Truncset{\ap\theta}}\circ \ap\theta$. Hence,
+if we denote $\bar \pi_2(f,f_0): \loopspace 1 \Sc \to \loopspace 1 \Sc$ for the
+composition
+$\Truncset{\ap\theta} \circ \pi_2(f,f_0) \circ
+\inv{\Truncset{\ap\theta}}$, then through equation~(\ref{eq:34}),
+\begin{equation}
+  \label{eq:36}%
+  (\inv\Phi \circ d) (f,f_0) = \bar\pi_2(f,f_0)\left(
+    \ap\theta \left( \ap {\mrd(\base) \cdot \mrd(\blank)} (\Sloop) \right)
+  \right)
+\end{equation}
+Remember that $\theta\circ (\mrd(\base)\cdot\mrd(\blank)) =
+\id_\Sc$. Then it follows that
+\begin{equation}
+  \label{eq:36}%
+  (\inv\Phi \circ d) (f,f_0) = \bar\pi_2(f,f_0)\left( \Sloop \right)
+\end{equation}
+Through the commutativity of diagram~(\ref{eq:30}), it holds that
+\begin{equation}
+  \bar d(f,f_0) = \inv{\lambda_\Sc}(\bar \pi_2(f,f_0)(\Sloop))
+\end{equation}
+In particular, if $(f,f_0)$ and $(g,g_0)$ are pointed maps
+$\Sp \ptdto \Sp$, then one has:
+\begin{equation}
+  \label{eq:37}
+  \begin{aligned}
+    \bar d ((g,g_0) \circ (f,f_0))
+    &= \inv{\lambda_\Sc} \left(
+      \bar\pi_2((g,g_0) \circ (f,f_0))\left( \Sloop \right)
+    \right)
+    \\
+    &= \inv{\lambda_\Sc} \left(
+      \bar\pi_2(g,g_0)\left( \bar\pi_2(f,f_0)\left(  \Sloop \right) \right)
+    \right)
+  \end{aligned}
+\end{equation}
+It is now easy to prove that the latter map is equal to
+$\inv{\lambda_\Sc}(\bar \pi_2(g,g_0)(\Sloop)) \circ
+\inv{\lambda_\Sc}(\bar \pi_2(f,f_0)(\Sloop))$ by circle induction: as
+both maps $\base$ definitionally to $\base$, one only need to check
+that their action on the loop is the same. By definition,
+$\inv{\lambda_\Sc}(\bar \pi_2(g,g_0)(\bar\pi_2(f,f_0)(\Sloop)))$ acts
+on the loop $\Sloop$ as $\bar
+\pi_2(g,g_0)(\bar\pi_2(f,f_0)(\Sloop))$. While the action of
+$\inv{\lambda_\Sc}(\bar \pi_2(g,g_0)(\Sloop)) \circ
+\inv{\lambda_\Sc}(\bar \pi_2(f,f_0)(\Sloop))$ on the loop leads to the
+application of
+$\loopspace 1 \left(\inv{\lambda_\Sc}(\bar
+  \pi_2(g,g_0)(\Sloop))\right)$ to $\bar\pi_2(f,f_0)(\Sloop)$. Hence,
+it suffices to prove that
+$\varpi_{g,g_0} \defequi\loopspace 1 \left(\inv{\lambda_\Sc}(\bar
+  \pi_2(g,g_0)(\Sloop))\right)$ is equal to $\bar \pi_2(g,g_0)$. They
+both are group morphisms that have the same image on $\Sloop$: for
+each
+$k:\ZZ$, one has
+\begin{equation}
+  \label{eq:39}
+  \varpi_{g,g_0} (\Sloop^k) = \varpi_{g,g_0} (\Sloop)^k
+  = \bar\pi_2(g,g_0)(\Sloop)^k = \bar\pi_2(g,g_0)(\Sloop^k)
+\end{equation}
+This concludes that $\bar d$ maps composition to composition. We have
+also seen that $\bar d (\id_\Sp,\refl N) = (\id_\Sc,\refl\base)$,
+hence $\bar d$ maps pointed equivalences to pointed equivalences.
+
+To conclude: given any equivalence $f:\Sp\simeq \Sp$, in order to
+prove the proposition
+$P(f)\defequi \Truncprop{\id_\Sp = f} + \Truncprop{\-id_\Sp = f}$, one
+can suppose that $f$ is pointed by a path $f_0$; then $\bar d(f,f_0)$
+is a pointed equivalence $\S \ptdto \Sc$ which is already known to be
+equal to either $(\id_\Sc,\refl\base)$ or
+$(-id_\Sc,\refl\base)$. Moreover $\bar d$ has the property of a
+set-truncation map, meaning that
+$\Truncprop{x=y} \weq (\bar d x = \bar d y)$: so
+$\bar d(f,f_0) = (\id_\Sc,\refl \base) \to \Truncprop{(f,f_0) =
+  (\id_\Sp,\refl N)}$ and
+$\bar d(f,f_0) = (-\id_\Sc,\refl \base) \to \Truncprop{(f,f_0) =
+  (-\id_\Sp,\refl N)}$. It remains to project on the first component
+and to use the universal property of a sum to find $P(f)$.
+
+%% -----------------------
+%% OLD STUFF, MAYBE USEFUL
+%% -----------------------
+%
+% Now remark that under the equivalence $\Phi\lambda_\Sc$,
+% multiplication in $\ZZ$ corresponds to composition in
+% $\Sc \ptdto \Sc$, as proved in the first section. {\tt \color{red}
+%   (Maybe we should make that a lemma somewhere.)} %
+% Hence, $d$ maps composition to product if and only if $\bar d$
+% preserves composition. Taking equation~(\ref{eq:27}) into account, one
+% needs to prove that for pointed functions $(f,f_0)$ and $(g,g_0)$, the
+% following type is inhabited:
+% \begin{equation}
+%   \label{eq:31}
+%   \theta \circ \loopspace 1 {(g,g_0)} \circ (f,f_0)^\natural
+%   = \theta \circ (g,g_0)^\natural \circ \theta \circ (f,f_0)^\natural  
+% \end{equation}
 
 % There is a simpler goal though: to prove that $\bar d$ maps pointed
 % equivalences to pointed equivalences. Take $(f,f_0): \Sp \ptdto \Sp$
@@ -644,10 +780,7 @@ following type is inhabited:
 % the element $(\base, \ap \theta (\pi_{f,f_0}))$. For any other point
 % $(x,p)$ of this fiber, one gets
 % $p: \base = \theta(\varphi_{f,f_0}(x))$.
-
-%% -----------------------
-%% OLD STUFF, MAYBE USEFUL
-%% -----------------------
+%
 % Notice that for any $p,q:N=f(S)$,
 % \begin{equation}
 %   \inv{q} \cdot p = \inv{\mrd(\base)} \cdot (\inv{(q\circ \inv{\mrd(\base)})} \cdot p)
