@@ -468,18 +468,19 @@ described above.
 
 For any paths $e,e':N=N$ and a path $\alpha: e=e'$ between them, the
 transport
-$\trp[T]{\alpha}:(\trp[\hopffam]{e}(\base) = \base) \to (\trp[\hopffam]{e'}(\base) =
-\base)$ identifies with the following function:
+$\trp[T]{\alpha}$
+%:(\trp[\hopffam]{e}(\base) = \base) \to (\trp[\hopffam]{e'}(\base) =\base)$ 
+identifies with the following function:
 \begin{equation}
   \begin{aligned}
-    {t_\alpha}: (\trp[\hopffam]{e}(\base) = \base) &\to (\trp[\hopffam]{e'}(\base) = \base)
+    {\trp[T]{\alpha}}: (\trp[\hopffam]{e}(\base) = \base) &\to (\trp[\hopffam]{e'}(\base) = \base)
     \\
     p &\mapsto p\cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
   \end{aligned}
 \end{equation}
 This is shown by induction on $\alpha$: indeed,
 $\ap{\trp[\hopffam]{\blank}(\base)}(\refl{e}) \jdeq \refl{\trp[\hopffam]{e}(\base)}$; hence
-path algebra provides a proof of $t_{\refl{e}}(p) = p$. So in
+path algebra provides a proof of $\trp[T]{\refl{e}}(p) = p$. So in
 particular when $\alpha:\refl N = \refl N$, one gets
 \begin{equation}\label{eq:trp-Ta(refl)}
   \trp[T]{\alpha}(\refl \base) = \refl \base \cdot \inv{\left(\ap{\trp[\hopffam]{\blank}(\base)}(\alpha)\right)}
@@ -524,7 +525,7 @@ $c_{f,f_0,g,g_0}$, in:
 \begin{equation}
   \begin{aligned}
     \varphi_{gf,g(f_0)g_0} %
-    &= \inv{(g(f_0)g_0)}\inv{gf(\mrd(\base))} gf(\mrd(\blank))
+    &\jdeq \inv{(g(f_0)g_0)}\inv{gf(\mrd(\base))} gf(\mrd(\blank))
     g(f_0)g_0
     \\
     &= \inv{g_0}\inv{g(f_0)}\inv{gf(\mrd(\base))} gf(\mrd(\blank))
@@ -604,7 +605,7 @@ element under this equivalence. In other words, it means that two
 pointed functions are in the same connected component of
 $\Sp \ptdto \Sp$ if and only if they have the same degree.
 % To conclude that equivalences are merely equal to either $\id_\Sp$ or
-% $-\id_\Sp$, one still need to prove that equivalences have degree
+% $-\id_\Sp$, one still needs to prove that equivalences have degree
 % either $1$ or $-1$. This will be achieved if we manage to prove that
 % $d$ maps compositions to products in $\ZZ$. For that we shall 
 
