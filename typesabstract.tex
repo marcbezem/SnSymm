@@ -1,6 +1,7 @@
 \documentclass[english,a4]{article}
 
 %\usepackage{fontspec}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb}
 %\usepackage{unicode-math}
 %\usepackage{polyglossia}
@@ -16,8 +17,9 @@
 \input macros2%
 % more macros
 \newcommand{\Sp}{{S^2}}%
+\newcommand{\Sn}{{S^n}}%
 \newcommand{\mrd}{\mathit{merid}}%
-\newcommand{\susp}[1]{\operatorname{\Sigma}{#1}}%
+\newcommand{\susp}[1]{\Sigma{#1}}%
 \newcommand{\Truncset}[1]{{\Trunc{#1}}_0}%
 \newcommand{\truncset}[1]{{\trunc{#1}}_0}%
 \newcommand{\Truncprop}[1]{\Trunc{#1}}%
@@ -72,65 +74,95 @@
 }%
 
 \def\U{\universe U}%
+\def\blank{\_}%
 
 \begin{document}
 
 \maketitle
 
-We work in intuitionistic Martin-Löf's type
-theory with $\Sigma$-, $\Pi$- and $\mathrm{Id}$- types and with a
-cumulative hierarchy of universes, simply written $\U$, for
-which Voevodsky's univalence axiom hold.
-A good reference for our setting is the HoTT Book \cite{HoTT},
+The goal of this talk is to give insights in the symmetries of the
+$n$-sphere in synthetic homotopy theory, i.e.\ the type $S^n = S^n$.
+
+We work in intuitionistic Martin-Löf's type theory with $\Sigma$-,
+$\Pi$- and $\mathrm{Id}$- types and with a cumulative hierarchy of
+universes, simply written $\U$, for which Voevodsky's univalence axiom
+hold.  A good reference for our setting is the HoTT Book \cite{HoTT},
 to which we will refer frequently. We specifically use the following
-higher inductive types (HITs): 
-the propositional truncation $\Trunc{A}$ of an arbitrary type $A$ (\cite[Ch.~3.7]{HoTT});
-the set truncation $\Trunc{A}_0$ of an arbitrary type $A$ (\cite[Ch.~6.9]{HoTT});
-the circle $\Sc$ (\cite[Ch.~6.4]{HoTT});
-the suspension $\susp A$ of an arbitrary type $A$ (\cite[Ch.~6.5]{HoTT}).
+higher inductive types (HITs): the propositional truncation
+$\Trunc{A}$ of an arbitrary type $A$ (\cite[Ch.~3.7]{HoTT}); the set
+truncation $\Trunc{A}_0$ of an arbitrary type $A$
+(\cite[Ch.~6.9]{HoTT}); the circle $\Sc$ (\cite[Ch.~6.4]{HoTT}); the
+suspension $\susp A$ of an arbitrary type $A$ (\cite[Ch.~6.5]{HoTT}).
 
-Any HIT comes with its induction principle capturing the essence of the HIT,
-and computation rules explaining how to simplify certain expressions.
-The essence of the propositional truncation is a faithful way of turning
-a type $A$ into a proposition (a type with all elements equal).
-The essence of the set truncation is a faithful way of turning
-a type $A$ into a set (all types $a=_Aa'$ propositions). 
-We give some more details of the circle
-and the suspension, as they are crucial for our presentation.
+% Any HIT comes with its induction principle capturing the essence of the HIT,
+% and computation rules explaining how to simplify certain expressions.
+% The essence of the propositional truncation is a faithful way of turning
+% a type $A$ into a proposition (a type with all elements equal).
+% The essence of the set truncation is a faithful way of turning
+% a type $A$ into a set (all types $a=_Aa'$ propositions). 
 
+We give some more details of the circle and the suspension, as they
+are crucial for our presentation. The circle is a higher inductive
+type with one point constructor and one path constructor:
+\begin{align*}
+  \base &: \Sc,  \quad\text{the base point}\\
+  \Sloop &: \base =_{\Sc} \base,  \quad\text{the loop}
+\end{align*}
+The circle comes with an elimination rule such that functions
+$\Sc \to A$ correspond to pairs of an element $a:A$ and a path
+$\ell: a=a$ for any type $A$. The first part of the talk will be
+dedicated to showing that
+\begin{equation}
+  \label{eq:s1-result}%
+  (\Sc = \Sc) \weq (\Sc+\Sc).
+\end{equation}
 
-The circle is a higher inductive type with one point constructor and one path constructor:
-\begin{align}
-  \label{eq:1}
-  \base &: \Sc  \quad\text{the base point}\\
-  \Sloop &: \base =_{\Sc} \base  \quad\text{the loop}
-\end{align}
-
-The suspension $\susp A$ of a type $A$ is a higher inductive type 
-with two point constructors and path constructors indexed by $A$:
-\begin{align}
+For $n\geq 2$, the $n$-sphere $S^n$ is inductively defined as the
+suspension $\susp {(S^{n-1})}$. The suspension $\susp A$ of a type $A$
+is a higher inductive type with two point constructors and path
+constructors indexed by $A$:
+\begin{align*}
   \label{eq:suspension}
-  N &: \susp A \quad\text{the `North pole'}\\
-  S &: \susp A \quad\text{the `South pole'}\\
-  \mrd &: A \to (N =_{\susp A} S) \quad\text{the `meridians'}
-\end{align}
+  N &: \susp A, \quad\text{the `North pole'}\\
+  S &: \susp A, \quad\text{the `South pole'}\\
+  \mrd &: A \to (N =_{\susp A} S), \quad\text{the `meridians'}
+\end{align*}
+The elimination principle for $\susp A$ gives again a correspondence
+between the type $\susp A \to B$ and the type of triplets consisting
+of $b_N: B$, $b_S: B$ and $m: A \to b_N=b_S$.
 
-Spheres ...
+One cannot expect (\ref{eq:s1-result}) to generalise to higher
+dimensions. However, (\ref{eq:s1-result}) implies that $\Sc = \Sc$
+consists of two equivalent connected components. Modulo univalence,
+one component contains $\id_\Sc$ and the other $-\id_\Sc$. The latter
+is the function $\Sc \to \Sc$ corresponding to the pair $\base:\Sc$
+together with the path $\inv\Sloop:\base=\base$. This weaker statement
+does in fact generalise to higher spheres in the homotopy theory of
+topological spaces. We shall elaborate a proof in HoTT for the case
+$n=2$. For $n>2$, this is still work in progress.
 
-Goal: understanding the type $S^n = S^n$ of symmetries of spheres.
+The first step is to define $-\id_{\susp A}$ for any type $A$ as the
+function corresponding to the triplet $S:\susp A$, $N:\susp A$ and
+$\inv{\mrd(\blank)} : (A \to S=N)$. In other words, $-\id_{\susp A}$
+flips the poles and reverses each meridian. Notice that
+$-\id_{\susp A}$ is an equivalence, as it is its own
+pseudo-inverse. The function
+\begin{displaymath}
+  \flip_A \defequi \blank \circ -\id_{\susp A} : (\susp A \to \susp A) \to (\susp A \to \susp A)
+\end{displaymath}
+is then an equivalence, hence establishing an equivalence from the
+connected component at $\id_{\susp A}$ to the connected component at
+$-\id_{\susp A}$.
 
-  \begin{displaymath}
-    (\Sc = \Sc) \weq (\Sc + \Sc).
-  \end{displaymath}
-
-This result doesn't generalise to higher dimensions.
-However, one can prove that $S^n = S^n$ is equivalent the sum of two
-connected components, since the set truncation of $S^n = S^n$ is $\bool$. 
-One component contains, of course, $\refl{S^n}$.
-The other component contains the path coming by univalence from an
-equivalence $-\id{S^n}$ (to be defined).
-
-Moreover, these two components are equivalent.
+As the sphere $S^n$ is connected, in proving the proposition
+$\Trunc{\varphi=\id_\Sn}+\Trunc{\varphi=-id_\Sn}$ for an equivalence
+$\varphi:\Sn \weq \Sn$, one can as well suppose that $\varphi$ is a
+pointed by a path $\varphi_0:N=\varphi(N)$. It is worth computing the
+degree of such an $\varphi$. Recall that the degree $d(f,f_0)$ of a
+pointed function $(f,f_0):\Sn \ptdto\Sn$ is defined as the integer
+$\bar \pi_n(f,f_0)(1)$ where $\bar\pi_n(f,f_0)$ is the function
+$\pi(f,f_0) : \pi_n(\Sn) \to \pi_n(\Sn)$ viewed through the
+equivalence $\pi_n(\Sn) \weq \ZZ$.
 
 Future: $n>2$, CTT, computing degrees.
 
