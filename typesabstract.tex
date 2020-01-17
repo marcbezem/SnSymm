@@ -27,6 +27,28 @@
 \newcommand{\conncomp}[2]{{#1}_{(#2)}}%
 %
 
+%% REMOVE FOR NORMAL BIBLIO
+\makeatletter
+\renewenvironment{thebibliography}[1]{%
+  \list{\@biblabel{\@arabic\c@enumiv}}%
+  {\settowidth\labelwidth{\@biblabel{#1}}%
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \@openbib@code
+    \usecounter{enumiv}%
+    \let\p@enumiv\@empty
+    \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty \clubpenalty
+  \widowpenalty4000%
+  \sfcode`\.\@m}
+{\def\@noitemerr
+  {\@latex@warning{Empty `thebibliography' environment}}%
+  \endlist}
+\makeatother
+%%%% 
+
 
 \hypersetup{
     colorlinks,
@@ -62,10 +84,10 @@ which Voevodsky's univalence axiom hold.
 A good reference for our setting is the HoTT Book \cite{HoTT},
 to which we will refer frequently. We specifically use the following
 higher inductive types (HITs): 
-The propositional truncation $\Trunc{A}$ of an arbitrary type $A$ (\cite[Ch.]{HoTT});
-The set truncation $\Trunc{A}_0$ of an arbitrary type $A$ (\cite[Ch.]{HoTT});
-The circle $\Sc$ (\cite[Ch.]{HoTT});
-The suspension $\susp A$ of an arbitrary type $A$ (\cite[Ch.]{HoTT}).
+the propositional truncation $\Trunc{A}$ of an arbitrary type $A$ (\cite[Ch.~3.7]{HoTT});
+the set truncation $\Trunc{A}_0$ of an arbitrary type $A$ (\cite[Ch.~6.9]{HoTT});
+the circle $\Sc$ (\cite[Ch.~6.4]{HoTT});
+the suspension $\susp A$ of an arbitrary type $A$ (\cite[Ch.~6.5]{HoTT}).
 
 Any HIT comes with its induction principle capturing the essence of the HIT,
 and computation rules explaining how to simplify certain expressions.
@@ -112,6 +134,9 @@ Moreover, these two components are equivalent.
 
 Future: $n>2$, CTT, computing degrees.
 
+
+\bibliographystyle{alpha}
+\bibliography{bib}
 
 \section{The circle}
 \label{sec:circle-case}%
