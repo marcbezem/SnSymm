@@ -75,6 +75,7 @@
 
 \def\U{\universe U}%
 \def\blank{\_}%
+\def\hopffam{\mathcal H}
 
 \begin{document}
 
@@ -144,7 +145,8 @@ $n=2$. For $n>2$, this is still work in progress.
 The first step is to define $-\id_{\susp A}$ for any type $A$ as the
 function corresponding to the triplet $S:\susp A$, $N:\susp A$ and
 $\inv{\mrd(\blank)} : (A \to S=N)$. In other words, $-\id_{\susp A}$
-flips the poles and reverses each meridian. Notice that
+flips the poles and reverses each meridian. It is important (and non-trivial)
+that $-\id_{\susp A} \neq \id_{\susp A}$ for spheres $A$.  Notice that
 $-\id_{\susp A}$ is an equivalence, as it is its own
 pseudo-inverse. The function
 \begin{displaymath}
@@ -155,7 +157,7 @@ connected component at $\id_{\susp A}$ to the connected component at
 $-\id_{\susp A}$.
 
 As the sphere $S^n$ is connected, in proving the proposition
-$\Trunc{\varphi=\id_\Sn}+\Trunc{\varphi=-id_\Sn}$ for an equivalence
+$\Trunc{\varphi=\id_\Sn}+\Trunc{\varphi=-\id_\Sn}$ for an equivalence
 $\varphi:\Sn \weq \Sn$, one can as well suppose that $\varphi$ is a
 pointed by a path $\varphi_0:N=\varphi(N)$. It is worth computing the
 degree of such an $\varphi$. Recall that the degree $d(f,f_0)$ of a
@@ -164,11 +166,30 @@ $\bar \pi_n(f,f_0)(1)$ where $\bar\pi_n(f,f_0)$ is the function
 $\pi(f,f_0) : \pi_n(\Sn) \to \pi_n(\Sn)$ viewed through the
 equivalence $\pi_n(\Sn) \weq \ZZ$.
 
+As an example, we give a canonical pointed map $d_k: \Sp \ptdto\Sp$ of degree $k$.
+\begin{align*}
+  \label{eq:deg-k-func}
+  d_k(N)&\jdeq N, \quad\text{keeping the poles, $\refl{N}: N=d_k(N)$}\\
+  d_k(S)&\jdeq S\\
+  d_k(\mrd(\base))&= \mrd(\base)\\
+  d_k(\mrd(\Sloop))&= \mrd(\Sloop^{k}),\quad\text{$k$-fold rotation of meridians}
+\end{align*}
+It is easy to see that $d_{-1} = -\id_{\Sp}$   and $d_1 = \id_{\Sp}$.
+Proving that $d_k$ has indeed degree $k$ is non-trivial, and the known
+proof uses the Hopf fibration.
+
+However, the hardest part is the proof that the degree of the composition of
+two pointed maps $\Sn \ptdto\Sn$ is the product of the degrees in $\ZZ$.
+This give the desired result, since it shows that the degree of any pointed 
+\emph{equivalence} $\Sn \ptdto\Sn$ is either $1$ or $-1$. 
+
 Future: $n>2$, CTT, computing degrees.
 
 
 \bibliographystyle{alpha}
 \bibliography{bib}
+
+\end{document}
 
 \section{The circle}
 \label{sec:circle-case}%
