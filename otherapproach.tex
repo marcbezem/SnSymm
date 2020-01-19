@@ -128,7 +128,7 @@ the following square commutes (up to homotopy):
 Since the group of integers has exactly two invertible elements, we get the following
 (note that we write $A \xrightarrow{\sim} B$ synonymously with $A \simeq B$):
 
-\begin{corollary}
+\begin{corollary} \label{cor:sph1-bool}
  The type $(\sph 1 \xrightarrow{\sim}_\bullet \sph 1)$ of pointed equivalences
 %  , or equivalently the type $(\sph 1 =_\bullet \sph 1)$ of pointed equalities, 
  is isomorphic to $\mathsf{Bool}$.
@@ -202,15 +202,33 @@ We start with a lemma allowing us the removal of base points:
  ``Singleton-contraction.''
 \end{proof}
 
+% % % NEEDS TO COME LATER
+% This gives us the following result for the circle:
+% 
+% \begin{theorem}
+% We have:
+%  \begin{equation}
+%   (\sph 1 = \sph 1) = (\sph 1 + \sph 1).
+%  \end{equation}
+% \end{theorem}
+% \begin{proof}
+%  This follows by combining 
+%  \cref{cor:sph1-bool} with
+%  \cref{lem:rm-base-points}.
+% \end{proof}
+% 
+% For higher spheres, some more work is needed.
+
 \begin{lemma} \label{lem:eqv-to-bool}
  For all $x : \sph n$ with $n \geq 1$, we have the following equivalence:
  \begin{equation}
-  \trunc 0 {(\sph n, \North) \to_\bullet (\sph n, x), \lambda \_ . x} \xrightarrow{\sim}_\bullet (\mathsf{Bool}, \mathsf{true}).
+%   \trunc 0 {(\sph n, \North) \to_\bullet (\sph n, x), \lambda \_ . x} \xrightarrow{\sim}_\bullet (\mathsf{Bool}, \mathsf{true}).
+  \trunc {-1} {\trunc 0 {(\sph n, \North) \to_\bullet (\sph n, x)} \simeq \mathsf{Bool}}.
  \end{equation}
 \end{lemma}
 \begin{proof}
  By induction on $x$.
- Note that the goal is a proposition, i.e.\ it is enough to check the cases for the point constructors. For $\North$, this is given by 
+ Since the goal is a proposition, it is enough to check the cases for the point constructors. For $\North$, this is given by 
  \cref{cor:Sn-bool}. Note that it is always true that $(B = C)$ implies $(A \to_\bullet B) \simeq (A \to_\bullet C)$;
  thus, a single equivalence on $\sph n$ swapping $\North$ and $\South$ is suffices to cover the case $\South$.
  There is a canonical such equivalence which reverses all meridians.
@@ -220,7 +238,7 @@ We start with a lemma allowing us the removal of base points:
 \begin{lemma} \label{lem:sn-bool}
  For $n \geq 1$, we have
  \begin{equation}
-  \big(\Sigma (x : \sph n). \trunc 0 {(\sph n , \North) \to_\bullet (\sph n, x)\big)} \; \simeq \; \sph n \times \mathsf{Bool}.
+  \trunc {-1} {\big(\Sigma (x : \sph n). \trunc 0 {(\sph n , \North) \to_\bullet (\sph n, x)\big)} \; \simeq \; \sph n \times \mathsf{Bool}}.
  \end{equation}
 \end{lemma}
 \begin{proof}
@@ -240,12 +258,12 @@ Curiously, the main theorem works for $n \equiv 0$, even though the above statem
  For all $n \geq 0$, the type of symmetries of $\sph n$ has exactly two connected components.
  In other words,
  \begin{equation}
-  \trunc 0 {\sph n = \sph n} = \mathsf{Bool}.
+  \trunc {-1} {\trunc 0 {\sph n = \sph n} = \mathsf{Bool}}.
  \end{equation}
 \end{theorem}
 \begin{proof}
  The case $n \equiv 0$ is easily checked.
- For $n \geq 1$, we have the following chain of equivalences:
+ For $n \geq 1$, we have the following chain of ``mere equivalences'' (i.e.\ the chain is to be understood in the ``truncation monad'', i.e.\ every step is only ``merely true''):
   \begin{alignat}{5}
   &&&\trunc 0 {\sph n = \sph n} \\
   \textit{by }\cref{lem:rm-base-points} \qquad &\simeq &\quad& \trunc 0 {\Sigma(x : \sph n).(\sph n, \North) \xrightarrow{\sim}_\bullet (\sph n, x)}  \\
@@ -254,12 +272,8 @@ Curiously, the main theorem works for $n \equiv 0$, even though the above statem
   \textit{ } \qquad &\simeq && \trunc 0 {\sph n} \times \trunc 0 {\mathsf{Bool}}    \\
   \textit{spheres are connected} \qquad &\simeq && \mathsf{Bool}
  \end{alignat}
+(Todo: is the formulation in parentheses above understandable?)
 \end{proof}
-
-
-
-
-
 
 \bibliographystyle{plain}
 \bibliography{bib}
