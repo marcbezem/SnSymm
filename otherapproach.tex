@@ -26,6 +26,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{issue}[theorem]{Issue/TODO}
 
 
 \newcommand{\Nat}{\mathbb{N}}
@@ -216,8 +217,16 @@ We start with a lemma allowing us the removal of base points:
  \cref{cor:Sn-bool}. Note that it is always true that $(B = C)$ implies $(A \to_\bullet B) \simeq (A \to_\bullet C)$;
  thus, a single equivalence on $\sph n$ swapping $\North$ and $\South$ is suffices to cover the case $\South$.
  There is a canonical such equivalence which reverses all meridians.
- (Remark/todo: I think this argument is fine, but one can also allude to a more general result about ``proving truncated properties over spheres'' here. Further, note that we could consider not-necessarily-pointed equivalences, which would make the goal a set, which should still be fine but maybe a bit more tedious.)
 \end{proof}
+
+
+\begin{issue}
+ I think the proof of \cref{lem:eqv-to-bool} is correct, but there would be a more elegant argument.
+ If we want to inhabit a family of $(n-1)$-types over a pointed $n$-connected type, then it suffices to inhabit the family at the base point. This is directly applicable in \cref{lem:eqv-to-bool}. Moreover, if we start with $n \geq 2$, we can remove the propositional truncation, saving us the step from \cref{lem:mainlemma} to \cref{thm:symmetries-two-components}.
+ Coincidentally (?), \cref{lem:grp-iso} also needs to be treated separately for $n < 2$, as Pierre has pointed out.
+ We could restructure the argument so that we only do the case $n \geq 2$ here, and then maybe combine with the first approach?
+\end{issue}
+
 
 \begin{lemma} \label{lem:sn-bool}
  For $n \geq 1$, we have
@@ -260,7 +269,7 @@ Curiously, the main theorem works for $n \equiv 0$, even though the above statem
 \end{proof}
 
 We can get rid of the propositional truncation:
-\begin{theorem}
+\begin{theorem} \label{thm:symmetries-two-components}
  For all $n \geq 0$, the type of symmetries of $\sph n$ has exactly two connected components.
  In other words,
  \begin{equation}
