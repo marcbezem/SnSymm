@@ -26,6 +26,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{issue}[theorem]{Issue/TODO}
 
 
 \newcommand{\Nat}{\mathbb{N}}
@@ -98,10 +99,10 @@ Given pointed types $A$ and $B$ (with implicit base points $a_0$ and $b_0$), we 
 \end{proof}
 
 We denote the standard multiplication on integers by $(\_ \cdot \_)$.
-Note that $\Z$ with multiplication is a group\footnote{Note that the definition of a \emph{group} used here requires the carrier to be a set (a $0$-truncated type).}, and so is $(\sph 1 \pointedm \sph 1)$ with function composition.
+Note that $\Z$ with multiplication is a monoid\footnote{Note that the definition of a monoid used here requires the carrier to be a set (a $0$-truncated type).}, and so is $(\sph 1 \pointedm \sph 1)$ with function composition.
 
 \begin{theorem}[$\Z \simeq (\sph 1 \pointedm \sph 1)$]
- The function $\gamma$ is a group isomorphism between $(\Z, \_ \cdot \_)$ and $(\sph 1 \pointedm \sph 1, \_ \circ \_)$.
+ The function $\gamma$ is a monoid isomorphism between $(\Z, \_ \cdot \_)$ and $(\sph 1 \pointedm \sph 1, \_ \circ \_)$.
 \end{theorem}
 \begin{proof}
 (Todo: I expect that this has already been recorded in the HoTT book?
@@ -125,7 +126,7 @@ the following square commutes (up to homotopy):
 \end{equation}
 \end{proof}
 
-Since the group of integers has exactly two invertible elements, we get the following
+Since the monoid of integers has exactly two invertible elements, we get the following
 (note that we write $A \xrightarrow{\sim} B$ synonymously with $A \simeq B$):
 
 \begin{corollary} \label{cor:sph1-bool}
@@ -167,16 +168,16 @@ In other words, the data for a \emph{wild $1$-functor} considered in \cref{lem:S
 
 
 
-While $(\sph 1 \pointedm \sph 1)$ is a group, the same is not the case in general for $(\sph n \pointedm \sph n)$.
+While $(\sph 1 \pointedm \sph 1)$ is a monoid, the same is not the case in general for $(\sph n \pointedm \sph n)$.
 The reason is that this type is in general not a set.
 However,
-$\trunc 0 {\sph n \pointedm \sph n}$ is a group in the canonical way.
+$\trunc 0 {\sph n \pointedm \sph n}$ is a monoid in the canonical way.
 
 \begin{lemma} \label{lem:grp-iso}
- The morphism map $\trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}$ is an isomorphism of groups for all $n \geq 1$.
+ The morphism map $\trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}$ is an isomorphism of monoids for all $n \geq 1$.
 \end{lemma}
 \begin{proof}
- (Todo: Details need to be worked out, but here is the sketch: The statement follows from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. The formulation in \cite[Cor 8.6.14]{HoTT} is useful, and \cite[Thm 8.6.17]{HoTT} \emph{nearly} says the correct thing; the latter ``forgets'' a bit too much, but I think the proof is essentially there.)
+ (Todo: Details need to be worked out, but here is the sketch: The statement follows from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. The formulation in \cite[Cor 8.6.14]{HoTT} is useful, and \cite[Thm 8.6.17]{HoTT} \emph{nearly} says the correct thing; the latter ``forgets'' a bit too much, but I think the proof is essentially there. As Pierre has pointed out, the case for $n + 1 = 2$ needs a proof as well, since Freudenthal only works for $n \geq 2$.)
 \end{proof}
 
 
@@ -216,8 +217,16 @@ We start with a lemma allowing us the removal of base points:
  \cref{cor:Sn-bool}. Note that it is always true that $(B = C)$ implies $(A \to_\bullet B) \simeq (A \to_\bullet C)$;
  thus, a single equivalence on $\sph n$ swapping $\North$ and $\South$ is suffices to cover the case $\South$.
  There is a canonical such equivalence which reverses all meridians.
- (Remark/todo: I think this argument is fine, but one can also allude to a more general result about ``proving truncated properties over spheres'' here. Further, note that we could consider not-necessarily-pointed equivalences, which would make the goal a set, which should still be fine but maybe a bit more tedious.)
 \end{proof}
+
+
+\begin{issue}
+ I think the proof of \cref{lem:eqv-to-bool} is correct, but there would be a more elegant argument.
+ If we want to inhabit a family of $(n-1)$-types over a pointed $n$-connected type, then it suffices to inhabit the family at the base point. This is directly applicable in \cref{lem:eqv-to-bool}. Moreover, if we start with $n \geq 2$, we can remove the propositional truncation, saving us the step from \cref{lem:mainlemma} to \cref{thm:symmetries-two-components}.
+ Coincidentally (?), \cref{lem:grp-iso} also needs to be treated separately for $n < 2$, as Pierre has pointed out.
+ We could restructure the argument so that we only do the case $n \geq 2$ here, and then maybe combine with the first approach?
+\end{issue}
+
 
 \begin{lemma} \label{lem:sn-bool}
  For $n \geq 1$, we have
@@ -260,7 +269,7 @@ Curiously, the main theorem works for $n \equiv 0$, even though the above statem
 \end{proof}
 
 We can get rid of the propositional truncation:
-\begin{theorem}
+\begin{theorem} \label{thm:symmetries-two-components}
  For all $n \geq 0$, the type of symmetries of $\sph n$ has exactly two connected components.
  In other words,
  \begin{equation}
