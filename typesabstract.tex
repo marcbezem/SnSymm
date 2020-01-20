@@ -12,6 +12,7 @@
 %\usepackage[explicit]{titlesec}
 \usepackage[mathscr]{euscript}
 \usepackage{mathtools}
+\usepackage{titling}
 
 \input macros%
 \input macros2%
@@ -61,14 +62,17 @@
 
 \setlist[enumerate]{label=(\roman*)}
 
-\title{On Symmetries of Spheres in HoTT-UF}
-\author{Pierre Cagne \and Nicolai Kraus \and Marc Bezem}
+\title{On Symmetries of Spheres in HoTT-UF}%
+\author{Pierre Cagne\thanks{Universitetet i Bergen} \and Nicolai
+  Kraus\thanks{University of Birmingham} \and Marc
+  Bezem\footnotemark[1]{}}%
 \institute{
-%   University of Birmingham
-%   \and
-%   University of Bergen
+  % University of Birmingham
+  % \and
+  % University of Bergen
 }
-
+\titlerunning{\thetitle}
+\authorrunning{\theauthor}
 
 
 % \date{\normalsize Last updated on \today}%
@@ -148,13 +152,12 @@ is the function $\Sc \to \Sc$ corresponding to the pair $\base:\Sc$
 together with the path $\inv\Sloop:\base=\base$. This weaker statement
 does in fact generalise to higher spheres in the homotopy theory of
 topological spaces. We shall elaborate a proof in HoTT for the case
-$n=2$. For $n>2$, this is still work in progress.
+$n=2$. %For $n>2$, this is still work in progress.
 
 The first step is to define $-\id_{\susp A}$ for any type $A$ as the
 function corresponding to the triplet $S:\susp A$, $N:\susp A$ and
 $\inv{\mrd(\blank)} : (A \to S=N)$. In other words, $-\id_{\susp A}$
-flips the poles and reverses each meridian. It is important (and non-trivial)
-that $-\id_{\susp A} \neq \id_{\susp A}$ for spheres $A$.  Notice that
+flips the poles and reverses each meridian. Notice that
 $-\id_{\susp A}$ is an equivalence, as it is its own
 pseudo-inverse. The function
 \begin{displaymath}
@@ -162,46 +165,59 @@ pseudo-inverse. The function
 \end{displaymath}
 is then an equivalence, hence establishing an equivalence from the
 connected component at $\id_{\susp A}$ to the connected component at
-$-\id_{\susp A}$.
+$-\id_{\susp A}$.  In particular, it will prove important (and
+non-trivial) that $-\id_{\Sp} \neq \id_{\Sp}$.
 
-As the sphere $S^n$ is connected, in proving the proposition
-$\Trunc{\varphi=\id_\Sn}+\Trunc{\varphi=-\id_\Sn}$ for an equivalence
-$\varphi:\Sn \weq \Sn$, one can as well suppose that $\varphi$ is a
-pointed by a path $\varphi_0:N=\varphi(N)$. It is worth computing the
-degree of such an $\varphi$. Recall that the degree $d(f,f_0)$ of a
-pointed function $(f,f_0):\Sn \ptdto\Sn$ is defined as the integer
-$\bar \pi_n(f,f_0)(1)$ where $\bar\pi_n(f,f_0)$ is the group morphism
-$\pi(f,f_0) : \pi_n(\Sn) \to \pi_n(\Sn)$ viewed through the
-equivalence $\pi_n(\Sn) \weq \ZZ$.
+As the sphere $\Sp$ is connected, in proving the proposition
+$\Trunc{\varphi=\id_\Sp}+\Trunc{\varphi=-\id_\Sp}$ for an equivalence
+$\varphi:\Sp \weq \Sp$, one can as well suppose that $\varphi$ is a
+pointed map by a path $\varphi_0:N=\varphi(N)$. It is worth computing
+the degree of such a $\varphi$. Recall that the degree $d(f,f_0)$ of a
+pointed function $(f,f_0):\Sp \ptdto\Sp$ is defined as the integer
+$\bar \pi_2(f,f_0)(1)$ where $\bar\pi_2(f,f_0)$ is the group morphism
+$\pi_2(f,f_0) : \pi_2(\Sp) \to \pi_2(\Sp)$ viewed through the
+equivalence $\pi_2(\Sp) \weq \ZZ$.
 
-For example, for each $k:\ZZ$, the
-following map $\delta_k : \Sp \to \Sp$ has degree $k$: first define
+For example, for each $k:\ZZ$, the following map
+$\delta_k : \Sp \ptdto \Sp$ has degree $k$: first define
 $c_k:\Sc\to\Sc$ as the map that corresponds to the pair $\base:\Sc$
 together with the path $\Sloop^k:\base=\base$; then define $\delta_k$
 as the map corresponding to the triplet $N:\Sp$, $S:\Sp$ and
-$\mrd\circ c_k: \Sc \to N=S$, obviously pointed by the path
-$\refl N:N=\delta_k(N)$. 
-It is easy to see that $\delta_{-1} = -\id_{\Sp}$   and $\delta_1 = \id_{\Sp}$.
-Proving that $\delta_k$ has indeed degree $k$ is non-trivial, and the known
-proof uses the Hopf fibration.
+$\mrd{}\circ c_k: \Sc \to N=S$, obviously pointed by the path
+$\refl N:N=\delta_k(N)$.  It is easy to see that
+$\delta_1 = \id_{\Sp}$ and one can prove that
+$\delta_{-1} = -\id_{\Sp}$ also.  Proving that $\delta_k$ has indeed
+degree $k$ is non-trivial, and we shall exhibit a proof using the Hopf
+fibration.
 
-In particular, $d$ maps the composition of
-pointed functions to the product of their degrees, and as such, it
-maps equivalences to invertible elements of $\ZZ$ . Hence,
-$d(\varphi,\varphi_0) = \pm 1$.
+Using the functoriality of $\pi_2$, one gets
+\begin{displaymath}
+  d((g,g_0)\circ (f,f_0)) = \bar\pi_2(g,g_0)\left( \bar\pi_2(f,f_0)(1)\right)
+  = \bar\pi_2(g,g_0)(1)\times\bar\pi_2(f,f_0)(1).
+\end{displaymath}
+The last identity comes from the fact that $\bar\pi_2(g,g_0)$ is a
+group morphism $\ZZ\to\ZZ$. In other words, $d$ is a morphism of
+monoids, and as such, it maps equivalences to invertible elements of
+$\ZZ$. Hence, $d(\varphi,\varphi_0) = \pm 1$. The last step is to
+prove that having the same degree means precisely being in the same
+connected component of $\Sp \ptdto \Sp$. In order to do so, we shall
+give an alternate description of the degree, based on the Hopf
+fibration, and on the proof that $\pi_2(\Sp) \weq \ZZ$ (cf.\
+\cite[Ch.~8.6]{HoTT}).
 
-The last step is to prove that $d$ identifies precisely these pointed
-functions that are in the same connected component of
-$\Sp \ptdto \Sp$. In order to do so, we shall give
-an alternate description of the degree, based on the Hopf fibration
-and the proof that $\pi_2(\Sp) \weq \ZZ$ in \cite[Ch.~8.6]{HoTT}.
+To generalize this proof to the case $n>2$, one can rely on the
+Freudenthal suspension theorem (\cite[Ch.~8.6]{HoTT}). If time
+permits, we shall sketch how it allows to prove that $\Sn \ptdto \Sn$
+has exactly two connected components, and we shall detail the work in
+progress in order to get the full property.
 
-Future works include: generalizing this proof to the case $n>2$, for
-which one can rely on Freudenthal's theorem (\cite[Ch.~8.6]{HoTT});
-formalizing this proof in cubical type theory and experimenting with
-actual computation of the degree of selected equivalences (the
-definition of the Hopf fibration, hence the definition of the degree
-also, heavily relies on the univalence axiom).
+
+Future works include formalizing this proof in cubical type theory
+(CTT) and experimenting with actual computation of the degree of
+selected symmetries. The univalence axiom is necessary for the
+definition of the Hopf fibration (hence for the definition of the
+degree also) and it would be interesting to see how much of a
+challenge it represents for CTT to actually compute.
 
 \bibliographystyle{alpha}
 \bibliography{bib}
