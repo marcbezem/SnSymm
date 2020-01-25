@@ -74,6 +74,37 @@
 
 When we later regard $\Sigma A$ as a pointed type, we implicitly choose its base point to be $\North$.
 
+\begin{definition}[Wedge-suspension]
+ Given a pointed type $A$ with base point $a_0$, the \emph{wedge-suspension} $\Sigma^w A$ is the following higher inductive type:
+ \begin{align*}
+  & \textit{inductive} \; \Sigma^w A \\
+  & \quad \North : \Sigma^w A \\
+  & \quad \merid : A \to \North = \North \\
+  & \quad \mathsf{base} : \merid(a_0) = \refl
+ \end{align*}
+\end{definition}
+
+\begin{lemma}[$\Sigma^w = \Sigma$]
+ For a pointed type $A$, the suspension is equivalent to the wedge-suspension.
+\end{lemma}
+\begin{proof}
+  $\Sigma A \to \Sigma^w A$ is given by
+ \begin{align*}
+  & \North \mapsto \North \\
+  & \South \mapsto \North \\
+  & \merid(a) \mapsto \merid(a).\\
+%  \end{align*}
+  \intertext{Let the base point of $A$ be $a_0$.
+  $\Sigma^w A \to \Sigma A$ is given by}
+%  \begin{align*}
+  & \North \mapsto \North \\
+  & \merid(a) \mapsto \merid(a) \ct \merid(a_0)^{-1} \\
+  & \mathsf{base} \mapsto \mathsf{syminv}.
+ \end{align*}
+ An easy calculation shows that these are inverses.
+\end{proof}
+
+
 \begin{definition}[Spheres $\sph n$]
  $\sph {-1}$ is defined to be the empty type, and $\sph {n+1}$ is $\Sigma \sph n$.
 \end{definition}
@@ -146,8 +177,8 @@ before clarifying why we call the concept a \emph{wild $1$-functor} in \cref{rem
  \begin{enumerate}
   \item \emph{Objects:} for any type $A$, we get a type $\Sigma A$.
   \item \emph{Morphisms:} given a function $f : A \to B$, we get $\Sigma f : \Sigma A \to \Sigma B$.
-  \item Given functions $A \xrightarrow f B \xrightarrow g C$, we have $\Sigma(g \circ f) = \Sigma g \circ \Sigma f$.
-  \item For the identity function $\idf$, we have $\Sigma \idf_A = \idf_{\Sigma A}$.
+  \item Given functions $A \xrightarrow f B \xrightarrow g C$, we have $\Sigma(g \circ f) = \Sigma g \circ \Sigma f$. \label{eq:susp-law1}
+  \item For the identity function $\idf$, we have $\Sigma \idf_A = \idf_{\Sigma A}$. \label{eq:susp-law2}
  \end{enumerate}
  \qed
 \end{lemma}
@@ -177,7 +208,7 @@ $\trunc 0 {\sph n \pointedm \sph n}$ is a monoid in the canonical way.
  The morphism map $\trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}$ is an isomorphism of monoids for all $n \geq 1$.
 \end{lemma}
 \begin{proof}
- (Todo: Details need to be worked out, but here is the sketch: The statement follows from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. The formulation in \cite[Cor 8.6.14]{HoTT} is useful, and \cite[Thm 8.6.17]{HoTT} \emph{nearly} says the correct thing; the latter ``forgets'' a bit too much, but I think the proof is essentially there. As Pierre has pointed out, the case for $n + 1 = 2$ needs a proof as well, since Freudenthal only works for $n \geq 2$.)
+ (Todo: Details need to be worked out, but here is the sketch: The statement that it is an equivalence of types follows from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. The formulation in \cite[Cor 8.6.14]{HoTT} is useful, and \cite[Thm 8.6.17]{HoTT} \emph{nearly} says the correct thing; the latter ``forgets'' a bit too much, but I think the proof is essentially there. As Pierre has pointed out, the case for $n + 1 = 2$ needs a proof as well, since Freudenthal only works for $n \geq 2$. Caveat: We also need to check whether this map is the same as the map in Freudenthal. The statement that the monoid action is respected follows from \eqref{eq:susp-law1} and \eqref{eq:susp-law2}.)
 \end{proof}
 
 
