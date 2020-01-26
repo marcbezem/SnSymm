@@ -74,8 +74,8 @@
 
 When we later regard $\Sigma A$ as a pointed type, we implicitly choose its base point to be $\North$.
 
-\begin{definition}[Wedge-suspension]
- Given a pointed type $A$ with base point $a_0$, the \emph{wedge-suspension} $\Sigma^w A$ is the following higher inductive type:
+\begin{definition}[{reduced suspension \cite[Rem 8.6.3]{HoTT}}]
+ Given a pointed type $A$ with base point $a_0$, the \emph{reduced suspension} $\Sigma^w A$ is the following higher inductive type:
  \begin{align*}
   & \textit{inductive} \; \Sigma^w A \\
   & \quad \North : \Sigma^w A \\
@@ -84,8 +84,8 @@ When we later regard $\Sigma A$ as a pointed type, we implicitly choose its base
  \end{align*}
 \end{definition}
 
-\begin{lemma}[$\Sigma^w = \Sigma$]
- For a pointed type $A$, the suspension is equivalent to the wedge-suspension.
+\begin{lemma}[{$\Sigma^w = \Sigma$ \cite[Rem 8.6.3]{HoTT}}]
+ For a pointed type $A$, the suspension is equivalent to the reduced suspension.
 \end{lemma}
 \begin{proof}
   $\Sigma A \to \Sigma^w A$ is given by
