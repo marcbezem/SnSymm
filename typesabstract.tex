@@ -97,7 +97,7 @@ The goal of this talk is to give insights in the symmetries of the
 $n$-sphere in synthetic homotopy theory, i.e.\ the type $S^n = S^n$.
 
 We work in intuitionistic Martin-Löf's type theory with $\Sigma$-,
-$\Pi$- and $\mathrm{Id}$- types and with a cumulative hierarchy of
+$\Pi$- and $\mathrm{Id}$-types and with a cumulative hierarchy of
 universes, simply written $\U$, for which Voevodsky's univalence axiom
 hold.  A good reference for our setting is the HoTT Book \cite{HoTT},
 to which we will refer frequently. We specifically use the following
@@ -151,8 +151,8 @@ one component contains $\id_\Sc$ and the other $-\id_\Sc$. The latter
 is the function $\Sc \to \Sc$ corresponding to the pair $\base:\Sc$
 together with the path $\inv\Sloop:\base=\base$. This weaker statement
 does in fact generalise to higher spheres in the homotopy theory of
-topological spaces. We shall elaborate a proof in HoTT for the case
-$n=2$. %For $n>2$, this is still work in progress.
+topological spaces. In the talk, we will elaborate a proof in HoTT-UF
+for the case $n=2$, following the following lines.
 
 The first step is to define $-\id_{\susp A}$ for any type $A$ as the
 function corresponding to the triplet $S:\susp A$, $N:\susp A$ and
@@ -165,8 +165,10 @@ pseudo-inverse. The function
 \end{displaymath}
 is then an equivalence, hence establishing an equivalence from the
 connected component at $\id_{\susp A}$ to the connected component at
-$-\id_{\susp A}$.  In particular, it will prove important (and
-non-trivial) that $-\id_{\Sp} \neq \id_{\Sp}$.
+$-\id_{\susp A}$. Notice that $-\id_{\susp A}$ is not necessarily
+distinct from $\id_{\susp A}$ (take for example $A\defequi 1$ for
+which $\susp A$ is contractible). In particular, it is non-trivial to
+prove that $-\id_{\Sp} \neq \id_{\Sp}$.
 
 As the sphere $\Sp$ is connected, in proving the proposition
 $\Trunc{\varphi=\id_\Sp}+\Trunc{\varphi=-\id_\Sp}$ for an equivalence
@@ -207,17 +209,20 @@ fibration, and on the proof that $\pi_2(\Sp) \weq \ZZ$ (cf.\
 
 To generalize this proof to the case $n>2$, one can rely on the
 Freudenthal suspension theorem (\cite[Ch.~8.6]{HoTT}). If time
-permits, we shall sketch how it allows to prove that $\Sn \ptdto \Sn$
-has exactly two connected components, and we shall detail the work in
-progress in order to get the full property.
-
+permits, we will sketch how it allows to prove that $\Sn \ptdto \Sn$
+has exactly two connected components, and we shall then detail the
+work in progress in order to get the full property.
 
 Future works include formalizing this proof in cubical type theory
 (CTT) and experimenting with actual computation of the degree of
-selected symmetries. The univalence axiom is necessary for the
-definition of the Hopf fibration (hence for the definition of the
-degree also) and it would be interesting to see how much of a
-challenge it represents for CTT to actually compute.
+selected symmetries. This is one of the motivations for this
+work. Indeed, the univalence axiom is necessary for the definition of
+the Hopf fibration and for the Freudenthal suspension theorem (and
+hence for the definition of the degree), and an implementation in CTT
+will display the computational content of univalence at
+work. Hopefully, this would pose as a reasonable computational
+challenge, simpler than the current problems tackled through CTT such
+as the computation of Brunerie's number (cf. \cite{brunerie:thesis}).
 
 \bibliographystyle{alpha}
 \bibliography{bib}
