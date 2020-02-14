@@ -174,26 +174,205 @@ The reason is that this type is in general not a set.
 However,
 $\trunc 0 {\sph n \pointedm \sph n}$ is a monoid in the canonical way.
 
-\begin{lemma} \label{lem:grp-iso}
- The morphism map $\trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}$ is an isomorphism of monoids for all $n \geq 1$.
+\begin{corollary} \label{cor:mon-mor}
+ The morphism map $\trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}$ is a monoid morphism for all $n \geq 0$.
+\end{corollary}
+\begin{proof}
+ The monoid structure is respected by \eqref{eq:susp-law1} and \eqref{eq:susp-law2}.
+%  (Todo: This needs to be worked out.
+%  The statement that it is an equivalence of types should hopefully follow from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. However, we need to be careful: The map $\sigma$ in that theorem is not the same as the map $\Sigma \_$ we have here.
+%  This is why the potentially useful formulations in \cite[Cor 8.6.14]{HoTT} and \cite[Thm 8.6.17]{HoTT} do not solve this immediately.
+%  As Pierre has pointed out, the case for $n + 1 = 2$ needs a proof as well, since Freudenthal only works for $n \geq 2$.
+%  
+%  The statement that the monoid structure is respected follows from \eqref{eq:susp-law1} and \eqref{eq:susp-law2}.)
+\end{proof}
+
+\section{Based Symmetries on Higher Spheres}
+
+The goal of this section is to improve the result of 
+\cref{cor:mon-mor} to the following:
+
+\begin{theorem} \label{thm:mon-iso}
+The monoid morphism
+\begin{equation}
+ \trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}
+\end{equation}
+is an isomorphism of monoids for all $n \geq 1$. 
+\end{theorem}
+
+Our strategy for proving \cref{thm:mon-iso} is to apply the
+Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. 
+Since we have $(\sph n \pointedm \sph n) \simeq \Omega^n(\sph n)$ and thus $\trunc 0 {\sph n \pointedm \sph n} = \pi_n(\sph n)$, it might seem as if 
+the desired statement is already given by \cite[Cor 8.6.15]{HoTT}.
+Unfortunately, we need to be careful: 
+The Freudenthal suspension theorem makes a statement about the map
+\begin{equation}
+ \sigma : X \to \Omega(\Sigma X),
+\end{equation}
+the unit of the adjunction $\Sigma \dashv \Omega$.
+The isomorphism in \cite[Cor 8.6.15]{HoTT}
+is given by $\mathsf{ap}^n_\sigma$.
+A priori, this function has an unknown relationship with the map $\Sigma \_$ that we consider in \cref{thm:mon-iso}.
+The key to proving \cref{thm:mon-iso} is thus showing that these maps are the same up to canonical isomorphism, i.e.\ commutation of the following square:
+
+\begin{equation} \label{eq:needs-to-commute}
+\begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+ \node (A) at (0,0) {$(\sph n \pointedm \sph n)$}; 
+ \node (B) at (0,1) {$\Omega^n(\sph n)$}; 
+ \node (C) at (1,1) {$\Omega^{n+1}(\sph {n+1})$}; 
+ \node (D) at (1,0) {$(\sph {n+1} \pointedm \sph {n+1})$}; 
+
+ \draw[arrow] (A) to node [left] {$\sim$} (B);
+ \draw[arrow] (B) to node [above] {$\mathsf{ap}^n_\sigma$} (C);
+ \draw[arrow] (D) to node [right] {$\sim$} (C);
+ \draw[arrow] (A) to node [above] {$\Sigma$} (D);
+\end{tikzpicture}
+\end{equation}
+
+Our argument for this is the concatenation of the following lemmas.
+
+\begin{lemma} \label{lem:ap-Sigma}
+ Let $X$ be a pointed type and $f \equiv (f_0, f_1) : A \pointedm B$ be a pointed function.
+ The following square commutes:
+\begin{equation}
+\begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+ \node (A) at (0,0) {$(\Sigma X \pointedm A)$}; 
+ \node (D) at (1,0) {$(\Sigma X \pointedm B)$}; 
+ \node (B) at (0,1) {$(X \pointedm \Omega A)$}; 
+ \node (C) at (1,1) {$(X \pointedm \Omega B)$}; 
+
+ \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
+ \draw[arrow] (A) to node [left] {$\sim$} (B);
+ \draw[arrow] (B) to node [above] {$\mathsf{ap}_f \circ \_$} (C);
+ \draw[arrow] (D) to node [right] {$\sim$} (C);
+\end{tikzpicture}
+\end{equation}
 \end{lemma}
 \begin{proof}
- (Todo: This needs to be worked out.
- The statement that it is an equivalence of types should hopefully follow from the Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}. However, we need to be careful: The map $\sigma$ in that theorem is not the same as the map $\Sigma \_$ we have here.
- This is why the potentially useful formulations in \cite[Cor 8.6.14]{HoTT} and \cite[Thm 8.6.17]{HoTT} do not solve this immediately.
- As Pierre has pointed out, the case for $n + 1 = 2$ needs a proof as well, since Freudenthal only works for $n \geq 2$.
+ By calculation.
+%  Starting with $f_0 : \Sigma X \to A$ and $f_1 : f_0(N) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
+We start in the top left corner with $g_0 : \Sigma X \to A$ and $g_1 : g_0(N) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
+\begin{equation}
+ \begin{alignedat}{5}
+  &\quad && g_0 : \Sigma X \to A & \\
+  \mapsto &&& \lambda x. g_1^{-1} \ct \mathsf{ap}_{g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)) \ct g_1 : X \to \Omega A \\
+  \mapsto &&& \lambda x. f_1^{-1} \ct \mathsf{ap}_{f_0}(g_1)^{-1} \ct  \mathsf{ap}_{f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \mathsf{ap}_{f_0}(g_1) \ct f_1 : X \to \Omega B
+ \end{alignedat}
+\end{equation}
+If we go first right, then down, we get:
+\begin{equation}
+ \begin{alignedat}{5}
+  &\quad && g_0 : \Sigma X \to A & \\
+  \mapsto &&&  f_0 \circ g_0 : \Sigma X \to B \\
+  \mapsto &&& \lambda x. f_1^{-1} \ct \mathsf{ap}_{f_0}(g_1)^{-1} \ct  \mathsf{ap}_{f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \mathsf{ap}_{f_0}(g_1) \ct f_1 : X \to \Omega B
+ \end{alignedat}
+\end{equation}
+The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.)
+\end{proof}
+
+\begin{lemma} \label{lem:adj-prop}
+ For all $n \geq 0$ and $f$ as above, the diagram
+\begin{equation}
+\begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+ \node (A) at (0,0) {$(\sph n \pointedm A)$}; 
+ \node (D) at (1,0) {$(\sph n \pointedm B)$}; 
+ \node (B) at (0,1) {$(\Omega^n A)$}; 
+ \node (C) at (1,1) {$(\Omega^n B)$}; 
+
+ \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
+ \draw[arrow] (A) to node [left] {$\sim$} (B);
+ \draw[arrow] (B) to node [above] {$\mathsf{ap}_f^n \circ \_$} (C);
+ \draw[arrow] (D) to node [right] {$\sim$} (C);
+\end{tikzpicture}
+\end{equation}
+ commutes.
+\end{lemma}
+\begin{proof}
+ By induction on $n$. The case $n \equiv 0$ is trivial.
+ The step from $n$ to $n+1$ is an application of \cref{lem:ap-Sigma}.
+\end{proof}
+
+The next lemma is a standard property of adjunctions, here worked out explicitly for $\Sigma \dashv \Omega$:
+\begin{lemma}
+ For pointed types $C$ and $D$, the following commutes:
+\begin{equation}
+\begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+ \node (A) at (0,0) {$(C \pointedm D)$}; 
+ \node (D) at (1,0) {$(\Sigma C \pointedm \Sigma D)$}; 
+ \node (C) at (1,1) {$(C \pointedm \Omega \Sigma D)$}; 
+
+ \draw[arrow] (A) to node [above] {$\Sigma$} (D);
+ \draw[arrow] (A) to node [below left] {$\sigma \circ \_$} (C);
+ \draw[arrow] (D) to node [right] {$\sim$} (C);
+\end{tikzpicture}
+\end{equation}
+\end{lemma}
+\begin{proof}
+ By easy calculation.
+\end{proof}
+
+\begin{lemma} \label{lem:what-commutes-commutes}
+ The diagram \eqref{eq:needs-to-commute} commutes.
+\end{lemma}
+\begin{proof}
+ Consider the following:
+\begin{equation}
+\begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+ \node (A) at (0,0) {$(\sph n \pointedm \sph n)$}; 
+ \node (B) at (0,2) {$\Omega^n(\sph n)$}; 
+ \node (C) at (1,2) {$\Omega^{n+1}(\sph {n+1})$}; 
+ \node (D) at (1,0) {$(\sph {n+1} \pointedm \sph {n+1})$}; 
+ \node (E) at (1,1) {$(\sph n \pointedm \Omega \Sigma \sph n)$};
  
- The statement that the monoid structure is respected follows from \eqref{eq:susp-law1} and \eqref{eq:susp-law2}.)
+ \draw[arrow] (A) to node [left] {$\sim$} (B);
+ \draw[arrow] (B) to node [above] {$\mathsf{ap}^n_\sigma$} (C);
+%  \draw[arrow] (D) to node [right] {$\sim$} (C);
+ \draw[arrow] (A) to node [above] {$\Sigma$} (D);
+ \draw[arrow] (D) to node [right] {$\sim$} (E);
+ \draw[arrow] (E) to node [right] {$\sim$} (C);
+ \draw[arrow] (A) to node [above] {$\sigma \circ \_$} (E);
+\end{tikzpicture}
+\end{equation}
+The top triangle commutes by \cref{lem:adj-prop}.
+The bottem quadrangel commutes by \cref{lem:ap-Sigma}.
+\end{proof}
+
+We are now ready to prove
+\cref{thm:mon-iso}, i.e.\ that 
+\begin{equation}
+ \trunc 0 {\Sigma \_} : \trunc 0 {\sph n \pointedm \sph n} \to \trunc 0 {\sph {n+1} \pointedm \sph {n+1}}
+\end{equation}
+is an isomorphism of monoids for all $n \geq 1$. 
+
+\begin{proof}[Proof of \cref{thm:mon-iso} for the case $n \geq 2$]
+ Consider the set-truncation of digram \eqref{eq:needs-to-commute}.
+ By the Freudenthal suspension theorem, the bottom horizontal map is an equivalence for $n \geq 2$.
+ Since the vertical maps are always equivalences, by \cref{lem:what-commutes-commutes}, the top vertical map $\trunc 0 \Sigma$ is an equivalence.
+ By \cref{cor:mon-mor}, this map preserves the monoid structure.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:mon-iso} for the cases $n \equiv 1$]
+ TODO: Here is the connection to Pierre's and Marc's writeup!
+\end{proof}
+
+From this, we immediately get:
+
+\begin{theorem} \label{thm:Sn-bool}
+ The type
+ $\trunc 0 {\sph n \xrightarrow{\sim}_\bullet \sph n}$
+is equivalent to $\mathsf{Bool}$ for all $n \geq 1$.
+\end{theorem}
+\begin{proof}
+ By (TODO: connection to Pierre and Marc's writeup!), the statement holds for $n \equiv 1$.
+ By \cref{thm:mon-iso}, it holds for all $n$.
 \end{proof}
 
 
-\begin{corollary} \label{cor:Sn-bool}
-%  The set-truncation of the type of pointed equivalences 
- The type
- $\trunc 0 {\sph n \xrightarrow{\sim}_\bullet \sph n}$
-%  , or equivalently pointed equalities $(\sph n =_\bullet \sph n)$, 
-is equivalent to $\mathsf{Bool}$ for all $n \geq 1$.
-\end{corollary}
 
 \section{Unbased Symmetries}
 
@@ -220,7 +399,7 @@ We start with a lemma allowing us the removal of base points:
 \begin{proof}
  By induction on $x$.
  Since the goal is a proposition, it is enough to check the cases for the point constructors. For $\North$, this is given by 
- \cref{cor:Sn-bool}. Note that it is always true that $(B = C)$ implies $(A \to_\bullet B) \simeq (A \to_\bullet C)$;
+ \cref{thm:Sn-bool}. Note that it is always true that $(B = C)$ implies $(A \to_\bullet B) \simeq (A \to_\bullet C)$;
  thus, a single equivalence on $\sph n$ swapping $\North$ and $\South$ is suffices to cover the case $\South$.
  There is a canonical such equivalence which reverses all meridians.
 \end{proof}
