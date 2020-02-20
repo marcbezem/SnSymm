@@ -81,7 +81,7 @@ When we later regard $\Sigma A$ as a pointed type, we implicitly choose its base
 
 Given pointed types $A$ and $B$ (with implicit base points $a_0$ and $b_0$), we write $A \pointedm B$ for the type of \emph{pointed maps}: $\Sigma (f : A \to B). f(a_0) = b_0$.
 
-\begin{lemma}[{Spheres and loops \cite[check-lemma-number]{HoTT}}] \label{lem:sph-loops}
+\begin{lemma}[{Spheres and loops \cite[iterate Lemma 6.5.4]{HoTT}}] \label{lem:sph-loops}
  Given $n \geq 0$ and a pointed type $A$, we have
  \begin{equation}
   (\sph n \pointedm A) \simeq \Omega^n(A).
@@ -207,7 +207,7 @@ the desired statement is already given by \cite[Cor 8.6.15]{HoTT}.
 Unfortunately, we need to be careful: 
 The Freudenthal suspension theorem makes a statement about the map
 \begin{equation}
- \sigma : X \to \Omega(\Sigma X),
+ \sigma : X \to \Omega(\Sigma X) : x \mapsto \mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1},
 \end{equation}
 the unit of the adjunction $\Sigma \dashv \Omega$.
 The isomorphism in \cite[Cor 8.6.15]{HoTT}
@@ -257,7 +257,7 @@ We start in the top left corner with $g_0 : \Sigma X \to A$ and $g_1 : g_0(N) = 
 \begin{equation}
  \begin{alignedat}{5}
   &\quad && g_0 : \Sigma X \to A & \\
-  \mapsto &&& \lambda x. g_1^{-1} \ct \mathsf{ap}_{g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)) \ct g_1 : X \to \Omega A \\
+  \mapsto &&& \lambda x. g_1^{-1} \ct \mathsf{ap}_{g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct g_1 : X \to \Omega A \\
   \mapsto &&& \lambda x. f_1^{-1} \ct \mathsf{ap}_{f_0}(g_1)^{-1} \ct  \mathsf{ap}_{f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \mathsf{ap}_{f_0}(g_1) \ct f_1 : X \to \Omega B
  \end{alignedat}
 \end{equation}
@@ -272,7 +272,7 @@ If we go first right, then down, we get:
 The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.)
 \end{proof}
 
-\begin{lemma} \label{lem:adj-prop}
+\begin{lemma}\label{lem:iterated-ap-Sigma}
  For all $n \geq 0$ and $f$ as above, the diagram
 \begin{equation}
 \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
@@ -296,7 +296,7 @@ The proofs that the functions are pointed are the canonical ones and coincide as
 \end{proof}
 
 The next lemma is a standard property of adjunctions, here worked out explicitly for $\Sigma \dashv \Omega$:
-\begin{lemma}
+\begin{lemma} \label{lem:adj-prop}
  For pointed types $C$ and $D$, the following commutes:
 \begin{equation}
 \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
@@ -339,7 +339,7 @@ The next lemma is a standard property of adjunctions, here worked out explicitly
 \end{tikzpicture}
 \end{equation}
 The top triangle commutes by \cref{lem:adj-prop}.
-The bottem quadrangel commutes by \cref{lem:ap-Sigma}.
+The bottom quadrangel commutes by \cref{lem:iterated-ap-Sigma}.
 \end{proof}
 
 We are now ready to prove
