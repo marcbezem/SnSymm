@@ -142,7 +142,7 @@ The suspension is a ``functor'' in the somewhat naive sense of directly writing 
 We first record this observation in \cref{lem:Susp-is-functor}
 before clarifying why we call the concept a \emph{wild $1$-functor} in \cref{rem:wildness}.
 
-\begin{lemma}[Funcotrial structure of the suspension] \label{lem:Susp-is-functor}
+\begin{lemma}[Functorial structure of the suspension] \label{lem:Susp-is-functor}
  The suspension can canonically be given the structure of a \emph{wild $1$-functor} in the following sense:
  \begin{enumerate}
   \item \emph{Objects:} for any type $A$, we get a type $\Sigma A$.
@@ -373,6 +373,44 @@ is equivalent to $\mathsf{Bool}$ for all $n \geq 1$.
 \end{proof}
 
 
+Attempt at spelling out the proof of \cite[8.6.15]{HoTT},
+where $\sigma'$ is $\sigma$ transported according to 
+\cite[7.3.15]{HoTT}
+
+
+\begin{equation} \label{eq:wants-to-commute}
+\begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
+ \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+
+ \node (UL) at (0,0) {$\trunc n {\sph n}$};
+ \node (UR) at (1,0) {$\trunc n {\Omega\Sigma \sph n}$};
+ \node (mL) at (0,1) {$\Omega^n \trunc n {\sph n}$};
+ \node (mR) at (1,1) {$\Omega^n \trunc n {\Omega\Sigma \sph n}$};
+ 
+
+ \draw[arrow] (UL) to node [above] {$\trunc n {\sigma'}$} 
+                      node [below] {8.6.16 (!), $n\geq 2$} (UR);
+ \draw[arrow] (UL) to node [left] {$\Omega^n$} (mL);
+ \draw[arrow] (UR) to node [right] {$\Omega^n$} (mR);
+ \draw[arrow] (mL) to node [above] {$\Omega^n \trunc n {\sigma'}$} node [below] {functoriality of $\Omega$} (mR);
+
+
+ \node (ML) at (0,2) {$\trunc 0 {\Omega^n \sph n}$};
+ \node (MR) at (1,2) {$\trunc 0 {\Omega^{n+1}\Sigma \sph n}$}; 
+ \draw[arrow] (mL) to node [left] {7.3.14} (ML);
+ \draw[arrow] (mR) to node [right] {7.3.14} (MR);
+ \draw[arrow] (ML) to node [below] {$\Omega^n \trunc n {\sigma'}$} node [above] {some transport of} (MR);
+
+ \node (DL) at (0,3) {$\trunc 0 {\Omega^n(\sph n)}$}; 
+ \node (DR) at (1,3) {$\trunc 0 {\Omega^{n+1}(\sph {n+1})}$}; 
+ \draw[arrow] (ML) to node [left] {$\equiv$} (DL);
+ \draw[arrow] (MR) to node [right] {$\equiv$} (DR); 
+ \draw[arrow] (DL) to node [above] {$\trunc 0 {\Omega^n \sigma}$} node [below] {hopefully} (DR);
+
+\end{tikzpicture}
+\end{equation}
+
+
 
 \section{Unbased Symmetries}
 
@@ -469,6 +507,9 @@ We can get rid of the propositional truncation:
  is a proposition.
  It follows from \cref{lem:mainlemma} and implies the claimed equality.
 \end{proof}
+
+
+
 
 
 
