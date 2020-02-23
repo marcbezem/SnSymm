@@ -206,9 +206,10 @@ Since we have $(\sph n \pointedm \sph n) \simeq \Omega^n(\sph n)$ and thus $\tru
 the desired statement is already given by \cite[Cor 8.6.15]{HoTT}.
 Unfortunately, we need to be careful: 
 The Freudenthal suspension theorem makes a statement about the map
-\begin{equation}
- \sigma : X \to \Omega(\Sigma X) : x \mapsto \mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1},
-\end{equation}
+\begin{align}
+ \sigma : \; &X \to \Omega(\Sigma X) \\
+ &x \mapsto \mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1},
+\end{align}
 the unit of the adjunction $\Sigma \dashv \Omega$.
 The isomorphism in \cite[Cor 8.6.15]{HoTT}
 is given by $\mathsf{ap}^n_\sigma$.
@@ -339,7 +340,7 @@ The next lemma is a standard property of adjunctions, here worked out explicitly
 \end{tikzpicture}
 \end{equation}
 The top triangle commutes by \cref{lem:adj-prop}.
-The bottom quadrangel commutes by \cref{lem:iterated-ap-Sigma}.
+The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.
 \end{proof}
 
 We are now ready to prove
