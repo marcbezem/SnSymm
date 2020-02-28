@@ -1,0 +1,337 @@
+%% packages
+% \usepackage{amssymb,amsthm}
+% \usepackage[numbers]{natbib}
+% % \usepackage{mathtools}          %to get \vcentcolon
+% \usepackage{thmtools}
+%\usepackage{letltxmacro}        %to rename \equiv
+\let\oldequiv\equiv
+% \usepackage{xspace}
+% \usepackage[all]{xy}
+% \usepackage{pgfplots,tikz}
+% \pgfplotsset{compat=newest}
+% %\usepackage{soul} % for striking out, can be removed in the end
+% \usepackage{enumitem}
+
+% \usetikzlibrary{decorations.markings,decorations.pathreplacing,matrix,arrows,chains,positioning,scopes} 
+        %,hobby} % for hobby splines
+%% useful for debugging bezier paths
+%\tikzset{%
+%  show curve controls/.style={
+%    postaction={
+%      decoration={
+%        show path construction,
+%        curveto code={
+%          \draw [blue] 
+%            (\tikzinputsegmentfirst) -- (\tikzinputsegmentsupporta)
+%            (\tikzinputsegmentlast) -- (\tikzinputsegmentsupportb);
+%          \fill [red, opacity=0.5] 
+%            (\tikzinputsegmentsupporta) circle [radius=.5ex]
+%            (\tikzinputsegmentsupportb) circle [radius=.5ex];
+%        }
+%      },
+%      decorate
+%    }}}
+
+% hyperref should be the package loaded last
+% \usepackage[backref=page,
+%             colorlinks,
+%             citecolor=linkcolor,
+%             linkcolor=linkcolor,
+%             urlcolor=linkcolor,
+%             unicode,
+%             pdfauthor={CAS},
+%             pdftitle={Symmetry},
+%             pdfsubject={Mathematics},
+%             pdfkeywords={type theory, group theory, univalence axiom}]{hyperref}
+% % - except for cleveref!
+% \usepackage[capitalize]{cleveref}
+% \usepackage{xifthen}
+% \definecolor{linkcolor}{rgb}{0,0,0.5}
+
+%% macros
+% \newcommand{\mytitle}{Symmetry}
+% \newcommand{\myauthor}{}
+
+% \newcommand{\DELETE}[1]{}
+
+% %%% Headers
+% \pagestyle{headings}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%% THEOREMS
+% \declaretheoremstyle[headfont=\normalfont\bfseries,bodyfont=\itshape]{cas-thm}
+% \declaretheoremstyle[headfont=\normalfont\bfseries]{cas-def}
+% \declaretheorem[parent=section,style=cas-thm]{theorem}
+% \declaretheorem[sibling=theorem,style=cas-thm]{lemma}
+% \declaretheorem[sibling=theorem,style=cas-thm]{corollary}
+% \declaretheorem[sibling=theorem,style=cas-thm]{conjecture}
+% \declaretheorem[sibling=theorem,style=cas-thm]{axiom}
+% \declaretheorem[sibling=theorem,style=cas-thm]{construction}
+% \declaretheorem[sibling=theorem,style=cas-def]{definition}
+% \declaretheorem[sibling=theorem,style=cas-def]{remark}
+% \declaretheorem[sibling=theorem,style=cas-def]{example}
+% \declaretheorem[sibling=theorem,style=cas-def]{exercise}
+% \declaretheorem[sibling=theorem,style=cas-def,name=Exercise]{xca}
+% \declaretheorem[sibling=theorem,style=cas-def,name={}]{principle}
+
+% \numberwithin{equation}{section}
+% %% end
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\arxiv}[1]{preprint available at \href{http://arxiv.org/abs/#1}{arXiv:#1}}
+
+% Should these be roman or italic?!
+\newcommand{\bool}{\mathop{\mathit{Bool}}}
+\newcommand{\yes}{\mathop{\mathit{yes}}}
+\newcommand{\no}{\mathop{\mathit{no}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\refl}[1]{\mathop{{\mathit{refl}}_{#1}}}
+\newcommand{\refloi}[1]{\mathop{\mathit{refl}^{-o}_{#1}}}
+\newcommand{\inl}[1]{\mathop{\mathit{inl}_{#1}}}
+\newcommand{\inr}[1]{\mathop{{\it inr}_{#1}}}
+\newcommand{\true}{\mathop{\mathit{True}}}
+\newcommand{\false}{\mathop{\mathit{False}}}
+\newcommand{\triv}{\mathop{\mathit{triv}}}
+\newcommand{\symm}{\mathop{\mathit{symm}}}
+\newcommand{\trans}{\mathop{\mathit{trans}}}
+%\newcommand{\fact}{\mathop{\mathit{fact}}}
+\newcommand{\trp}[2][]{\mathop{\mathit{trp}^{#1}_{#2}}}
+\newcommand{\fst}{\mathop{\mathit{fst}}}
+\newcommand{\snd}{\mathop{\mathit{snd}}}
+\newcommand{\zpos}{\mathop{\mathrm{pos}}}
+\newcommand{\zneg}{\mathop{\mathrm{neg}}}
+\newcommand{\zzero}{\mathop{\mathrm{zero}}}
+\newcommand{\mZ}{\mathop{\mathrm{m}}}
+\newcommand{\preim}{\mathop{\mathrm{preim}}}
+\newcommand{\tot}{\mathop{\mathrm{tot}}}
+\newcommand{\funext}{\mathop{\mathrm{funext}}}
+\newcommand{\ptw}{\mathop{\mathrm{ptw}}}
+\newcommand{\ap}[1]{\mathop{{\it ap}_{#1}}}
+\newcommand{\apd}[1]{\mathop{{\it apd}_{#1}}}
+\newcommand{\apap}[3]{\mathop{{\it apap}_{#1}(#2)(#3)}}
+\newcommand{\apc}{\mathop{{\it ap}{\ct}}}
+\newcommand{\loopspace}[1]{\mathop{\Omega^{#1}}}%
+
+\newcommand{\id}{\mathord{\mathrm{id}}}
+\newcommand{\pt}{{\mathord{\mathrm{pt}}}}
+\newcommand{\Type}{\mathord{\mathrm{Type}}}
+\newcommand{\Prop}{\mathord{\mathrm{Prop}}}
+\newcommand{\Set}{\mathord{\mathrm{Set}}}
+\newcommand{\Group}{\mathord{\mathrm{Group}}}
+\newcommand{\AbGroup}{\mathord{\mathrm{AbGroup}}}
+\newcommand{\Bunch}{\mathord{\mathrm{Bunch}}}
+\newcommand{\AbBunch}{\mathord{\mathrm{AbBunch}}}
+\newcommand{\Band}{\mathord{\mathrm{Band}}}
+\newcommand{\AbBand}{\mathord{\mathrm{AbBand}}}
+
+\DeclareMathOperator\Bop{B}         % with extra space
+\newcommand{\B}{\mathrm B}          % without extra space
+\newcommand{\N}{\mathrm N}
+\newcommand{\weq}{\simeq}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\isom}{\cong}
+\newcommand{\ct}{*}
+\newcommand{\cto}{*_{\mathrm{o}}}
+\newcommand{\rrfl}{\mathit{rrfl}}
+\newcommand{\cp}[1]{\mathit{cp}_{#1}}
+\newcommand*{\dblslash}{\mathbin{/\kern-3pt/}}
+
+%\renewcommand{\equiv}{\simeq}
+%\newcommand{\liff}{\equiv}
+\newcommand{\jdeq}{\equiv}
+\newcommand{\defeq}{\mathrel{\raisebox{-.05ex}{$:$}\mkern-8mu\equiv}}
+%\newcommand{\defeq}{\vcentcolon\jdeq}
+\newcommand{\defequi}{\defeq}%definitionally equal}
+% \newcommand{\defis}{\vcentcolon=}
+\newcommand{\defis}{\mathrel{\hbox{:}\mkern-5mu=}}
+
+\DeclareMathOperator\Aut{Aut}
+\DeclareMathOperator\Out{Out}
+\DeclareMathOperator\Inn{Inn}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator\Img{Im}
+\DeclareMathOperator\Sym{Sym}
+\DeclareMathOperator\Card{Card}
+\DeclareMathOperator\bunch{bunch}
+\DeclareMathOperator\band{band}
+\DeclareMathOperator\fiber{fiber}
+\DeclareMathOperator\Succ{Succ}
+\DeclareMathOperator\fin{Fin}
+\DeclareMathOperator\El{El}
+
+\newcommand{\Trunc}[1]{\left\lVert{#1}\right\rVert}
+% \DeclarePairedDelimiter\Trunc{\lVert}{\rVert}
+% \DeclarePairedDelimiter\trunc{\lvert}{\rvert} % truncation
+% \DeclarePairedDelimiter\merely{\lVert}{\rVert_{-1}}
+% \DeclarePairedDelimiter\angled{\langle}{\rangle}
+% \DeclarePairedDelimiter\Fin[]
+% \DeclarePairedDelimiterX\setof[2]\lbrace\rbrace{#1 \mid #2}
+
+\newcommand{\nonempty}[1]{\Trunc{#1}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%from circle on
+\newcommand{\covering}{set bundle\xspace}
+\newcommand{\coverings}{set bundles\xspace}
+\newcommand{\Covering}{Set bundle\xspace}
+\newcommand{\Coverings}{Set bundles\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% these arise from the group theory chapter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%originates in group.tex (BID)
+\newcommand{\ie}{{\em i.e.,\xspace}}%\xspace}fixlater
+\newcommand{\eg}{{\em e.g.,\xspace}}%\xspace}fixlater
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\ve}{\mathrm{ve}}
+\newcommand{\el}{\mathrm{elim}}
+\newcommand{\we}{\overset\sim\to}
+
+
+
+\newcommand{\iscontr}{\mathrm{isContr}}
+\newcommand{\isprop}{\mathrm{isProp}}
+\newcommand{\isset}{\mathrm{isSet}}
+\newcommand{\isgrpd}{\mathrm{isGrpd}}
+\newcommand{\isEq}{\mathrm{isEquiv}}
+\newcommand{\isonetype}{\mathrm{1Type}}
+\newcommand{\isconn}{\mathrm{isConn}}
+
+\newcommand{\conn}{\mathrm{conn}}
+\newcommand{\conncomp}[2]{{#1_{\left(#2\right)}}}%
+\newcommand{\aut}{\mathrm{Aut}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\setgroup}[1]{||#1||}
+\newcommand{\inftygp}{$\infty$-group\xspace}
+\newcommand{\aninftygp}{an $\infty$-group\xspace}
+\newcommand{\inftygps}{$\infty$-groups\xspace}
+\newcommand{\princ}[1]{\mathrm{Pr}_{{#1}}}%{\mathrm{Princ}}
+\newcommand{\pathsp}[1]{\mathrm{P}_{#1}}
+\DeclareMathOperator\abstrOp{abst}
+\newcommand{\abstr}{\mathrm{abs}}
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\agp}[1]{\mathcal #1}%generic abstract group
+
+\newcommand{\pre}{\mathrm{pre}}%these may be open for discussion
+\newcommand{\preinv}{\mathrm{preinv}}
+\newcommand{\post}{\mathrm{post}}
+\newcommand{\adjoint}{\mathrm{ad}}
+\newcommand{\concr}{\mathrm{concr}}
+
+%some special types
+\newcommand{\Gtorsor}{\mathrm{tors}_G}
+\newcommand{\Xtorsor}[1]{\mathrm{tors}_{#1}}%      added by MAB
+\newcommand{\Ztorsor}{\Xtorsor{\zet}}
+\newcommand{\TorZ}{{\mathrm{T}\ZZ}} % {\mathbf{TorZor}}% alternative: BZ.   
+\DeclareMathOperator\SetBundle{\mathrm{SetBundle}}             % end MAB
+\newcommand{\typegroup}{\mathbf{Group}}
+\newcommand{\typesubgroup}{\mathbf{Sub}}%"gp" removed - is evident from the type of the subscript G
+\newcommand{\typeset}{\Set}
+\newcommand{\typeinftygp}{{\infty}\mathbf{Group}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\UUp}{\UU_*}
+\newcommand{\pttype}{\UUp}
+\newcommand{\typeabsgp}{\mathbf{Group}_{\mathrm{Abstract}}}
+\newcommand{\typemonoid}{\mathbf{Monoid}}
+\newcommand{\typetorsor}{\mathbf{Tors}}
+\newcommand{\BSigma}{B\Sigma}%previously \Set_{(S)} - the component of S:\Set
+\newcommand{\revers}{\mathit{r}}
+\newcommand{\twist}{\mathit{twist}}%loop in BC_2
+\newcommand{\Sn}[1]{{\mathbb S^{#1}}}%the circle
+\newcommand{\Sc}{{\Sn 1}}%the circle
+\newcommand{\Sp}{{\Sn 2}}%the circle
+\newcommand{\mrd}{{\operatorname{\mathrm{merid}}}}%
+%\newcommand{\sbt}{\begin{picture}(-1,1)(-1,-3)\circle*{2}\end{picture}}
+\newcommand{\sbt}{\tikz[anchor=base,baseline]{\node[outer sep=0pt,inner sep=.3ex] (0,.7ex) {$\bullet$};}}
+\newcommand{\base}{\mathord{\sbt}}%point in circle
+\newcommand{\uc}[1]{{I_{#1}}}%universal set bundle
+\newcommand{\Zloop}{\circlearrowleft} %was \mathrm{loop}}%MAB: loop TorZor
+\newcommand{\Sloop}{\mathord{\circlearrowleft}}%loop in circle
+\newcommand{\bn}[1]{\mathbf{#1}}
+\newcommand{\Eq}{\mathrm{Eq}}
+\newcommand{\emptytype}{\emptyset}
+
+\newcommand{\etop}[1]{\bar {#1}}
+\newcommand{\ptoe}[1]{\tilde {#1}}
+\newcommand{\cast}{\mathrm{cast}}
+\newcommand{\ua}{\mathrm{ua}}%univalence inverse
+\newcommand{\zet}{\mathrm{Z}}%the SET of integers
+
+%% paths over paths
+
+%% \newcommand{\pathover}[4]{#1 \overset{#2}{\underset{#3}=} #4}
+\newcommand{\pathoverdisplay}[4]{{#1} \overset{#2}{\underset{#3}=} #4}
+\newcommand{\pathover}[4]{#1 =^{#2}_{#3} #4}
+
+\newcommand{\pair}{\mathop{\mathrm{pair}}}
+\newcommand{\rec}{\mathop{\mathrm{rec}}}
+\newcommand{\ind}{\mathop{\mathrm{ind}}}
+\newcommand\pathpair[2]{\overline{({#1},{#2})}}
+
+%% Euclidean geometry
+
+\newcommand\EE{\mathbb E}
+\newcommand\VV{\mathbb V}
+\newcommand\ES{{\tilde \EE}}
+\newcommand\OS{{\tilde \VV}}
+\newcommand\OrthGp[1]{\mathrm O(#1)}
+\newcommand\EucGp[1]{\mathrm E(#1)}
+\DeclareMathOperator\Vectors{Vec}
+\DeclareMathOperator\Points{Pts}
+\newcommand{\typeRealVectorSpace}{\mathbf{Vect}_\RR}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Peter & Benedikt's macros for referring to coqdoc
+% d2c4e86
+% see https://tex.stackexchange.com/a/35314/ for help understanding the following:
+
+\newcommand{\longhash}{e47ce20acce953129e34e021a10976ed27948a39}
+\newcommand{\shorthash}{e47ce20}
+
+%fragile, better to freeze with stable hash
+\newcommand{\coqdocbasebaseurl}{https://unimath.github.io/doc/UniMath/\shorthash/}
+
+%\coqident call are relative to this long path
+\newcommand{\coqdocbaseurl}{\coqdocbasebaseurl UniMath.} 
+\newcommand{\urlhash}{\#}
+
+\newcommand{\coqdocurl}[2]{\coqdocbaseurl #1.html\urlhash #2}
+
+%nolinkurl from url or hyperref package
+\newcommand{\nolinkcoqident}[1]{\nolinkurl{#1}} % TODO: give better def for this?
+\makeatletter
+\newcommand{\coqident}{\begingroup\@makeother\#\@coqident}
+\newcommand{\@coqident}[3][]{% empty default first and optional argument
+  \ifthenelse{\isempty{#2}}% 
+  {\nolinkcoqident{#3}}%           [optional]{}{printme}
+  {\ifthenelse{\isempty{#1}}%
+  {\href{\coqdocurl{#2}{#3}}{\nolinkcoqident{#3}}}% []{file}{identifier+printed}
+  {\href{\coqdocurl{#2}{#3}}{\nolinkcoqident{#1}}}}% [printme]{file}{identifier}
+\endgroup}
+% optional argument allows link text to differ from link url
+\newcommand{\coqfile}[2]{%
+  \ifthenelse{\isempty{#1}}%
+  {\href{\coqdocbaseurl #2.html}{#2.v}}%
+  {\href{\coqdocbaseurl #1.#2.html}{#2.v}}} 
+\makeatother
+
+%sususe is a replacement for subsubsection.  sususe is the same as subsubsection but numbers correctly bid
+\newenvironment{sususe}[1]{\refstepcounter{theorem}%
+\vspace{.5\baselineskip}\par\medskip\noindent%
+{\normalfont\normalsize\bfseries{\thetheorem. #1}}%
+\vspace{.5\baselineskip}\newline}
+
