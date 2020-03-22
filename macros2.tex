@@ -210,6 +210,7 @@
 \newcommand{\isconn}{\mathrm{isConn}}
 
 \newcommand{\conn}{\mathrm{conn}}
+\newcommand{\conncomp}[2]{{#1}_{\left(#2\right)}}
 \newcommand{\aut}{\mathrm{Aut}}
 \newcommand{\Hom}{\mathrm{Hom}}
 \newcommand{\setgroup}[1]{||#1||}
@@ -248,7 +249,9 @@
 \newcommand{\BSigma}{B\Sigma}%previously \Set_{(S)} - the component of S:\Set
 \newcommand{\revers}{\mathit{r}}
 \newcommand{\twist}{\mathit{twist}}%loop in BC_2
-\newcommand{\Sc}{{S^1}}%the circle
+\newcommand{\Sn}[1]{{\mathbb S^{#1}}}%the circle
+\newcommand{\Sc}{{\Sn 1}}%the circle
+\newcommand{\Sp}{{\Sn 2}}%the circle
 %\newcommand{\sbt}{\begin{picture}(-1,1)(-1,-3)\circle*{2}\end{picture}}
 \newcommand{\sbt}{\tikz[anchor=base,baseline]{\node[inner sep=.3ex] (0,.7ex) {$\bullet$};}}
 \newcommand{\base}{\mathord{\sbt}}%point in circle
@@ -258,6 +261,10 @@
 \newcommand{\bn}[1]{\mathbf{#1}}
 \newcommand{\Eq}{\mathrm{Eq}}
 \newcommand{\emptytype}{\emptyset}
+\newcommand{\istrunc}[1]{\mathsf{istrunc}_{#1}}
+\newcommand{\ind}{\operatorname{\mathsf{ind}}}
+\newcommand{\susp}{\operatorname{\mathcal S}}
+\newcommand{\mrd}{\operatorname{\mathsf{mrd}}}
 
 \newcommand{\etop}[1]{\bar {#1}}
 \newcommand{\ptoe}[1]{\tilde {#1}}
@@ -273,7 +280,6 @@
 
 \newcommand{\pair}{\mathop{\mathrm{pair}}}
 \newcommand{\rec}{\mathop{\mathrm{rec}}}
-\newcommand{\ind}{\mathop{\mathrm{ind}}}
 \newcommand\pathpair[2]{\overline{({#1},{#2})}}
 
 %% Euclidean geometry
