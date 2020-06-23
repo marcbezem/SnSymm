@@ -1,0 +1,571 @@
+\documentclass[english,a4]{article}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{tikz,tikz-cd}
+\usepackage{microtype}
+\usepackage[mathscr]{euscript}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[capitalize]{cleveref}
+
+\input macros%
+\input macros2%
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setlist[enumerate]{label=(\roman*)}
+
+\title{{On symmetries of spheres in univalent foundations}}%
+\author{Pierre Cagne\thanks{Universitetet i Bergen} \and Nicolai
+  Kraus\thanks{University of Birmingham} \and Marc
+  Bezem\thanks{Universitetet i Bergen}}%
+
+\date{\normalsize Last updated on \today}%
+
+%% global tikz styles
+\tikzset{cell/.style={%
+    shorten <=1em,%
+    shorten >=1em,
+    /tikz/commutative diagrams/Rightarrow
+  }%
+}%
+
+\renewcommand{\ap}[1]{\left[{#1}\right]}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  In this paper, we investigate the symmetries of the spheres $\Sn n$
+  ($n\geq 1)$ in univalent foundations.
+
+  The case $n=1$ has a slick answer: $(\Sc = \Sc) \weq (\Sc +
+  \Sc)$. Unfortunately, it is expected that the result does not
+  generalize for $n>1$. However, we show that the type $\Sn n = \Sn n$
+  has two equivalent connected component and we exhibit members for
+  each component.
+\end{abstract}
+
+
+\section{Introduction}
+
+In this paper, we are interested in the description of the type
+$\Sn n = \Sn n$ ($n\geq 1$) where $\Sn n$ is the $n$-dimensional
+sphere, as defined in the HoTT-book (cf.~\cite{HoTT}).
+
+To be fully precise and to fix notations, we work inside an
+intuitionistic Martin-Löf's type theory with $\Sigma$-, $\Pi$- and
+$\mathrm{Id}$-types and with a cumulative hierarchy of universes,
+simply written $\UU$, for which Voevodsky's univalence axiom hold. The
+transport along $p$ in a type family $T:A\to \UU$ is denoted
+$\trp [T] p$. For any dependent function $f\from\prod_{x\from A}T(x)$,
+the function
+\begin{displaymath}
+  \ap f:\prod_{x,y\from A}\prod_{p\from x=y} \pathover {f(x)} T p
+  {f(y)}
+\end{displaymath}
+denotes the dependent application of $f$. We usually leave out the two
+first arguments of $\ap f$ as they are inferable, and we write simply
+$\ap f (p)$ for a path $p:x=y$. As in \cite{HoTT}, we call a type $A$
+a {\em proposition} if the type $\prod_{x,y\from A} x=y$ contains an
+element.
+
+We postulate a type $\NN$ of natural numbers and a type $\ZZ$ of
+integers with their respective inductive properties
+(cf.~\cite[Ch.??]{HoTT}). We allow also several higher inductive types
+that are defined in the HoTT-book: propositional truncations,
+suspensions, and the circle. Considering their importance in this
+paper, we recall them in full\footnote{\color{red}Or maybe we should
+  make an appendix of that?}:
+\begin{enumerate}
+\item the {\em propositional truncation} of a type $A$ is a type
+  $\Trunc A$ defined by
+  \begin{itemize}
+  \item a map $\trunc \blank \from A \to \Trunc A$,
+  \item and a dependent function
+    $\istrunc {-1} \from \prod_{x,y\from \Trunc A} x=y$
+  \end{itemize}
+  with the following induction rule:
+  \begin{quote}
+    given a type family $T\from \Trunc A \to \UU$ such that every
+    $T(x)$ is a proposition for each $x\from \Trunc A$, every
+    dependent function
+    \begin{displaymath}
+      s\from \prod_{a\from A}T(\trunc a)
+    \end{displaymath}
+    defines a dependent function
+    \begin{displaymath}
+      \ind(s)\from\prod_{x\from \Trunc A} T(x)
+    \end{displaymath}
+    such that $\ind(s)(\trunc a) \jdeq s(a)$ for all $a\from A$.
+  \end{quote}
+\item the {\em suspension} of a type $A$ is a type $\susp A$ defined
+  by
+  \begin{itemize}
+  \item two elements $N,S\from \susp A$,
+  \item and a  map $\mrd \from A \to (N=S)$
+  \end{itemize}
+  with the following induction rule:
+  \begin{quote}
+    given a type family $T\from \susp A \to \UU$, every dependent
+    triple of elements
+    \begin{displaymath}
+      n\from T(N), \quad s\from T(S),\quad
+      m\from \prod_{a\from A}\pathover n T {\mrd a} s
+    \end{displaymath}
+    defines a dependent function
+    \begin{displaymath}
+      \ind(n,s,m)\from\prod_{x\from \susp A} T(x)
+    \end{displaymath}
+    such that
+    \begin{gather*}
+      \ind(n,s,m)(N) \jdeq n,\quad \ind(n,s,m)(S) \jdeq s,\\
+      \ap{\ind(n,s,m)}(\mrd a) = m(a)\ \text{for all}\ a\from A.
+    \end{gather*}
+  \end{quote}
+\item the {\em circle} $\Sc$ is a type defined by
+  \begin{itemize}
+  \item an element $\base \from \Sc$,
+  \item and a path $\Sloop: \base = \base$
+  \end{itemize}
+  with the following induction rule:
+  \begin{quote}
+    given a type family $T\from \Sc \to \UU$, every dependent pair of
+    elements
+    \begin{displaymath}
+      b\from T(\base), \quad \ell\from \pathover b T \Sloop b
+    \end{displaymath}
+    defines a dependent function
+    \begin{displaymath}
+      \ind(b,\ell)\from\prod_{x\from \Sc} T(x)
+    \end{displaymath}
+    such that
+    \begin{displaymath}
+      \ind(b,\ell)(\base) \jdeq b,\quad \ap{\ind(b,\ell)}(\Sloop) = \ell
+    \end{displaymath}
+  \end{quote}
+\end{enumerate}
+The spheres $\Sn n$ are then defined by induction on $n:\NN$ by
+$\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 1$.
+
+\paragraph{Plan of the paper.}%
+In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
+is equivalent to $\Sc + \Sc$. Maybe surprising at first, this result
+is quite straightforward once we unravel the details.
+
+In \cref{sec:sphere}, we deal with the case $n=2$. Because the
+equivalence of the case $n=1$ relies heavily on $\Omega(\Sc)\weq \ZZ$
+being an abelian group, we can not expect to generalize the proof for
+$n=2$. However, a careful analysis of Brunerie's proof of
+$\pi_2(\Sp) \weq \ZZ$ allows us to prove that the type $\Sp=\Sp$ has
+exactly two connected components, equivalent one to
+another. Determining a type with a simple description that is
+equivalent to these components is a challenge in itself, still open,
+to the author's knowledge.
+
+In \cref{sec:higher-sphere}, we propagate the result by induction on
+$n\geq 2$: the type $\Sn n = \Sn n$ has exactly two connected
+components, equivalent one to another. Each induction step relies on a 
+Freudenthal's suspension theorem.
+
+\section{Symmetries of the circle}
+\label{sec:circle-case}%
+
+In this section, we will provide an equivalence:
+\begin{equation}
+  \label{eq:symm-cricle}%
+  (\Sc = \Sc) \weq \Sc+\Sc.
+\end{equation}
+We will work transparently across univalence, so that equivalences
+$f:\Sc\weq \Sc$ will be treated as elements of $\Sc=\Sc$ without any
+warning. In particular, we shall write as if
+``$\refl \Sc \jdeq \id_\Sc$''.
+
+To provide an equivalence of type \cref{eq:symm-cricle}, we proceed
+in several steps:
+\begin{itemize}
+\item first, we will describe two elements of $\Sc=\Sc$;
+\item next, we will prove that these two elements are not in the same
+  connected component;
+\item then, we will prove that every equivalences in $\Sc=\Sc$ is
+  merely equal to one of these two elements;
+\item finally, we will conclude by exhibiting an equivalence between
+  $\Sc$ and the connected component of each of these two elements.
+\end{itemize}
+
+The first element is simply the identity equivalence $\id_\Sc$. The
+second element is the function
+$-\id_\Sc \defequi \ind(\base,\inv{\Sloop})$ defined by
+$\Sc$-induction in the constant type family at $\Sc$. In other words,
+$-\id_\Sc$ is the (propositionally) unique function $\Sc \to \Sc$ such
+that:
+\begin{displaymath}
+  -\id_\Sc(\base) \jdeq \base%
+  \quad\text{and}\quad%
+  \ap{-\id_\Sc}(\Sloop) = \inv{\Sloop}.
+\end{displaymath}
+Let us note that $-\id_\Sc$ is an equivalence. Indeed,
+\begin{displaymath}
+  -\id_\Sc \circ -\id_\Sc (\base) \jdeq \base%
+  \quad\text{and}\quad%
+  \ap{-\id_\Sc \circ -\id_\Sc} (\Sloop) = \inv{\left(\inv \Sloop\right)} = \Sloop.
+\end{displaymath}
+By $\Sc$-induction, there is only one such function, the identity
+function, hence it provides a path $-\id_\Sc \circ -\id_\Sc
+=\id_\Sc$. This proves that $-\id_\Sc$ is its own pseudo-inverse,
+hence this is an equivalence.
+
+\begin{lemma}
+  \label{lemma:S1-id-neq-minusid}%
+  The proposition $\id_\Sc \neq -\id_\Sc$ holds.
+\end{lemma}
+\begin{proof}
+  Suppose a path $p\from\id_\Sc = -\id_\Sc$ and derive a
+  contradiction. Through function extensionality, and because
+  $\id_\Sc(\base) \jdeq \base \jdeq -\id_\Sc(\base)$, one gets a path
+  $p(\base) \from \base = \base$, and a $2$-path
+  $\ap p (\Sloop) \from \pathover \base T \Sloop \base$ where
+  $T(x)\defequi (\id_\Sc(x) = -\id_\Sc(x))$ for all $x:\Sc$. One can
+  easily find by induction on $q\from x=y$ a path of type
+  \begin{displaymath}
+    \trp [T] q (\blank) = \ap{-\id_\Sc}(q) \blank \inv{\ap{\id_\Sc}(q)}.
+  \end{displaymath}
+  In particular, $\ap p (\Sloop)$ provides a path of type
+  $\inv\Sloop p(\base) \inv\Sloop = p(\base)$. Now recall that
+  the function
+  \begin{equation}
+    \label{eq:loopspace-circle-Z}%
+    \ZZ\to(\base=\base),\quad k \mapsto \Sloop^k 
+  \end{equation}
+  is an equivalence. In particular, it shows that path-composition in
+  $\base=\base$ is commutative, and $\ap p (\Sloop)$ together with
+  path algebra provide then a path of type $\Sloop = \inv\Sloop$. This
+  is a contradiction, as it would yield a path of type $1=-1$ in $\ZZ$
+  through the equivalence of \cref{eq:loopspace-circle-Z}.
+\end{proof}
+\cref{lemma:S1-id-neq-minusid} proves that $\id_\Sc$ and $-\id_\Sc$
+lie in different connected component of $\Sc=\Sc$. We will now prove
+that there are no more connected components in $\Sc=\Sc$. We will need
+the following consequence of \cref{lemma:S1-id-neq-minusid}.
+\begin{corollary}%
+  \label{cor:S1-eq-either-isaprop}%
+  For every equivalence $\varphi\from \Sc=\Sc$, the following type is
+  a proposition:
+  \begin{equation}
+    \label{eq:S1-def-target-eq}%
+    P(\varphi) \defequi \Trunc{\varphi = \id_\Sc} + \Trunc{\varphi = -\id_\Sc}.
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  The type $P(\varphi)$ is the disjoint sum of two propositions. In
+  order to be a proposition, it is enough (and in fact necessary) for
+  the two summands to not overlap. More precisely, we need to show
+  that the premise
+  $\Trunc{\varphi = \id_\Sc}\times\Trunc{\varphi = -\id_\Sc}$ leads to
+  absurdity. Absurdity is a proposition, so we can as well suppose the
+  premise ${(\varphi = \id_\Sc)}\times{(\varphi = -\id_\Sc)}$. By
+  composition of paths, it gives a path of type $\id_\Sc = -\id_\Sc$
+  and \cref{lemma:S1-id-neq-minusid} allows us to derive a
+  contradiction.
+\end{proof}
+
+\begin{proposition}
+  \label{prop:S1-eq-either}%
+  For every equivalence $\varphi\from\Sc=\Sc$, the proposition
+  $P(\varphi)$ of \cref{eq:S1-def-target-eq} holds.
+\end{proposition}
+\begin{proof}
+  Let $\varphi$ be a symmetry of the circle, and let $\psi$ denote a
+  pseudo-inverse of $\varphi$. The type $\Sc$ being connected, one
+  have $\Trunc{\base=\varphi(\base)}$ and
+  $\Trunc{\base=\psi(\base)}$. Because the goal $P(\varphi)$ is
+  propositional, one can instead suppose actual paths
+  $\varphi_0\from\base=\varphi(\base)$ and
+  $\psi_0\from\base=\psi(\base)$. In other words, we can suppose that
+  $\varphi$ and its pseudo-inverse $\psi$ are pointed maps. Denote
+  $\pi$ for a path of type $\id_\Sc=\varphi\psi$. Then one can craft a
+  path of type
+  $(\varphi,\varphi)_0 \circ (\psi,\psi_0) =
+  (\id_\Sc,\pi_{\base}\varphi(\psi_0)\varphi_0)$. Now, consider the
+  induced applications
+  \begin{displaymath}
+    \loopspace{} (\varphi,\varphi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc
+    \quad\text{and}\quad
+    \loopspace{} (\psi,\psi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc.
+  \end{displaymath}
+  The elements $\loopspace{} (\varphi,\varphi_0) (\Sloop)$ and
+  $\loopspace{} (\psi,\psi_0) (\Sloop)$ of $(\base=\base)$ must be a
+  power of $\Sloop$ by the equivalence
+  of~\cref{eq:loopspace-circle-Z}. We denote them $\Sloop^k$ and
+  $\Sloop^\ell$ respectively. Then the following chain of propositions
+  holds:
+  \begin{align*}
+    \Sloop^{k\ell} &= (\Sloop^k)^\ell\\
+    &= \loopspace{} (\varphi,\varphi_0) \left(
+      \loopspace{} (\psi,\psi_0) (\Sloop)
+    \right)\\
+    &= \loopspace{} (\id_\Sc,\pi_{\base}\varphi(\psi_0)\varphi_0) (\Sloop)\\
+    &= \inv{\left(\pi_{\base}\varphi(\psi_0)\varphi_0\right)} \Sloop
+      \left(\pi_{\base}\varphi(\psi_0)\varphi_0\right)\\
+    &= \Sloop
+  \end{align*}
+  where the last equality exploits commutativity of path composition
+  in the loop space $(\base = \base)$. Through the equivalence
+  of~\cref{eq:loopspace-circle-Z}, we get that $k\ell=1$ in $\ZZ$,
+  from which we get an element of $(k=1)+(k=-1)$. From $k=1$, and
+  because
+  $\loopspace{} (\varphi,\varphi_0) \jdeq \inv{\varphi_0}
+  \varphi(\Sloop) \varphi_0$, one gets an element
+  \begin{displaymath}
+    b\from \Sloop = \inv{\varphi_0} \varphi(\Sloop)\varphi_0.
+  \end{displaymath}
+  One can then construct an element $\kappa\from \id_\Sc = \varphi$ by
+  $\Sc$-induction by taking $\kappa(\base)$ to be
+  $\varphi_0 \from (\base = \varphi(\base))$ and $\ap \kappa(\Sloop)$
+  the element $b$ just defined, transported back over the equivalence
+  \begin{displaymath}
+    (\pathover {\varphi_0} {\id_\Sc(\blank)=\varphi(\blank)} \Sloop {\varphi_0}) \weq
+    (\varphi(\Sloop) \varphi_0 \inv \Sloop = \varphi_0)
+    \weq (\Sloop = \inv{\varphi_0} \varphi(\Sloop) \varphi_0)
+  \end{displaymath}
+  By taking $\trunc{\kappa}$, we get an element of
+  $\Trunc{\id_\Sc = \varphi}$. Similarly, from $k=-1$, one gets an
+  element of $\Trunc{-\id_\Sc =\varphi}$. So in both cases, one gets
+  an element of $P(\varphi)$.
+\end{proof}
+
+For any type $A$, and an element $a\from A$, let us write $\conncomp A a$
+for the connected component of $a$ in $A$. In other words,
+\begin{displaymath}
+  \conncomp A a \defequi \sum_{x\from A}\Trunc{a=x}.
+\end{displaymath}
+\cref{lemma:S1-id-neq-minusid} and \cref{prop:S1-eq-either} put
+together show that the type $\Sc=\Sc$ has two connected components,
+one is the connected component of $\id_\Sc$ and the other is the
+connected component of $-\id_\Sc$. In summary, we have shown that
+there is an element of the type:
+\begin{displaymath}
+  (\Sc=\Sc) \weq \conncomp{(\Sc=\Sc)}{\id_\Sc} + \conncomp{(\Sc=\Sc)}{-\id_\Sc}.
+\end{displaymath}
+
+In order to prove our goal (cf.~\cref{eq:symm-cricle}), it remains to
+exhibit equivalences from $\Sc$ to both
+$\conncomp{(\Sc=\Sc)}{\id_\Sc}$ and
+$\conncomp{(\Sc=\Sc)}{-\id_\Sc}$. First note that because $\Sc=\Sc$ is
+a subtype of $\Sc\to\Sc$, the connected component of some equivalence
+$\varphi$ in $\Sc=\Sc$ is equivalent to the connected component of
+$\varphi$ seen as a function in $\Sc \to \Sc$. In particular,
+\begin{displaymath}
+  \conncomp{\left(\Sc=\Sc\right)}{\id_\Sc} \weq \conncomp{\left(\Sc\to\Sc\right)}{\id_\Sc}
+  \quad\text{and}\quad
+  \conncomp{\left(\Sc=\Sc\right)}{-\id_\Sc} \weq \conncomp{\left(\Sc\to\Sc\right)}{-\id_\Sc}.
+\end{displaymath}
+Recall that there is an element
+\begin{equation}
+  \label{eq:S1-loopspace-Z-at-each-x}%
+  f\from \prod_{x:\Sc} (\base=\base) \weq (x=x)
+\end{equation}
+defined by
+$\Sc$-induction as the dependent function such that
+$f(\base) \jdeq \id_{\base=\base}$ and such that the element
+$\ap f (\Sloop) \from (\Sloop\blank\inv\Sloop = \id_{\base=\base})$ is
+the reflexivity of $\id_{\base=\base}$ transported along the
+commutativity in $\base=\base$. Because $(\base=\base)$ is equivalent
+to $\ZZ$ (cf.~\cref{eq:loopspace-circle-Z}), it gives an equivalence
+$\varepsilon_x\from (x=x) \weq \ZZ$ for any $x\from\Sc$. We can know
+exhibit an equivalence:
+\begin{displaymath}
+  \begin{tikzcd}
+    \left(\Sc \to \Sc\right) \rar["\weq"] & (\sum_{x\from\Sc}x=x)
+    \rar["\weq"] & \Sc \times \ZZ
+    \\
+    \varphi \rar[mapsto] & (\varphi(\base),\ap \varphi (\Sloop))
+    \rar[mapsto] & \left(%
+      \varphi(\base), \varepsilon_{\varphi(\base)}(\ap\varphi(\Sloop))%
+    \right)%
+\end{tikzcd}
+\end{displaymath}
+In particular, one can verify that $\id_\Sc$ is mapped to $(\base,1)$
+and $-\id_\Sc$ is mapped to $(\base,-1)$ through this
+equivalence. Because $\ZZ$ is a set and $\Sc$ is connected, the
+connected components of $\Sc\times\ZZ$ are easy to understand: for
+every $x:\Sc$ and $k:\ZZ$, the connected component of $(x,k)$ is
+equivalent to the type of all those pairs $(x',k)$ for
+$x'\from\Sc$. In particular, every connected component of
+$\Sc\times\ZZ$ is equivalent to $\Sc$. In particular, one gets
+equivalences:
+\begin{displaymath}
+  \conncomp{\left(\Sc \to \Sc\right)}{\id_\Sc} \weq \Sc
+  \quad\text{and}\quad
+  \conncomp{\left(\Sc \to \Sc\right)}{-\id_\Sc} \weq \Sc
+\end{displaymath}
+
+Finally, one can compose all the equivalences that we exhibited:
+\begin{align*}
+  (\Sc=\Sc)
+  & \weq \conncomp{\left(\Sc = \Sc\right)}{\id_\Sc}
+    + \conncomp{\left(\Sc = \Sc\right)}{-\id_\Sc}
+  \\
+  & \weq \conncomp{\left(\Sc \to \Sc\right)}{\id_\Sc}
+    + \conncomp{\left(\Sc \to \Sc\right)}{-\id_\Sc}
+  \\
+  & \weq \Sc + \Sc.
+\end{align*}
+
+\section{Symmetries of the $2$-sphere}
+\label{sec:sphere}
+
+In this section, we will prove that the canonical inclusion:
+\begin{equation}
+  \label{eq:goal-section-sphere}
+  \conncomp{\left(\Sp = \Sp\right)}{\id_\Sp} +
+  \conncomp{\left(\Sp = \Sp\right)}{-\id_\Sp}
+  \to 
+  \left(\Sp = \Sp\right)
+\end{equation}
+is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
+define by $\Sp$-induction as the function such that
+$-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
+$\ap{-\id_\Sp}(\mrd x) = \inv{(\mrd x)}$ for all $a\from\Sc$. This
+function is indeed an equivalence as it is its own pseudo-inverse.
+
+We will follow more or less the same road map as
+in~\cref{sec:circle-case}:
+\begin{itemize}
+\item first, we will prove that $\id_\Sp$ and $-\id_\Sp$ are not in
+  the same connected component,
+\item then, we will prove that every equivalence in $\Sp=\Sp$ is
+  either in the connected component of $\id_\Sp$ or in the connected
+  component of $-\id_\Sp$,
+\item finally, we will prove that the connected component of $\id_\Sp$
+  and $-\id_\Sp$ are equivalent to each other.
+\end{itemize}
+Notice that the last step is less ambitious than in the case of $\Sc$,
+where the two connected components were proven equivalent to each
+other but also each equivalent to $\Sc$ itself. Although we do not
+have any counter-argument for it, we do not expect that the connected
+components of $\id_\Sp$ and $-\id_\Sp$ are each equivalent to $\Sp$
+itself. Indeed, the proof in the case of $\Sc$ relies heavily on two
+facts: $\Sc$ is $1$-truncated and $\Sc$ is the classifying type of an
+abelian group. In other words, the homotopy structure of $\Sc$ is very
+well understood. This is not the case for $\Sp$: for example, it is
+certainly not $2$-truncated (\cite{brunerie:thesis}), and it expected
+to be provably not $n$-truncated for any $n$.
+
+The main tool for this section is the Hopf family, defined by Brunerie
+in~\cite{brunerie:thesis}, to get an analog in HoTT of the Hopf
+fibration in topology. First, let us defined for each $x\from\Sc$, an
+equivalence $\iota_x\from \Sc=\Sc$ by $\Sc$-induction as the map such
+that $\iota_x(\base) \jdeq x$ and $\ap{\iota_x}(\Sloop) = f_x(\Sloop)$
+where $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
+dependent function defined
+in~\cref{eq:S1-loopspace-Z-at-each-x}. Notice that $\iota_x$ is the
+point of $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ that corresponds to $x:\Sc$
+under the equivalence $\Sc \weq \conncomp{(\Sc=\Sc)}{\id_\Sc}$
+exhibited in~\cref{sec:circle-case}. Now define the type family
+$\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
+\begin{displaymath}
+  \hopf(N) \jdeq \Sc,\quad
+  \hopf(S) \jdeq \Sc,\quad\text{and}\quad
+  \ap\hopf (\mrd x) = \iota_x\ \text{for all}\ x:\Sc.
+\end{displaymath}
+
+\begin{lemma}
+  \label{lemma:S2-id-neq-minusid}%
+  The proposition $\id_\Sp \neq -\id_\Sp$ holds.
+\end{lemma}
+\begin{proof}
+  Suppose $p:\id_\Sp = -\id_\Sp$ and derive a contradiction. Through
+  function extensionality, it produces paths
+  \begin{displaymath}
+    p(N) \from N = S
+    \quad\text{and}\quad
+    p(S) \from S = N,
+  \end{displaymath}
+  and for all $x\from\Sc$ a path over
+  $\ap p (\mrd x)\from \pathover {p(N)} T {\mrd x} {p(S)}$ where
+  $T\from \Sp \to \UU$ is the type family
+  $T(a)\defequi (\id_\Sp(a) = -\id_\Sp(a))$. Because $\Sp$ is simply
+  connected and we are targeting the empty type $\varnothing$, which
+  is a proposition, we might as well suppose that $p(N)=\mrd \base$
+  and $p(S) = \inv{(\mrd \base)}$. Transporting $\ap p(\mrd x)$ over
+  these two paths, one gets a path of type
+  $\pathover {(\mrd \base)} T {\mrd x} {\inv{(\mrd
+      \base)}}$. Transport over $\mrd(x)$ in the type family $T$ is
+  easily proven to be equal to the function
+  $q \mapsto \inv{\mrd(x)} q \inv{\mrd(x)}$, so that one
+  ends up with a path
+  \begin{displaymath}
+    \pi_x\from \inv{\mrd(x)} \mrd(\base) \inv{\mrd(x)} = \inv{\mrd(\base)}
+    \quad
+    \text{for all }x\from\Sc
+  \end{displaymath}
+  In particular, one has
+  \begin{displaymath}
+    \pi_{\base} \from \inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}
+    = \inv{\mrd(\base)}
+  \end{displaymath}
+  and $\ap {\pi_{\blank}} (\Sloop)$ produces a path
+  $\trp [T'] \Sloop (\pi_{\base}) = \pi_{\base}$, where $T'\from\Sc\to\UU$
+  is the type family defined by
+  \begin{displaymath}
+    T'(x) \defequi \left(\inv{\mrd(x)}\mrd(\base)\inv{\mrd(x)}
+      = \inv{\mrd(\base)} \right).
+  \end{displaymath}
+  The type family $T'$ is just a family of path-types with one fixed
+  end, so the transport is easily computed:
+  \begin{displaymath}
+    \trp [T'] \Sloop (\pi_{\base}) = \pi_{\base} \cdot
+    \ap{\inv{\mrd(\blank)} \mrd(\base) \inv{\mrd(\blank)}}(\Sloop).
+  \end{displaymath}
+  Ultimately, one gets a path of type
+  \begin{displaymath}
+    \ap{\inv{\mrd(\blank)} \mrd(\base) \inv{\mrd(\blank)}}(\Sloop) =
+    \refl{\inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}}.
+  \end{displaymath}
+  However, by path induction on $p\from \base = x$, one can provide an
+  element of type
+  \begin{displaymath}
+    \ap{\inv{\mrd(\blank)} \mrd(\base) \inv{\mrd(\blank)}}(p) =
+    \ap{\inv{\mrd(\blank)}}(p) \hcomp \refl{\mrd(\base)}
+    \hcomp \ap{\inv{\mrd(\blank)}}(p). 
+  \end{displaymath}
+  Indeed, for $p\jdeq \refl{\base}$, both sides reduces to
+  $\refl{\inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}}$. One can
+  apply that in the case $p\jdeq \Sloop$ and
+  invoke~\cref{lemma:mustache-lemma} to get an element of type
+  \begin{displaymath}
+    {\ap{\inv{\mrd(\blank)}}(\Sloop)}^2 = \refl{\inv{\mrd(\base)}}
+  \end{displaymath}
+  Notice that the term on the left hand-side is equal to
+  $\ap{\inv{\blank}}(\ap\mrd (\Sloop^2))$ and the right hand-side is
+  equal to $\ap{\inv{\blank}}(\refl{\mrd(\base)})$. Because
+  $\inv{\blank}$ is an equivalence, this is equivalently given by an
+  element of type
+  \begin{displaymath}
+    \ap\mrd(\Sloop^2) = \refl{\mrd(\base)}.
+  \end{displaymath}
+\end{proof}
+
+\section{Symmetries of the $n$-sphere}
+\label{sec:higher-sphere}
+
+
+\bibliographystyle{alpha}
+\bibliography{bib}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% reftex-default-bibliography: ("bib.bib")
+%%% End:
