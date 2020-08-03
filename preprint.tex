@@ -49,7 +49,7 @@
   The case $n=1$ has a slick answer: $(\Sc = \Sc) \weq (\Sc +
   \Sc)$. Unfortunately, it is expected that the result does not
   generalize for $n>1$. However, we show that the type $\Sn n = \Sn n$
-  has two equivalent connected component and we exhibit members for
+  has two equivalent connected components and we exhibit members for
   each component.
 \end{abstract}
 
@@ -65,7 +65,8 @@ intuitionistic Martin-Löf's type theory with $\Sigma$-, $\Pi$- and
 $\mathrm{Id}$-types and with a cumulative hierarchy of universes,
 simply written $\UU$, for which Voevodsky's univalence axiom hold. The
 transport along $p$ in a type family $T:A\to \UU$ is denoted
-$\trp [T] p$. For any dependent function $f\from\prod_{x\from A}T(x)$,
+$\trp [T] p$, and $\pathover u T p v$ denotes $\trp [T] p {(u)} = v$.
+For any dependent function $f\from\prod_{x\from A}T(x)$,
 the function
 \begin{displaymath}
   \ap f:\prod_{x,y\from A}\prod_{p\from x=y} \pathover {f(x)} T p
@@ -80,16 +81,16 @@ element.
 We postulate a type $\NN$ of natural numbers and a type $\ZZ$ of
 integers with their respective inductive properties
 (cf.~\cite[Ch.??]{HoTT}). We allow also several higher inductive types
-that are defined in the HoTT-book: propositional truncations,
-suspensions, and the circle. Considering their importance in this
+that are defined in the HoTT-book: propositional truncation,
+suspension, and the circle. Considering their importance in this
 paper, we recall them in full\footnote{\color{red}Or maybe we should
-  make an appendix of that?}:
+  make an appendix of that? MB is for an appendix!}:
 \begin{enumerate}
 \item the {\em propositional truncation} of a type $A$ is a type
   $\Trunc A$ defined by
   \begin{itemize}
-  \item a map $\trunc \blank \from A \to \Trunc A$,
-  \item and a dependent function
+  \item a map $\trunc \blank \from A \to \Trunc A$, and
+  \item a dependent function
     $\istrunc {-1} \from \prod_{x,y\from \Trunc A} x=y$
   \end{itemize}
   with the following induction rule:
@@ -109,8 +110,8 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
 \item the {\em suspension} of a type $A$ is a type $\susp A$ defined
   by
   \begin{itemize}
-  \item two elements $N,S\from \susp A$,
-  \item and a  map $\mrd \from A \to (N=S)$
+  \item two elements $N,S\from \susp A$, and
+  \item a  map $\mrd \from A \to (N=S)$
   \end{itemize}
   with the following induction rule:
   \begin{quote}
@@ -132,8 +133,8 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
   \end{quote}
 \item the {\em circle} $\Sc$ is a type defined by
   \begin{itemize}
-  \item an element $\base \from \Sc$,
-  \item and a path $\Sloop: \base = \base$
+  \item an element $\base \from \Sc$, and
+  \item a path $\Sloop: \base = \base$
   \end{itemize}
   with the following induction rule:
   \begin{quote}
@@ -148,7 +149,7 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
     \end{displaymath}
     such that
     \begin{displaymath}
-      \ind(b,\ell)(\base) \jdeq b,\quad \ap{\ind(b,\ell)}(\Sloop) = \ell
+      \ind(b,\ell)(\base) \jdeq b,\quad \ap{\ind(b,\ell)}(\Sloop) = \ell \,.
     \end{displaymath}
   \end{quote}
 \end{enumerate}
@@ -165,14 +166,14 @@ equivalence of the case $n=1$ relies heavily on $\Omega(\Sc)\weq \ZZ$
 being an abelian group, we can not expect to generalize the proof for
 $n=2$. However, a careful analysis of Brunerie's proof of
 $\pi_2(\Sp) \weq \ZZ$ allows us to prove that the type $\Sp=\Sp$ has
-exactly two connected components, equivalent one to
-another. Determining a type with a simple description that is
+exactly two connected components, equivalent to one another. 
+Determining a type with a simple description that is
 equivalent to these components is a challenge in itself, still open,
-to the author's knowledge.
+to the authors' knowledge.
 
 In \cref{sec:higher-sphere}, we propagate the result by induction on
 $n\geq 2$: the type $\Sn n = \Sn n$ has exactly two connected
-components, equivalent one to another. Each induction step relies on a 
+components, equivalent to one another. Each induction step relies on
 Freudenthal's suspension theorem.
 
 \section{Symmetries of the circle}
@@ -183,7 +184,7 @@ In this section, we will provide an equivalence:
   \label{eq:symm-cricle}%
   (\Sc = \Sc) \weq \Sc+\Sc.
 \end{equation}
-We will work transparently across univalence, so that equivalences
+We will treat univalence as transparent, so that equivalences
 $f:\Sc\weq \Sc$ will be treated as elements of $\Sc=\Sc$ without any
 warning. In particular, we shall write as if
 ``$\refl \Sc \jdeq \id_\Sc$''.
@@ -192,9 +193,9 @@ To provide an equivalence of type \cref{eq:symm-cricle}, we proceed
 in several steps:
 \begin{itemize}
 \item first, we will describe two elements of $\Sc=\Sc$;
-\item next, we will prove that these two elements are not in the same
-  connected component;
-\item then, we will prove that every equivalences in $\Sc=\Sc$ is
+\item next, we will prove that these two elements are not equal (and
+hence in different connected components);
+\item then, we will prove that every equivalence in $\Sc=\Sc$ is
   merely equal to one of these two elements;
 \item finally, we will conclude by exhibiting an equivalence between
   $\Sc$ and the connected component of each of these two elements.
