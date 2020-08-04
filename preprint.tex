@@ -220,7 +220,7 @@ Let us note that $-\id_\Sc$ is an equivalence. Indeed,
 \end{displaymath}
 By $\Sc$-induction, there is only one such function, the identity
 function, hence it provides a path $-\id_\Sc \circ -\id_\Sc
-=\id_\Sc$. This proves that $-\id_\Sc$ is its own pseudo-inverse,
+=\id_\Sc$. This proves that $-\id_\Sc$ is its own quasi-inverse,
 hence this is an equivalence.
 
 \begin{lemma}
@@ -238,7 +238,7 @@ hence this is an equivalence.
   \begin{displaymath}
     \trp [T] q (\blank) = \ap{-\id_\Sc}(q) \blank \inv{\ap{\id_\Sc}(q)}.
   \end{displaymath}
-  In particular, $\ap p (\Sloop)$ provides a 2-path of type
+  By composition, $\ap p (\Sloop)$ provides a 2-path of type
   $\inv\Sloop p(\base) \inv\Sloop = p(\base)$. Now recall that
   the function
   \begin{equation}
@@ -284,16 +284,16 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
 \end{proposition}
 \begin{proof}
   Let $\varphi$ be a symmetry of the circle, and let $\psi$ denote a
-  pseudo-inverse of $\varphi$. The type $\Sc$ being connected, one
-  have $\Trunc{\base=\varphi(\base)}$ and
+  quasi-inverse of $\varphi$. The type $\Sc$ being connected, one
+  has $\Trunc{\base=\varphi(\base)}$ and
   $\Trunc{\base=\psi(\base)}$. Because the goal $P(\varphi)$ is
   propositional, one can instead suppose actual paths
   $\varphi_0\from\base=\varphi(\base)$ and
   $\psi_0\from\base=\psi(\base)$. In other words, we can suppose that
-  $\varphi$ and its pseudo-inverse $\psi$ are pointed maps. Denote
+  $\varphi$ and its quasi-inverse $\psi$ are pointed maps. Denote
   $\pi$ for a path of type $\id_\Sc=\varphi\psi$. Then one can craft a
   path of type
-  $(\varphi,\varphi)_0 \circ (\psi,\psi_0) =
+  $(\varphi,\varphi_0) \circ (\psi,\psi_0) =
   (\id_\Sc,\pi_{\base}\varphi(\psi_0)\varphi_0)$. Now, consider the
   induced applications
   \begin{displaymath}
@@ -380,7 +380,7 @@ $\ap f (\Sloop) \from (\Sloop\blank\inv\Sloop = \id_{\base=\base})$ is
 the reflexivity of $\id_{\base=\base}$ transported along the
 commutativity in $\base=\base$. Because $(\base=\base)$ is equivalent
 to $\ZZ$ (cf.~\cref{eq:loopspace-circle-Z}), it gives an equivalence
-$\varepsilon_x\from (x=x) \weq \ZZ$ for any $x\from\Sc$. We can know
+$\varepsilon_x\from (x=x) \weq \ZZ$ for any $x\from\Sc$. We can now
 exhibit an equivalence:
 \begin{displaymath}
   \begin{tikzcd}
@@ -435,7 +435,7 @@ is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
 define by $\Sp$-induction as the function such that
 $-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
 $\ap{-\id_\Sp}(\mrd x) = \inv{(\mrd x)}$ for all $a\from\Sc$. This
-function is indeed an equivalence as it is its own pseudo-inverse.
+function is indeed an equivalence as it is its own quasi-inverse.
 
 We will follow more or less the same road map as
 in~\cref{sec:circle-case}:
