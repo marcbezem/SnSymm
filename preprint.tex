@@ -37,6 +37,9 @@
 }%
 
 \renewcommand{\ap}[1]{\left[{#1}\right]}
+\newcommand{\ptdto}{\to_\ast}%
+\newcommand{\setTrunc}[1]{\Trunc{#1}_0}
+\newcommand{\settrunc}[1]{\trunc{#1}_0}
 
 \begin{document}
 
@@ -212,16 +215,20 @@ that:
   \quad\text{and}\quad%
   \ap{-\id_\Sc}(\Sloop) = \inv{\Sloop}.
 \end{displaymath}
-Let us note that $-\id_\Sc$ is an equivalence. Indeed,
+
+Let us note that $-\id_\Sc$ is an equivalence. It is indeed its own inverse, as
+it is shown in the following. In order to construct a proof of $-\id_\Sc \circ
+-\id_\Sc = \id_\Sc$, we use function extensionality and $\Sc$-induction.
+$\refl\base$ is an element of $-\id_\Sc\circ -\id_\Sc (\base) = \base$, and
+we only need to provide an element of $\pathover {\refl\base} T \Sloop
+{\refl\base}$ where $T$ is the type family $x \mapsto -\id_\Sc \circ -\id_\Sc (x)
+= x$. The transport in the type family $T$ over $\Sloop$ is given by
 \begin{displaymath}
-  -\id_\Sc \circ -\id_\Sc (\base) \jdeq \base%
-  \quad\text{and}\quad%
-  \ap{-\id_\Sc \circ -\id_\Sc} (\Sloop) = \inv{\left(\inv \Sloop\right)} = \Sloop.
+  p \mapsto \Sloop \cdot p \cdot \inv{[-\id_\Sc \circ -\id_\Sc](\Sloop)}.
 \end{displaymath}
-By $\Sc$-induction, there is only one such function, the identity
-function, hence it provides a path $-\id_\Sc \circ -\id_\Sc
-=\id_\Sc$. This proves that $-\id_\Sc$ is its own quasi-inverse,
-hence this is an equivalence.
+By definition of $-\id_\Sc$, the formula can be rewritten as $\Sloop \cdot p
+\cdot \inv \Sloop$.  Hence $\trp[T] \Sloop (\refl\base) = \refl\base$ by simple
+path algebra, as wanted. 
 
 \begin{lemma}
   \label{lemma:S1-id-neq-minusid}%
@@ -553,7 +560,145 @@ $\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
   \begin{displaymath}
     \ap\mrd(\Sloop^2) = \refl{\mrd(\base)}.
   \end{displaymath}
+
+  Now the Hopf family enters into play. Taking the action of $\ap\hopf$ on
+  paths on both sides, one gets:
+  
+  \begin{displaymath}
+    \ap{\ap\hopf\circ \mrd}(\Sloop^2) = \refl{\ap\hopf(\mrd\base)}
+  \end{displaymath}
+  
+  Recall that, by design, ${\ap\hopf}\circ{\mrd} = \iota$ is an equivalence
+  from $\Sc$ to the connected component at $\id_\Sc$ of $\Sc=\Sc$. One ends up
+  then with the equation $\Sloop^2 = \refl \base$, or in other words $2=0$ in
+  $\zet$, which is absurd.
+  
 \end{proof}
+
+This proves that $\id_\Sp$ and $-\id_\Sp$ belong to different connected
+components. Now we will prove that every equivalence in $\Sp \simeq \Sp$ is
+either in the component of $\id_\Sp$ or in the component of $-\id_\Sp$. First,
+notice that from the previous lemma, one concludes that the type 
+\begin{displaymath}
+  \prod_{\varphi:\Sp\weq\Sp}\Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp = \varphi}
+\end{displaymath}
+is a proposition, following the same exact poof as for
+\cref{cor:S1-eq-either-isaprop}. The goal is to prove that this proposition
+holds indeed. To this end, take a symmetry $\varphi$ of the sphere and let us
+prove that the proposition $\Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp =
+\varphi}$ holds. We tackle the problem as follows: 
+\begin{enumerate}
+  \item Because we are targeting a proposition, and $\Sp$ is
+    connected, one can as well suppose that $\varphi$ is pointed. Denote $p:N=\varphi(N)$ the given path.
+  \item Recall the degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
+    monoid morphism. In particular, it maps pointed equivalences to invertible
+    elements in $\ZZ$, that is $1$ or $-1$.
+  \item Proves that $d$ is a set-truncation map, meaning that $d(f)=d(g)$ if and
+    only if $\Trunc{f=g}$. This will prove either $\Trunc{(\id_\Sp,\refl
+    N)=(\varphi,p)}$ or $\Trunc{(-\id_\Sp,\mrd\base)=(\varphi,p)}$, from which
+    one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
+    $\Trunc{-\id_\Sp = \varphi}$.
+\end{enumerate}
+
+In order to perform these steps, one shall first recall a result from the
+HoTT-book: the second homotopy group of $\Sp$ is $\ZZ$. More precisely, the
+second homotopy group $\pi_2(\Sp)$ is defined as the set truncation
+$\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
+\begin{displaymath}
+  \tau: \loopspace\null\Sp \to \Sc, \, p \mapsto \ap\hopf(p)(\base).
+\end{displaymath}
+Then \cite[Theorem ??]{HoTT} proves that the map $\loopspace\null\tau :
+\loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
+$\setTrunc{\loopspace\null\tau}: \pi_2(\Sp) \to \pi_1(\Sc)$ on the connected
+components. Composing with the known isomorphism $\pi_1(\Sc) \weq \ZZ$, one
+ends up with a group isomorphism $\zeta: \pi_2(\Sp) \to \ZZ$. The degree of a
+pointed map is then defined as the image of $1$ through the induced morphism
+between the second homotopy groups, viewed under this equivalence. Formally
+speaking one defines: 
+\begin{displaymath}
+  d(f) \defequi \zeta\left(\pi_2(f)\left(\inv\zeta(1)\right)\right):\ZZ \qquad
+  \text{for any}\ f:\Sp\ptdto\Sp.
+\end{displaymath}
+
+\begin{proposition}
+  The degree function $d$ is a morphism of monoids from the monoid of pointed
+  endofunction to the multiplicative monoid $\ZZ$.
+  \label{prop:deg-monoid-morphism}
+\end{proposition}
+\begin{proof}
+  First, let us prove that $\id_\Sp$, pointed by $\refl N$, has degree $1$.
+  This is easy because $\pi_2(\id_\Sp) = \id_{\pi_2(\Sp)}$ so that $d(\id_\Sp)
+  = \zeta(\inv\zeta(1)) = 1$.
+
+  Now, let us prove that $d(g\circ f) = d(g)\times d(f)$ for any $f,g:\Sp
+  \ptdto\Sp$. This again comes from the functoriality of $\pi_2$
+  (\cite[??]{HoTT}), meaning that $\pi_2(g\circ f) = \pi_2(g)\circ\pi_2(f)$
+  holds. Hence:
+  \begin{align*}
+    d(g\circ f) &= \zeta\left( \pi_2(g\circ f)\left( \inv\zeta(1) \right) \right) 
+    \\
+    &= \zeta\left( \pi_2(g) \left( \pi_2(f)\left( \inv\zeta(1) \right)
+    \right) \right) 
+    \\
+    &= \zeta\left( \pi_2(g) \left( \inv\zeta \left( \zeta \left( \pi_2(f)\left( \inv\zeta(1) \right)
+    \right) \right) \right) \right)
+    \\
+    &= \zeta \left( \pi_2(g) \left( \inv\zeta \left(d(f)\right) \right) \right)
+    \\
+    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)^{d(f)} \right) \right)
+    \\
+    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)\right)^{d(f)} \right)
+    \\
+    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)\right) \right)\times d(f)
+    \\
+    &= d(g)\times d(f)
+  \end{align*}
+  The chain of equality above uses the fact that $\zeta$ is not a mere
+  equivalence but also a group morphism: in particular, for any $n:\ZZ$, one
+  gets $\inv\zeta(n) = {\inv\zeta(1)}^n$ in $\pi_2(\Sp)$ (where the group
+  operation is denoted multiplicatively).
+\end{proof}
+
+\begin{corollary}
+  The degree of a pointed equivalence is either $1$ or $-1$.
+  \label{cor:degree-equivalences}
+\end{corollary}
+\begin{proof}
+  By the previous proposition, invertible elements in $\Sp \ptdto \Sp$ have
+  invertible degrees in the multiplicative monoid $\ZZ$. However there is only
+  two such elements in $\ZZ$: $1$ and $-1$. 
+\end{proof}
+
+The final step is where the complexity hides: one want to prove that the degree
+map is an injection on connected components. To do so, we will explicitate
+another map $\bar d: (\Sp \ptdto \Sp) \to \ZZ$ which is easily proven an
+injection on connected components, and then we will prove that $d = \bar d$.
+Recall that for any types $A,B$ respectively pointed by $a$and $b$, there is an
+equivalence
+\begin{displaymath}
+  \Phi_{A,B}: (\susp A \ptdto B) \weq (A \ptdto \loopspace \null B) 
+\end{displaymath}
+that takes a function $f:\susp A \to B$ pointed by $f_0:b=f(N)$ and maps it to 
+\begin{displaymath}
+  \inv p\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot p : A \to \loopspace\null B
+\end{displaymath}
+which is pointed by the path $\varpi_{f}:\refl b = \inv p \cdot (\ap f (\inv
+\mrd(a)\mrd(a))) \cdot p$ given by path algebra operations.
+
+There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
+the composition:
+\begin{displaymath}
+  (\Sp \ptdto \Sp) \stackrel{\Phi_{\Sc,\Sp}}\weq (\Sc \ptdto\loopspace\null \Sp)
+  \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq (\bn 2\ptdto\loopspace 2 \Sp) \weq \loopspace 2 \Sp
+\end{displaymath}
+We now define $\bar d$ as the composition of $\loopspace\null\tau\circ
+\gamma:(\Sp \ptdto\Sp) \to \loopspace\null\Sc$ with the well know isomorphism
+$\loopspace \null \Sc \weq \ZZ$.
+
+\begin{proposition}
+  The equation $d=\bar d$ holds.
+  \label{prop:alternative-description-degree}
+\end{proposition}
 
 \section{Symmetries of the $n$-sphere}
 \label{sec:higher-sphere}
