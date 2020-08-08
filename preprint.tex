@@ -680,10 +680,26 @@ equivalence
 \end{displaymath}
 that takes a function $f:\susp A \to B$ pointed by $f_0:b=f(N)$ and maps it to 
 \begin{displaymath}
-  \inv p\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot p : A \to \loopspace\null B
+  \inv {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot f_0 : A \to \loopspace\null B
 \end{displaymath}
-which is pointed by the path $\varpi_{f}:\refl b = \inv p \cdot (\ap f (\inv
-\mrd(a)\mrd(a))) \cdot p$ given by path algebra operations.
+which is pointed by the path $\varpi_{f}:\refl b = \inv {f_0} \cdot (\ap f (\inv
+\mrd(a)\mrd(a))) \cdot f_0$ given by path algebra operations.
+
+In particular, for each type $A$, one gets a {\em unit} function 
+\begin{displaymath}
+  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A.
+\end{displaymath}
+This map is involved in the so-called triangle identity: for any type $B$,
+there is an element of the following type
+\begin{equation}
+  \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
+  \label{eq:triangle-identity-unit}
+\end{equation}
+given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:b=f(N)$
+\begin{displaymath}
+  \loopspace\null(f) \circ \eta_A = \inv {f_0} \cdot \ap f (\eta_A(\blank)) \cdot f_0 
+  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\cdot\mrd(\blank)) \cdot f_0 = \Phi_{A,B}(f). 
+\end{displaymath}
 
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
 the composition:
@@ -691,14 +707,99 @@ the composition:
   (\Sp \ptdto \Sp) \stackrel{\Phi_{\Sc,\Sp}}\weq (\Sc \ptdto\loopspace\null \Sp)
   \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq (\bn 2\ptdto\loopspace 2 \Sp) \weq \loopspace 2 \Sp
 \end{displaymath}
-We now define $\bar d$ as the composition of $\loopspace\null\tau\circ
-\gamma:(\Sp \ptdto\Sp) \to \loopspace\null\Sc$ with the well know isomorphism
-$\loopspace \null \Sc \weq \ZZ$.
+We now define $\bar d$ as the composition
+\begin{displaymath}
+  (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
+  \pi_2(\Sp) \stackrel \zeta \to \ZZ.
+\end{displaymath}
 
 \begin{proposition}
   The equation $d=\bar d$ holds.
   \label{prop:alternative-description-degree}
 \end{proposition}
+\begin{proof}
+  In other words, we want to prove that the outer diagram commutes in the following:
+  \begin{displaymath}
+    \begin{tikzcd}
+      (\Sp \ptdto \Sp) \ar[r,"\loopspace\null"] \ar[dd,"\Phi_{\Sc,\Sp}"{swap}]
+      \drar[phantom,"\textcircled{\small 1}"{description, near start}] 
+      & (\loopspace \null \Sp \ptdto \loopspace\null\Sp) \ar[r,"\loopspace\null"] \ar[ddl,"\blank\circ\eta_{\Sc}"] 
+      \dar["\textcircled{\small 2}", phantom]
+      & (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"] 
+      \ar[r,"\setTrunc\blank"] \dar["\blank\circ \loopspace\null(\eta_{\Sc})"swap] 
+      & (\pi_2(\Sp) \to \pi_2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\textcircled{\small 5}", phantom] &
+      \\
+      & {} \drar["\textcircled{\small 3}"{near end}, phantom] 
+      & (\loopspace\null\Sc \ptdto \loopspace 2 \Sp) \dar["\blank\circ\eta_{\bn 2}"swap] 
+      \drar["\textcircled{\small 4}", phantom] &
+      & \pi_2(\Sp)
+      \\
+      (\Sc \ptdto \loopspace\null\Sp) \ar[rr,"\Phi_{\bn 2,\loopspace\null\Sp}"swap] \ar[urr,"\loopspace\null"] & 
+      & (\bn 2 \ptdto \loopspace 2 \Sp) \rar["\ev_0"swap] & \loopspace 2 \Sp \urar["\settrunc\blank"swap] & 
+    \end{tikzcd}
+  \end{displaymath}
+  We will do that by proving that each of the small inner diagrams denoted
+  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commutes, for
+  elementary reasons. Triangles $\textcircled{\small 1}$ and
+  $\textcircled{\small 3}$ commute as instances of
+  \cref{eq:triangle-identity-unit}. The commutativity of square
+  $\textcircled{\small 2}$ simply expresses the functoriality of
+  $\loopspace\null$. In order to prove that $\textcircled{\small 4}$ and
+  $\textcircled{\small 5}$ commute, we first need to define what is denoted
+  $\ell$: by definition, we set $\ell \defequi \loopspace\null (\eta_\Sc)(\Sloop)$.
+  Then it is almost immediate that $\textcircled{\small 4}$ commutes because
+  under the equivalence $\Sc = \susp {\bn 2}$, one has $\Sloop = \eta_2(0)$.
+  Now the commutativity of $\textcircled{\small 5}$ will follow from the
+  functoriality of $\setTrunc\blank$ once we have shown $\settrunc \ell =
+  \inv\zeta(1)$. By definition of $\zeta$, this is equivalent to showing that
+  $\loopspace\null(\tau) (\ell) = \Sloop$ in $\loopspace\null \Sc$. However, we
+  have seen\footnote{\color{red}Actually we have not, let's make it a lemma
+  soon after the definition of $\tau$} that $\loopspace\null (\eta_\Sc)$ is a
+  section of $\loopspace\null(\tau)$. Hence it follows that:
+  \begin{displaymath}
+    \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.
+  \end{displaymath}
+\end{proof}
+
+In the following, we make the abuse of taking $\id_\Sp$ pointed by the path
+$\refl N$, and $-\id_\Sp$ pointed by the path $\mrd(\base)$.
+\begin{corollary}
+  A pointed equivalence is in the connect component of either $\id_\Sp$ or $-\id_\Sp$.
+  \label{cor:equivalence-conn-component}
+\end{corollary}
+\begin{proof}
+  The previous result shows that $d$ is equal to the composition of
+  $\settrunc\blank:\loopspace\null\Sp \to\ZZ$ with two equivalences. As
+  $\setTrunc{x = y}$ if and only if $\settrunc x = \settrunc y$ for any
+  $x,y:\loopspace\null \Sp$, the same property holds for $d$:
+  \begin{displaymath}
+    d(f) = d(g) \quad \text{if and only if}\quad
+    \setTrunc{f = g} \quad \text{for any}\ f,g:\Sp \ptdto\Sp.
+  \end{displaymath}
+  Given a pointed equivalencei $\varphi$, we know from
+  \cref{cor:degree-equivalences} that its degree is either $1$ or $-1$.
+  However, one has already computed that $d(\id_\Sp) = 1$, and it remains only
+  to prove that $d(-\id_\Sp) = -1$. For that it is enough to show that the type
+  $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element (where $\ell$ is
+  defined as $\loopspace\null(\eta_\Sc)(\Sloop)$ as in the previous proof), for
+  then
+  \begin{displaymath}
+    d(-\id_\Sp) \jdeq \zeta(\pi_2(-\id_\Sp)(\settrunc{\ell})) = \zeta\left( \inv{\settrunc\ell} \right) = - \zeta(\inv\zeta(1)) = -1.
+  \end{displaymath}
+  Let us compute:
+  \begin{align*}
+    \loopspace 2 (-\id_\Sp)(\ell) &= \loopspace 2 (-\id_\Sp) \left( \loopspace\null(\eta_\Sc)(\Sloop) \right)
+    \\
+    &= \loopspace\null \left( \Phi_{\Sc,\Sp}(-\id_\Sp) \right)(\Sloop)
+  \end{align*}
+  However one can verify that $\Phi_{\Sc,\Sp}(-\id_\Sp) =
+  \inv{\eta_\Sc(\blank)}$ has an element. Because $\loopspace\null(\inv\blank)
+  = \inv\blank$ ({\color{red}abstract non sense from mustache style lemma, we
+  might want to put something in appendix}), it follows that
+  $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
+  \inv{\loopspace\null\eta_\Sc(\Sloop)}$. Hence, $\loopspace 2 (-\id_\Sp)(\ell)
+  = \inv{\ell}$.
+\end{proof}
 
 \section{Symmetries of the $n$-sphere}
 \label{sec:higher-sphere}
