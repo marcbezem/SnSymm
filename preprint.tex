@@ -441,8 +441,33 @@ In this section, we will prove that the canonical inclusion:
 is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
 define by $\Sp$-induction as the function such that
 $-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
-$\ap{-\id_\Sp}(\mrd x) = \inv{(\mrd x)}$ for all $a\from\Sc$. This
-function is indeed an equivalence as it is its own quasi-inverse.
+$\ap{-\id_\Sp}(\mrd x) = \inv{(\mrd x)}$ for all $a\from\Sc$. 
+
+\begin{lemma}
+  The function $-\id_\Sp$ is an equivalence.
+  \label{lem:minus-id-equivalence}
+\end{lemma}
+\begin{proof}
+  We are to produce an element of the type $\prod_{x:\Sp}T(x)$ where $T$ is the
+  type family defined by $T(x)\defequi x= (-\id_\Sp \circ -\id_\Sp)(x)$. Let us
+  use $\Sp$-induction for this purpose. By definition of $-\id_\Sp$, $T(N)
+  \jdeq N$ and $T(S) \jdeq S$. Hence one can select $\refl N:T(N)$ and $\refl
+  S:T(S)$. To complete $\Sp$-induction, one should now provide an element of
+  type $\prod_{y:\Sc} \pathover{\refl N} T {\mrd y} {\refl S}$. However,
+  transporting over a meridian in the family $T$ is conjugation by the
+  meridian: indeed, the transport over any path $p:x=x'$ in $T$ is given by
+  $q\mapsto \ap{-\id_\Sp \circ -\id_\Sp}(p) \cdot q \cdot \inv p$, and
+  \begin{align*}
+    \ap{-\id_\Sp \circ -\id_\Sp} (\mrd(y)) 
+     &= \ap{-\id_\Sp}(\inv {\mrd(y)}) 
+    \\ &= \inv {\left( \ap{-\id_\Sp}(\mrd(y)) \right)} 
+    \\ &= \inv { \left( \inv{\mrd(y)} \right) }
+    \\ &= \mrd(y).
+  \end{align*}
+  Hence $\pathover{\refl N} T {\mrd(y)} {\refl S}$ is equivalent to
+  $\mrd(y)\refl N \inv {\mrd(y)} = \refl S$, which is indeed inhabited for any
+  $y:\Sc$ by simple path algebra.
+\end{proof}
 
 We will follow more or less the same road map as
 in~\cref{sec:circle-case}:
