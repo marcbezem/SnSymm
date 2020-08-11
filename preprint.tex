@@ -795,11 +795,11 @@ $\refl N$, and $-\id_\Sp$ pointed by the path $\mrd(\base)$.
 \begin{proof}
   The previous result shows that $d$ is equal to the composition of
   $\settrunc\blank:\loopspace\null\Sp \to\ZZ$ with two equivalences. As
-  $\setTrunc{x = y}$ if and only if $\settrunc x = \settrunc y$ for any
+  $\Trunc{x = y}$ if and only if $\settrunc x = \settrunc y$ for any
   $x,y:\loopspace\null \Sp$, the same property holds for $d$:
   \begin{displaymath}
     d(f) = d(g) \quad \text{if and only if}\quad
-    \setTrunc{f = g} \quad \text{for any}\ f,g:\Sp \ptdto\Sp.
+    \Trunc{f = g} \quad \text{for any}\ f,g:\Sp \ptdto\Sp.
   \end{displaymath}
   Given a pointed equivalencei $\varphi$, we know from
   \cref{cor:degree-equivalences} that its degree is either $1$ or $-1$.
@@ -824,6 +824,38 @@ $\refl N$, and $-\id_\Sp$ pointed by the path $\mrd(\base)$.
   $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
   \inv{\loopspace\null\eta_\Sc(\Sloop)}$. Hence, $\loopspace 2 (-\id_\Sp)(\ell)
   = \inv{\ell}$.
+\end{proof}
+
+\begin{proposition}
+  The canonical inclusion
+  \begin{displaymath}
+    \conncomp{(\Sp = \Sp)}{\id_\Sp} + \conncomp{(\Sp = \Sp)}{-\id_\Sp} \to (\Sp = \Sp)
+  \end{displaymath}
+  is an equivalence.
+  \label{prop:symm-S2-connected-components}
+\end{proposition}
+\begin{proof}
+  In other words, one wants to prove that a symmetry of $\Sp$ is in the
+  connected component of either $\id_\Sp$ or $-\id_\Sp$. Given an equivalence
+  $\varphi:\Sp \weq \Sp$, the target 
+  \begin{displaymath}
+    \Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp = \varphi}
+  \end{displaymath}
+  is a proposition by \cref{lemma:S2-id-neq-minusid}. Hence, one can as well
+  assume that $\varphi$ is pointed by a path $p:N=\varphi(N)$. Then from
+  \cref{prop:symm-S2-connected-components}, it follows that:
+  \begin{displaymath}
+    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} + \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)}.
+  \end{displaymath}
+  It is then enough to prove the two following propositions:
+  \begin{align*}
+    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} &\to \Trunc{\id_\Sp = \varphi},
+    \\
+    \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)} &\to \Trunc{-\id_\Sp = \varphi}
+  \end{align*}
+  Both implications come from the general behaviour of truncations with
+  projections. ({\color{red} Find an explicit reference in HoTT-Book if
+  possible.})
 \end{proof}
 
 \section{Symmetries of the $n$-sphere}
