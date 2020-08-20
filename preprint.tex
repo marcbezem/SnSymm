@@ -159,6 +159,10 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
 The spheres $\Sn n$ are then defined by induction on $n:\NN$ by
 $\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 1$.
 
+???We shall frequently use, for all inductive and higher inductive types,
+that functions defined by induction are unique. This is a well-known
+result, see \cite{XXX}.
+
 \paragraph{Plan of the paper.}%
 In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
 is equivalent to $\Sc + \Sc$. Maybe surprising at first, this result
@@ -301,7 +305,7 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   $\pi$ for a path of type $\id_\Sc=\varphi\psi$. Then one can craft a
   path of type
   $(\varphi,\varphi_0) \circ (\psi,\psi_0) =
-  (\id_\Sc,\pi_{\base}\varphi(\psi_0)\varphi_0)$. Now, consider the
+  (\id_\Sc,\pi_{\base}\ap\varphi(\psi_0)\varphi_0)$. Now, consider the
   induced applications
   \begin{displaymath}
     \loopspace{} (\varphi,\varphi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc
@@ -319,9 +323,9 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
     &= \loopspace{} (\varphi,\varphi_0) \left(
       \loopspace{} (\psi,\psi_0) (\Sloop)
     \right)\\
-    &= \loopspace{} (\id_\Sc,\pi_{\base}\varphi(\psi_0)\varphi_0) (\Sloop)\\
-    &= \inv{\left(\pi_{\base}\varphi(\psi_0)\varphi_0\right)} \Sloop
-      \left(\pi_{\base}\varphi(\psi_0)\varphi_0\right)\\
+    &= \loopspace{} (\id_\Sc,\pi_{\base}\ap\varphi(\psi_0)\varphi_0) (\Sloop)\\
+    &= \inv{\left(\pi_{\base}\ap\varphi(\psi_0)\varphi_0\right)} \Sloop
+      \left(\pi_{\base}\ap\varphi(\psi_0)\varphi_0\right)\\
     &= \Sloop
   \end{align*}
   where the last equality exploits commutativity of path composition
@@ -330,9 +334,9 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   from which we get an element of $(k=1)+(k=-1)$. From $k=1$, and
   because
   $\loopspace{} (\varphi,\varphi_0) \jdeq \inv{\varphi_0}
-  \varphi(\Sloop) \varphi_0$, one gets an element
+  \ap\varphi(\Sloop) \varphi_0$, one gets an element
   \begin{displaymath}
-    b\from \Sloop = \inv{\varphi_0} \varphi(\Sloop)\varphi_0.
+    b\from \Sloop = \inv{\varphi_0} \ap\varphi(\Sloop)\varphi_0.
   \end{displaymath}
   One can then construct an element $\kappa\from \id_\Sc = \varphi$ by
   $\Sc$-induction by taking $\kappa(\base)$ to be
@@ -340,8 +344,8 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   the element $b$ just defined, transported back over the equivalence
   \begin{displaymath}
     (\pathover {\varphi_0} {\id_\Sc(\blank)=\varphi(\blank)} \Sloop {\varphi_0}) \weq
-    (\varphi(\Sloop) \varphi_0 \inv \Sloop = \varphi_0)
-    \weq (\Sloop = \inv{\varphi_0} \varphi(\Sloop) \varphi_0)
+    (\ap\varphi(\Sloop) \varphi_0 \inv \Sloop = \varphi_0)
+    \weq (\Sloop = \inv{\varphi_0} \ap\varphi(\Sloop) \varphi_0)
   \end{displaymath}
   By taking $\trunc{\kappa}$, we get an element of
   $\Trunc{\id_\Sc = \varphi}$. Similarly, from $k=-1$, one gets an
@@ -384,8 +388,9 @@ defined by
 $\Sc$-induction as the dependent function such that
 $f(\base) \jdeq \id_{\base=\base}$ and such that the element
 $\ap f (\Sloop) \from (\Sloop\blank\inv\Sloop = \id_{\base=\base})$ is
-the reflexivity of $\id_{\base=\base}$ transported along the
-commutativity in $\base=\base$. Because $(\base=\base)$ is equivalent
+the reflexivity path of $\id_{\base=\base}$ transported using
+commutativity in $\base=\base$ and path algebra. 
+Because $(\base=\base)$ is equivalent
 to $\ZZ$ (cf.~\cref{eq:loopspace-circle-Z}), it gives an equivalence
 $\varepsilon_x\from (x=x) \weq \ZZ$ for any $x\from\Sc$. We can now
 exhibit an equivalence:
@@ -441,7 +446,7 @@ In this section, we will prove that the canonical inclusion:
 is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
 define by $\Sp$-induction as the function such that
 $-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
-$\ap{-\id_\Sp}(\mrd x) = \inv{(\mrd x)}$ for all $a\from\Sc$. 
+$\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $a\from\Sc$. 
 
 \begin{lemma}
   The function $-\id_\Sp$ is an equivalence.
@@ -507,8 +512,10 @@ $\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
 \begin{displaymath}
   \hopf(N) \jdeq \Sc,\quad
   \hopf(S) \jdeq \Sc,\quad\text{and}\quad
-  \ap\hopf (\mrd x) = \iota_x\ \text{for all}\ x:\Sc.
+  \ap\hopf (\mrd(x)) = \iota_x\ \text{for all}\ x:\Sc.
 \end{displaymath}
+
+We start by carrying out the first step of the road map.
 
 \begin{lemma}
   \label{lemma:S2-id-neq-minusid}%
@@ -523,14 +530,14 @@ $\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
     p(S) \from S = N,
   \end{displaymath}
   and for all $x\from\Sc$ a path over
-  $\ap p (\mrd x)\from \pathover {p(N)} T {\mrd x} {p(S)}$ where
+  $\ap p (\mrd(x))\from \pathover {p(N)} T {\mrd(x)} {p(S)}$ where
   $T\from \Sp \to \UU$ is the type family
   $T(a)\defequi (\id_\Sp(a) = -\id_\Sp(a))$. Because $\Sp$ is simply
   connected and we are targeting the empty type $\varnothing$, which
-  is a proposition, we might as well suppose that $p(N)=\mrd \base$
-  and $p(S) = \inv{(\mrd \base)}$. Transporting $\ap p(\mrd x)$ over
+  is a proposition, we might as well suppose that $p(N)=\mrd(\base)$
+  and $p(S) = \inv{(\mrd(\base))}$. Transporting $\ap p(\mrd(x))$ over
   these two paths, one gets a path of type
-  $\pathover {(\mrd \base)} T {\mrd x} {\inv{(\mrd
+  $\pathover {(\mrd(\base))} T {\mrd(x)} {\inv{(\mrd
       \base)}}$. Transport over $\mrd(x)$ in the type family $T$ is
   easily proven to be equal to the function
   $q \mapsto \inv{\mrd(x)} q \inv{\mrd(x)}$, so that one
