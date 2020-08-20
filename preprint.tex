@@ -534,11 +534,11 @@ We start by carrying out the first step of the road map.
   $T\from \Sp \to \UU$ is the type family
   $T(a)\defequi (\id_\Sp(a) = -\id_\Sp(a))$. Because $\Sp$ is simply
   connected and we are targeting the empty type $\varnothing$, which
-  is a proposition, we might as well suppose that $p(N)=\mrd(\base)$
-  and $p(S) = \inv{(\mrd(\base))}$. Transporting $\ap p(\mrd(x))$ over
+  is a proposition, we might as well assume paths of types $p(N)=\mrd(\base)$
+  and $p(S) = \inv{\mrd(\base)}$. Transporting $\ap p(\mrd(x))$ over
   these two paths, one gets a path of type
-  $\pathover {(\mrd(\base))} T {\mrd(x)} {\inv{(\mrd
-      \base)}}$. Transport over $\mrd(x)$ in the type family $T$ is
+  $\pathover {\mrd(\base)} T {\mrd(x)} {\inv{\mrd(\base)}}$. 
+  Transport over $\mrd(x)$ in the type family $T$ is
   easily proven to be equal to the function
   $q \mapsto \inv{\mrd(x)} q \inv{\mrd(x)}$, so that one
   ends up with a path
@@ -577,7 +577,7 @@ We start by carrying out the first step of the road map.
     \ap{\inv{\mrd(\blank)}}(p) \hcomp \refl{\mrd(\base)}
     \hcomp \ap{\inv{\mrd(\blank)}}(p). 
   \end{displaymath}
-  Indeed, for $p\jdeq \refl{\base}$, both sides reduces to
+  Indeed, for $p\jdeq \refl{\base}$, both sides reduce to
   $\refl{\inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}}$. One can
   apply that in the case $p\jdeq \Sloop$ and
   invoke~\cref{lemma:mustache-lemma} to get an element of type
@@ -597,7 +597,7 @@ We start by carrying out the first step of the road map.
   paths on both sides, one gets:
   
   \begin{displaymath}
-    \ap{\ap\hopf\circ \mrd}(\Sloop^2) = \refl{\ap\hopf(\mrd\base)}
+    \ap{\ap\hopf\circ \mrd}(\Sloop^2) = \refl{\ap\hopf(\mrd(\base))}
   \end{displaymath}
   
   Recall that, by design, ${\ap\hopf}\circ{\mrd} = \iota$ is an equivalence
