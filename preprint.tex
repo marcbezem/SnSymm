@@ -40,6 +40,7 @@
 \newcommand{\ptdto}{\to_\ast}%
 \newcommand{\setTrunc}[1]{\Trunc{#1}_0}
 \newcommand{\settrunc}[1]{\trunc{#1}_0}
+\newcommand{\UUptd}{\UU_{\ast}}
 
 \begin{document}
 
@@ -865,9 +866,137 @@ $\refl N$, and $-\id_\Sp$ pointed by the path $\mrd(\base)$.
   possible.})
 \end{proof}
 
+It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
+$\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well known type.
+However, one can still establish a relation of one with the other.
+\begin{proposition}
+  $\conncomp{(\Sp = \Sp)}{\id_\Sp} \weq \conncomp{(\Sp = \Sp)}{-\id_\Sp}$
+  \label{prop:S2-components-are-equiv}
+\end{proposition}
+\begin{proof}
+  Define $f:{(\Sp \to \Sp)} \to (\Sp \to \Sp)$ by mapping
+  $\varphi$ to the function defined by $\Sp$-induction in the following way:
+  \begin{align*}
+    &f(\varphi)(N) \jdeq \varphi(S), \quad f(\varphi)(S) \jdeq \varphi(N),\\
+    &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
+  \end{align*}
+  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{\Sp
+  \to \Sp}$. Indeed, for any $\varphi:\Sp \to \Sp$, the function $(f\circ
+  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$;
+  an easy $\Sp$-induction and path algebra show then that $(f\circ f)
+  (\varphi) = \varphi$.
+  %
+  By easy $\Sp$-induction also, one finds that $f(\id_\Sp) = -\id_\Sp$. The
+  equivalence $f$ restricts then into an equivalence between the connected
+  component of $\id_\Sp$ and the connected component of $-\id_\Sp$. Connected
+  component of equivalences inside $\Sp\to\Sp$ or inside $\Sp=\Sp$ coincide.
+  This provides the equivalence of the statement.
+  %
+\end{proof}
+
 \section{Symmetries of the $n$-sphere}
 \label{sec:higher-sphere}
 
+In this section, we want to carry out the work done on the $2$-sphere to higher
+spheres. More precisely, we will prove that
+\begin{theorem}
+  \label{thm:higher-spheres}
+  For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
+\end{theorem}
+%
+
+\cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
+of \cref{thm:higher-spheres}. We will now focus on the induction step. 
+
+
+\section{Appendix}
+\label{sec:appendix}
+
+\subsection{Wild functors}
+\label{sec:wild-functors}
+The types $\UUptd$ does certainly not form a category, but some
+constructions on it are reminiscent of functors. 
+\begin{definition}
+  A wild functor on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
+  \begin{align*}
+    F_0 &:\UUptd \to \UUptd,\\
+    F_1 &:\prod_{A,B:\UUptd} (A \ptdto B) \to (F_0(A) \ptdto F_0(B))\\
+    c &: \prod_{A,B,C:\UUptd}\prod_{f:A\ptdto B, g:B\ptdto C}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
+    u &: \prod_{A:\UUptd} F_1(\id_A) = \id_{F_1(A)}
+  \end{align*}
+  \label{def:wild-functor}
+\end{definition}
+
+As for functors, we usually write both $F_0$ and $ F_1$ only as $F$. The only
+relevant fact about $c$ and $u$ is that there exists, also we will often make
+the abuse to denote a wild functor by its first two components only.
+
+\begin{example}~
+  \begin{enumerate}
+    \item There is a functor $\loopspace \null$ which maps a pointed type $A$
+      (pointed at $a$) to $\loopspace \null A$ (pointed at $\refl a$), and maps
+      a pointed function $f: A \ptdto B$ to the pointed function $\loopspace
+      \null (f): \loopspace \null A \ptdto \loopspace \null B$ defined as
+      follows:
+      \begin{displaymath}
+        \loopspace \null (f) (p) \defequi \inv{f_0} \cdot \ap f (p) \cdot f_0
+      \end{displaymath}
+      where $f_0: b=f(a)$ is the path pointing $f$. The map $\loopspace \null
+      (f)$ is pointed by a path $\varpi_{f,f_0}$ given by path algebra:
+      \begin{displaymath}
+        \inv{f_0} \cdot \ap f (\refl a) \cdot f_0 = 
+        \inv{f_0} \cdot \refl {f(a)} \cdot f_0 = 
+        \refl b.
+      \end{displaymath}
+      Note that $\varpi_{f,\refl {f(a)}} \jdeq \refl {\refl {f(a)}}$. In
+      pqrticular, it gives us directly the witness $u$ of
+      \cref{def:wild-functor}. Moreover, given $f:A \ptdto B$ and $g:B \ptdto
+      C$, one has a path $\xi_{f,f_0,g,g_0}(p): \loopspace\null (g\circ f)(p) =
+      \loopspace\null(g)(\loopspace\null(f)(p))$ given simply by path algebra.
+      The importqnce thing to notice is that $\xi_{f,\refl {f(a)},g,
+      \refl{g(f(a))}}(\refl a) \jdeq \refl {\refl{g(f(a))}}$. Hence, one can
+      easily show, by double induction on $p:f(a)=x$ ($x:B$ being a free
+      endpoint) and $q:g(x) = y$ ($y:C$ being a free endpoint), that the
+      following triangle commutes:   
+      \begin{displaymath}
+        \begin{tikzcd}
+          \loopspace\null (g\circ f)(\refl a) \ar[rr, equal, "\xi_{f,p,g,q}(\refl a)"] 
+          \ar[dr, equal, "\varpi_{g\circ f,\ap g(p)q}"swap] & &
+          \loopspace\null (g)(\loopspace\null (f)(\refl a)) 
+          \ar[dl, equal, "\ap{\loopspace\null(g)}(\varpi_{f,p})\varpi_{g,q}"]
+          \\
+          & \refl c &
+        \end{tikzcd}
+      \end{displaymath}
+      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
+
+    \item There is a wild functor $\susp \null$ which maps a pointed type $A$
+      to $\susp A$ (pointed at the pole $N$), and maps a pointed function
+      $f:A\ptdto B$ to the pointed function $\susp (f) : \susp A \ptdto \susp
+      B$ defined by induction as follows:
+      \begin{displaymath}
+        \susp (f) (N) \defequi N,\quad
+        \susp (f) (S) \defequi S,\quad
+        \ap{\susp (f)} \circ \mrd = \mrd \circ f.
+      \end{displaymath}
+      Note that $\susp (f)$ is pointed by definition as it maps $N$ to $N$
+      directly. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
+      straightforward through degenerate induction on the supsension.
+  \end{enumerate}
+\end{example}
+
+\begin{definition}
+  Given two wild functors $L$ and $R$, a wild adjunction of type $L\leftadjto
+  R$ is a dependent function that $\Phi$ that maps pointed types $A,B:\UUptd$
+  to an element
+  \begin{displaymath}
+    \Phi_{A,B} : (LA\ptdto B) \weq (A\ptdto RB)
+  \end{displaymath}
+  such that $\Phi_{A,B}(\blank) \circ f = \Phi_{A',B} (\blank \circ L(f))$ for
+  any $f:A'\ptdto A$ and $\Phi_{A,B'}(g\circ\blank) = R(g)\circ \Phi_{A,B}
+  (\blank)$ for any $g:B\ptdto B'$.
+  \label{def:wild-adj}
+\end{definition}
 
 \bibliographystyle{alpha}
 \bibliography{bib}
