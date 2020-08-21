@@ -912,9 +912,69 @@ of \cref{thm:higher-spheres}. We will now focus on the induction step.
 \section{Appendix}
 \label{sec:appendix}
 
+\subsection{Path algebra}
+\label{sec:path-algebra}
+All along this paper, we deal with pointed functions of the form $f:A \ptdto
+\loopspace\null B$. It happens every so often that such an $f$ is pointed by a
+path $\refl b = f(a)$ which derives directly from basic path algebra. Because
+we need a way to refer to these elemetary steps of path algebra, we give names
+and conventions in this section.
+
+Given a path $p:x=y$ in any type $A$, one should denotes
+\begin{align*}
+  \varpi_p &: \refl x = \inv p \refl y p\\
+  \omega_p &: \refl x = \inv p p
+\end{align*}
+Depending on the implemetation of concatenation of path, $\omega_p$ and $\varpi_p$
+might be definitionally equal. We don't care especially for that, as long at it
+is clear that:
+\begin{displaymath}
+  \varpi_{\refl x} \jdeq \refl {\refl x} \jdeq \omega_{\refl x}  
+\end{displaymath}
+For any pair of composable path $p: x=y$ and $q: y=z$, one denotes
+\begin{displaymath}
+  \kappa_{p,q} : \inv{(qp)} = \inv p \inv q.
+\end{displaymath}
+Here again, the implementation of $\kappa$ is not important as long as one
+makes sure that
+\begin{displaymath}
+  \kappa_{\refl x,\refl x} \jdeq  \refl {\refl x}
+\end{displaymath}
+
+Given a function $f:A\to B$ and $a:A$, the map $\ap f : a=a
+\to f(a)=f(a)$ is defined in such a way that $\ap f (\refl a) \jdeq \refl
+{f(a)}$. In particular, given an element $b:B$ and a path $p:b=f(a)$, the path
+$\varpi_p$ points the map:
+\begin{displaymath}
+  \loopspace\null (f,p) : \loopspace \null A \to \loopspace\null B, \quad
+  q \mapsto \inv p \cdot \ap f(q) \cdot p.
+\end{displaymath}
+There is also a path witnessing the compatibility of $f$ with concatenation of
+paths $p:x=y$ qnd $q:y=z$:
+\begin{displaymath}
+  \chi_{f,p,q} : \ap f (qp) = \ap f (q) \ap f (p).
+\end{displaymath}
+As for the previous denoted path, we are mostly interested in the fact that 
+\begin{displaymath}
+  \chi_{f,\refl x,\refl x} \jdeq \refl{\refl {f(x)}}.
+\end{displaymath}
+In the same way there is a witness of the compatibility of $f$ with inversion of
+a path $p$:
+\begin{displaymath}
+  \iota_{f,p} : \ap f(\inv p) = \inv {\ap f (p)}.
+\end{displaymath}
+This path is defined by induction on $p$ so that $\iota_{f,\refl x} \jdeq
+\refl{\refl {f(x)}}$.
+
+Finally, whenever two functions $f:A\to B$ and $g:B\to C$ are composable, there
+is, for every path $p$ in $A$, a path $\gamma_{f,g}(p) : \ap{g\circ f}(p) = \ap
+g (\ap f (p))$, which is definitionally $\refl{\refl x}$ when $p \jdeq \refl x$.
+
+
+
 \subsection{Wild functors}
 \label{sec:wild-functors}
-The types $\UUptd$ does certainly not form a category, but some
+Thze types $\UUptd$ does certainly not form a category, but some
 constructions on it are reminiscent of functors. 
 \begin{definition}
   A wild functor on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
@@ -941,19 +1001,56 @@ the abuse to denote a wild functor by its first two components only.
       \begin{displaymath}
         \loopspace \null (f) (p) \defequi \inv{f_0} \cdot \ap f (p) \cdot f_0
       \end{displaymath}
-      where $f_0: b=f(a)$ is the path pointing $f$. The map $\loopspace \null
-      (f)$ is pointed by a path $\varpi_{f,f_0}$ given by path algebra:
+      where $f_0: b=f(a)$ is the path pointing $f$. As noted in
+      \cref{sec:path-algebra}, the map $\loopspace \null (f)$ is pointed by the
+      path $\varpi_{f_0}:\refl b = \loopspace\null (f)(\refl a)$.
+      %
+      Whenever $b \jdeq f(a)$ and $f_0 \jdeq \refl {f(a)}$, we have
+      $\varpi_{f_0} \jdeq \refl {\refl {f(a)}}$, and in particular, it gives us
+      directly the witness $u$ of \cref{def:wild-functor}.
+      %
+      Moreover, given $f:A \ptdto B$ and $g:B \ptdto C$, one has a path
+      $\xi_{f,f_0,g,g_0}(p): \loopspace\null (g\circ f)(p) =
+      \loopspace\null(g)(\loopspace\null(f)(p))$ given by a chain of path algebra steps:
       \begin{displaymath}
-        \inv{f_0} \cdot \ap f (\refl a) \cdot f_0 = 
-        \inv{f_0} \cdot \refl {f(a)} \cdot f_0 = 
-        \refl b.
+        \begin{split}
+        \xi_{f,f_0,g,g_0}(p) \defequi&
+        \ap{\inv {g_0}  \blank g_0}(\inv{\chi_{g,f_0,\inv{f_0}\ap f(p)}})\\
+        &\cdot
+        \ap{\inv {g_0}  \blank \ap g(f_0) g_0}(\inv{\chi_{g,\ap f(p),\inv{f_0}}})\\
+        &\cdot
+        \ap{\inv {g_0}  \blank \ap g (\ap f(p)) \ap g(f_0) g_0}(\inv{\iota_{f,f_0}})\\
+        &\cdot
+        \ap{\inv {g_0} \inv{\ap g(f_0)} \blank \ap g(f_0) g_0}(\gamma_{f,g}(p))\\
+        &\cdot
+        \ap { \blank \ap{g\circ f}(p) \ap g(f_0) g_0 } (\kappa_{g_0,\ap g (f_0)})
+      \end{split}
       \end{displaymath}
-      Note that $\varpi_{f,\refl {f(a)}} \jdeq \refl {\refl {f(a)}}$. In
-      pqrticular, it gives us directly the witness $u$ of
-      \cref{def:wild-functor}. Moreover, given $f:A \ptdto B$ and $g:B \ptdto
-      C$, one has a path $\xi_{f,f_0,g,g_0}(p): \loopspace\null (g\circ f)(p) =
-      \loopspace\null(g)(\loopspace\null(f)(p))$ given simply by path algebra.
-      The importqnce thing to notice is that $\xi_{f,\refl {f(a)},g,
+      \begin{displaymath}
+        \begin{tikzcd}
+          \inv{(\ap g(f_0) g_0)} \ap{g\circ f}(p) \ap g(f_0) g_0
+          \rar["\kappa"] \ar[ddddr, bend right, dashed]
+          & 
+          \inv {g_0} \inv{\ap g(f_0)} \ap{g\circ f}(p) \ap g(f_0) g_0 
+          \dar["\gamma"]
+          \\
+          &
+          \inv {g_0} \inv{\ap g(f_0)} \ap g(\ap f(p)) \ap g(f_0) g_0 
+          \dar["\inv \iota"]
+          \\
+          &
+          \inv {g_0} \ap g(\inv{f_0}) \ap g(\ap f(p)) \ap g(f_0) g_0 
+          \dar["\inv \chi"]
+          \\
+          &
+          \inv {g_0} \ap g(\inv{f_0} \ap f(p)) \ap g(f_0) g_0 
+          \dar["\inv \chi"]
+          \\
+          &
+          \inv {g_0} \ap g(\inv{f_0} \ap f(p) f_0) g_0 
+        \end{tikzcd}
+      \end{displaymath}
+      The importance thing to notice is that $\xi_{f,\refl {f(a)},g,
       \refl{g(f(a))}}(\refl a) \jdeq \refl {\refl{g(f(a))}}$. Hence, one can
       easily show, by double induction on $p:f(a)=x$ ($x:B$ being a free
       endpoint) and $q:g(x) = y$ ($y:C$ being a free endpoint), that the
@@ -961,9 +1058,9 @@ the abuse to denote a wild functor by its first two components only.
       \begin{displaymath}
         \begin{tikzcd}
           \loopspace\null (g\circ f)(\refl a) \ar[rr, equal, "\xi_{f,p,g,q}(\refl a)"] 
-          \ar[dr, equal, "\varpi_{g\circ f,\ap g(p)q}"swap] & &
+          \ar[dr, equal, "\varpi_{\ap g(p)q}"swap] & &
           \loopspace\null (g)(\loopspace\null (f)(\refl a)) 
-          \ar[dl, equal, "\ap{\loopspace\null(g)}(\varpi_{f,p})\varpi_{g,q}"]
+          \ar[dl, equal, "\ap{\loopspace\null(g)}(\varpi_{p})\varpi_{q}"]
           \\
           & \refl c &
         \end{tikzcd}
@@ -997,6 +1094,20 @@ the abuse to denote a wild functor by its first two components only.
   (\blank)$ for any $g:B\ptdto B'$.
   \label{def:wild-adj}
 \end{definition}
+
+\begin{proposition}
+  There is a wild adjunction $\susp \null \leftadjto \loopspace \null$.
+  \label{prop:susp-loop-adjunction}
+\end{proposition}
+\begin{proof}
+  Let $A$ and $B$ be pointed types, with respective distinguished point $a$ and
+  $b$. Given $f:\susp A \ptdto B$ pointed by $f_0:b = f(N)$, define for every
+  $x:A$
+  \begin{displaymath}
+    \Phi_{A,B}(f) (x) \defequi \inv{f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(x)) \cdot f_0
+  \end{displaymath}
+  This function $\Phi_{A,B}(f): A \to \loopspace\null B$ is pointed by path algebra.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{bib}
