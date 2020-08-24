@@ -499,13 +499,16 @@ to be provably not $n$-truncated for any $n$.
 
 The main tool for this section is the Hopf family, defined by Brunerie
 in~\cite{brunerie:thesis}, to get an analog in HoTT of the Hopf
-fibration in topology. First, let us defined for each $x\from\Sc$, an
-equivalence $\iota_x\from \Sc=\Sc$ by $\Sc$-induction as the map such
-that $\iota_x(\base) \jdeq x$ and $\ap{\iota_x}(\Sloop) = f_x(\Sloop)$
-where $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
-dependent function defined
-in~\cref{eq:S1-loopspace-Z-at-each-x}. Notice that $\iota_x$ is the
-point of $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ that corresponds to $x:\Sc$
+fibration in topology. First, let us define, uniformly in $x\from\Sc$, a
+function $\iota_x\from \Sc\to\Sc$ by $\Sc$-induction, putting
+$\iota_x(\base) \jdeq x$ and $\ap{\iota_x}(\Sloop) = f_x(\Sloop)$.
+Here $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
+dependent function defined in~\cref{eq:S1-loopspace-Z-at-each-x}.
+Obviously, $\iota_{\base}=\id_{\Sc}$ is an equivalence and hence,
+since $\Sc$ is connected, every $\iota_x$ is an equivalence.
+Consequently, we may view $\iota_x\from \Sc=\Sc$ as a path.
+Notice furthermore that $\iota_x$ is the element
+of $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ that corresponds to $x:\Sc$
 under the equivalence $\Sc \weq \conncomp{(\Sc=\Sc)}{\id_\Sc}$
 exhibited in~\cref{sec:circle-case}. Now define the type family
 $\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
