@@ -613,32 +613,35 @@ We start by carrying out the first step of the road map.
   
 \end{proof}
 
-This proves that $\id_\Sp$ and $-\id_\Sp$ belong to different connected
-components. Now we will prove that every equivalence in $\Sp \simeq \Sp$ is
-either in the component of $\id_\Sp$ or in the component of $-\id_\Sp$. First,
-notice that from the previous lemma, one concludes that the type 
+The previous lemma proves that $\id_\Sp$ and $-\id_\Sp$ belong 
+to different connected components. We proceed to prove the second step
+of the road map: every equivalence in $\Sp \simeq \Sp$ is
+either in the component of $\id_\Sp$ or in the component of $-\id_\Sp$. 
+First, notice that from the previous lemma, one concludes that the type 
 \begin{displaymath}
   \prod_{\varphi:\Sp\weq\Sp}\Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp = \varphi}
 \end{displaymath}
-is a proposition, following the same exact poof as for
-\cref{cor:S1-eq-either-isaprop}. The goal is to prove that this proposition
+is a proposition, similarly to \cref{cor:S1-eq-either-isaprop}. 
+The goal is to prove that this proposition
 holds indeed. To this end, take a symmetry $\varphi$ of the sphere and let us
 prove that the proposition $\Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp =
-\varphi}$ holds. We tackle the problem as follows: 
+\varphi}$ holds. We tackle the problem in three successive steps,
+the first of which is simple: 
 \begin{enumerate}
   \item Because we are targeting a proposition, and $\Sp$ is
-    connected, one can as well suppose that $\varphi$ is pointed. Denote $p:N=\varphi(N)$ the given path.
-  \item Recall the degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
+    connected, one can as well suppose that $\varphi$ is pointed. 
+    Let $p:N=\varphi(N)$ be the given path.
+  \item Construct a degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
     monoid morphism. In particular, it maps pointed equivalences to invertible
     elements in $\ZZ$, that is $1$ or $-1$.
-  \item Proves that $d$ is a set-truncation map, meaning that $d(f)=d(g)$ if and
+  \item Prove that $d$ is a set-truncation map, meaning that $d(f)=d(g)$ if and
     only if $\Trunc{f=g}$. This will prove either $\Trunc{(\id_\Sp,\refl
     N)=(\varphi,p)}$ or $\Trunc{(-\id_\Sp,\mrd\base)=(\varphi,p)}$, from which
     one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
     $\Trunc{-\id_\Sp = \varphi}$.
 \end{enumerate}
 
-In order to perform these steps, one shall first recall a result from the
+In order to perform the second and the third step, we first recall a result from the
 HoTT-book: the second homotopy group of $\Sp$ is $\ZZ$. More precisely, the
 second homotopy group $\pi_2(\Sp)$ is defined as the set truncation
 $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
