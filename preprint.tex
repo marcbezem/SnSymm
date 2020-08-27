@@ -505,9 +505,10 @@ function $\iota_x\from \Sc\to\Sc$ by $\Sc$-induction, putting
 $\iota_x(\base) \jdeq x$ and $\ap{\iota_x}(\Sloop) = f_x(\Sloop)$.
 Here $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
 dependent function defined in~\cref{eq:S1-loopspace-Z-at-each-x}.
-Obviously, $\iota_{\base}=\id_{\Sc}$ and hence, since $\Sc$ is connected, 
-every $\iota_x$ is an equivalence that is merely equal to $\id_{\Sc}$.
-Therefore we may view $\iota_x\from \Sc=\Sc$ as a path.
+Clearly, $\iota_{\base}=\id_{\Sc}$ and hence, since $\Sc$ is connected, 
+every $\iota_x$ is merely equal to $\id_{\Sc}$ and thus an equivalence.
+Recalling the transparency of univalence, 
+we view $\iota_x\from \Sc=\Sc$ as a path.
 Notice furthermore that $\iota_x$ is the element
 of $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ that corresponds to $x:\Sc$
 under the equivalence $\Sc \weq \conncomp{(\Sc=\Sc)}{\id_\Sc}$
@@ -601,7 +602,8 @@ We start by carrying out the first step of the road map.
   paths on both sides, one gets:
   
   \begin{displaymath}
-    \ap{\ap\hopf\circ \mrd}(\Sloop^2) = \refl{\ap\hopf(\mrd(\base))}
+    \ap{\ap\hopf\circ \mrd}(\Sloop^2) = \ap{\ap\hopf}(\ap\mrd(\Sloop^2)) =
+    \ap{\ap\hopf}(\refl{\mrd(\base)}) = \ap{\ap\hopf\circ \mrd}(\refl{\base})
   \end{displaymath}
   
   Recall that, by design, ${\ap\hopf}\circ{\mrd} = \iota$ is an equivalence
