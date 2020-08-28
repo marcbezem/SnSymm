@@ -635,35 +635,37 @@ the first of which is simple:
     monoid morphism. In particular, it maps pointed equivalences to invertible
     elements in $\ZZ$, that is $1$ or $-1$.
   \item Prove that $d$ is a set-truncation map, meaning that $d(f)=d(g)$ if and
-    only if $\Trunc{f=g}$. This will prove either $\Trunc{(\id_\Sp,\refl
-    N)=(\varphi,p)}$ or $\Trunc{(-\id_\Sp,\mrd\base)=(\varphi,p)}$, from which
+    only if $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
+    this will prove either $\Trunc{(\id_\Sp,\refl N)=(\varphi,p)}$ 
+    or $\Trunc{(-\id_\Sp,\mrd(\base))=(\varphi,p)}$, from which
     one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
     $\Trunc{-\id_\Sp = \varphi}$.
 \end{enumerate}
 
 In order to perform the second and the third step, we first recall a result from the
 HoTT-book: the second homotopy group of $\Sp$ is $\ZZ$. More precisely, the
-second homotopy group $\pi_2(\Sp)$ is defined as the set truncation
+second homotopy group $\pi_2(\Sp)$ is defined as the set-truncation
 $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
 \begin{displaymath}
   \tau: \loopspace\null\Sp \to \Sc, \, p \mapsto \ap\hopf(p)(\base).
 \end{displaymath}
-Then \cite[Theorem ??]{HoTT} proves that the map $\loopspace\null\tau :
+Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
-$\setTrunc{\loopspace\null\tau}: \pi_2(\Sp) \to \pi_1(\Sc)$ on the connected
-components. Composing with the known isomorphism $\pi_1(\Sc) \weq \ZZ$, one
+$\setTrunc{\loopspace\null\tau}: \pi_2(\Sp) \to \pi_1(\Sc)$ on the set-truncations.
+Composing with the known isomorphism $\pi_1(\Sc) \weq \ZZ$, one
 ends up with a group isomorphism $\zeta: \pi_2(\Sp) \to \ZZ$. The degree of a
 pointed map is then defined as the image of $1$ through the induced morphism
-between the second homotopy groups, viewed under this equivalence. Formally
-speaking one defines: 
+between the second homotopy groups, transported back and forth by $\zeta$. 
+Formally speaking one defines: 
 \begin{displaymath}
-  d(f) \defequi \zeta\left(\pi_2(f)\left(\inv\zeta(1)\right)\right):\ZZ \qquad
+  %d(f) \defequi \zeta\left(\pi_2(f)\left(\inv\zeta(1)\right)\right):\ZZ \qquad
+  d(f) \defequi \left(\zeta\circ\pi_2(f)\circ \inv\zeta\right)(1):\ZZ \qquad
   \text{for any}\ f:\Sp\ptdto\Sp.
 \end{displaymath}
 
 \begin{proposition}
   The degree function $d$ is a morphism of monoids from the monoid of pointed
-  endofunction to the multiplicative monoid $\ZZ$.
+  endofunctions to the multiplicative monoid $\ZZ$.
   \label{prop:deg-monoid-morphism}
 \end{proposition}
 \begin{proof}
@@ -673,7 +675,8 @@ speaking one defines:
 
   Now, let us prove that $d(g\circ f) = d(g)\times d(f)$ for any $f,g:\Sp
   \ptdto\Sp$. This again comes from the functoriality of $\pi_2$
-  (\cite[??]{HoTT}), meaning that $\pi_2(g\circ f) = \pi_2(g)\circ\pi_2(f)$
+  (\cite[after Lem.\ 7.3.3 and before Def.\ 8.4.2]{HoTT}), 
+  meaning that $\pi_2(g\circ f) = \pi_2(g)\circ\pi_2(f)$
   holds. Hence:
   \begin{align*}
     d(g\circ f) &= \zeta\left( \pi_2(g\circ f)\left( \inv\zeta(1) \right) \right) 
@@ -694,8 +697,8 @@ speaking one defines:
     \\
     &= d(g)\times d(f)
   \end{align*}
-  The chain of equality above uses the fact that $\zeta$ is not a mere
-  equivalence but also a group morphism: in particular, for any $n:\ZZ$, one
+  The chain of equalities above uses the fact that $\zeta$ is not just any
+  equivalence but a group isomorphism: in particular, for any $n:\ZZ$, one
   gets $\inv\zeta(n) = {\inv\zeta(1)}^n$ in $\pi_2(\Sp)$ (where the group
   operation is denoted multiplicatively).
 \end{proof}
@@ -706,7 +709,7 @@ speaking one defines:
 \end{corollary}
 \begin{proof}
   By the previous proposition, invertible elements in $\Sp \ptdto \Sp$ have
-  invertible degrees in the multiplicative monoid $\ZZ$. However there is only
+  invertible degrees in the multiplicative monoid $\ZZ$. However there are only
   two such elements in $\ZZ$: $1$ and $-1$. 
 \end{proof}
 
