@@ -749,10 +749,13 @@ given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:b=f(
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
 the composition:
 \begin{displaymath}
-  (\Sp \ptdto \Sp) \stackrel{\Phi_{\Sc,\Sp}}\weq (\Sc \ptdto\loopspace\null \Sp)
-  \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq (\bn 2\ptdto\loopspace 2 \Sp) \weq \loopspace 2 \Sp,
+  (\Sp \ptdto \Sp) \stackrel{\Phi_{\Sc,\Sp}}\weq 
+  (\Sc \ptdto\loopspace\null \Sp) \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq 
+  (\bn 2\ptdto\loopspace 2 \Sp) \stackrel{\ev_0}\weq 
+  \loopspace 2 \Sp,
 \end{displaymath}
-using that $\susp{\bn 2} \weq \Sc$ and $(\bn 2\ptdto X) \weq X$ for any type $X$.					
+using that $\Sc \weq \susp{\bn 2}$, and with $\ev_0$ evaluating its argument 
+in the element of $\bn 2$ that is not the point of $\bn 2$ as as pointed type.					
 We now define $\bar d$ as the composition
 \begin{displaymath}
   (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
@@ -764,7 +767,10 @@ We now define $\bar d$ as the composition
   \label{prop:alternative-description-degree}
 \end{proposition}
 \begin{proof}
-  In other words, we want to prove that the outer diagram commutes in the following:
+  Taking the respective definitions of $d$ and $\bar d$ into account,
+  we have to prove $\pi_2 (f)({\inv\zeta(1)})= \settrunc {\gamma(f)}$ for all $f$.
+  Unfolding definitions, 
+  we have to prove that the outer diagram commutes in the following:
   \begin{displaymath}
     \begin{tikzcd}
       (\Sp \ptdto \Sp) \ar[r,"\loopspace\null"] \ar[dd,"\Phi_{\Sc,\Sp}"{swap}]
@@ -785,7 +791,7 @@ We now define $\bar d$ as the composition
     \end{tikzcd}
   \end{displaymath}
   We will do that by proving that each of the small inner diagrams denoted
-  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commutes, for
+  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commute, for
   elementary reasons. Triangles $\textcircled{\small 1}$ and
   $\textcircled{\small 3}$ commute as instances of
   \cref{eq:triangle-identity-unit}. The commutativity of square
@@ -794,7 +800,7 @@ We now define $\bar d$ as the composition
   $\textcircled{\small 5}$ commute, we first need to define what is denoted
   $\ell$: by definition, we set $\ell \defequi \loopspace\null (\eta_\Sc)(\Sloop)$.
   Then it is almost immediate that $\textcircled{\small 4}$ commutes because
-  under the equivalence $\Sc = \susp {\bn 2}$, one has $\Sloop = \eta_2(0)$.
+  under the equivalence $\Sc = \susp {\bn 2}$, one has $\Sloop = \eta_{\bn 2}(0)$.
   Now the commutativity of $\textcircled{\small 5}$ will follow from the
   functoriality of $\setTrunc\blank$ once we have shown $\settrunc \ell =
   \inv\zeta(1)$. By definition of $\zeta$, this is equivalent to showing that
@@ -807,32 +813,39 @@ We now define $\bar d$ as the composition
   \end{displaymath}
 \end{proof}
 
-In the following, we make the abuse of taking $\id_\Sp$ pointed by the path
-$\refl N$, and $-\id_\Sp$ pointed by the path $\mrd(\base)$.
+In the following we complete step \ref{it:weakly_injective}. 
+Recall that we have pointed $\id_\Sp$ by the path $\refl N$, 
+and $-\id_\Sp$ by the path $\mrd(\base)$.
 \begin{corollary}
-  A pointed equivalence is in the connect component of either $\id_\Sp$ or $-\id_\Sp$.
+  Any pointed equivalence is in the connect component of either $\id_\Sp$ or $-\id_\Sp$.
   \label{cor:equivalence-conn-component}
 \end{corollary}
 \begin{proof}
-  The previous result shows that $d$ is equal to the composition of
-  $\settrunc\blank:\loopspace\null\Sp \to\ZZ$ with two equivalences. As
+  The previous result shows that 
+  $d(f) = \bar d(f) \defeq \zeta(\settrunc{\gamma(f)})$ 
+  with $\gamma, \zeta$ equivalences. As
   $\Trunc{x = y}$ if and only if $\settrunc x = \settrunc y$ for any
   $x,y:\loopspace\null \Sp$, the same property holds for $d$:
   \begin{displaymath}
     d(f) = d(g) \quad \text{if and only if}\quad
     \Trunc{f = g} \quad \text{for any}\ f,g:\Sp \ptdto\Sp.
   \end{displaymath}
-  Given a pointed equivalencei $\varphi$, we know from
+  Given a pointed equivalence $\varphi$, we know from
   \cref{cor:degree-equivalences} that its degree is either $1$ or $-1$.
   However, one has already computed that $d(\id_\Sp) = 1$, and it remains only
   to prove that $d(-\id_\Sp) = -1$. For that it is enough to show that the type
-  $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element (where $\ell$ is
-  defined as $\loopspace\null(\eta_\Sc)(\Sloop)$ as in the previous proof), for
-  then
-  \begin{displaymath}
-    d(-\id_\Sp) \jdeq \zeta(\pi_2(-\id_\Sp)(\settrunc{\ell})) = \zeta\left( \inv{\settrunc\ell} \right) = - \zeta(\inv\zeta(1)) = -1.
-  \end{displaymath}
-  Let us compute:
+  $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element, 
+  where $\ell$ is defined as $\loopspace\null(\eta_\Sc)(\Sloop)$, 
+  with $\settrunc \ell = \inv\zeta(1)$ as in the previous proof. 
+  For then we have
+  \begin{align*}
+    d(-\id_\Sp) &\jdeq \zeta(\pi_2(-\id_\Sp)(\inv\zeta(1)))\\
+                & = \zeta(\setTrunc{\loopspace 2 (-\id_\Sp)}(\settrunc{\ell}))\\
+                & = \zeta(\settrunc{\loopspace 2 (-\id_\Sp)(\ell)})\\
+                & = \zeta( \settrunc{\inv\ell}) = - \zeta( \settrunc{\ell}) \\
+                & = - \zeta(\inv\zeta(1)) = -1.
+  \end{align*}
+  In order to prove $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$, we compute:
   \begin{align*}
     \loopspace 2 (-\id_\Sp)(\ell) &= \loopspace 2 (-\id_\Sp) \left( \loopspace\null(\eta_\Sc)(\Sloop) \right)
     \\
