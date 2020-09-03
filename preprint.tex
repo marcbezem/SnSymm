@@ -634,12 +634,12 @@ the first of which is simple:
   \item Construct a degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
     monoid morphism. In particular, it maps pointed equivalences to invertible
     elements in $\ZZ$, that is $1$ or $-1$.
-  \item Prove that $d$ is a set-truncation map, meaning that $d(f)=d(g)$ if and
-    only if $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
+  \item Prove that $d$ is `weakly injective', meaning that $d(f)=d(g)$ 
+    implies $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
     this will prove either $\Trunc{(\id_\Sp,\refl N)=(\varphi,p)}$ 
     or $\Trunc{(-\id_\Sp,\mrd(\base))=(\varphi,p)}$, from which
     one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
-    $\Trunc{-\id_\Sp = \varphi}$.
+    $\Trunc{-\id_\Sp = \varphi}$.\label{it:weakly_injective}
 \end{enumerate}
 
 In order to perform the second and the third step, we first recall a result from the
@@ -713,12 +713,13 @@ Formally speaking one defines:
   two such elements in $\ZZ$: $1$ and $-1$. 
 \end{proof}
 
-The final step is where the complexity hides: one want to prove that the degree
-map is an injection on connected components. To do so, we will explicitate
-another map $\bar d: (\Sp \ptdto \Sp) \to \ZZ$ which is easily proven an
+The step \ref{it:weakly_injective} 
+is where the complexity hides: one wants to prove that the degree
+map is an injection on connected components. To do so, we will define
+another map $\bar d: (\Sp \ptdto \Sp) \to \ZZ$, which is easily proven an
 injection on connected components, and then we will prove that $d = \bar d$.
-Recall that for any types $A,B$ respectively pointed by $a$and $b$, there is an
-equivalence
+Recall that for any types $A,B$ pointed by $a$ and $b$,
+respectively, there is an equivalence
 \begin{displaymath}
   \Phi_{A,B}: (\susp A \ptdto B) \weq (A \ptdto \loopspace \null B) 
 \end{displaymath}
@@ -741,16 +742,17 @@ there is an element of the following type
 \end{equation}
 given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:b=f(N)$
 \begin{displaymath}
-  \loopspace\null(f) \circ \eta_A = \inv {f_0} \cdot \ap f (\eta_A(\blank)) \cdot f_0 
-  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\cdot\mrd(\blank)) \cdot f_0 = \Phi_{A,B}(f). 
+  \loopspace\null(f) \circ \eta_A \jdeq \inv {f_0} \cdot \ap f (\eta_A(\blank)) \cdot f_0 
+  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\cdot\mrd(\blank)) \cdot f_0 \jdeq \Phi_{A,B}(f). 
 \end{displaymath}
 
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
 the composition:
 \begin{displaymath}
   (\Sp \ptdto \Sp) \stackrel{\Phi_{\Sc,\Sp}}\weq (\Sc \ptdto\loopspace\null \Sp)
-  \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq (\bn 2\ptdto\loopspace 2 \Sp) \weq \loopspace 2 \Sp
+  \stackrel{\Phi_{\bn 2,\loopspace\null\Sp}}\weq (\bn 2\ptdto\loopspace 2 \Sp) \weq \loopspace 2 \Sp,
 \end{displaymath}
+using that $\susp{\bn 2} \weq \Sc$ and $(\bn 2\ptdto X) \weq X$ for any type $X$.					
 We now define $\bar d$ as the composition
 \begin{displaymath}
   (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
