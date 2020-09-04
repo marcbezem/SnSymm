@@ -887,15 +887,15 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
   \begin{align*}
     \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} &\to \Trunc{\id_\Sp = \varphi},
     \\
-    \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)} &\to \Trunc{-\id_\Sp = \varphi}
+    \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)} &\to \Trunc{-\id_\Sp = \varphi}.
   \end{align*}
   Both implications come from the general behaviour of truncations with
   projections. ({\color{red} Find an explicit reference in HoTT-Book if
-  possible.})
+  possible. MB: isn't it clear enough?})
 \end{proof}
 
 It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
-$\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well known type.
+$\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well-known type.
 However, one can still establish a relation of one with the other.
 \begin{proposition}
   $\conncomp{(\Sp = \Sp)}{\id_\Sp} \weq \conncomp{(\Sp = \Sp)}{-\id_\Sp}$
@@ -910,14 +910,19 @@ However, one can still establish a relation of one with the other.
   \end{align*}
   One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{\Sp
   \to \Sp}$. Indeed, for any $\varphi:\Sp \to \Sp$, the function $(f\circ
-  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$;
-  an easy $\Sp$-induction and path algebra show then that $(f\circ f)
-  (\varphi) = \varphi$.
+  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$.
+  Moreover, 
+  \[
+  \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
+  = \inv{\inv{\ap{\varphi}(\mrd(x))}} = \ap{\varphi}(\mrd(x)),
+  \]
+  so an easy $\Sp$-induction shows that $(f\circ f)(\varphi) = \varphi$.
   %
-  By easy $\Sp$-induction also, one finds that $f(\id_\Sp) = -\id_\Sp$. The
-  equivalence $f$ restricts then into an equivalence between the connected
-  component of $\id_\Sp$ and the connected component of $-\id_\Sp$. Connected
-  component of equivalences inside $\Sp\to\Sp$ or inside $\Sp=\Sp$ coincide.
+  Another easy $\Sp$-induction shows that $f(\id_\Sp) = -\id_\Sp$.
+  The equivalence $f$ restricts then into an equivalence between the connected
+  component of $\id_\Sp$ and the connected component of $-\id_\Sp$. 
+  For any equivalence, its connected
+  component inside $\Sp\to\Sp$ and inside $\Sp=\Sp$ are equivalent.
   This provides the equivalence of the statement.
   %
 \end{proof}
