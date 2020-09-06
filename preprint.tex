@@ -162,7 +162,7 @@ $\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 1$.
 
 ???We shall frequently use, for all inductive and higher inductive types,
 that functions defined by induction are unique. This is a well-known
-result, see \cite{XXX}.
+result, see \cite{XXX}. ({\color{red} PC: I restrained from using this result directly in the end.})
 
 \paragraph{Plan of the paper.}%
 In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
@@ -851,15 +851,23 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
     \\
     &= \loopspace\null \left( \Phi_{\Sc,\Sp}(-\id_\Sp) \right)(\Sloop)
   \end{align*}
-  However, {\color{red}it follows from (\ref{eq:triangle-identity-unit})??} 
-  that $\Phi_{\Sc,\Sp}(-\id_\Sp) = \inv{\eta_\Sc(\blank)}$ has an element. 
-  Because $\loopspace\null(\inv\blank) = \inv\blank$.
-
-({\color{red}abstract non sense from mustache style lemma, we
-  might want to put something in appendix}), it follows that
+  Now note that $\Phi_{\Sc,\Sp}(-\id_\Sp) = \inv{\eta_\Sc(\blank)}$ has an
+  element. Indeed, one can just compute from the definition of
+  $\Phi_{\Sc,\Sp}$: for all $x:\Sc$
+  \begin{align*}
+    \Phi_{\Sc,\Sp}(-id_\Sp)(x) 
+    &\jdeq \inv{\mrd(\base)} \cdot \ap{-id_\Sp}(\inv{\mrd(\base)} \mrd(x)) \cdot \mrd(\base)\\
+    &= \inv{\mrd(\base)} \cdot \inv{\ap{-id_\Sp}(\mrd(\base))} \ap{-\id_\Sp}(\mrd(x)) \cdot \mrd(\base)\\
+    &= \inv{\mrd(\base)} \cdot \inv{\left(\inv{\mrd(\base)}\right)} \cdot \inv{\mrd(x)} \cdot \mrd(\base)\\
+    &= \inv{\mrd(x)} \cdot \mrd(\base)\\
+    &= \inv{\eta_\Sc(x)}
+  \end{align*}
+  Because $\loopspace\null(\inv\blank) = \inv\blank$ ({\color{red}abstract non
+      sense from mustache style lemma, we might want to put something in
+  appendix}), it follows that
   $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
-  \inv{\loopspace\null\eta_\Sc(\Sloop)}$. Hence, $\loopspace 2 (-\id_\Sp)(\ell)
-  = \inv{\ell}$.
+  \inv{\loopspace\null(\eta_\Sc)(\Sloop)}$. Hence, $\loopspace 2
+  (-\id_\Sp)(\ell) = \inv{\ell}$.
 \end{proof}
 
 \begin{proposition}
@@ -889,9 +897,8 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
     \\
     \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)} &\to \Trunc{-\id_\Sp = \varphi}.
   \end{align*}
-  Both implications come from the general behaviour of truncations with
-  projections. ({\color{red} Find an explicit reference in HoTT-Book if
-  possible. MB: isn't it clear enough?})
+  Both implications are given by the maps induced by the first projection on
+  propositional truncations.
 \end{proof}
 
 It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
@@ -1139,7 +1146,58 @@ the abuse to denote a wild functor by its first two components only.
   \begin{displaymath}
     \Phi_{A,B}(f) (x) \defequi \inv{f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(x)) \cdot f_0
   \end{displaymath}
-  This function $\Phi_{A,B}(f): A \to \loopspace\null B$ is pointed by path algebra.
+  This function $\Phi_{A,B}(f): A \to \loopspace\null B$ is pointed by path algebra
+  \begin{displaymath}
+    \ap{\inv{f_0} \ap f(\blank) f_0 }(\omega_{\mrd(a)}) \cdot \varpi_{f_0} 
+  \end{displaymath}
+  
+  The function $\Phi_{A,B}$ is an equivalence: indeed define a pseudo-inverse
+  $\Psi_{A,B}$ as the function that maps $f: A\ptdto \loopspace\null B$ to the
+  pointed map $\susp A \ptdto B$ defined by induction through 
+  \begin{displaymath}
+    \Psi_{A,B}(f)(N) \defequi b,\quad \Psi_{A,B}(f)(S) \defequi b,\quad
+    \ap{\Psi_{A,B}(f)}\circ\mrd = f.
+  \end{displaymath}
+  The function $\Psi_{A,B}(f)$ is pointed by $\refl b$. For future references,
+  denote $\mu$ for the path $\ap{\Psi_{A,B}(f)}\circ \mrd = f$.
+  
+  Let us first show that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$ for any pointed map $f:A\to
+  \loopspace\null B$. Let us denote $f_0: \refl b = f(a)$ the path pointing
+  $f$. The function $\Phi_{A,B}(\Psi_{A,B}(f))$ maps $x:A$ to 
+  \begin{displaymath}
+    \refl b\cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}\mrd(x))\cdot \refl b
+  \end{displaymath}
+  There is a path $p_x$ from this element to $f(x)$ obtained by composing all the
+  following paths ({\color{red} Drawing? diagrams?}):
+  \begin{align*}
+    \ap{\refl b \cdot \blank \cdot \refl b}(\chi_{\Psi_{A,B}(f),\inv{\mrd(a)},\mrd(x)}),
+    \\
+    \ap{\refl b \cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}) \cdot \blank \cdot \refl b}(\mu(x)),
+    \\
+    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\iota_{\Psi_{A,B}(f),\mrd(a)}),
+    \\
+    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(\mu(a))),
+    \\
+    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(f_0)),
+    \\
+    \tau_{f(x)}
+  \end{align*}
+  ({\color{red} add a path in beginning of appendix $\tau_p: \refl x p \refl x
+  = p$ that also satisfies $\tau_{\refl x} \jdeq \refl{\refl x}$}).
+
+  To finish proving that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$, one shall now prove
+  that the transport of the path pointing $\Phi_{A,B}(\Psi_{A,B}(f))$ over $p$
+  is equal to $f_0$. In other words, we want the folowing triangle to commute:
+  \begin{displaymath}
+    \begin{tikzcd}
+      \Phi_{A,B}(\Psi_{A,B}(f)) (a) \rar[equal, "p_a"] 
+      \drar[equal, "\ap{\refl b\cdot \ap{\Psi_{A,B}(f)}(\blank) \cdot \refl b}(\omega_{\mrd(a)}", swap]
+      & f(a) \dar[equal, "f_0"]
+      \\
+      & \refl b 
+    \end{tikzcd}
+  \end{displaymath}
+  {\color{red}This is true, basically just astract properties of $\omega$ against application of functions + little induction. Yet TODO properly!}  
 \end{proof}
 
 \bibliographystyle{alpha}
