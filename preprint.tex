@@ -1187,7 +1187,7 @@ the abuse to denote a wild functor by its first two components only.
 
   To finish proving that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$, one shall now prove
   that the transport of the path pointing $\Phi_{A,B}(\Psi_{A,B}(f))$ over $p$
-  is equal to $f_0$. In other words, we want the folowing triangle to commute:
+  is equal to $f_0$. In other words, we want the following triangle to commute:
   \begin{displaymath}
     \begin{tikzcd}
       \Phi_{A,B}(\Psi_{A,B}(f)) (a) \rar[equal, "p_a"] 
@@ -1198,6 +1198,35 @@ the abuse to denote a wild functor by its first two components only.
     \end{tikzcd}
   \end{displaymath}
   {\color{red}This is true, basically just astract properties of $\omega$ against application of functions + little induction. Yet TODO properly!}  
+
+  We continue by showing giving an element of $\Psi_{A,B}(\Phi_{A,B}(f)) = f$
+  for any pointed map $f: \susp A \ptdto B$, where the path of $f$ is denoted
+  $f_0:b = f(N)$.  First let us give an element $p_f$ of
+  $\Psi_{A,B}(\Phi_{A,B}(f)) = f$ as (unpointed) functions, by induction on $\susp A$ by
+  providing: 
+  \begin{enumerate}
+    \item the path $f_0:\Psi_{A,B}(\Phi_{A,B}(f))(N) \jdeq b = f(N)$,
+    \item the path $\ap f(\mrd(a))\cdot f_0:\Psi_{A,B}(\Phi_{A,B}(f))(S) \jdeq b = f(S)$.
+  \end{enumerate}
+  All we need is now a path over $\pathover {f_0} {T}{\mrd(x)} {\ap f{\mrd(a)} \cdot
+  f_0}$ for any $x:A$, where $T$ is the type family $(y:\susp A) \mapsto
+  \Psi_{A,B}(\Phi_{A,B}(f))(y) = f(y)$. In other words, for any $x:A$, one
+  wants to provide a witness for the commutativity of the following square:
+  \begin{displaymath}
+    \begin{tikzcd}[column sep=large]
+      b \dar["\inv{f_0}\ap f(\inv{\mrd(a)}\mrd(x)) f_0"swap] \rar["f_0"] 
+      & f(N) \dar["\ap f (\mrd(x))"]
+      \\
+      b \rar["\ap f (\mrd(a))f_0"swap] & f(S)
+    \end{tikzcd}
+  \end{displaymath}
+  The witness is simply provided by path algebra. The last bit of information
+  to provide is the compatibility of $p_f$ with the paths pointing
+  $\Psi_{A,B}(\Phi_{A,B}(f))$ and $f$: we must show that $p_f(N) \cdot refl b =
+  f_0$. This is immediate as we defined $p_f(N)$ to be $f_0$ definitionally.
+
+  It remains to prove that the equivalence $\Phi_{A,B}$ is natural in $A$ and
+  $B$ in the sense of \cref{def:wild-adj}.
 \end{proof}
 
 \bibliographystyle{alpha}
