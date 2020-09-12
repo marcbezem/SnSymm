@@ -855,16 +855,19 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
   element. Indeed, one can just compute from the definition of
   $\Phi_{\Sc,\Sp}$: for all $x:\Sc$
   \begin{align*}
-    \Phi_{\Sc,\Sp}(-id_\Sp)(x) 
-    &\jdeq \inv{\mrd(\base)} \cdot \ap{-id_\Sp}(\inv{\mrd(\base)} \mrd(x)) \cdot \mrd(\base)\\
-    &= \inv{\mrd(\base)} \cdot \inv{\ap{-id_\Sp}(\mrd(\base))} \ap{-\id_\Sp}(\mrd(x)) \cdot \mrd(\base)\\
+    \Phi_{\Sc,\Sp}(-\id_\Sp)(x) 
+    &\jdeq \inv{\mrd(\base)} \cdot \ap{-\id_\Sp}(\inv{\mrd(\base)} \mrd(x)) \cdot \mrd(\base)\\
+    &= \inv{\mrd(\base)} \cdot \inv{\ap{-\id_\Sp}(\mrd(\base))} \ap{-\id_\Sp}(\mrd(x)) \cdot \mrd(\base)\\
     &= \inv{\mrd(\base)} \cdot \inv{\left(\inv{\mrd(\base)}\right)} \cdot \inv{\mrd(x)} \cdot \mrd(\base)\\
     &= \inv{\mrd(x)} \cdot \mrd(\base)\\
     &= \inv{\eta_\Sc(x)}
   \end{align*}
   Because $\loopspace\null(\inv\blank) = \inv\blank$ ({\color{red}abstract non
       sense from mustache style lemma, we might want to put something in
-  appendix}), it follows that
+  appendix MB it might be sufficient to give the types:
+$\loopspace\null(\inv\blank:a=a \to a=a) = 
+                (\inv\blank: \refl{a}=\refl{a} \to \refl{a}=\refl{a})$}), 
+it follows that
   $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
   \inv{\loopspace\null(\eta_\Sc)(\Sloop)}$. Hence, $\loopspace 2
   (-\id_\Sp)(\ell) = \inv{\ell}$.
@@ -937,11 +940,12 @@ However, one can still establish a relation of one with the other.
 \section{Symmetries of the $n$-sphere}
 \label{sec:higher-sphere}
 
-In this section, we want to carry out the work done on the $2$-sphere to higher
+In this section, we want to generalize the work done on the $2$-sphere to higher
 spheres. More precisely, we will prove that
 \begin{theorem}
   \label{thm:higher-spheres}
   For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
+{\color{red} actually, a bit more}
 \end{theorem}
 %
 
@@ -954,24 +958,24 @@ of \cref{thm:higher-spheres}. We will now focus on the induction step.
 
 \subsection{Path algebra}
 \label{sec:path-algebra}
-All along this paper, we deal with pointed functions of the form $f:A \ptdto
+All through this paper, we deal with pointed functions of the form $f:A \ptdto
 \loopspace\null B$. It happens every so often that such an $f$ is pointed by a
 path $\refl b = f(a)$ which derives directly from basic path algebra. Because
-we need a way to refer to these elemetary steps of path algebra, we give names
-and conventions in this section.
+we use these elementary steps of path algebra in a proof-relevant way, 
+we fix names and conventions in this section.
 
-Given a path $p:x=y$ in any type $A$, one should denotes
+Given a path $p:x=y$ in any type $A$, we denote
 \begin{align*}
   \varpi_p &: \refl x = \inv p \refl y p\\
   \omega_p &: \refl x = \inv p p
 \end{align*}
-Depending on the implemetation of concatenation of path, $\omega_p$ and $\varpi_p$
+Depending on the implementation of concatenation of path, $\omega_p$ and $\varpi_p$
 might be definitionally equal. We don't care especially for that, as long at it
 is clear that:
 \begin{displaymath}
   \varpi_{\refl x} \jdeq \refl {\refl x} \jdeq \omega_{\refl x}  
 \end{displaymath}
-For any pair of composable path $p: x=y$ and $q: y=z$, one denotes
+For any pair of composable paths $p: x=y$ and $q: y=z$, one denotes
 \begin{displaymath}
   \kappa_{p,q} : \inv{(qp)} = \inv p \inv q.
 \end{displaymath}
@@ -994,7 +998,7 @@ paths $p:x=y$ qnd $q:y=z$:
 \begin{displaymath}
   \chi_{f,p,q} : \ap f (qp) = \ap f (q) \ap f (p).
 \end{displaymath}
-As for the previous denoted path, we are mostly interested in the fact that 
+Like for the paths $\kappa_{p,q}$, swe are mostly interested in the fact that 
 \begin{displaymath}
   \chi_{f,\refl x,\refl x} \jdeq \refl{\refl {f(x)}}.
 \end{displaymath}
@@ -1014,7 +1018,7 @@ g (\ap f (p))$, which is definitionally $\refl{\refl x}$ when $p \jdeq \refl x$.
 
 \subsection{Wild functors}
 \label{sec:wild-functors}
-Thze types $\UUptd$ does certainly not form a category, but some
+The types $\UUptd$ do certainly not form a category, but some
 constructions on it are reminiscent of functors. 
 \begin{definition}
   A wild functor on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
