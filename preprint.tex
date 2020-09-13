@@ -1026,7 +1026,7 @@ constructions on it are reminiscent of functors.
     F_0 &:\UUptd \to \UUptd,\\
     F_1 &:\prod_{A,B:\UUptd} (A \ptdto B) \to (F_0(A) \ptdto F_0(B))\\
     c &: \prod_{A,B,C:\UUptd}\prod_{f:A\ptdto B, g:B\ptdto C}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
-    u &: \prod_{A:\UUptd} F_1(\id_A) = \id_{F_1(A)}
+    u &: \prod_{A:\UUptd} F_1(\id_A) = \id_{F_0(A)}
   \end{align*}
   \label{def:wild-functor}
 \end{definition}
