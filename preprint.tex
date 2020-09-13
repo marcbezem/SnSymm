@@ -1018,8 +1018,8 @@ g (\ap f (p))$, which is definitionally $\refl{\refl x}$ when $p \jdeq \refl x$.
 
 \subsection{Wild functors}
 \label{sec:wild-functors}
-The types $\UUptd$ do certainly not form a category, but some
-constructions on it are reminiscent of functors. 
+The types $\UUptd$ do certainly not form a category {\color{red} of categories???}, 
+but some constructions on it are reminiscent of functors. 
 \begin{definition}
   A wild functor on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
   \begin{align*}
@@ -1032,13 +1032,16 @@ constructions on it are reminiscent of functors.
 \end{definition}
 
 As for functors, we usually write both $F_0$ and $ F_1$ only as $F$. The only
-relevant fact about $c$ and $u$ is that there exists, also we will often make
-the abuse to denote a wild functor by its first two components only.
+relevant fact about $c$ and $u$ is that they exist, 
+{\color{red} even though their types are not propositions}. 
+Therefore we will often (abusively)
+denote a wild functor by its first two components only.
 
 \begin{example}~
   \begin{enumerate}
-    \item There is a functor $\loopspace \null$ which maps a pointed type $A$
-      (pointed at $a$) to $\loopspace \null A$ (pointed at $\refl a$), and maps
+    \item There is a wild functor $\loopspace \null$ which maps a pointed type $A$
+      (pointed at $a$) to $\loopspace \null A \defeq (a=a$)
+      (pointed at $\refl a$), and maps
       a pointed function $f: A \ptdto B$ to the pointed function $\loopspace
       \null (f): \loopspace \null A \ptdto \loopspace \null B$ defined as
       follows:
