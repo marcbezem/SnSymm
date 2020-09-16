@@ -833,44 +833,51 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
   Given a pointed equivalence $\varphi$, we know from
   \cref{cor:degree-equivalences} that its degree is either $1$ or $-1$.
   However, one has already computed that $d(\id_\Sp) = 1$, and it remains only
-  to prove that $d(-\id_\Sp) = -1$. For that it is enough to show that the type
-  $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element, 
-  where $\ell$ is defined as $\loopspace\null(\eta_\Sc)(\Sloop)$, 
-  with $\settrunc \ell = \inv\zeta(1)$ as in the previous proof. 
-  For then we have
-  \begin{align*}
-    d(-\id_\Sp) &\jdeq \zeta(\pi_2(-\id_\Sp)(\inv\zeta(1)))
-                 = \zeta(\setTrunc{\loopspace 2 (-\id_\Sp)}(\settrunc{\ell}))
-                 = \zeta(\settrunc{\loopspace 2 (-\id_\Sp)(\ell)})\\
-                & = \zeta( \settrunc{\inv\ell}) = - \zeta( \settrunc{\ell})
-                 = - \zeta(\inv\zeta(1)) = -1.
-  \end{align*}
-  In order to prove $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$, we compute:
-  \begin{align*}
-    \loopspace 2 (-\id_\Sp)(\ell) &= \loopspace 2 (-\id_\Sp) \left( \loopspace\null(\eta_\Sc)(\Sloop) \right)
-    \\
-    &= \loopspace\null \left( \Phi_{\Sc,\Sp}(-\id_\Sp) \right)(\Sloop)
-  \end{align*}
-  Now note that $\Phi_{\Sc,\Sp}(-\id_\Sp) = \inv{\eta_\Sc(\blank)}$ has an
-  element. Indeed, one can just compute from the definition of
-  $\Phi_{\Sc,\Sp}$: for all $x:\Sc$
-  \begin{align*}
-    \Phi_{\Sc,\Sp}(-\id_\Sp)(x) 
-    &\jdeq \inv{\mrd(\base)} \cdot \ap{-\id_\Sp}(\inv{\mrd(\base)} \mrd(x)) \cdot \mrd(\base)\\
-    &= \inv{\mrd(\base)} \cdot \inv{\ap{-\id_\Sp}(\mrd(\base))} \ap{-\id_\Sp}(\mrd(x)) \cdot \mrd(\base)\\
-    &= \inv{\mrd(\base)} \cdot \inv{\left(\inv{\mrd(\base)}\right)} \cdot \inv{\mrd(x)} \cdot \mrd(\base)\\
-    &= \inv{\mrd(x)} \cdot \mrd(\base)\\
-    &= \inv{\eta_\Sc(x)}
-  \end{align*}
-  Because $\loopspace\null(\inv\blank) = \inv\blank$ ({\color{red}abstract non
-      sense from mustache style lemma, we might want to put something in
-  appendix MB it might be sufficient to give the types:
-$\loopspace\null(\inv\blank:a=a \to a=a) = 
-                (\inv\blank: \refl{a}=\refl{a} \to \refl{a}=\refl{a})$}), 
-it follows that
-  $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
-  \inv{\loopspace\null(\eta_\Sc)(\Sloop)}$. Hence, $\loopspace 2
-  (-\id_\Sp)(\ell) = \inv{\ell}$.
+  to prove that $d(-\id_\Sp) = -1$. However, we know that $-\id_\Sp$ is an
+  equivalence, hence its degree is either $1$ or $-1$. If it is $1$, the
+  previous property of $d$ would prove $\Trunc{\id_\Sp = \-\id_\Sp}$ which we
+  have prove false. Then $d(-\id_\Sp) = -1$ \footnote{\color{red} Do we need
+  decidability here? If so we should juste recall that $\ZZ$ is decidable.}
+  
+% WHAT TO DO WITH THAT: seems to prove that id‡-id without the Hopf fibration...
+%   For that it is enough to show that the type
+%   $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element, 
+%   where $\ell$ is defined as $\loopspace\null(\eta_\Sc)(\Sloop)$, 
+%   with $\settrunc \ell = \inv\zeta(1)$ as in the previous proof. 
+%   For then we have
+%   \begin{align*}
+%     d(-\id_\Sp) &\jdeq \zeta(\pi_2(-\id_\Sp)(\inv\zeta(1)))
+%                  = \zeta(\setTrunc{\loopspace 2 (-\id_\Sp)}(\settrunc{\ell}))
+%                  = \zeta(\settrunc{\loopspace 2 (-\id_\Sp)(\ell)})\\
+%                 & = \zeta( \settrunc{\inv\ell}) = - \zeta( \settrunc{\ell})
+%                  = - \zeta(\inv\zeta(1)) = -1.
+%   \end{align*}
+%   In order to prove $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$, we compute:
+%   \begin{align*}
+%     \loopspace 2 (-\id_\Sp)(\ell) &= \loopspace 2 (-\id_\Sp) \left( \loopspace\null(\eta_\Sc)(\Sloop) \right)
+%     \\
+%     &= \loopspace\null \left( \Phi_{\Sc,\Sp}(-\id_\Sp) \right)(\Sloop)
+%   \end{align*}
+%   Now note that $\Phi_{\Sc,\Sp}(-\id_\Sp) = \inv{\eta_\Sc(\blank)}$ has an
+%   element. Indeed, one can just compute from the definition of
+%   $\Phi_{\Sc,\Sp}$: for all $x:\Sc$
+%   \begin{align*}
+%     \Phi_{\Sc,\Sp}(-\id_\Sp)(x) 
+%     &\jdeq \inv{\mrd(\base)} \cdot \ap{-\id_\Sp}(\inv{\mrd(\base)} \mrd(x)) \cdot \mrd(\base)\\
+%     &= \inv{\mrd(\base)} \cdot \inv{\ap{-\id_\Sp}(\mrd(\base))} \ap{-\id_\Sp}(\mrd(x)) \cdot \mrd(\base)\\
+%     &= \inv{\mrd(\base)} \cdot \inv{\left(\inv{\mrd(\base)}\right)} \cdot \inv{\mrd(x)} \cdot \mrd(\base)\\
+%     &= \inv{\mrd(x)} \cdot \mrd(\base)\\
+%     &= \inv{\eta_\Sc(x)}
+%   \end{align*}
+%   Because $\loopspace\null(\inv\blank) = \inv\blank$ ({\color{red}abstract non
+%       sense from mustache style lemma, we might want to put something in
+%   appendix MB it might be sufficient to give the types:
+% $\loopspace\null(\inv\blank:a=a \to a=a) = 
+%                 (\inv\blank: \refl{a}=\refl{a} \to \refl{a}=\refl{a})$}), 
+% it follows that
+%   $\loopspace\null(\Phi_{\Sc,\Sp}(-\id_\Sp))(\Sloop) =
+%   \inv{\loopspace\null(\eta_\Sc)(\Sloop)}$. Hence, $\loopspace 2
+%   (-\id_\Sp)(\ell) = \inv{\ell}$.
 \end{proof}
 
 \begin{proposition}
@@ -906,34 +913,44 @@ it follows that
 
 It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
 $\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well-known type.
-However, one can still establish a relation of one with the other.
+However, one can still establish that both connected components are equivalent.
+In fact, it has little to do with $\Sp$ itself, and one can state a more
+general result.
 \begin{proposition}
-  $\conncomp{(\Sp = \Sp)}{\id_\Sp} \weq \conncomp{(\Sp = \Sp)}{-\id_\Sp}$
-  \label{prop:S2-components-are-equiv}
+  Let $A$ be a pointed type. Then:
+  \begin{displaymath}
+    \conncomp{(\susp A = \susp A)}{\id_{\susp A}} \weq \conncomp{(\susp A = \susp A)}{-\id_{\susp A}}
+  \end{displaymath}
+  \label{prop:sups-components-are-equiv}
 \end{proposition}
 \begin{proof}
-  Define $f:{(\Sp \to \Sp)} \to (\Sp \to \Sp)$ by mapping
-  $\varphi$ to the function defined by $\Sp$-induction in the following way:
+  Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $N$
+  to $S$, $S$ to $N$ and each meridian to its inverse as a path of $\susp A$.
+  %
+
+  Now, define $f:{({\susp A} \to {\susp A})} \to ({\susp A} \to {\susp A})$ by mapping
+  $\varphi$ to the function defined by ${\susp A}$-induction in the following way:
   \begin{align*}
     &f(\varphi)(N) \jdeq \varphi(S), \quad f(\varphi)(S) \jdeq \varphi(N),\\
     &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
   \end{align*}
-  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{\Sp
-  \to \Sp}$. Indeed, for any $\varphi:\Sp \to \Sp$, the function $(f\circ
+  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{{\susp A}
+  \to {\susp A}}$. Indeed, for any $\varphi:{\susp A} \to {\susp A}$, the function $(f\circ
   f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$.
   Moreover, 
   \[
   \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
   = \inv{\inv{\ap{\varphi}(\mrd(x))}} = \ap{\varphi}(\mrd(x)),
   \]
-  so an easy $\Sp$-induction shows that $(f\circ f)(\varphi) = \varphi$.
+  so an easy ${\susp A}$-induction shows that $(f\circ f)(\varphi) = \varphi$.
   %
-  Another easy $\Sp$-induction shows that $f(\id_\Sp) = -\id_\Sp$.
+  Another easy ${\susp A}$-induction shows that $f(\id_{\susp A}) = -\id_{\susp A}$.
   The equivalence $f$ restricts then into an equivalence between the connected
-  component of $\id_\Sp$ and the connected component of $-\id_\Sp$. 
-  For any equivalence, its connected
-  component inside $\Sp\to\Sp$ and inside $\Sp=\Sp$ are equivalent.
-  This provides the equivalence of the statement.
+  component of $\id_{\susp A}$ and the connected component of $-\id_{\susp A}$. 
+  Being an equivalence is a property, so that the connected component of an
+  equivalence $\varphi$ in $\susp A = \susp A$ is equivalent to the connected
+  component of $\varphi$ in ${\susp A} \to {\susp A}$. This provides the
+  equivalence of the statement.
   %
 \end{proof}
 
@@ -945,8 +962,17 @@ spheres. More precisely, we will prove that
 \begin{theorem}
   \label{thm:higher-spheres}
   For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
-{\color{red} actually, a bit more}
 \end{theorem}
+If we manage to prove that $\id_{\Sn n}$ is not merely to $-\id_{\Sn n}$, then
+together with \cref{prop:sups-components-are-equiv}, one has the slightly
+better result:
+\begin{displaymath}
+  (\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
+\end{displaymath}
+{\color{red} Maybe add a remark as: This is reminiscent of the well-know result
+  about the orthogonal group: $\mathrm O(n)$ is a Lie group with 2 connected
+  components, both diffeomorphic to $\mathrm{SO}(n)$.
+}
 %
 
 \cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
