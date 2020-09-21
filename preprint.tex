@@ -38,6 +38,7 @@
 
 \renewcommand{\ap}[1]{\left[{#1}\right]}
 \newcommand{\ptdto}{\to_\ast}%
+\newcommand{\ptdweq}{\weq_\ast}%
 \newcommand{\setTrunc}[1]{\Trunc{#1}_0}
 \newcommand{\settrunc}[1]{\trunc{#1}_0}
 \newcommand{\UUptd}{\UU_{\ast}}
@@ -963,10 +964,11 @@ spheres. More precisely, we will prove that
   \label{thm:higher-spheres}
   For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
 \end{theorem}
-If we manage to prove that $\id_{\Sn n}$ is not merely to $-\id_{\Sn n}$, then
-together with \cref{prop:sups-components-are-equiv}, one has the slightly
+
+If we manage to prove that $\id_{\Sn n}$ is not merely equal to $-\id_{\Sn n}$,
+then together with \cref{prop:sups-components-are-equiv}, one has the slightly
 better result:
-\begin{displaymath}
+ \begin{displaymath}
   (\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
 \end{displaymath}
 {\color{red} Maybe add a remark as: This is reminiscent of the well-know result
@@ -977,7 +979,107 @@ better result:
 
 \cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
 of \cref{thm:higher-spheres}. We will now focus on the induction step. 
+%
+We take an interest in the following map, induced by the suspension wild functor:
+\begin{displaymath}
+  \susp (\blank) : (\Sn n \ptdto \Sn n) \to (\Sn {n+1} \ptdto \Sn{n+1})
+\end{displaymath}
+The wild nature of the functor just vanishes once the function types are
+set-truncated.
+%
+In other words, it means that the following map is a morphism of monoids:
+\begin{displaymath}
+  \setTrunc{\susp(\blank)} : \setTrunc{\Sn n \ptdto \Sn n} \to \setTrunc{\Sn {n+1} \ptdto \Sn{n+1}}
+\end{displaymath}
 
+\begin{proposition}
+  For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoid.
+  \label{prop:susp-iso-monoids}
+\end{proposition}
+\begin{proof}
+  {\color{red}Freudenthal + check Marc's diagram.}
+\end{proof}
+
+\begin{lemma}
+  Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
+  is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
+  \setTrunc{A \ptdto A}$.
+  \label{lemma:invertible-truncated-Sn-pointed-weq}
+\end{lemma}
+\begin{proof}
+  Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
+  as $\settrunc{\inv f}$ is an inverse for it.
+
+  Conversely, if $x:\setTrunc{A \ptdto A}$ is invertible, then one wants to
+  produce an element of the type:
+  \begin{displaymath}
+    \sum_{y:\setTrunc{A \ptdweq A}} x = i(y)
+  \end{displaymath}
+  %
+  As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
+  \ptdweq A}$, this type is a set itself. Hence, one might assume
+  that $x \jdeq \settrunc f$ for some function $f:A \ptdto A$ as well
+  as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \ptdto A$. 
+  %
+  From the inverse law in the monoid $\setTrunc{A \ptdto A}$, one
+  derive that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
+  the proposition that $f$ is an equivalence, on can then assume actual
+  witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
+  pseudo-inverse for $f$, which solves the problem.
+\end{proof}
+
+\begin{corollary}
+  For any $n\geq 2$, $\setTrunc{\Sn n \ptdweq \Sn n} \weq \bn 2$.
+  \label{cor:Sn-pointed-weq-is-bool}
+\end{corollary}
+\begin{proof}
+  We have shown the result for $n=2$ in the previous chapter
+  (\cref{cor:equivalence-conn-component}). Suppose $n\geq 2$. By
+  \cref{prop:susp-iso-monoids}, the monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and
+  $\setTrunc{\Sn {n+1} \ptdto \Sn {n+1}}$ are equivalent. Hence, their respective
+  submonoids of invertible elements are also equivalent. By
+  \cref{lemma:invertible-truncated-Sn-pointed-weq}, the type $\setTrunc{\Sn n
+  \ptdweq \Sn n}$ is then equivalent to $\setTrunc{\Sn {n+1} \ptdweq \Sn
+  {n+1}}$.
+
+  The result is then proved by induction on $n\geq 2$.
+\end{proof}
+
+To prove \cref{thm:higher-spheres}, we need to get from this result to {\em
+unpointed} equivalences. For the next lemma, consider $\Sn n$ as a bare type
+and let us use $(\Sn n,x)$ to mean the type $\Sn n$ pointed by an element
+$x:\Sn n$.
+\begin{lemma}
+  Let $n\geq 2$. For all $x:\Sn n$, one has $\setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$.
+  \label{lemma:pointed-weq-free-point-codomain-is-bool}
+\end{lemma}
+\begin{proof}
+  The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
+  groupoid, hence as $n\geq 2$ this is an $(n-1)$-type. The sphere $\Sn n$ being
+  $n$-connected, the map $1\to \Sn n$ selecting the point $N$ is
+  $(n-1)$-connected. Hence it suffices to give an element of $P(N)$ to get an
+  dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
+  provided by \cref{cor:Sn-pointed-weq-is-bool}.
+\end{proof}
+
+We can now give a proof of \cref{thm:higher-spheres}.
+\begin{proof}[Proof of \cref{thm:higher-spheres}]
+  One relies on the well-know equivalence:
+  \begin{displaymath}
+    (\Sn n \weq \Sn n) = \sum_{x:\Sn n}\left( (\Sn n, N) \ptdweq (\Sn n, x) \right)
+  \end{displaymath}
+  By \cite[Thm 7.3.9]{HoTT}, the $k$-truncation of a total space
+  $\sum_{x:A}P(x)$ is equivalent to the $k$-truncation of the space
+  $\sum_{x:A}\Trunc{P(x)}_k$. Hence, we find:
+  \begin{align*}
+    \setTrunc{\Sn n = \Sn n} &\weq \setTrunc{\Sn n \weq \Sn n} \\
+    &\weq \setTrunc{\sum_{x:\Sn n} (\Sn n, N) \weq (\Sn n, x)} \\
+    &\weq \setTrunc{\sum_{x:\Sn n} \setTrunc{(\Sn n, N) \weq (\Sn n, x)}} \\
+    &\weq \setTrunc{\Sn n \times \bn 2} \\
+    &\weq \setTrunc{\Sn n} \times \setTrunc{\bn 2} \\
+    &\weq \bn 2
+  \end{align*}
+\end{proof}
 
 \section{Appendix}
 \label{sec:appendix}
