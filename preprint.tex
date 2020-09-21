@@ -993,7 +993,7 @@ In other words, it means that the following map is a morphism of monoids:
 \end{displaymath}
 
 \begin{proposition}
-  For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoid.
+  For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoids.
   \label{prop:susp-iso-monoids}
 \end{proposition}
 \begin{proof}
@@ -1083,6 +1083,30 @@ We can now give a proof of \cref{thm:higher-spheres}.
 
 \section{Appendix}
 \label{sec:appendix}
+
+\subsection{General Results}
+
+TODO:
+The following could allow us to simplify the proof of \cref{thm:higher-spheres}.
+
+\begin{lemma}
+    Let $X$ be a type and $x : X$ be a point. If $X$ is connected, then the canonical map
+    \begin{equation}
+        \setTrunc{(X,x) \ptdto (X,x)} \xrightarrow{\setTrunc{\pi_1}} \setTrunc{X \to X}
+    \end{equation}
+    is an isomorphism of monoids.
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{alignat}{2}
+        &&& \setTrunc{\Sigma(f : X \to X). f(x) = x} \\
+        &\simeq &\quad & \setTrunc{\Sigma(f : X \to X). \setTrunc{f(x) = x}} \\
+        &\simeq && \setTrunc{X \to X},
+    \end{alignat}
+    where the first steps holds by \cite[Thm.~7.3.9]{HoTT} and the second by the connectedness assumption.
+    Composition and identities are preserved by the projection $\pi_1$, and thus also by $\setTrunc{\pi_1}$.
+\end{proof}
+
 
 \subsection{Path algebra}
 \label{sec:path-algebra}
