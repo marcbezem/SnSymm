@@ -1056,9 +1056,11 @@ $x:\Sn n$.
 \end{lemma}
 \begin{proof}
   The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
-  set, hence as $n\geq 2$ this is an $(n-2)$-type. The sphere $\Sn n$ being
-  $(n-1)$-connected, the map $1\to \Sn n$ selecting the point $N$ is
-  $(n-2)$-connected. Hence it suffices to give an element of $P(N)$ to get an
+  set, i.e.\ $0$-truncated.
+  Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
+  $(n-2)$-connected. 
+  By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
+  it suffices to give an element of $P(N)$ to get a
   dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
   provided by \cref{cor:Sn-pointed-weq-is-bool}.
 \end{proof}
