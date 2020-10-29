@@ -172,9 +172,6 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
 The spheres $\Sn n$ are then defined by induction on $n:\NN$ by
 $\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 1$.
 
-???We shall frequently use, for all inductive and higher inductive types,
-that functions defined by induction are unique. This is a well-known
-result, see \cite{XXX}. ({\color{red} PC: I restrained from using this result directly in the end.})
 
 \paragraph{Plan of the paper.}%
 In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
@@ -722,7 +719,7 @@ Formally speaking one defines:
 \begin{proof}
   By the previous proposition, invertible elements in $\Sp \ptdto \Sp$ have
   invertible degrees in the multiplicative monoid $\ZZ$. However there are only
-  two such elements in $\ZZ$: $1$ and $-1$. 
+  two such elements in $\ZZ$: $1$ and $-1$. Now use that $=$ on $\ZZ$ is decidable.
 \end{proof}
 
 The step \ref{it:weakly_injective} 
@@ -848,8 +845,7 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
   to prove that $d(-\id_\Sp) = -1$. However, we know that $-\id_\Sp$ is an
   equivalence, hence its degree is either $1$ or $-1$. If it is $1$, the
   previous property of $d$ would prove $\Trunc{\id_\Sp = -\id_\Sp}$ which we
-  have prove false. Then $d(-\id_\Sp) = -1$ \footnote{\color{red} Do we need
-  decidability here? If so we should juste recall that $\ZZ$ is decidable.}
+  have proved false. Hence $d(-\id_\Sp) = -1$.
   
 % WHAT TO DO WITH THAT: seems to prove that id‡-id without the Hopf fibration...
 %   For that it is enough to show that the type
