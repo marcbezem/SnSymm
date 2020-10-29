@@ -6,7 +6,18 @@
 \usepackage{microtype}
 \usepackage[mathscr]{euscript}
 \usepackage{mathtools}
+
+\usepackage{thm-restate}
 \usepackage{hyperref}
+
+
+
+
+
+%%% only for writing. Remove in the final version.
+\usepackage{todonotes}
+
+
 \usepackage[capitalize]{cleveref}
 
 \input macros%
@@ -958,157 +969,319 @@ general result.
 \section{Symmetries of the $n$-sphere}
 \label{sec:higher-sphere}
 
-In this section, we want to generalize the work done on the $2$-sphere to higher
-spheres. More precisely, we will prove that
-\begin{theorem}
-  \label{thm:higher-spheres}
-  For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
-\end{theorem}
 
-If we manage to prove that $\id_{\Sn n}$ is not merely equal to $-\id_{\Sn n}$,
-then together with \cref{prop:sups-components-are-equiv}, one has the slightly
-better result:
- \begin{displaymath}
-  (\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
-\end{displaymath}
-{\color{red} Maybe add a remark as: This is reminiscent of the well-know result
-  about the orthogonal group: $\mathrm O(n)$ is a Lie group with 2 connected
-  components, both diffeomorphic to $\mathrm{SO}(n)$.
+\todo[inline]{Nicolai: I assume that, in previous sections, we have established the following: $\susp$ is a wild functor (could probably be called an \emph{H-functor}); the general definition of $\Sn n$ recursively on $n$; that $\Sn n \to \Sn n$ is an H-monoid (``wild monoid''; decide on terminology). 
+If we can show that, for $n = 1$ and $n=2$, this monoid is isomorphic to $(\ZZ,\times)$, we could formulate \cref{thm:higher-spheres-2} a bit more nicely; but currently, the text only assumes that the type of symmetries has two connected components. If any definition is missing, we need to add it below.
 }
-%
 
-\cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
-of \cref{thm:higher-spheres}. We will now focus on the induction step. 
-%
-We take an interest in the following map, induced by the suspension wild functor:
-\begin{displaymath}
-  \susp (\blank) : (\Sn n \ptdto \Sn n) \to (\Sn {n+1} \ptdto \Sn{n+1})
-\end{displaymath}
-The wild nature of the functor just vanishes once the function types are
-set-truncated.
-%
-In other words, it means that the following map is a morphism of monoids:
-\begin{displaymath}
-  \setTrunc{\susp(\blank)} : \setTrunc{\Sn n \ptdto \Sn n} \to \setTrunc{\Sn {n+1} \ptdto \Sn{n+1}}
-\end{displaymath}
+Having discussed the cases $n = 1$ and $n = 2$ in some detail, we finally wish to establish the result that $\Sn n = \Sn n$ has two connected components, for all $n \geq 1$.
+The main ideas for the proof are already contained in the result that $\pi_n(\Sn n) = \ZZ$ \cite{licataBrunerie_s1again} and the definition of degrees by Buchholtz and Favonia \cite{Buchholtz2018CellularCI}, but the argument that we need does not seem to have been spelled out in detail so far.
 
-\begin{proposition}
-  For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoids.
-  \label{prop:susp-iso-monoids}
-\end{proposition}
-\begin{proof}
-  {\color{red}Freudenthal + check Marc's diagram.}
-\end{proof}
+The core ingredient is the following statement,
+where we use that the suspension $\susp$ acts like a functor on morphisms:
+\begin{restatable}{theorem}{suspiso}
+    \label{thm:susp-is-monoid-iso}
+    For all natural numbers $n \geq 2$, the function
+    \begin{equation} \label{eq:susp-monoid-morphism}
+    (\Sn n \to_* \Sn n) \xrightarrow{\susp} (\Sn {n+1} \to_* \Sn {n+1})
+    \end{equation}
+    is a $0$-connected morphism of H-monoids.
+\end{restatable}
 
-\begin{lemma}
-  Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
-  is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
-  \setTrunc{A \ptdto A}$.
-  \label{lemma:invertible-truncated-Sn-pointed-weq}
+As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see that $\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$ is an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n \to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, the argument of \cref{TODO:refer-to-earlier-result} applies.
+
+We now discuss the preparation for the proof of \cref{thm:susp-is-monoid-iso}.
+First of all, we have a (``wild'') adjunction $\susp \dashv \Omega$ \cite[find lemma]{HoTT}.
+For a pointed type $X$, this adjunction comes with the unit
+\begin{align}
+\sigma : \; &X \to \Omega(\susp X) \label{eq:sigma} \\
+&x \mapsto \mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}.
+\end{align}
+If $A$ is a second pointed type, the adjunction can also be described via an equivalence of function spaces \cite[Lemma 6.5.4]{HoTT},
+\begin{equation}
+\Phi : (\susp(X) \to_* A) \simeq (X \to_* \Omega(A)).
+\end{equation}
+
+A standard property of adjunctions, here worked out explicitly for $\susp \dashv \Omega$, is the following:
+\begin{lemma} \label{lem:adj-prop}
+    For pointed types $C$ and $D$, the following commutes:
+    \begin{equation}
+    \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \node (A) at (0,0) {$(C \to_* D)$}; 
+    \node (D) at (1,0) {$(\susp C \to_* \susp D)$}; 
+    \node (C) at (1,1) {$(C \to_* \Omega \susp D)$}; 
+    
+    \draw[arrow] (A) to node [above] {$\susp$} (D);
+    \draw[arrow] (A) to node [below left] {$\susp \circ \, \blank$} (C);
+    \draw[arrow] (D) to node [right] {$\Phi$} (C);
+    \end{tikzpicture}
+    \end{equation}
 \end{lemma}
 \begin{proof}
-  Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
-  as $\settrunc{\inv f}$ is an inverse for it.
-
-  Conversely, if $x:\setTrunc{A \ptdto A}$ is invertible, then 
-  it has a unique inverse $\inv x$, and we want to
-  produce an element of the type:
-  \begin{displaymath}
-    \sum_{y:\setTrunc{A \ptdweq A}} x = i(y)
-  \end{displaymath}
-  %
-  As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
-  \ptdweq A}$, this type is a set itself. Hence, one might assume
-  that $x \jdeq \settrunc f$ for some function $f:A \ptdto A$ as well
-  as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \ptdto A$. 
-  %
-  From the inverse law in the monoid $\setTrunc{A \ptdto A}$, one
-  derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
-  the proposition that $f$ is an equivalence, on can then assume actual
-  witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
-  pseudo-inverse for $f$, which solves the problem.
+    By easy calculation.
 \end{proof}
 
-\begin{corollary}
-  For any $n\geq 2$, $\setTrunc{\Sn n \ptdweq \Sn n} \weq \bn 2$.
-  \label{cor:Sn-pointed-weq-is-bool}
+
+
+
+
+This equivalence $\Phi$ also satisfies the following lemma:
+
+\begin{lemma} \label{lem:ap-Sigma}
+    Let $X$ be a pointed type and $f : A \to B$ be a function.
+    The following square commutes (up to homotopy):\todo{check whether it should be $\mathsf{ap}$ or $\Omega(f)$.}
+    \begin{equation}
+    \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \node (A) at (0,0) {$(\susp X \to_* A)$}; 
+    \node (D) at (1,0) {$(\susp X \to_* B)$}; 
+    \node (B) at (0,1) {$(X \to_* \Omega A)$}; 
+    \node (C) at (1,1) {$(X \to_* \Omega B)$}; 
+    
+    \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
+    \draw[arrow] (A) to node [left] {$\Phi$} (B);
+    \draw[arrow] (B) to node [above] {$\ap f \circ \_$} (C);
+    \draw[arrow] (D) to node [right] {$\Phi$} (C);
+    \end{tikzpicture}
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    By calculation.
+    %  Starting with $f_0 : \susp X \to A$ and $f_1 : f_0(N) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
+    We start in the top left corner with $g_0 : \susp X \to A$ and $g_1 : g_0(N) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
+    \begin{equation}
+    \begin{alignedat}{5}
+    &\quad && g_0 : \susp X \to A & \\
+    \mapsto &&& \lambda x. g_1^{-1} \ct \ap {g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct g_1 : X \to \Omega A \\
+    \mapsto &&& \lambda x. f_1^{-1} \ct \ap {f_0}(g_1)^{-1} \ct  \ap {f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \ap {f_0}(g_1) \ct f_1 : X \to \Omega B
+    \end{alignedat}
+    \end{equation}
+    If we go first right, then down, we get:
+    \begin{equation}
+    \begin{alignedat}{5}
+    &\quad && g_0 : \susp X \to A & \\
+    \mapsto &&&  f_0 \circ g_0 : \susp X \to B \\
+    \mapsto &&& \lambda x. f_1^{-1} \ct \ap {f_0}(g_1)^{-1} \ct  \ap {f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \ap {f_0}(g_1) \ct f_1 : X \to \Omega B
+    \end{alignedat}
+    \end{equation}
+    The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.)
+\end{proof}
+
+This implies in particular:
+
+
+\begin{corollary}\label{lem:iterated-ap-Sigma}
+    For all $n \geq 0$ and $f$ as above, the diagram
+    \begin{equation}
+    \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \node (A) at (0,0) {$(\Sn n \to_* A)$}; 
+    \node (D) at (1,0) {$(\Sn n \to_* B)$}; 
+    \node (B) at (0,1) {$\Omega^n A$}; 
+    \node (C) at (1,1) {$\Omega^n B$}; 
+    
+    \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
+    \draw[arrow] (A) to node [left] {$\Phi^n$} (B);
+    \draw[arrow] (B) to node [above] {$\Omega^n(f)$} (C);
+    \draw[arrow] (D) to node [right] {$\Phi^n$} (C);
+    \end{tikzpicture}
+    \end{equation}
+    commutes.
 \end{corollary}
 \begin{proof}
-  We have shown the result for $n=2$ in the previous chapter
-  (\cref{cor:equivalence-conn-component}). Suppose $n\geq 2$. By
-  \cref{prop:susp-iso-monoids}, the monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and
-  $\setTrunc{\Sn {n+1} \ptdto \Sn {n+1}}$ are equivalent. Hence, their respective
-  submonoids of invertible elements are also equivalent. By
-  \cref{lemma:invertible-truncated-Sn-pointed-weq}, the type $\setTrunc{\Sn n
-  \ptdweq \Sn n}$ is then equivalent to $\setTrunc{\Sn {n+1} \ptdweq \Sn
-  {n+1}}$.
-
-  The result is then proved by induction on $n\geq 2$.
+    By induction on $n$. Note that $\Sn 0$ is the two-element type,\todo{If we define $\Sn 1 :\equiv \susp(\Sn 0)$ at the very beginning, this is nicer. Maybe say that both are equivalent definitions?} and pointed functions from it into $A$ are determined by a single point in $A$. This makes the case $n \equiv 0$ trivial.
+    The step from $n$ to $n+1$ is an application of \cref{lem:ap-Sigma}.
 \end{proof}
 
-To prove \cref{thm:higher-spheres}, we need to get from this result to {\em
-unpointed} equivalences. For the next lemma, consider $\Sn n$ as a bare type
-and let us use $(\Sn n,x)$ to mean the type $\Sn n$ pointed by an element
-$x:\Sn n$.
-\begin{lemma}
-  Let $n\geq 2$. For all $x:\Sn n$, one has $\setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$.
-  \label{lemma:pointed-weq-free-point-codomain-is-bool}
+
+The above lemmas allow us to formulate a connection between the maps $\susp$ in \eqref{eq:susp-monoid-morphism} and $\sigma$ in \eqref{eq:sigma}:
+%, which will be needed in order to use \cref{thm:freudenthal} for \cref{thm:susp-is-monoid-iso}:
+
+\begin{lemma} \label{lem:sigma-susp}
+    The maps $\sigma$ and $\susp$ are equal up to canonical isomorphism, i.e.\ the square
+    \begin{equation} \label{eq:needs-to-commute}
+    \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \node (A) at (0,0) {$(\Sn n \to_* \Sn n)$}; 
+    \node (B) at (0,1) {$\Omega^n(\Sn n)$}; 
+    \node (C) at (1,1) {$\Omega^{n+1}(\Sn {n+1})$}; 
+    \node (D) at (1,0) {$(\Sn {n+1} \to_* \Sn {n+1})$}; 
+    
+    \draw[arrow] (A) to node [left] {$\phi^n$} (B);
+    \draw[arrow] (B) to node [above] {$\Omega^n(\sigma)$} (C);
+    \draw[arrow] (D) to node [right] {$\phi^n$} (C);
+    \draw[arrow] (A) to node [above] {$\susp$} (D);
+    \end{tikzpicture}
+    \end{equation}
+    commutes.
 \end{lemma}
 \begin{proof}
-  The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
-  set, i.e.\ $0$-truncated.
-  Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
-  $(n-2)$-connected. 
-  By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
-  it suffices to give an element of $P(N)$ to get a
-  dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
-  provided by \cref{cor:Sn-pointed-weq-is-bool}.
+ Consider the following:
+\begin{equation}
+\begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
+\tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+\node (A) at (0,0) {$(\Sn n \to_* \Sn n)$}; 
+\node (B) at (0,2) {$\Omega^n(\Sn n)$}; 
+\node (C) at (1,2) {$\Omega^{n+1}(\Sn {n+1})$}; 
+\node (D) at (1,0) {$(\Sn {n+1} \to_* \Sn {n+1})$}; 
+\node (E) at (1,1) {$(\Sn n \to_* \Omega \Sigma \Sn n)$};
+
+\draw[arrow] (A) to node [left] {$\phi^n$} (B);
+\draw[arrow] (B) to node [above] {$\Omega^n(\sigma)$} (C);
+%  \draw[arrow] (D) to node [right] {$\sim$} (C);
+\draw[arrow] (A) to node [above] {$\susp$} (D);
+\draw[arrow] (D) to node [right] {$\phi$} (E);
+\draw[arrow] (E) to node [right] {$\phi^n$} (C);
+\draw[arrow] (A) to node [above right] {$\sigma \circ \blank$} (E);
+\end{tikzpicture}
+\end{equation}
+The top triangle commutes by \cref{lem:adj-prop}.
+The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.\todo{fix $\ap f$ vs $\Omega(f)$!!}
 \end{proof}
 
-We can now give a proof of \cref{thm:higher-spheres}.
-\begin{proof}[Proof of \cref{thm:higher-spheres}]
-  One relies on the well-know equivalence:
-  \begin{displaymath}
-    (\Sn n \weq \Sn n) = \sum_{x:\Sn n}\left( (\Sn n, N) \ptdweq (\Sn n, x) \right)
-  \end{displaymath}
-  By \cite[Thm 7.3.9]{HoTT}, the $k$-truncation of a total space
-  $\sum_{x:A}P(x)$ is equivalent to the $k$-truncation of the space
-  $\sum_{x:A}\Trunc{P(x)}_k$. Hence, we find:
-  \begin{align*}
-    \setTrunc{\Sn n = \Sn n} &\weq \setTrunc{\Sn n \weq \Sn n} \\
-    &\weq \setTrunc{\sum_{x:\Sn n} (\Sn n, N) \weq (\Sn n, x)} \\
-    &\weq \setTrunc{\sum_{x:\Sn n} \setTrunc{(\Sn n, N) \weq (\Sn n, x)}} \\
-    &\weq \setTrunc{\Sn n \times \bn 2} \\
-    &\weq \setTrunc{\Sn n} \times \setTrunc{\bn 2} \\
-    &\weq \bn 2
-  \end{align*}
-\end{proof}
+\cref{lem:sigma-susp} characterises the function \eqref{eq:susp-monoid-morphism}
+in terms of $\sigma$.
+Our motivation for this characterisation is that we know something about $\sigma$ through the following result:
 
-\section{Appendix}
-\label{sec:appendix}
+\begin{theorem}[{Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}}] \label{thm:freudenthal}
+    If $X$ is $n$-connected and pointed, with $n \geq 0$, then the map $\sigma$ is $2n$-connected. \qed
+\end{theorem}
 
-\subsection{General Results}
 
-TODO:
-The following could allow us to simplify the proof of \cref{thm:higher-spheres}.
+Choosing $X$ to be $\Sn n$ and using that $\Sn n$ is $(n-1)$-truncated \cite[find-lemma-number]{HoTT}, we get in particular the following instantiation:
+
+
+\begin{corollary} \label{cor:sigma-truncated}
+For $n \geq 1$, the map
+\begin{equation} 
+\sigma : \Sn n \to \Omega(\Sn {n+1})
+\end{equation}
+is $2(n-1)$-truncated.
+\end{corollary}
+
+
+To make use of this, we show how connectedness of functions interacts with loop spaces:
 
 \begin{lemma}
-    Let $X$ be a type and $x : X$ be a point. If $X$ is connected, then the canonical map
+    Let $A$ and $B$ be types and $f : A \to B$ be a $k$-connected function ($k \geq -1$).
+    For all $a_1, a_2 : A$, the function $\ap f : a_1 = a_2 \to f(a_1) = f(a_2)$ is $(k-1)$-connected.
+\end{lemma}
+\begin{proof}
+    Let us fix $a_1, a_2$, and $p : f(a_1) = f(a_2)$.
+    We need to show that the fibre
     \begin{equation}
-        \setTrunc{(X,x) \ptdto (X,x)} \xrightarrow{\setTrunc{\pi_1}} \setTrunc{X \to X}
+%        \higherTrunc {k-1} {\Sigma q : a_1 = a_2. \ap{f}(q) = p}
+        \Sigma q : a_1 = a_2. \ap{f}(q) = p
     \end{equation}
+    is $(k-1)$-connected.
+    
+%    By the connectedness assumption on $f$, the type $\higherTrunc k {f^{-1}(a_2)}$ is contractible. 
+    We consider the two elements 
+    $\highertrunc k {(a_1, p)}$ 
+    and  
+    $\highertrunc k {(a_2, \refl {f(a_2)})}$ of 
+    the type $\higherTrunc k {f^{-1}(a_2)}$, which is contractible by the connectedness assumption on $f$.
+    Therefore, the type of equalities between the two chosen elements is contractible as well.
+    By \cite[Theorem 7.3.12]{HoTT}, this type of equalities is equivalent to
+    \begin{equation} \label{eq:eq-in-truncated-fibre}
+    \higherTrunc {k-1} {(a_1, p) = (a_2, \refl {f(a_2)})}.
+    \end{equation} 
+    By \cite[Theorem 2.7.2 and todo-find-number]{HoTT}, 
+%    the equality type $(a_1,p) = (a_2,\refl {f(a_2)})$ is 
+    this type is further equivalent to
+    \begin{equation}
+    \higherTrunc {k-1} {\Sigma(q : a_1 = a_2). \ap f(q) = p},
+    \end{equation} 
+    and the contractibility of this type is exactly what we had to show.
+\end{proof}
+
+By $k$-fold application of the above lemma, we get:
+\begin{corollary} \label{cor:n-2-connected}
+    If $f : A \to_* B$ is $(k+m)$-connected with $k \geq 0$, $m \geq -2$, then
+    $\Omega^k(f) : \Omega^k(A) \to \Omega^k(B)$ (viewed as a non-pointed function) is $m$-connected. 
+    
+    Building on \cref{cor:sigma-truncated} we get that, for $n \geq 1$, the map
+    \begin{equation} 
+    \sigma : \Omega^n(\Sn n) \to \Omega^{n+1}(\Sn {n+1})
+    \end{equation}
+    is $(n-2)$-connected.
+    \qed
+\end{corollary}
+
+We are now ready to restate and prove \cref{thm:susp-is-monoid-iso}:
+
+\suspiso*
+\begin{proof}
+    Since identity and composition of the monoid structures are just given by the identity function and function composition,
+    preservation of the monoid structure is just the (wild) functoriality of $\susp$.
+    
+    What is left to show is $0$-connectedness.
+    In the commuting square of \cref{lem:sigma-susp}, the two vertical maps are equivalences and the bottom horizontal map is $(n-2)$-truncated by \cref{cor:n-2-connected}.
+    This implies that the top horizontal map $\susp$ is $(n-2)$-connected as well.
+    By assumption we have $(n-2) \geq 0$, which means that an $(n-2)$-connected map is also $0$-truncated.
+\end{proof}
+
+Set-truncating a $0$-connected map gives an equivalences, and therefore:
+\begin{corollary} \label{cor:iso-of-monoids}
+    For all $n \geq 2$, the map
+    \begin{equation}
+    \higherTrunc 0 {\susp} : \higherTrunc 0 {\Sn n \to_* \Sn n} \to \higherTrunc 0 {\Sn {n+1} \to_* \Sn {n+1}}
+    \end{equation}
+    is an isomorphism of monoids.\qed
+\end{corollary}
+
+Recalling that we eventually want to reach non-pointed equivalences $\Sn n \simeq \Sn n$, 
+we want to remove the base points of the monoid morphism above. 
+We have the following general result:
+
+\begin{lemma}
+    Let $X$ be a type and $x : X$ be a point. If $X$ is connected, then the canonical map which forgets the preservation of the base point $x$, given as
+    \begin{alignat}{2}
+    \setTrunc{\pi_1}: && \quad & \setTrunc{(X,x) \ptdto (X,x)} \to \setTrunc{X \to X} \\
+    &&& \highertrunc 0 {(f,p)} \mapsto \highertrunc 0 f
+    \end{alignat}
     is an isomorphism of monoids.
 \end{lemma}
 \begin{proof}
     We have 
     \begin{alignat}{2}
-        &&& \setTrunc{\Sigma(f : X \to X). f(x) = x} \\
-        &\simeq &\quad & \setTrunc{\Sigma(f : X \to X). \setTrunc{f(x) = x}} \\
-        &\simeq && \setTrunc{X \to X},
+    &&& \setTrunc{\Sigma(f : X \to X). f(x) = x} \\
+    &\simeq &\quad & \setTrunc{\Sigma(f : X \to X). \setTrunc{f(x) = x}} \\
+    &\simeq && \setTrunc{X \to X},
     \end{alignat}
     where the first steps holds by \cite[Thm.~7.3.9]{HoTT} and the second by the connectedness assumption.
     Composition and identities are preserved by the projection $\pi_1$, and thus also by $\setTrunc{\pi_1}$.
 \end{proof}
+
+Since every $\Sn n$ (for $n \geq 1$) is connected, this allows us to get rid of the preservation of base points in \cref{cor:iso-of-monoids}:
+
+\begin{corollary} \label{cor:higher-spheres-2-comp}
+    For all natural numbers $n \geq 2$, the map
+    \begin{equation}
+    \higherTrunc 0 {\susp} : \higherTrunc 0 {\Sn n \to \Sn n} \to \higherTrunc 0 {\Sn {n+1} \to \Sn {n+1}}
+    \end{equation}
+    is an isomorphism of monoids.
+\end{corollary}
+
+This allows us to see that there are two connected components of symmetries of spheres:
+
+\begin{theorem} \label{thm:higher-spheres-2}
+    For any $n \geq 1$, we have an equivalence of type
+    \begin{equation}
+    \higherTrunc 0 {\Sn n= \Sn n} \weq \bn 2
+    \end{equation} 
+\end{theorem}
+\begin{proof}
+    For $n = 1$ and $n=2$, we have established this result in the previous sections (see \cref{todo-enter-thm-numbers}).
+    For higher $n$, it follows by induction on $n$ with the help of \cref{cor:higher-spheres-2-comp} that the monoids $\Sn n \to \Sn n$ have exactly two invertible elements.
+\end{proof}
+
+\todo[inline]{Nicolai: Now, we can try to show that id and -id are elements of the two components (i.e.\ in different components). I will think about it.}
+
+\section{Appendix}
+\label{sec:appendix}
+
 
 
 \subsection{Path algebra}
@@ -1390,6 +1563,138 @@ denote a wild functor by its first two components only.
   It remains to prove that the equivalence $\Phi_{A,B}$ is natural in $A$ and
   $B$ in the sense of \cref{def:wild-adj}.
 \end{proof}
+
+
+\subsection{Old section: Symmetries of the $n$-Sphere}
+
+\todo[inline]{Nicolai: I have replaced the $n\geq 2$ development with my completed approach. I keep the old attempt here, it contains a few ideas which I have not used but which could still be of interest.}
+
+In this section, we want to generalize the work done on the $2$-sphere to higher
+spheres. More precisely, we will prove that
+\begin{theorem}
+    \label{thm:higher-spheres}
+    For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
+\end{theorem}
+
+If we manage to prove that $\id_{\Sn n}$ is not merely equal to $-\id_{\Sn n}$,
+then together with \cref{prop:sups-components-are-equiv}, one has the slightly
+better result:
+\begin{displaymath}
+(\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
+\end{displaymath}
+{\color{red} Maybe add a remark as: This is reminiscent of the well-know result
+    about the orthogonal group: $\mathrm O(n)$ is a Lie group with 2 connected
+    components, both diffeomorphic to $\mathrm{SO}(n)$.
+}
+%
+
+\cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
+of \cref{thm:higher-spheres}. We will now focus on the induction step. 
+%
+We take an interest in the following map, induced by the suspension wild functor:
+\begin{displaymath}
+\susp (\blank) : (\Sn n \ptdto \Sn n) \to (\Sn {n+1} \ptdto \Sn{n+1})
+\end{displaymath}
+The wild nature of the functor just vanishes once the function types are
+set-truncated.
+%
+In other words, it means that the following map is a morphism of monoids:
+\begin{displaymath}
+\setTrunc{\susp(\blank)} : \setTrunc{\Sn n \ptdto \Sn n} \to \setTrunc{\Sn {n+1} \ptdto \Sn{n+1}}
+\end{displaymath}
+
+\begin{proposition}
+    For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoids.
+    \label{prop:susp-iso-monoids}
+\end{proposition}
+\begin{proof}
+    {\color{red}Freudenthal + check Marc's diagram.}
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
+    is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
+    \setTrunc{A \ptdto A}$.
+    \label{lemma:invertible-truncated-Sn-pointed-weq}
+\end{lemma}
+\begin{proof}
+    Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
+    as $\settrunc{\inv f}$ is an inverse for it.
+    
+    Conversely, if $x:\setTrunc{A \ptdto A}$ is invertible, then 
+    it has a unique inverse $\inv x$, and we want to
+    produce an element of the type:
+    \begin{displaymath}
+    \sum_{y:\setTrunc{A \ptdweq A}} x = i(y)
+    \end{displaymath}
+    %
+    As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
+        \ptdweq A}$, this type is a set itself. Hence, one might assume
+    that $x \jdeq \settrunc f$ for some function $f:A \ptdto A$ as well
+    as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \ptdto A$. 
+    %
+    From the inverse law in the monoid $\setTrunc{A \ptdto A}$, one
+    derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
+    the proposition that $f$ is an equivalence, on can then assume actual
+    witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
+    pseudo-inverse for $f$, which solves the problem.
+\end{proof}
+
+\begin{corollary}
+    For any $n\geq 2$, $\setTrunc{\Sn n \ptdweq \Sn n} \weq \bn 2$.
+    \label{cor:Sn-pointed-weq-is-bool}
+\end{corollary}
+\begin{proof}
+    We have shown the result for $n=2$ in the previous chapter
+    (\cref{cor:equivalence-conn-component}). Suppose $n\geq 2$. By
+    \cref{prop:susp-iso-monoids}, the monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and
+    $\setTrunc{\Sn {n+1} \ptdto \Sn {n+1}}$ are equivalent. Hence, their respective
+    submonoids of invertible elements are also equivalent. By
+    \cref{lemma:invertible-truncated-Sn-pointed-weq}, the type $\setTrunc{\Sn n
+        \ptdweq \Sn n}$ is then equivalent to $\setTrunc{\Sn {n+1} \ptdweq \Sn
+        {n+1}}$.
+    
+    The result is then proved by induction on $n\geq 2$.
+\end{proof}
+
+To prove \cref{thm:higher-spheres}, we need to get from this result to {\em
+    unpointed} equivalences. For the next lemma, consider $\Sn n$ as a bare type
+and let us use $(\Sn n,x)$ to mean the type $\Sn n$ pointed by an element
+$x:\Sn n$.
+\begin{lemma}
+    Let $n\geq 2$. For all $x:\Sn n$, one has $\setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$.
+    \label{lemma:pointed-weq-free-point-codomain-is-bool}
+\end{lemma}
+\begin{proof}
+    The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
+    set, i.e.\ $0$-truncated.
+    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
+    $(n-2)$-connected. 
+    By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
+    it suffices to give an element of $P(N)$ to get a
+    dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
+    provided by \cref{cor:Sn-pointed-weq-is-bool}.
+\end{proof}
+
+We can now give a proof of \cref{thm:higher-spheres}.
+\begin{proof}[Proof of \cref{thm:higher-spheres}]
+    One relies on the well-know equivalence:
+    \begin{displaymath}
+    (\Sn n \weq \Sn n) = \sum_{x:\Sn n}\left( (\Sn n, N) \ptdweq (\Sn n, x) \right)
+    \end{displaymath}
+    By \cite[Thm 7.3.9]{HoTT}, the $k$-truncation of a total space
+    $\sum_{x:A}P(x)$ is equivalent to the $k$-truncation of the space
+    $\sum_{x:A}\Trunc{P(x)}_k$. Hence, we find:
+    \begin{align*}
+    \setTrunc{\Sn n = \Sn n} &\weq \setTrunc{\Sn n \weq \Sn n} \\
+    &\weq \setTrunc{\sum_{x:\Sn n} (\Sn n, N) \weq (\Sn n, x)} \\
+    &\weq \setTrunc{\sum_{x:\Sn n} \setTrunc{(\Sn n, N) \weq (\Sn n, x)}} \\
+    &\weq \setTrunc{\Sn n \times \bn 2} \\
+    &\weq \setTrunc{\Sn n} \times \setTrunc{\bn 2} \\
+    &\weq \bn 2
+    \end{align*}
+\end{proof}
+
 
 \bibliographystyle{alpha}
 \bibliography{bib}
