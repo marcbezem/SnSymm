@@ -1159,7 +1159,7 @@ is $2(n-1)$-truncated.
 
 To make use of this, we show how connectedness of functions interacts with loop spaces:
 
-\begin{lemma}
+\begin{lemma} \label{lem:conn-ap}
     Let $A$ and $B$ be types and $f : A \to B$ be a $k$-connected function ($k \geq -1$).
     For all $a_1, a_2 : A$, the function $\ap f : a_1 = a_2 \to f(a_1) = f(a_2)$ is $(k-1)$-connected.
 \end{lemma}
@@ -1241,32 +1241,43 @@ We have the following general result:
     \pi_1: && \quad & ((X,x) \ptdto (Y,y)) \to (X \to Y) \\
     &&& (f,p) \mapsto f
     \end{alignat}
-    is $n$-connected. 
-    If $(X,x) \equiv (Y,y)$, then $\setTrunc{\pi_1}$ isomorphism of monoids.
-\end{lemma}
-
-\todo[inline]{TODO TODO TODO fix above and below!!}
-
-\begin{lemma} \label{lem:forget-points-conn}
-    Let $X$ be a type and $x : X$ a point. If $X$ is connected, then the canonical map which forgets the preservation of the base point $x$, given as
-    \begin{alignat}{2}
-    \setTrunc{\pi_1}: && \quad & \setTrunc{(X,x) \ptdto (X,x)} \to \setTrunc{X \to X} \\
-    &&& \highertrunc 0 {(f,p)} \mapsto \highertrunc 0 f
-    \end{alignat}
-    is an isomorphism of monoids.
+    is $(n-1)$-connected. 
+%    If $(X,x) \equiv (Y,y)$, then $\setTrunc{\pi_1}$ isomorphism of monoids.
 \end{lemma}
 \begin{proof}
-    We have 
-    \begin{alignat}{2}
-    &&& \setTrunc{\Sigma(f : X \to X). f(x) = x} \\
-    &\simeq &\quad & \setTrunc{\Sigma(f : X \to X). \setTrunc{f(x) = x}} \\
-    &\simeq && \setTrunc{X \to X},
+    Assume $f : X \to Y$.
+    We calculate
+    \begin{alignat}{3}
+    &\quad && \pi_1^{-1}(f) \\
+    \equiv &&&  \Sigma\left(\Sigma(g : X \to Y).g(x) = y\right). (g = f) \\
+    \simeq &&&  f(x) = y, \label{eq:simplified-preimage}
     \end{alignat}
-    where the first steps holds by \cite[Thm.~7.3.9]{HoTT} and the second by the connectedness assumption.
-    Composition and identities are preserved by the projection $\pi_1$, and thus also by $\setTrunc{\pi_1}$.
+    where we use that the dependent pair type $\Sigma(g : X \to Y). g = f$ is contractible.
+    Since $Y$ is $n$-connected, the type \eqref{eq:simplified-preimage} is $(n-1)$-connected by \cref{lem:conn-ap}.
+%    
+%    \begin{alignat}{2}
+%    &&& \setTrunc{\Sigma(f : X \to X). f(x) = x} \\
+%    &\simeq &\quad & \setTrunc{\Sigma(f : X \to X). \setTrunc{f(x) = x}} \\
+%    &\simeq && \setTrunc{X \to X},
+%    \end{alignat}
+%    where the first steps holds by \cite[Thm.~7.3.9]{HoTT} and the second by the connectedness assumption.
+%    Composition and identities are preserved by the projection $\pi_1$, and thus also by $\setTrunc{\pi_1}$.
 \end{proof}
 
-Since every $\Sn n$ (for $n \geq 1$) is connected, this allows us to get rid of the preservation of base points in \cref{cor:iso-of-monoids}:
+Using that every $\Sn n$ (for $n \geq 2$) is $1$-connected, the case $(X,x) \equiv (Y,y) \equiv (\Sn n, N)$ gives the following:
+%\begin{corollary} \label{cor:forget-point-iso}
+%    If $X$ is a $1$-connected type and $x:A$, then
+%    \begin{alignat}{2}
+%    \setTrunc{\pi_1}: && \quad & \setTrunc{(X,x) \ptdto (X,x)} \to \setTrunc{X \to X} \\
+%    &&& \highertrunc 0 {(f,p)} \mapsto \highertrunc 0 f
+%    \end{alignat}
+%    is an isomorphism of monoids.
+%\end{corollary}
+%\begin{proof}
+%    The monoid structure is clearly preserved, and a $0$-connected map becomes an equivalence when $0$-truncating.
+%\end{proof}
+%
+%Since every $\Sn n$ (for $n \geq 2$) is $1$-connected, this allows us to get rid of the preservation of base points in \cref{cor:iso-of-monoids}:
 
 \begin{corollary} \label{cor:higher-spheres-2-comp}
     For all natural numbers $n \geq 2$, the map
@@ -1275,8 +1286,11 @@ Since every $\Sn n$ (for $n \geq 1$) is connected, this allows us to get rid of 
     \end{equation}
     is an isomorphism of monoids.
 \end{corollary}
+\begin{proof}
+    The monoid structure is clearly preserved, and the map is $0$-connected by the lemma. A $0$-connected map becomes an equivalence when $0$-truncating domain and codomain.
+\end{proof}
 
-This allows us to see that there are two connected components of symmetries of spheres:
+We now see that there are two connected components of symmetries of spheres:
 
 \begin{theorem} \label{thm:higher-spheres-2}
     For any $n \geq 1$, we have an equivalence of type
