@@ -924,7 +924,7 @@ $\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well-known type.
 However, one can still establish that both connected components are equivalent.
 In fact, it has little to do with $\Sp$ itself, and one can state a more
 general result.
-\begin{proposition}
+\begin{proposition} \label{prop:equiv-susp-comp}
   Let $A$ be a pointed type. Then:
   \begin{displaymath}
     \conncomp{(\susp A = \susp A)}{\id_{\susp A}} \weq \conncomp{(\susp A = \susp A)}{-\id_{\susp A}}
@@ -1234,8 +1234,21 @@ Recalling that we eventually want to reach non-pointed equivalences $\Sn n \sime
 we want to remove the base points of the monoid morphism above. 
 We have the following general result:
 
-\begin{lemma}
-    Let $X$ be a type and $x : X$ be a point. If $X$ is connected, then the canonical map which forgets the preservation of the base point $x$, given as
+
+\begin{lemma} \label{lem:forget-points-conn}
+    Let $X$ and $Y$ be types, and $x : X$ and $y : Y$ be points. If $Y$ is $n$-connected, then the canonical map which forgets the preservation of the base point $x$, given as
+    \begin{alignat}{2}
+    \pi_1: && \quad & ((X,x) \ptdto (Y,y)) \to (X \to Y) \\
+    &&& (f,p) \mapsto f
+    \end{alignat}
+    is $n$-connected. 
+    If $(X,x) \equiv (Y,y)$, then $\setTrunc{\pi_1}$ isomorphism of monoids.
+\end{lemma}
+
+\todo[inline]{TODO TODO TODO fix above and below!!}
+
+\begin{lemma} \label{lem:forget-points-conn}
+    Let $X$ be a type and $x : X$ a point. If $X$ is connected, then the canonical map which forgets the preservation of the base point $x$, given as
     \begin{alignat}{2}
     \setTrunc{\pi_1}: && \quad & \setTrunc{(X,x) \ptdto (X,x)} \to \setTrunc{X \to X} \\
     &&& \highertrunc 0 {(f,p)} \mapsto \highertrunc 0 f
@@ -1280,8 +1293,37 @@ This allows us to see that there are two connected components of symmetries of s
 
 \todo[inline]{Nicolai: Here, we should prove that id and -id are elements of the two components (i.e.\ in different components). My plan was to show that the two wild functors $\susp$ and $-\susp$ commute. But it's trickier than I thought. Maybe we don't do this?}
 
+\subsection{The Structure of the Components of $\boldsymbol{(\Sn n = \Sn n)}$}
 
-\todo[inline]{todo: show that $(\Sn n = \Sn n) \not= (\Sn n + \Sn n)$ for $n \geq 2$}
+Having established that there are exactly two connected components of $(\Sn n = \Sn n)$, we want to examine the structure of each of these components.
+The first observation we make is simple:
+
+\begin{proposition} \label{prop:general-case-conn-comp-equiv}
+    For all $n \geq 1$, the two connected components of $(\Sn n = \Sn n)$ are equivalent.
+\end{proposition}
+\begin{proof}
+    For $n=1$ and $n=2$, this statement is given by the main result of \cref{sec:circle-case} and by \cref{prop:equiv-susp-comp}, respectively.
+    \todo[inline]{Nicolai: Need to fill in the argument for $n>2$. Something like $\susp$ preserves equivalence of components.}
+\end{proof}
+
+\cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ in $(\Sn n = \Sn n)$.
+We next calculate the fundamental group of this type.
+
+
+
+
+
+Recall that, in \cref{sec:circle-case}, we have seen that
+\begin{equation}
+(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1).
+\end{equation}
+We show
+
+
+XXX
+
+Finally, we want to examine the structure of 
+
 
 
 \section{Appendix}
