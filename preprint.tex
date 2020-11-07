@@ -600,14 +600,36 @@ We start by carrying out the first step of the road map.
     \hcomp \ap{\inv{\mrd(\blank)}}(p). 
   \end{displaymath}
   Indeed, for $p\jdeq \refl{\base}$, both sides reduce to
-  $\refl{\inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}}$. One can
+  $\refl{\inv{\mrd(\base)} \mrd(\base) \inv{\mrd(\base)}}$.
+The right hand side of the last equality can be depicted as:
+
+\begin{center}
+  \begin{tikzpicture}
+    \matrix (m) [matrix of nodes, column sep=9em] {
+      S & N & S & N \\
+    };%
+    \draw[->] (m-1-1.north) to[bend left=60] node[above, name=Afrom] {$\inv{\mrd(\base)}$} (m-1-2.north);
+%
+    \draw[->] (m-1-1.south) to[bend right=60] node[below, name=Ato] {$\inv{\mrd(x)}$} (m-1-2.south);
+%
+    \draw[cell] (Afrom) to node[fill=white] {$\ap{\inv{\mrd(\blank)}}(p)$} (Ato);%
+    \draw[->] (m-1-2) to node[above] {$\mrd(\base)$} (m-1-3);%
+    \draw[->] (m-1-3.north) to[bend left=60] node[above, name=Bfrom] {$\inv{\mrd(\base)}$} (m-1-4.north);
+%
+    \draw[->] (m-1-3.south) to[bend right=60] node[below, name=Bto] {$\inv{\mrd(x)}$} (m-1-4.south);%
+    \draw[cell] (Bfrom) to node[fill=white] {$\ap{\inv{\mrd(\blank)}}(p)$} (Bto);%
+  \end{tikzpicture}
+\end{center}
+
+
+One can
   apply that in the case $p\jdeq \Sloop$ and
   invoke~\cref{lemma:mustache-lemma} to get an element of type
   \begin{displaymath}
     {\ap{\inv{\mrd(\blank)}}(\Sloop)}^2 = \refl{\inv{\mrd(\base)}}
   \end{displaymath}
-  Notice that the term on the left hand-side is equal to
-  $\ap{\inv{\blank}}(\ap\mrd (\Sloop^2))$ and the right hand-side is
+  Notice that the term on the left hand side is equal to
+  $\ap{\inv{\blank}}(\ap\mrd (\Sloop^2))$ and the right hand side is
   equal to $\ap{\inv{\blank}}(\refl{\mrd(\base)})$. Because
   $\inv{\blank}$ is an equivalence, this is equivalently given by an
   element of type
