@@ -47,6 +47,14 @@
   }%
 }%
 
+\tikzset{
+tikzshortarrow/.style={
+    shorten >=0.2cm,
+    shorten <=0.2cm, 
+    thick,
+}
+}
+
 \renewcommand{\ap}[1]{\left[{#1}\right]}
 \newcommand{\ptdto}{\to_\ast}%
 \newcommand{\ptdweq}{\weq_\ast}%
@@ -1323,25 +1331,50 @@ The first observation we make is simple:
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
 The rest of this subsection is devoted to calculating the fundamental group of this type, which also allows us to see that the equivalence $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise for $n > 1$.
 
+%\begin{theorem}
+%    The fundamental group of the type of symmetries on $\Sn n$ is
+%    as follows.
+%    If $n \in \{1,2\}$, then $\pi_1(\Sn n = \Sn n)$ is $\ZZ$;
+%    if $n \geq 3$, then $\pi_1(\Sn n = \Sn n)$
+%    is $\ZZ \slash 2\ZZ$.
+%\end{theorem}
+%\begin{proof}
+%    For $n=1$, the statement follows from the main result of \cref{sec:circle-case}.
+%    For $n\geq 2$, our argument is as follows.\todo{this only works for $n \geq 3$ ??!!??}
+%\end{proof}
+
 \begin{theorem}
-    The fundamental group of the type of symmetries on $\Sn n$ is
-%    \begin{itemize}
-%        \item $\ZZ$, if $n \in \{1,2\}$;
-%        \item $\ZZ \slash 2\ZZ$, if $n \geq 3$.
-%    \end{itemize}.
-    as follows.
-    If $n \in \{1,2\}$, then $\pi_1(\Sn n = \Sn n)$ is $\ZZ$;
-    if $n \geq 3$, then $\pi_1(\Sn n = \Sn n)$
-    is $\ZZ \slash 2\ZZ$.
+    For $n \geq 3$, the fundamental group of the type of symmetries on $\Sn n$ is the cyclic group of order $2$:
+    \begin{equation}
+    \pi_1(\Sn n = \Sn n) = \ZZ \slash 2\ZZ
+    \end{equation}
+    as groups.\todo{We don't really show this, unfortunately. We only show equality as types, where the second thing is just Bool. BUT there is only one group structure anyway, and it's clear what the identity is.}
 \end{theorem}
 \begin{proof}
-    For $n=1$, the statement follows from the main result of \cref{sec:circle-case}.
-    For $n\geq 2$, our argument is as follows.\todo{this only works for $n \geq 3$ ??!!??}
-    XXX CHECK THIS XXX
     
+    \newdimen\R
+    \R=3cm
+    
+    \newcommand{\rot}{120}
+    
+    \begin{equation} \label{eq:3-coherator}
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \node (P1) at (\rot+0:\R) {$\Omega^{n+1}(\Sn n)$}; 
+    \node (P2) at (\rot+60:\R) {$\Omega(\Omega^{n}(\Sn n))$}; 
+    \node (P3) at (\rot+120:\R) {$\Omega(\Sn n \to_* \Sn n)$}; 
+    \node (P4) at (\rot+180:\R) {$\Omega(\Sn n \to \Sn n)$}; 
+    \node (P5) at (\rot+240:\R) {$\Omega(\Sn n \simeq \Sn n)$}; 
+    \node (P6) at (\rot+300:\R) {$\Omega(\Sn n = \Sn n)$}; 
+
+    \draw[<->, tikzshortarrow] (P1) to node [above left] {$\sim$} (P2);
+    \draw[<-, tikzshortarrow] (P2) to node [left] {$\Omega(\Phi^n)$} (P3);
+    \draw[->, tikzshortarrow] (P3) to node [above left] { $\Omega(\pi_1)$} (P4);
+    \draw[<->, tikzshortarrow] (P5) to node [right] {$\sim$} (P6);
+    \draw[->, tikzshortarrow] (P5) to node [below right] {$\Omega(\pi_1)$} (P4);
+    \end{tikzpicture}
+    \end{equation}
+    \todo[inline]{todo}
 \end{proof}
-
-
 
 
 
