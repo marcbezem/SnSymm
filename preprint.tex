@@ -11,12 +11,15 @@
 \usepackage{hyperref}
 
 
+% fundamental group notation uses this
+\usepackage{upgreek}
+
 
 
 
 %%% only for writing. Remove in the final version.
 \usepackage{todonotes}
-
+\usepackage{showlabels}
 
 \usepackage[capitalize]{cleveref}
 
@@ -1365,40 +1368,81 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %    For $n\geq 2$, our argument is as follows.\todo{this only works for $n \geq 3$ ??!!??}
 %\end{proof}
 
-\begin{theorem}
+\begin{theorem} \label{thm:fund-grp-of-symmetries}
     For $n \geq 3$, the fundamental group of the type of symmetries on $\Sn n$ is the cyclic group of order $2$:
     \begin{equation}
-    \pi_1(\Sn n = \Sn n) = \ZZ \slash 2\ZZ
+    \fgr(\Sn n = \Sn n) = \ZZ \slash 2\ZZ
     \end{equation}
-    as groups.\todo{We don't really show this, unfortunately. We only show equality as types, where the second thing is just Bool. BUT there is only one group structure anyway, and it's clear what the identity is.}
+    as groups.
 \end{theorem}
 \begin{proof}
+    Consider the following maps:
     
     \newdimen\R
-    \R=3cm
+    \R=4cm
     
     \newcommand{\rot}{120}
     
-    \begin{equation} \label{eq:3-coherator}
+    \begin{equation*} 
     \begin{tikzpicture}[baseline=(current bounding box.center)]
-    \node (P1) at (\rot+0:\R) {$\Omega^{n+1}(\Sn n)$}; 
-    \node (P2) at (\rot+60:\R) {$\Omega(\Omega^{n}(\Sn n))$}; 
-    \node (P3) at (\rot+120:\R) {$\Omega(\Sn n \to_* \Sn n)$}; 
-    \node (P4) at (\rot+180:\R) {$\Omega(\Sn n \to \Sn n)$}; 
-    \node (P5) at (\rot+240:\R) {$\Omega(\Sn n \simeq \Sn n)$}; 
-    \node (P6) at (\rot+300:\R) {$\Omega(\Sn n = \Sn n)$}; 
+    \node (P1) at (\rot+300:\R) {$\Omega^{n+1}(\Sn n)$}; 
+    \node (P2) at (\rot+240:\R) {$\Omega(\Omega^{n}(\Sn n))$}; 
+    \node (P3) at (\rot+180:\R) {$\Omega(\Sn n \to_* \Sn n)$}; 
+    \node (P4) at (\rot+120:\R) {$\Omega(\Sn n \to \Sn n)$}; 
+    \node (P5) at (\rot+60:\R) {$\Omega(\Sn n \simeq \Sn n)$}; 
+    \node (P6) at (\rot+0:\R) {$\Omega(\Sn n = \Sn n)$}; 
 
-    \draw[<->, tikzshortarrow] (P1) to node [above left] {$\sim$} (P2);
-    \draw[<-, tikzshortarrow] (P2) to node [left] {$\Omega(\Phi^n)$} (P3);
-    \draw[->, tikzshortarrow] (P3) to node [above left] { $\Omega(\pi_1)$} (P4);
-    \draw[<->, tikzshortarrow] (P5) to node [right] {$\sim$} (P6);
-    \draw[->, tikzshortarrow] (P5) to node [below right] {$\Omega(\pi_1)$} (P4);
+    \draw[<->, tikzshortarrow] (P1) to node [above right] {$\sim$} (P2);
+    \draw[<-, tikzshortarrow] (P2) to node [below right] {$\Omega(\Phi^n)$} (P3);
+    \draw[->, tikzshortarrow] (P3) to node [above] { $\Omega(\pi_1)$} (P4);
+    \draw[<->, tikzshortarrow] (P5) to node [above left] {$\sim$} (P6);
+    \draw[->, tikzshortarrow] (P5) to node [below left] {$\Omega(\pi_1)$} (P4);
     \end{tikzpicture}
-    \end{equation}
-    \todo[inline]{todo}
+    \end{equation*}
+The two upper arrows as well as the map $\Omega(\Phi^n)$ are evidently equivalences.
+The two remaining maps are both labelled as $\Omega(\pi_1)$,
+but it is important to note that these are different projections:
+\begin{align}
+& \pi_1 : (\Sn n \simeq \Sn n) \to (\Sn n \to \Sn n) \label{eq:project-eqv} \\
+& \pi_1 : (\Sn n \to_* \Sn n) \to (\Sn n\to \Sn n) \label{eq:project-point}
+\end{align}
+The map \eqref{eq:project-eqv} is the projection which drops the proof that a map is an equivalence. Since this is a proposition, the map $\pi_1$ is an embedding, and $\Omega(\pi_1)$ is an equivalence.
+The map \eqref{eq:project-point} instead drops the information that the base point is preserved, and is $(n-2)$-connected by \cref{lem:forget-points-conn}.
+By \cref{lem:conn-ap}, this implies that $\Omega(\pi_1)$ is $(n-3)$-connected.
+Since we have assumed $n \geq 3$, it is in particular $0$-connected and taking the $0$-truncation of the hexagon gives us an equivalence
+\begin{equation}
+    \setTrunc{\Omega(\Sn n = \Sn n)} \simeq \setTrunc{\Omega^{n+1}(\Sn n)}.
+\end{equation}
+By Brunerie's results 
+%note: these results are NOT in Guillaume's thesis, but only in the paper. I only checked the arxiv version, the published on is behind a paywall.
+\cite[Corollaries 3 and 4 of the arXiv version]{brunerie2019james}, the fundamental groups on the right-hand side is $\ZZ \slash 2\ZZ$.
+
+The calculation above a priori only shows an equivalence of types (i.e.\ $\fgr(\Sn n = \Sn n) = \bn 2$).
+The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
 \end{proof}
 
+This calculation also allows us to see that the result from \cref{sec:circle-case} does not generalise:
 
+\begin{proposition}\label{prop:not-generalising}
+    For $n \geq 3$, we have
+    \begin{equation}
+    (\Sn n = \Sn n) \not= (\Sn n + \Sn n)
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
+    Without loss of generality, we can assume that $\varphi(\refl{})$ lies in the left summand, 
+    i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$. 
+    By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $N$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
+    As the fundamental groups on both sides do not coincide, $\varphi$ cannot be an equivalence.
+\end{proof}
+
+Let us finally summarise the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries,prop:not-generalising} together:
+
+\begin{theorem}
+    For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\fgr(\ZZ \slash 2\ZZ)$.
+    The characterisation $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise.
+\end{theorem}
 
 \section{Appendix}
 \label{sec:appendix}
