@@ -1032,7 +1032,7 @@ First of all, recall that we have a (``wild'') adjunction $\susp \dashv \Omega$ 
 For a pointed type $X$, this adjunction comes with the unit
 \begin{align}
 \sigma : \; &X \to \Omega(\susp X) \label{eq:sigma} \\
-&x \mapsto \mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}.
+&x \mapsto \mrd(x_0)^{-1} \mrd(x).
 \end{align}
 If $A$ is a second pointed type, the adjunction can also be described via an equivalence of function spaces \cite[Lemma 6.5.4]{HoTT},
 \begin{equation}\label{eq:adj-equivalence-susp-loopspace}
@@ -1098,8 +1098,8 @@ The equivalence $\Phi$ also satisfies the following lemma:
     \begin{equation}
     \begin{alignedat}{5}
     &\quad && g_0 : \susp X \to A & \\
-    \mapsto &&& \lambda x. g_1^{-1} \ct \ap {g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct g_1 : X \to \Omega A \\
-    \mapsto &&& \lambda x. f_1^{-1} \ct \ap {f_0}(g_1)^{-1} \ct  \ap {f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \ap {f_0}(g_1) \ct f_1 : X \to \Omega B
+    \mapsto &&& \lambda x. g_1 \cdot \ap {g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot g_1^{-1} : X \to \Omega A \\
+    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
     \end{alignedat}
     \end{equation}
     If we go first right, then down, we get:
@@ -1107,7 +1107,7 @@ The equivalence $\Phi$ also satisfies the following lemma:
     \begin{alignedat}{5}
     &\quad && g_0 : \susp X \to A & \\
     \mapsto &&&  f_0 \circ g_0 : \susp X \to B \\
-    \mapsto &&& \lambda x. f_1^{-1} \ct \ap {f_0}(g_1)^{-1} \ct  \ap {f_0 \circ g_0}(\mathsf{merid}(x) \ct \mathsf{merid}(x_0)^{-1}) \ct \ap {f_0}(g_1) \ct f_1 : X \to \Omega B
+    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
     \end{alignedat}
     \end{equation}
     The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.) \todo{Pierre: this is the kind of stuff done in the HoTT-book that bug me a little}
