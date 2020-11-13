@@ -696,7 +696,7 @@ second homotopy group $\pi_2(\Sp)$ is defined as the set-truncation
 $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
 \begin{displaymath}
   \tau: \loopspace\null\Sp \to \Sc, \, p \mapsto \ap\hopf(p)(\base),
-\text{ pointed with $\refl{\base}:\tau(\refl{N})=\base$}.
+\text{ pointed by $\refl{\base}:\tau(\refl{N})=\base$}.
 \end{displaymath}
 Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
@@ -776,14 +776,15 @@ that takes a function $f:\susp A \to B$ pointed by $f_0:b=f(N)$ and maps it to
 \begin{displaymath}
   \inv {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot f_0 : A \to \loopspace\null B
 \end{displaymath}
-which is pointed by the path $\varpi_{f}:\refl b = \inv {f_0} \cdot (\ap f (\inv
-\mrd(a)\mrd(a))) \cdot f_0$ given by path algebra operations.
+which is pointed by the path $\varpi_{f}:\inv {f_0} \cdot (\ap f (\inv
+\mrd(a)\mrd(a))) \cdot f_0 = \refl{b}$ given by path algebra operations.
 
 In particular, for each type $A$, one gets a {\em unit} function 
 \begin{displaymath}
-  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A.
+  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A,
+ \text{ pointed by $\varpi_{\id{\susp A}}$}.
 \end{displaymath}
-This map is involved in the so-called triangle identity: for any type $B$,
+The map $\eta_A$ is involved in the so-called triangle identity: for any type $B$,
 there is an element of the following type
 \begin{equation}
   \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
@@ -792,7 +793,7 @@ there is an element of the following type
 given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:b=f(N)$
 \begin{displaymath}
   \loopspace\null(f) \circ \eta_A \jdeq \inv {f_0} \cdot \ap f (\eta_A(\blank)) \cdot f_0 
-  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\cdot\mrd(\blank)) \cdot f_0 \jdeq \Phi_{A,B}(f). 
+  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot f_0 \jdeq \Phi_{A,B}(f). 
 \end{displaymath}
 
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
@@ -810,6 +811,21 @@ We now define $\bar d$ as the composition
   (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
   \pi_2(\Sp) \stackrel \zeta \to \ZZ.
 \end{displaymath}
+
+We will show that the degree functions $d$ and $\bar d$ coincide, 
+for which we need the following lemma.
+\begin{lemma}
+The function $\eta_{\Sc}$ is a section of $\tau$, that is, $\tau\circ\eta_{\Sc} = \id_{\Sc}$.
+\label{lem:eta-S1-section-tau}
+\end{lemma}
+\begin{proof} For all $z\in\Sc$ we can calculate:
+$\tau(\eta_{\Sc}(z)) = 
+\tau(\ap{\id_{\Sp}}(\inv{\mrd(\base)} \mrd(z)) = 
+\ap{\hopf}(\inv{\mrd(\base)} \mrd(z))(\base) = 
+(\iota_{\base}^{-1} \circ \iota_z) (\base) =
+\id_{\Sc}^{-1}(\iota_z (\base)) = z$.
+\end{proof}
+
 
 \begin{proposition}
   The equation $d=\bar d$ holds.
@@ -854,8 +870,9 @@ We now define $\bar d$ as the composition
   functoriality of $\setTrunc\blank$ once we have shown $\settrunc \ell =
   \inv\zeta(1)$. By definition of $\zeta$, this is equivalent to showing that
   $\loopspace\null(\tau) (\ell) = \Sloop$ in $\loopspace\null \Sc$. However, we
-  have seen\footnote{\color{red}Actually we have not, let's make it a lemma
-  soon after the definition of $\tau$} that $\loopspace\null (\eta_\Sc)$ is a
+  have seen\footnote{\color{red}Lemma~\ref{lem:eta-S1-section-tau};
+note that I'm changing to Nicolai's $f(a)=b$ for the type of pointing paths.} 
+that $\loopspace\null (\eta_\Sc)$ is a
   section of $\loopspace\null(\tau)$. Hence it follows that:
   \begin{displaymath}
     \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.
