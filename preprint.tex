@@ -772,12 +772,12 @@ respectively, there is an equivalence
 \begin{displaymath}
   \Phi_{A,B}: (\susp A \ptdto B) \weq (A \ptdto \loopspace \null B) 
 \end{displaymath}
-that takes a function $f:\susp A \to B$ pointed by $f_0:b=f(N)$ and maps it to 
+that takes a function $f:\susp A \to B$ pointed by $f_0: f(N)=b$ and maps it to 
 \begin{displaymath}
-  \inv {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot f_0 : A \to \loopspace\null B
+  {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot \inv{f_0} : A \to \loopspace\null B
 \end{displaymath}
-which is pointed by the path $\varpi_{f}:\inv {f_0} \cdot (\ap f (\inv
-\mrd(a)\mrd(a))) \cdot f_0 = \refl{b}$ given by path algebra operations.
+which is pointed by the path $\varpi_{f}:{f_0} \cdot (\ap f (\inv
+\mrd(a)\mrd(a))) \cdot \inv{f_0} = \refl{b}$ given by path algebra operations.
 
 In particular, for each type $A$, one gets a {\em unit} function 
 \begin{displaymath}
@@ -790,10 +790,10 @@ there is an element of the following type
   \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
   \label{eq:triangle-identity-unit}
 \end{equation}
-given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:b=f(N)$
+given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:f(N)=b$
 \begin{displaymath}
-  \loopspace\null(f) \circ \eta_A \jdeq \inv {f_0} \cdot \ap f (\eta_A(\blank)) \cdot f_0 
-  = \inv {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot f_0 \jdeq \Phi_{A,B}(f). 
+  \loopspace\null(f) \circ \eta_A \jdeq {f_0} \cdot \ap f (\eta_A(\blank)) \cdot \inv{f_0} 
+  = {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot \inv{f_0} \jdeq \Phi_{A,B}(f). 
 \end{displaymath}
 
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
