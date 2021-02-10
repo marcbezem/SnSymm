@@ -211,11 +211,15 @@ Freudenthal's suspension theorem.
 \section{Symmetries of the circle}
 \label{sec:circle-case}%
 
-In this section, we will provide an equivalence:
-\begin{equation}
-  \label{eq:symm-cricle}%
-  (\Sc = \Sc) \weq \Sc+\Sc.
-\end{equation}
+In this section, we will prove the following result.
+\begin{theorem}
+  There is an equivalence
+  \begin{equation}
+    \label{eq:symm-cricle}%
+    (\Sc = \Sc) \weq \Sc+\Sc.
+  \end{equation}
+  \label{thm:symmetries-of-S1}
+\end{theorem}
 We will treat univalence as transparent, so that equivalences
 $f:\Sc\weq \Sc$ will be treated as elements of $\Sc=\Sc$ without any
 warning. In particular, we shall write as if
@@ -288,7 +292,7 @@ path algebra, as wanted.
   through the equivalence of \cref{eq:loopspace-circle-Z}.
 \end{proof}
 \cref{lemma:S1-id-neq-minusid} proves that $\id_\Sc$ and $-\id_\Sc$
-lie in different connected component of $\Sc=\Sc$. We will now prove
+lie in different connected components of $\Sc=\Sc$. We will now prove
 that there are no more connected components in $\Sc=\Sc$. We will need
 the following consequence of \cref{lemma:S1-id-neq-minusid}.
 \begin{corollary}%
@@ -678,37 +682,37 @@ the first of which is simple:
 \begin{enumerate}
   \item Because we are targeting a proposition, and $\Sp$ is
     connected, one can as well suppose that $\varphi$ is pointed. 
-    Let $p:N=\varphi(N)$ be the given path.
+    Let $p:\varphi(N)=N$ be the given path.
   \item Construct a degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
-    monoid morphism. In particular, it maps pointed equivalences to invertible
-    elements in $\ZZ$, that is $1$ or $-1$.
+    morphism of wild monoids. In particular, it maps pointed equivalences to
+    invertible elements in $\ZZ$, that is $1$ or $-1$.
   \item Prove that $d$ is `weakly injective', meaning that $d(f)=d(g)$ 
     implies $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
     this will prove either $\Trunc{(\id_\Sp,\refl N)=(\varphi,p)}$ 
-    or $\Trunc{(-\id_\Sp,\mrd(\base))=(\varphi,p)}$, from which
+    or $\Trunc{(-\id_\Sp,\inv{\mrd(\base)})=(\varphi,p)}$, from which
     one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
     $\Trunc{-\id_\Sp = \varphi}$.\label{it:weakly_injective}
 \end{enumerate}
 
-In order to perform the second and the third step, we first recall the result from the
-\cite[Cor. 8.5.2]{HoTT}: the second homotopy group of $\Sp$ is $\ZZ$. More precisely, the
-second homotopy group $\pi_2(\Sp)$ is defined as the set-truncation
-$\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
+In order to perform the second and the third step, we first recall the result
+from \cite[Cor. 8.5.2]{HoTT}: the second homotopy group of $\Sp$ is $\ZZ$. More
+precisely, the second homotopy group $\hgr 2(\Sp)$ is defined as the
+set-truncation $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
 \begin{displaymath}
   \tau: \loopspace\null\Sp \ptdto \Sc, \, p \mapsto \ap\hopf(p)(\base),
 \text{ pointed by $\refl{\base}:\tau(\refl{N})=\base$}.
 \end{displaymath}
 Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
-$\setTrunc{\loopspace\null\tau}: \pi_2(\Sp) \to \pi_1(\Sc)$ on the set-truncations.
-Composing with the known isomorphism $\pi_1(\Sc) \weq \ZZ$, one
-ends up with a group isomorphism $\zeta: \pi_2(\Sp) \to \ZZ$. The degree of a
+$\setTrunc{\loopspace\null\tau}: \hgr 2(\Sp) \to \hgr 1(\Sc)$ on the set-truncations.
+Composing with the known isomorphism $\hgr 1(\Sc) \weq \ZZ$, one
+ends up with a group isomorphism $\zeta: \hgr 2(\Sp) \to \ZZ$. The degree of a
 pointed map is then defined as the image of $1$ through the induced morphism
 between the second homotopy groups, transported back and forth by $\zeta$. 
 Formally speaking one defines: 
 \begin{displaymath}
-  %d(f) \defequi \zeta\left(\pi_2(f)\left(\inv\zeta(1)\right)\right):\ZZ \qquad
-  d(f) \defequi \left(\zeta\circ\pi_2(f)\circ \inv\zeta\right)(1):\ZZ \qquad
+  %d(f) \defequi \zeta\left(\hgr 2(f)\left(\inv\zeta(1)\right)\right):\ZZ \qquad
+  d(f) \defequi \left(\zeta\circ\hgr 2(f)\circ \inv\zeta\right)(1):\ZZ \qquad
   \text{for any}\ f:\Sp\ptdto\Sp.
 \end{displaymath}
 
@@ -735,36 +739,36 @@ a path.
 \end{proposition}
 \begin{proof}
   First, let us prove that $\id_\Sp$, pointed by $\refl N$, has degree $1$.
-  This is easy because $\pi_2(\id_\Sp) = \id_{\pi_2(\Sp)}$ so that $d(\id_\Sp)
+  This is easy because $\hgr 2(\id_\Sp) = \id_{\hgr 2(\Sp)}$ so that $d(\id_\Sp)
   = \zeta(\inv\zeta(1)) = 1$.
 
   Now, let us prove that $d(g\circ f) = d(g)\times d(f)$ for any $f,g:\Sp
-  \ptdto\Sp$. This again comes from the functoriality of $\pi_2$
+  \ptdto\Sp$. This again comes from the functoriality of $\hgr 2$
   (\cite[after Lem.\ 7.3.3 and before Def.\ 8.4.2]{HoTT}), 
-  meaning that $\pi_2(g\circ f) = \pi_2(g)\circ\pi_2(f)$
+  meaning that $\hgr 2(g\circ f) = \hgr 2(g)\circ\hgr 2(f)$
   holds. Hence:
   \begin{align*}
-    d(g\circ f) &= \zeta\left( \pi_2(g\circ f)\left( \inv\zeta(1) \right) \right) 
+    d(g\circ f) &= \zeta\left( \hgr 2(g\circ f)\left( \inv\zeta(1) \right) \right) 
     \\
-    &= \zeta\left( \pi_2(g) \left( \pi_2(f)\left( \inv\zeta(1) \right)
+    &= \zeta\left( \hgr 2(g) \left( \hgr 2(f)\left( \inv\zeta(1) \right)
     \right) \right) 
     \\
-    &= \zeta\left( \pi_2(g) \left( \inv\zeta \left( \zeta \left( \pi_2(f)\left( \inv\zeta(1) \right)
+    &= \zeta\left( \hgr 2(g) \left( \inv\zeta \left( \zeta \left( \hgr 2(f)\left( \inv\zeta(1) \right)
     \right) \right) \right) \right)
     \\
-    &= \zeta \left( \pi_2(g) \left( \inv\zeta \left(d(f)\right) \right) \right)
+    &= \zeta \left( \hgr 2(g) \left( \inv\zeta \left(d(f)\right) \right) \right)
     \\
-    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)^{d(f)} \right) \right)
+    &= \zeta \left( \hgr 2(g) \left( \inv\zeta(1)^{d(f)} \right) \right)
     \\
-    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)\right)^{d(f)} \right)
+    &= \zeta \left( \hgr 2(g) \left( \inv\zeta(1)\right)^{d(f)} \right)
     \\
-    &= \zeta \left( \pi_2(g) \left( \inv\zeta(1)\right) \right)\times d(f)
+    &= \zeta \left( \hgr 2(g) \left( \inv\zeta(1)\right) \right)\times d(f)
     \\
     &= d(g)\times d(f)
   \end{align*}
   The chain of equalities above uses the fact that $\zeta$ is not just any
   equivalence but a group isomorphism: in particular, for any $n:\ZZ$, one
-  gets $\inv\zeta(n) = {\inv\zeta(1)}^n$ in $\pi_2(\Sp)$ (where the group
+  gets $\inv\zeta(n) = {\inv\zeta(1)}^n$ in $\hgr 2(\Sp)$ (where the group
   operation is denoted multiplicatively).
 \end{proof}
 
@@ -835,7 +839,7 @@ in the element of $\bn 2$ that is not the point of $\bn 2$ as as pointed type.
 We now define $\bar d$ as the composition
 \begin{displaymath}
   (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
-  \pi_2(\Sp) \stackrel \zeta \to \ZZ.
+  \hgr 2(\Sp) \stackrel \zeta \to \ZZ.
 \end{displaymath}
 
 We will show that the degree functions $d$ and $\bar d$ coincide, 
@@ -859,7 +863,7 @@ $\tau(\eta_{\Sc}(z)) =
 \end{proposition}
 \begin{proof}
   Taking the respective definitions of $d$ and $\bar d$ into account,
-  we have to prove $\pi_2 (f)({\inv\zeta(1)})= \settrunc {\gamma(f)}$ for all $f$.
+  we have to prove $\hgr 2 (f)({\inv\zeta(1)})= \settrunc {\gamma(f)}$ for all $f$.
   Unfolding definitions, 
   we have to prove that the outer diagram commutes in the following:
   \begin{displaymath}
@@ -870,36 +874,33 @@ $\tau(\eta_{\Sc}(z)) =
       \dar["\textcircled{\small 2}", phantom]
       & (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"] 
       \ar[r,"\setTrunc\blank"] \dar["\blank\circ \loopspace\null(\eta_{\Sc})"swap] 
-      & (\pi_2(\Sp) \to \pi_2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\textcircled{\small 5}", phantom] &
+      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\textcircled{\small 5}", phantom] &
       \\
       & {} \drar["\textcircled{\small 3}"{near end}, phantom] 
       & (\loopspace\null\Sc \ptdto \loopspace 2 \Sp) \dar["\blank\circ\eta_{\bn 2}"swap] 
       \drar["\textcircled{\small 4}", phantom] &
-      & \pi_2(\Sp)
+      & \hgr 2(\Sp)
       \\
       (\Sc \ptdto \loopspace\null\Sp) \ar[rr,"\Phi_{\bn 2,\loopspace\null\Sp}"swap] \ar[urr,"\loopspace\null"] & 
       & (\bn 2 \ptdto \loopspace 2 \Sp) \rar["\ev_0"swap] & \loopspace 2 \Sp \urar["\settrunc\blank"swap] & 
     \end{tikzcd}
   \end{displaymath}
   We will do that by proving that each of the small inner diagrams denoted
-  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commute, for
-  elementary reasons. Triangles $\textcircled{\small 1}$ and
-  $\textcircled{\small 3}$ commute as instances of
-  \cref{eq:triangle-identity-unit}. The commutativity of square
-  $\textcircled{\small 2}$ simply expresses the functoriality of
+  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commute, for elementary
+  reasons. Triangles $\textcircled{\small 1}$ and $\textcircled{\small 3}$
+  commute as instances of \cref{eq:triangle-identity-unit}. The commutativity
+  of square $\textcircled{\small 2}$ simply expresses the functoriality of
   $\loopspace\null$. In order to prove that $\textcircled{\small 4}$ and
   $\textcircled{\small 5}$ commute, we first need to define what is denoted
-  $\ell$: by definition, we set $\ell \defequi \loopspace\null (\eta_\Sc)(\Sloop)$.
-  Then it is almost immediate that $\textcircled{\small 4}$ commutes because
-  under the equivalence $\Sc = \susp {\bn 2}$, one has $\Sloop = \eta_{\bn 2}(0)$.
-  Now the commutativity of $\textcircled{\small 5}$ will follow from the
-  functoriality of $\setTrunc\blank$ once we have shown $\settrunc \ell =
-  \inv\zeta(1)$. By definition of $\zeta$, this is equivalent to showing that
-  $\loopspace\null(\tau) (\ell) = \Sloop$ in $\loopspace\null \Sc$. However, we
-  have seen\footnote{\color{red}Lemma~\ref{lem:eta-S1-section-tau};
-note that I'm changing to Nicolai's $f(a)=b$ for the type of pointing paths.} 
-that $\loopspace\null (\eta_\Sc)$ is a
-  section of $\loopspace\null(\tau)$. Hence it follows that:
+  $\ell$: by definition, we set $\ell \defequi \loopspace\null
+  (\eta_\Sc)(\Sloop)$.  Then it is almost immediate that $\textcircled{\small
+  4}$ commutes because under the equivalence $\Sc = \susp {\bn 2}$, one has
+  $\Sloop = \eta_{\bn 2}(0)$.  Now the commutativity of $\textcircled{\small
+  5}$ will follow from the functoriality of $\setTrunc\blank$ once we have
+  shown $\settrunc \ell = \inv\zeta(1)$. By definition of $\zeta$, this is
+  equivalent to showing that $\loopspace\null(\tau) (\ell) = \Sloop$ in
+  $\loopspace\null \Sc$. However, we have seen in \cref{lem:eta-S1-section-tau}
+  that $\tau$ is a retraction of $\eta_{\Sc}$. Hence it follows that:
   \begin{displaymath}
     \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.
   \end{displaymath}
@@ -907,17 +908,16 @@ that $\loopspace\null (\eta_\Sc)$ is a
 
 In the following we complete step \ref{it:weakly_injective}. 
 Recall that we have pointed $\id_\Sp$ by the path $\refl N$, 
-and $-\id_\Sp$ by the path $\mrd(\base)$.
+and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
 \begin{corollary}
   Any pointed equivalence is in the connect component of either $\id_\Sp$ or $-\id_\Sp$.
   \label{cor:equivalence-conn-component}
 \end{corollary}
 \begin{proof}
-  The previous result shows that 
-  $d(f) = \bar d(f) \defeq \zeta(\settrunc{\gamma(f)})$ 
-  with $\gamma, \zeta$ equivalences. As
-  $\Trunc{x = y}$ if and only if $\settrunc x = \settrunc y$ for any
-  $x,y:\loopspace\null \Sp$, the same property holds for $d$:
+  The previous result shows that $d(f) = \bar d(f) \defeq
+  \zeta(\settrunc{\gamma(f)})$ with $\gamma, \zeta$ equivalences. As
+  $\trunc\blank$ is $0$-connected, so is $d$, being a composition of
+  $0$-connected maps. That is:
   \begin{displaymath}
     d(f) = d(g) \quad \text{if and only if}\quad
     \Trunc{f = g} \quad \text{for any}\ f,g:\Sp \ptdto\Sp.
@@ -926,10 +926,11 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
   \cref{cor:degree-equivalences} that its degree is either $1$ or $-1$.
   However, one has already computed that $d(\id_\Sp) = 1$, and it remains only
   to prove that $d(-\id_\Sp) = -1$. However, we know that $-\id_\Sp$ is an
-  equivalence, hence its degree is either $1$ or $-1$. If it is $1$, the
-  previous property of $d$ would prove $\Trunc{\id_\Sp = -\id_\Sp}$ which we
-  have proved false. Hence $d(-\id_\Sp) = -1$.
-  
+  equivalence, hence its degree is either $1$ or $-1$, again by
+  \cref{cor:degree-equivalences}. If it is $1$, the previous property of $d$
+  would prove $\Trunc{\id_\Sp = -\id_\Sp}$ which we have proved false in
+  \cref{lemma:S2-id-neq-minusid}. Hence $d(-\id_\Sp) = -1$.
+%%  
 % WHAT TO DO WITH THAT: seems to prove that id‡-id without the Hopf fibration...
 %   For that it is enough to show that the type
 %   $\loopspace 2 (-\id_\Sp)(\ell) = \inv\ell$ has an element, 
@@ -937,7 +938,7 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
 %   with $\settrunc \ell = \inv\zeta(1)$ as in the previous proof. 
 %   For then we have
 %   \begin{align*}
-%     d(-\id_\Sp) &\jdeq \zeta(\pi_2(-\id_\Sp)(\inv\zeta(1)))
+%     d(-\id_\Sp) &\jdeq \zeta(\hgr 2(-\id_\Sp)(\inv\zeta(1)))
 %                  = \zeta(\setTrunc{\loopspace 2 (-\id_\Sp)}(\settrunc{\ell}))
 %                  = \zeta(\settrunc{\loopspace 2 (-\id_\Sp)(\ell)})\\
 %                 & = \zeta( \settrunc{\inv\ell}) = - \zeta( \settrunc{\ell})
@@ -987,10 +988,10 @@ and $-\id_\Sp$ by the path $\mrd(\base)$.
     \Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp = \varphi}
   \end{displaymath}
   is a proposition by \cref{lemma:S2-id-neq-minusid}. Hence, one can as well
-  assume that $\varphi$ is pointed by a path $p:N=\varphi(N)$. Then from
+  assume that $\varphi$ is pointed by a path $p:\varphi(N) = N$. Then from
   \cref{prop:symm-S2-connected-components}, it follows that:
   \begin{displaymath}
-    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} + \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)}.
+    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} + \Trunc{(-\id_\Sp,\inv{\mrd(\base)}) = (\varphi, p)}.
   \end{displaymath}
   It is then enough to prove the two following propositions:
   \begin{align*}
@@ -1020,22 +1021,28 @@ general result.
   %
 
   Now, define $f:{({\susp A} \to {\susp A})} \to ({\susp A} \to {\susp A})$ by mapping
-  $\varphi$ to the function defined by ${\susp A}$-induction in the following way:
-  \begin{align*}
-    &f(\varphi)(N) \jdeq \varphi(S), \quad f(\varphi)(S) \jdeq \varphi(N),\\
-    &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
-  \end{align*}
-  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{{\susp A}
-  \to {\susp A}}$. Indeed, for any $\varphi:{\susp A} \to {\susp A}$, the function $(f\circ
-  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$.
-  Moreover, 
-  \[
-  \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
-  = \inv{\inv{\ap{\varphi}(\mrd(x))}} = \ap{\varphi}(\mrd(x)),
-  \]
-  so an easy ${\susp A}$-induction shows that $(f\circ f)(\varphi) = \varphi$.
+  $\varphi$ to $\varphi\circ(-\id_{\susp A})$.
+%%  
+%%  the function defined by ${\susp A}$-induction in the following way:
+%%  \begin{align*}
+%%    &f(\varphi)(N) \jdeq \varphi(S), \quad f(\varphi)(S) \jdeq \varphi(N),\\
+%%    &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
+%%  \end{align*}
+%%  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{{\susp A}
+%%  \to {\susp A}}$. Indeed, for any $\varphi:{\susp A} \to {\susp A}$, the function $(f\circ
+%%  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$.
+%%  Moreover, 
+%%  \[
+%%  \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
+%%  = \inv{\inv{\ap{\varphi}(\mrd(x))}} = \ap{\varphi}(\mrd(x)),
+%%  \]
+%%  so an easy ${\susp A}$-induction shows that $(f\circ f)(\varphi) = \varphi$.
+%%  %
+%%  Another easy ${\susp A}$-induction shows that $f(\id_{\susp A}) = -\id_{\susp A}$.
+  As $-\id_{\susp A}\circ -\id_{\susp A} = \id_{\susp A}$, the function $f$ is
+  an equivalence which is its own pseudo-inverse. Moreover, one has that
+  $f(\id_{\susp A}) = -\id_{\susp A}$.
   %
-  Another easy ${\susp A}$-induction shows that $f(\id_{\susp A}) = -\id_{\susp A}$.
   The equivalence $f$ restricts then into an equivalence between the connected
   component of $\id_{\susp A}$ and the connected component of $-\id_{\susp A}$. 
   Being an equivalence is a property, so that the connected component of an
@@ -1394,8 +1401,37 @@ Using that every $\Sn n$ (for $n \geq 2$) is $1$-connected, the case $(X,x) \equ
     The monoid structure is clearly preserved, and the map is $0$-connected by the lemma. A $0$-connected map becomes an equivalence when $0$-truncating domain and codomain.
 \end{proof}
 
-We now see that there are two connected components of symmetries of spheres:
+Recall that we are ultimately interested in the group $\setTrunc{\Sn n = \Sn n}$ and not in the monoid $\setTrunc{\Sn n \to \Sn n}$ itself. The following result states that the former is the group of invertible elements of the latter.
+\begin{lemma}
+    Let $A$ be a type. The type of invertible elements in the monoid $\setTrunc{A \to A}$
+    is the (essential) image of the induced inclusion $i:\setTrunc{A \weq A} \to
+    \setTrunc{A \to A}$.
+    \label{lemma:invertible-truncated-Sn-pointed-weq}
+\end{lemma}
+\begin{proof}
+    Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
+    as $\settrunc{\inv f}$ is an inverse for it.
+    
+    Conversely, if $x:\setTrunc{A \to A}$ is invertible, then 
+    it has a unique inverse $\inv x$, and we want to
+    produce an element of the type:
+    \begin{displaymath}
+    \sum_{y:\setTrunc{A \weq A}} x = i(y)
+    \end{displaymath}
+    %
+    As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
+        \weq A}$, this type is a set itself. Hence, one might assume
+    that $x \jdeq \settrunc f$ for some function $f:A \to A$ as well
+    as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \to A$. 
+    %
+    From the inverse law in the monoid $\setTrunc{A \to A}$, one
+    derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
+    the proposition that $f$ is an equivalence, on can then assume actual
+    witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
+    pseudo-inverse for $f$, which solves the problem.
+\end{proof}
 
+We now see that there are two connected components of symmetries of spheres:
 \begin{theorem} \label{thm:higher-spheres-2}
     For any $n \geq 1$, we have an equivalence of type
     \begin{equation}
@@ -1403,8 +1439,12 @@ We now see that there are two connected components of symmetries of spheres:
     \end{equation} 
 \end{theorem}
 \begin{proof}
-    For $n = 1$ and $n=2$, we have established this result in the previous sections (see \cref{todo-enter-thm-numbers}).
-    For higher $n$, it follows by induction on $n$ with the help of \cref{cor:higher-spheres-2-comp} that the monoids $\Sn n \to \Sn n$ have exactly two invertible elements.
+  For $n = 1$ and $n=2$, we have established this result in the previous
+  sections (see \cref{thm:symmetries-of-S1} and
+  \cref{prop:symm-S2-connected-components}).  For higher $n$, it follows by
+  induction on $n$ with the help of \cref{cor:higher-spheres-2-comp} that the
+  monoids $\setTrunc{\Sn n \to \Sn n}$ have exactly two invertible elements.
+  Then \cref{lemma:invertible-truncated-Sn-pointed-weq} llows us to conclude.
 \end{proof}
 
 \subsection{Concrete Symmetries of $\boldsymbol{\Sn n}$}
@@ -1443,9 +1483,40 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     For $n \geq 3$, the fundamental group of the type of symmetries on $\Sn n$ is the cyclic group of order $2$:
     \begin{equation}
     \fgr(\Sn n = \Sn n) = \ZZ \slash 2\ZZ
-    \end{equation}
+    \end{equation}za
     as groups.
 \end{theorem}
+
+\todo[inline]{Pierre: choose between the two proofs.}
+\begin{proof}[Alternative proof]
+  The following sequence is a fiber sequence by definition:
+  \begin{displaymath}
+    (\Sn n \ptdto \Sn n) \stackrel \iota \to (\Sn n \to \Sn n) \stackrel {\ev_\ast}\to \Sn n
+  \end{displaymath}
+  where $\iota$ is the map forgetting the pointing path, and where $\ev_\ast$
+  is the evaluation at the point of $\Sn n$. By \cite[find lemma]{HoTT}, this
+  induces a long exact sequence of groups:
+  \begin{displaymath}
+    \dots \to \hgr{k+1} (\Sn n) 
+    \to \hgr k(\Sn n \ptdto \Sn n) \to \hgr k(\Sn n \to \Sn n) \to \hgr k(\Sn n) 
+    %\to \hgr {k-1}(\Sn n \ptdto \Sn n)
+    \to \dots
+  \end{displaymath}
+  Hence for every $1\leq k < n-1$, this long sequence contains the following short exact sequence:
+  \begin{displaymath}
+    0 = \hgr {k+1}(\Sn n) 
+    \to \hgr k(\Sn n \ptdto \Sn n) \to \hgr k(\Sn n \to \Sn n) 
+    \to \hgr k(\Sn n) = 0
+  \end{displaymath}
+  In other words, for every $1\leq k < n-1$, one has 
+  \begin{displaymath}
+    \hgr k(\Sn n\to \Sn n) \weq \hgr k(\Sn n\ptdto\Sn n) \weq \hgr {n+k}(\Sn n)
+  \end{displaymath}
+  In particular for $n\geq 3$, $k\defequi 2$ enters the condition, and one gets:
+  \begin{displaymath}
+    \fgr (\Sn n = \Sn n) \weq \fgr (\Sn n \to \Sn n) \weq \hgr {n+1} (\Sn n) \weq \ZZ \slash 2\ZZ
+  \end{displaymath}
+\end{proof}
 \begin{proof}
     Consider the following maps:
     
@@ -1511,7 +1582,7 @@ This calculation also allows us to see that the result from \cref{sec:circle-cas
 Let us finally summarise the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries,prop:not-generalising} together:
 
 \begin{theorem}
-    For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\fgr(\ZZ \slash 2\ZZ)$.
+    For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\ZZ \slash 2\ZZ$.
     The characterisation $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise.
 \end{theorem}
 
@@ -1851,7 +1922,6 @@ In other words, it means that the following map is a morphism of monoids:
     Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
     is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
     \setTrunc{A \ptdto A}$.
-    \label{lemma:invertible-truncated-Sn-pointed-weq}
 \end{lemma}
 \begin{proof}
     Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
