@@ -325,16 +325,16 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
 \begin{proof}
   Let $\varphi$ be a symmetry of the circle, and let $\psi$ denote a
   quasi-inverse of $\varphi$. The type $\Sc$ being connected, one
-  has $\Trunc{\base=\varphi(\base)}$ and
-  $\Trunc{\base=\psi(\base)}$. Because the goal $P(\varphi)$ is
+  has $\Trunc{\varphi(\base) = \base}$ and
+  $\Trunc{\psi(\base) = \base}$. Because the goal $P(\varphi)$ is
   propositional, one can instead suppose actual paths
-  $\varphi_0\from\base=\varphi(\base)$ and
-  $\psi_0\from\base=\psi(\base)$. In other words, we can suppose that
+  $\varphi_0\from \varphi(\base) = \base$ and
+  $\psi_0\from \psi(\base) = \base$. In other words, we can suppose that
   $\varphi$ and its quasi-inverse $\psi$ are pointed maps. Denote
-  $\pi$ for a path of type $\id_\Sc=\varphi\psi$. Then one can craft a
-  path of type
+  $\pi$ for a path of type $\varphi\psi = \id_\Sc$. Then one can craft a
+  path $(\pi,)$ of type
   $(\varphi,\varphi_0) \circ (\psi,\psi_0) =
-  (\id_\Sc,\pi_{\base}\ap\varphi(\psi_0)\varphi_0)$. Now, consider the
+  (\id_\Sc, \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}})$. Now, consider the
   induced applications
   \begin{displaymath}
     \loopspace{} (\varphi,\varphi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc
@@ -352,33 +352,38 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
     &= \loopspace{} (\varphi,\varphi_0) \left(
       \loopspace{} (\psi,\psi_0) (\Sloop)
     \right)\\
-    &= \loopspace{} (\id_\Sc,\pi_{\base}\ap\varphi(\psi_0)\varphi_0) (\Sloop)\\
-    &= \inv{\left(\pi_{\base}\ap\varphi(\psi_0)\varphi_0\right)} \Sloop
-      \left(\pi_{\base}\ap\varphi(\psi_0)\varphi_0\right)\\
+    &= \loopspace{} (\id_\Sc, 
+    \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} (\Sloop))
+    \\
+    &=
+    \left( \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} \right)
+    \cdot \Sloop \cdot
+    \inv {\left( \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} \right)}
+    \\
     &= \Sloop
   \end{align*}
   where the last equality exploits commutativity of path composition
   in the loop space $(\base = \base)$. Through the equivalence
   of~\cref{eq:loopspace-circle-Z}, we get that $k\ell=1$ in $\ZZ$,
-  and by the decidability of $=$ in $\ZZ$ we get an element of $(k=1)+(k=-1)$. 
+  and by the decidability of equality in $\ZZ$ we get an element of $(k=1)+(k=-1)$. 
   From $k=1$, and because
-  $\loopspace{} (\varphi,\varphi_0) \jdeq \inv{\varphi_0}
-  \ap\varphi(\Sloop) \varphi_0$, one gets an element
+  $\loopspace{} (\varphi,\varphi_0) \jdeq \varphi_0
+  \ap\varphi(\Sloop) \inv {\varphi_0}$, one gets an element
   \begin{displaymath}
-    b\from \Sloop = \inv{\varphi_0} \ap\varphi(\Sloop)\varphi_0.
+    b\from \varphi_0 \ap\varphi(\Sloop) \inv {\varphi_0} = \Sloop.
   \end{displaymath}
-  One can then construct an element $\kappa\from \id_\Sc = \varphi$ by
+  One can then construct an element $\kappa\from \varphi = \id_\Sc$ by
   $\Sc$-induction by taking $\kappa(\base)$ to be
-  $\varphi_0 \from (\base = \varphi(\base))$ and $\ap \kappa(\Sloop)$
+  $\varphi_0 \from (\varphi(\base) = \base)$ and $\ap \kappa(\Sloop)$
   the element $b$ just defined, transported back over the equivalence
   \begin{displaymath}
-    (\pathover {\varphi_0} {\id_\Sc(\blank)=\varphi(\blank)} \Sloop {\varphi_0}) \weq
-    (\ap\varphi(\Sloop) \varphi_0 \inv \Sloop = \varphi_0)
-    \weq (\Sloop = \inv{\varphi_0} \ap\varphi(\Sloop) \varphi_0)
+    (\pathover {\varphi_0} {\varphi(\blank) = \id_\Sc(\blank)} \Sloop {\varphi_0}) \weq
+    ( \Sloop \varphi_0 \inv {\ap\varphi(\Sloop)} = \varphi_0)
+    \weq (\varphi_0 \ap\varphi(\Sloop) \inv {\varphi_0} = \Sloop)
   \end{displaymath}
   By taking $\trunc{\kappa}$, we get an element of
-  $\Trunc{\id_\Sc = \varphi}$. Similarly, from $k=-1$, one gets an
-  element of $\Trunc{-\id_\Sc =\varphi}$. So in both cases, one gets
+  $\Trunc{\varphi = \id_\Sc}$. Similarly, from $k=-1$, one gets an
+  element of $\Trunc{\varphi = -\id_\Sc}$. So in both cases, one gets
   an element of $P(\varphi)$.
 \end{proof}
 
