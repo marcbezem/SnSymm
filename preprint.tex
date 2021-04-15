@@ -10,6 +10,13 @@
 \usepackage{thm-restate}
 \usepackage{hyperref}
 
+%% biblatex for @online class
+\usepackage[
+  backend=biber,
+  bibencoding=utf8,
+  style=alphabetic]
+  {biblatex}
+\addbibresource{bib.bib}
 
 % fundamental group notation uses this
 \usepackage{upgreek}
@@ -25,6 +32,11 @@
 
 \input macros%
 \input macros2%
+
+\def\githubpath{\tt\small}
+\newcommand{\nat}{\mathrm{nat}}
+\newcommand{\ltr}{\mathrm{ltr}}
+\newcommand{\rtr}{\mathrm{rtr}}
 
 \hypersetup{
     colorlinks,
@@ -1063,6 +1075,8 @@ general result.
 
 \todo[inline]{Nicolai: I assume that, in previous sections, we have established the following: $\susp$ is a wild functor (could probably be called an \emph{H-functor}); the general definition of $\Sn n$ recursively on $n$; that $\Sn n \to \Sn n$ is an H-monoid (``wild monoid''; decide on terminology). 
 If we can show that, for $n = 1$ and $n=2$, this monoid is isomorphic to $(\ZZ,\times)$, we could formulate \cref{thm:higher-spheres-2} a bit more nicely; but currently, the text only assumes that the type of symmetries has two connected components. If any definition is missing, we need to add it below.
+
+Pierre: I think everything is there now.
 }
 
 Having discussed the cases $n = 1$ and $n = 2$ in some detail, we finally wish to establish the result that $\Sn n = \Sn n$ has two connected components, for all $n \geq 1$.
@@ -1079,31 +1093,36 @@ where we use that the suspension $\susp$ acts like a functor on morphisms:
     is a $0$-connected morphism of H-monoids.
 \end{restatable}
 
-As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see that $\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$ is an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n \to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, the argument of \cref{TODO:refer-to-earlier-result} applies.
+As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see
+that $\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$ is
+an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n
+\to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, the argument of
+\cref{TODO:refer-to-earlier-result} applies.
 
-\subsection{Connectedness of the H-Monoid Morphism}\todo[inline]{"H'' or ``wild'', decide and discuss this in the introduction. 
-
-Pierre: I vote for $H$, it catch the eye more than a mere adjective.}
-
-The goal of this subsection is to prove \cref{thm:susp-is-monoid-iso}.
-We need some preparation.
-First of all, recall that we have a (``wild'') adjunction $\susp \dashv \Omega$ \cite[find lemma]{HoTT}.
-\todo[inline]{As far as I know there is no lemma in the HoTT-book, only 6.5.4 describing the equivalence of \cref{eq:adj-equivalence-susp-loopspace}. In particular, I don't see the naturality of this equivalence anywhere in the book. }
-For a pointed type $X$, this adjunction comes with the unit
-\begin{align}
-\sigma : \; &X \to \Omega(\susp X) \label{eq:sigma} \\
-&x \mapsto \mrd(x_0)^{-1} \mrd(x).
-\end{align}
-If $A$ is a second pointed type, the adjunction can also be described via an equivalence of function spaces \cite[Lemma 6.5.4]{HoTT},
-\begin{equation}\label{eq:adj-equivalence-susp-loopspace}
-\Phi : (\susp(X) \to_* A) \simeq (X \to_* \Omega(A)).
+\subsection{Connectedness of the H-Monoid Morphism}
+%
+The goal of this subsection is to prove \cref{thm:susp-is-monoid-iso}. We need
+some preparation.  First of all, recall that we have a wild adjunction $\susp
+\dashv \Omega$ (see \cref{prop:susp-loop-adjunction}).
+%
+For a pointed type $X$, this adjunction comes with the unit, denoted $\eta(X)$
+in \cref{prop:susp-loop-adjunction}, that we rename here $\sigma_X$ to be in line
+with \cite{HoTT}:
+\begin{equation}  \label{eq:sigma}
+  \sigma_X : X \to \Omega(\susp X), \quad x \mapsto \mrd(x_0)^{-1} \mrd(x). 
 \end{equation}
-This equivalence is not spelled out in detail in \cite[Lemma 6.5.4]{HoTT}, hence we
-should make it explicit here for further computations. Denote $x_0$ and $a_0$ respectively the distinguished points of $X$ and $A$. Then $\Phi$ maps a pointed function $f:\susp X \ptdto A$ to the function
-\begin{displaymath}
-  \Phi(f) (x) \defequi \loopspace \null (f)(\inv{\mrd (x_0)} \mrd(x))
-\end{displaymath}
-\todo[inline]{Even specifying that this is a pointed function is cumbersome without any reference to paths coming from path algebra, let alone trying to prove it is an equivalence. For a tentative of doing so, see prop 5.4.}
+If $A$ is a second pointed type, the adjunction can also be described via an
+equivalence of function spaces (see \cref{def:wild-adj})
+\begin{equation}\label{eq:adj-equivalence-susp-loopspace}
+  \Phi_{X,A} : (\susp(X) \ptdto A) \simeq (X \ptdto \Omega(A)),\quad
+  f \mapsto \loopspace \null (f)(\inv{\mrd (x_0)} \mrd(\blank))
+\end{equation}
+%%This equivalence is not spelled out in detail in \cite[Lemma 6.5.4]{HoTT}, hence we
+%%should make it explicit here for further computations. Denote $x_0$ and $a_0$ respectively the distinguished points of $X$ and $A$. Then $\Phi$ maps a pointed function $f:\susp X \ptdto A$ to the function
+%%\begin{displaymath}
+%%  \Phi(f) (x) \defequi 
+%%\end{displaymath}
+%%\todo[inline]{Even specifying that this is a pointed function is cumbersome without any reference to paths coming from path algebra, let alone trying to prove it is an equivalence. For a tentative of doing so, see prop 5.4.}
 
 \begin{lemma} \label{lem:adj-prop}
     For pointed types $C$ and $D$, the following commutes (up to homotopy):
@@ -1115,26 +1134,29 @@ should make it explicit here for further computations. Denote $x_0$ and $a_0$ re
     \node (C) at (1,1) {$(C \to_* \Omega \susp D)$}; 
     
     \draw[arrow] (A) to node [above] {$\susp$} (D);
-    \draw[arrow] (A) to node [below left] {$\sigma \circ \, \blank$} (C);
-    \draw[arrow] (D) to node [right] {$\Phi$} (C);
+    \draw[arrow] (A) to node [below left] {$\sigma_D \circ \, \blank$} (C);
+    \draw[arrow] (D) to node [right] {$\Phi_{C,\susp D}$} (C);
     \end{tikzpicture}
     \end{equation}
 \end{lemma}
 \begin{proof}
-    By easy calculation.\todo{We should do it!}
-
-  Denote $c_0$ and $d_0$ respectively for the distinguished point of $C$ and $D$.
-  Let $f$ be a pointed function $C \ptdto D$ and let us show that the type
-  $\susp (\Phi (f)) = \sigma_D \circ f$ is inhabited.
-  %
-  \todo[inline]{Really depends of the form we give to $\Phi$ and to the path pointing $\Phi(f)$!}
+  By definition, for $f:C\ptdto D)$, one has $\Phi \circ \susp (f) \jdeq
+  \loopspace\susp(f)\circ \sigma_D$. Hence $\nat_\eta$ from
+  \cref{prop:susp-loop-adjunction} provides the wanted witness of
+  commutativity. 
+%%  
+%%  By easy calculation.\todo{We should do it!}
+%%
+%%  Denote $c_0$ and $d_0$ respectively for the distinguished point of $C$ and $D$.
+%%  Let $f$ be a pointed function $C \ptdto D$ and let us show that the type
+%%  $\susp (\Phi (f)) = \sigma_D \circ f$ is inhabited.
+%%  %
+%%  \todo[inline]{Really depends of the form we give to $\Phi$ and to the path pointing $\Phi(f)$!}
 \end{proof}
 
-
 The equivalence $\Phi$ also satisfies the following lemma:
-
 \begin{lemma} \label{lem:ap-Sigma}
-    Let $X$ be a pointed type and $f : A \to B$ be a function.
+    Let $X$ be a pointed type and $f : A \ptdto B$ be a pointed function.
     The following square commutes (up to homotopy):
     \begin{equation}
     \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
@@ -1144,40 +1166,41 @@ The equivalence $\Phi$ also satisfies the following lemma:
     \node (B) at (0,1) {$(X \to_* \Omega A)$}; 
     \node (C) at (1,1) {$(X \to_* \Omega B)$}; 
     
-    \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
-    \draw[arrow] (A) to node [left] {$\Phi$} (B);
-    \draw[arrow] (B) to node [above] {$\loopspace\null (f) \circ \_$} (C);
-    \draw[arrow] (D) to node [right] {$\Phi$} (C);
+    \draw[arrow] (A) to node [above] {$f \circ \blank$} (D);
+    \draw[arrow] (A) to node [left] {$\Phi_{X,B}$} (B);
+    \draw[arrow] (B) to node [above] {$\loopspace\null (f) \circ \blank$} (C);
+    \draw[arrow] (D) to node [right] {$\Phi_{X,A}$} (C);
     \end{tikzpicture}
     \end{equation}
 \end{lemma}
 \begin{proof}
-    By calculation.
-    %  Starting with $f_0 : \susp X \to A$ and $f_1 : f_0(N) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
-    We start in the top left corner with $g_0 : \susp X \to A$ and $g_1 : g_0(N) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
-    \begin{equation}
-    \begin{alignedat}{5}
-    &\quad && g_0 : \susp X \to A & \\
-    \mapsto &&& \lambda x. g_1 \cdot \ap {g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot g_1^{-1} : X \to \Omega A \\
-    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
-    \end{alignedat}
-    \end{equation}
-    If we go first right, then down, we get:
-    \begin{equation}
-    \begin{alignedat}{5}
-    &\quad && g_0 : \susp X \to A & \\
-    \mapsto &&&  f_0 \circ g_0 : \susp X \to B \\
-    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
-    \end{alignedat}
-    \end{equation}
-    The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.) \todo{Pierre: this is the kind of stuff done in the HoTT-book that bug me a little}
+    This is the content of \cref{def:wild-adj}.
+    %
+%%    By calculation.
+%%    %  Starting with $f_0 : \susp X \to A$ and $f_1 : f_0(N) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
+%%    We start in the top left corner with $g_0 : \susp X \to A$ and $g_1 : g_0(N) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
+%%    \begin{equation}
+%%    \begin{alignedat}{5}
+%%    &\quad && g_0 : \susp X \to A & \\
+%%    \mapsto &&& \lambda x. g_1 \cdot \ap {g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot g_1^{-1} : X \to \Omega A \\
+%%    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
+%%    \end{alignedat}
+%%    \end{equation}
+%%    If we go first right, then down, we get:
+%%    \begin{equation}
+%%    \begin{alignedat}{5}
+%%    &\quad && g_0 : \susp X \to A & \\
+%%    \mapsto &&&  f_0 \circ g_0 : \susp X \to B \\
+%%    \mapsto &&& \lambda x. f_1 \cdot \ap {f_0}(g_1) \cdot  \ap {f_0 \circ g_0}(\mrd(x_0)^{-1} \mrd(x)) \cdot \ap {f_0}(g_1)^{-1} \cdot f_1^{-1} : X \to \Omega B
+%%    \end{alignedat}
+%%    \end{equation}
+%%    The proofs that the functions are pointed are the canonical ones and coincide as well. (todo: if we have a formalisation, we can refer to that.) \todo{Pierre: this is the kind of stuff done in the HoTT-book that bug me a little}
 \end{proof}
 
-
-Define the equivalence $\phi^n: (\Sn n \ptdto A) \to \loopspace n A$ by induction on $n\geq 1$
-as follows: for $n=1$, $\phi^1(f:\Sc \ptdto A) \defequi \loopspace\null
-(f)(\Sloop)$ and for $n\geq 2$, $\phi^n \defequi \phi^{n-1} \circ
-\Phi$\todo{$\Phi$ probably need some subscript}.
+For a pointed type $A$, define the equivalence $\phi_A^n: (\Sn n \ptdto A) \to
+\loopspace n A$ by induction on $n\geq 1$ as follows: for $n=1$,
+$\phi_A^1(f:\Sc \ptdto A) \defequi \loopspace\null (f)(\Sloop)$ and for $n\geq
+2$, $\phi^n \defequi \phi_{\loopspace\null A}^{n-1} \circ \Phi_{\Sn {n-1},A}$.
 \begin{corollary}\label{lem:iterated-ap-Sigma}
     For all $n \geq 0$ and $f$ as above, the diagram
     \begin{equation}
@@ -1188,17 +1211,17 @@ as follows: for $n=1$, $\phi^1(f:\Sc \ptdto A) \defequi \loopspace\null
     \node (B) at (0,1) {$\Omega^n A$}; 
     \node (C) at (1,1) {$\Omega^n B$}; 
     
-    \draw[arrow] (A) to node [above] {$f \circ \_$} (D);
-    \draw[arrow] (A) to node [left] {$\phi^n$} (B);
+    \draw[arrow] (A) to node [above] {$f \circ \blank$} (D);
+    \draw[arrow] (A) to node [left] {$\phi_A^n$} (B);
     \draw[arrow] (B) to node [above] {$\Omega^n(f)$} (C);
-    \draw[arrow] (D) to node [right] {$\phi^n$} (C);
+    \draw[arrow] (D) to node [right] {$\phi_B^n$} (C);
     \end{tikzpicture}
-    \end{equation}
+    \end{equation}za
     commutes.
 \end{corollary}
 \begin{proof}
-  By induction on $n$. For $n\defequi 1$, this is given by $H$-fonctoriality of
-  $\loopspace\null$:
+  By induction on $n:\NN$. For $n\defequi 1$, this is given by the wild fonctoriality of
+  $\loopspace\null$ (see \cref{ex:loop-sus-wild-functors}):
   \begin{displaymath}
     \loopspace \null (f) (\phi^1 (g)) \jdeq \loopspace\null(f)(\loopspace\null(g)(\Sloop))
     =\loopspace\null(f\circ g)(\Sloop) \jdeq \phi^1(f\circ g)
@@ -1207,12 +1230,13 @@ as follows: for $n=1$, $\phi^1(f:\Sc \ptdto A) \defequi \loopspace\null
 \end{proof}
 
 
-The above lemmas allow us to formulate a connection between the maps $\susp$ in \eqref{eq:susp-monoid-morphism} and $\sigma$ in \eqref{eq:sigma}:
+The above lemmas allow us to formulate a connection between the maps $\susp$ in
+\eqref{eq:susp-monoid-morphism} and $\sigma_{\Sn n}$ in \eqref{eq:sigma}:
 %, which will be needed in order to use \cref{thm:freudenthal} for \cref{thm:susp-is-monoid-iso}:
 
 \begin{lemma} \label{lem:sigma-susp}
-    The maps $\sigma$ and $\susp$ are equal up to canonical isomorphism, i.e.\ the square
-    \begin{equation} \label{eq:needs-to-commute}
+  The maps $\sigma_{\Sn n}$ and $\susp$ are equal up to canonical isomorphism, i.e.\ the square
+  \begin{equation} \label{eq:needs-to-commute}
     \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
     \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
     \node (A) at (0,0) {$(\Sn n \to_* \Sn n)$}; 
@@ -1220,15 +1244,15 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in 
     \node (C) at (1,1) {$\Omega^{n+1}(\Sn {n+1})$}; 
     \node (D) at (1,0) {$(\Sn {n+1} \to_* \Sn {n+1})$}; 
     
-    \draw[arrow] (A) to node [left] {$\phi^n$} (B);
-    \draw[arrow] (B) to node [above] {$\Omega^n(\sigma)$} (C);
-    \draw[arrow] (D) to node [right] {$\phi^n$} (C);
+    \draw[arrow] (A) to node [left] {$\phi_{\Sn n}^n$} (B);
+    \draw[arrow] (B) to node [above] {$\Omega^n(\sigma_{\Sn n})$} (C);
+    \draw[arrow] (D) to node [right] {$\phi_{\Sn {n+1}}^{n+1}$} (C);
     \draw[arrow] (A) to node [above] {$\susp$} (D);
     \end{tikzpicture}
-    \end{equation}
-    commutes.
+  \end{equation}
+  commutes.
 \end{lemma}
-\begin{proof}
+\begin{proof}%
  Consider the following:
 \begin{equation}
 \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
@@ -1248,8 +1272,9 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in 
 \draw[arrow] (A) to node [above right] {$\sigma \circ \blank$} (E);
 \end{tikzpicture}
 \end{equation}
+  \todo[inline]{Pierre: the diagram should be completed with an extra $\Phi^{-1}$ on the right decomposing $\phi^n$.}
 The top triangle commutes by \cref{lem:adj-prop}.
-The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.\todo{fix $\ap f$ vs $\Omega(f)$!!}
+The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.
 \end{proof}
 
 \cref{lem:sigma-susp} characterises the function \eqref{eq:susp-monoid-morphism}
@@ -1452,10 +1477,10 @@ We now see that there are two connected components of symmetries of spheres:
   Then \cref{lemma:invertible-truncated-Sn-pointed-weq} llows us to conclude.
 \end{proof}
 
-\subsection{Concrete Symmetries of $\boldsymbol{\Sn n}$}
-
-\todo[inline]{Nicolai: Here, we should prove that id and -id are elements of the two components (i.e.\ in different components). My plan was to show that the two wild functors $\susp$ and $-\susp$ commute. But it's trickier than I thought. Maybe we don't do this?}
-
+%%\subsection{Concrete Symmetries of $\boldsymbol{\Sn n}$}
+%%
+%%\todo[inline]{Nicolai: Here, we should prove that id and -id are elements of the two components (i.e.\ in different components). My plan was to show that the two wild functors $\susp$ and $-\susp$ commute. But it's trickier than I thought. Maybe we don't do this?}
+%%
 \subsection{The Structure of the Components of $\boldsymbol{(\Sn n = \Sn n)}$}
 
 Having established that there are exactly two connected components of $(\Sn n = \Sn n)$, we want to examine the structure of each of these components.
@@ -1596,72 +1621,74 @@ Let us finally summarise the results of the current section, putting \cref{thm:h
 
 
 
-\subsection{Path algebra}
-\label{sec:path-algebra}
-All through this paper, we deal with pointed functions of the form $f:A \ptdto
-\loopspace\null B$. It happens every so often that such an $f$ is pointed by a
-path $\refl b = f(a)$ which derives directly from basic path algebra. Because
-we use these elementary steps of path algebra in a proof-relevant way, 
-we fix names and conventions in this section.
-
-Given a path $p:x=y$ in any type $A$, we denote
-\begin{align*}
-  \varpi_p &: \refl x = \inv p \refl y p\\
-  \omega_p &: \refl x = \inv p p
-\end{align*}
-Depending on the implementation of concatenation of path, $\omega_p$ and $\varpi_p$
-might be definitionally equal. We don't care especially for that, as long at it
-is clear that:
-\begin{displaymath}
-  \varpi_{\refl x} \jdeq \refl {\refl x} \jdeq \omega_{\refl x}  
-\end{displaymath}
-For any pair of composable paths $p: x=y$ and $q: y=z$, one denotes
-\begin{displaymath}
-  \kappa_{p,q} : \inv{(qp)} = \inv p \inv q.
-\end{displaymath}
-Here again, the implementation of $\kappa$ is not important as long as one
-makes sure that
-\begin{displaymath}
-  \kappa_{\refl x,\refl x} \jdeq  \refl {\refl x}
-\end{displaymath}
-
-Given a function $f:A\to B$ and $a:A$, the map $\ap f : a=a
-\to f(a)=f(a)$ is defined in such a way that $\ap f (\refl a) \jdeq \refl
-{f(a)}$. In particular, given an element $b:B$ and a path $p:b=f(a)$, the path
-$\varpi_p$ points the map:
-\begin{displaymath}
-  \loopspace\null (f,p) : \loopspace \null A \to \loopspace\null B, \quad
-  q \mapsto \inv p \cdot \ap f(q) \cdot p.
-\end{displaymath}
-There is also a path witnessing the compatibility of $f$ with concatenation of
-paths $p:x=y$ qnd $q:y=z$:
-\begin{displaymath}
-  \chi_{f,p,q} : \ap f (qp) = \ap f (q) \ap f (p).
-\end{displaymath}
-Like for the paths $\kappa_{p,q}$, swe are mostly interested in the fact that 
-\begin{displaymath}
-  \chi_{f,\refl x,\refl x} \jdeq \refl{\refl {f(x)}}.
-\end{displaymath}
-In the same way there is a witness of the compatibility of $f$ with inversion of
-a path $p$:
-\begin{displaymath}
-  \iota_{f,p} : \ap f(\inv p) = \inv {\ap f (p)}.
-\end{displaymath}
-This path is defined by induction on $p$ so that $\iota_{f,\refl x} \jdeq
-\refl{\refl {f(x)}}$.
-
-Finally, whenever two functions $f:A\to B$ and $g:B\to C$ are composable, there
-is, for every path $p$ in $A$, a path $\gamma_{f,g}(p) : \ap{g\circ f}(p) = \ap
-g (\ap f (p))$, which is definitionally $\refl{\refl x}$ when $p \jdeq \refl x$.
-
-
+%%\subsection{Path algebra}
+%%\label{sec:path-algebra}
+%%All through this paper, we deal with pointed functions of the form $f:A \ptdto
+%%\loopspace\null B$. It happens every so often that such an $f$ is pointed by a
+%%path $\refl b = f(a)$ which derives directly from basic path algebra. Because
+%%we use these elementary steps of path algebra in a proof-relevant way, 
+%%we fix names and conventions in this section.
+%%
+%%Given a path $p:x=y$ in any type $A$, we denote
+%%\begin{align*}
+%%  \varpi_p &: \refl x = \inv p \refl y p\\
+%%  \omega_p &: \refl x = \inv p p
+%%\end{align*}
+%%Depending on the implementation of concatenation of path, $\omega_p$ and $\varpi_p$
+%%might be definitionally equal. We don't care especially for that, as long at it
+%%is clear that:
+%%\begin{displaymath}
+%%  \varpi_{\refl x} \jdeq \refl {\refl x} \jdeq \omega_{\refl x}  
+%%\end{displaymath}
+%%For any pair of composable paths $p: x=y$ and $q: y=z$, one denotes
+%%\begin{displaymath}
+%%  \kappa_{p,q} : \inv{(qp)} = \inv p \inv q.
+%%\end{displaymath}
+%%Here again, the implementation of $\kappa$ is not important as long as one
+%%makes sure that
+%%\begin{displaymath}
+%%  \kappa_{\refl x,\refl x} \jdeq  \refl {\refl x}
+%%\end{displaymath}
+%%
+%%Given a function $f:A\to B$ and $a:A$, the map $\ap f : a=a
+%%\to f(a)=f(a)$ is defined in such a way that $\ap f (\refl a) \jdeq \refl
+%%{f(a)}$. In particular, given an element $b:B$ and a path $p:b=f(a)$, the path
+%%$\varpi_p$ points the map:
+%%\begin{displaymath}
+%%  \loopspace\null (f,p) : \loopspace \null A \to \loopspace\null B, \quad
+%%  q \mapsto \inv p \cdot \ap f(q) \cdot p.
+%%\end{displaymath}
+%%There is also a path witnessing the compatibility of $f$ with concatenation of
+%%paths $p:x=y$ qnd $q:y=z$:
+%%\begin{displaymath}
+%%  \chi_{f,p,q} : \ap f (qp) = \ap f (q) \ap f (p).
+%%\end{displaymath}
+%%Like for the paths $\kappa_{p,q}$, swe are mostly interested in the fact that 
+%%\begin{displaymath}
+%%  \chi_{f,\refl x,\refl x} \jdeq \refl{\refl {f(x)}}.
+%%\end{displaymath}
+%%In the same way there is a witness of the compatibility of $f$ with inversion of
+%%a path $p$:
+%%\begin{displaymath}
+%%  \iota_{f,p} : \ap f(\inv p) = \inv {\ap f (p)}.
+%%\end{displaymath}
+%%This path is defined by induction on $p$ so that $\iota_{f,\refl x} \jdeq
+%%\refl{\refl {f(x)}}$.
+%%
+%%Finally, whenever two functions $f:A\to B$ and $g:B\to C$ are composable, there
+%%is, for every path $p$ in $A$, a path $\gamma_{f,g}(p) : \ap{g\circ f}(p) = \ap
+%%g (\ap f (p))$, which is definitionally $\refl{\refl x}$ when $p \jdeq \refl x$.
+%%
+%%
+%%
 
 \subsection{Wild functors}
 \label{sec:wild-functors}
-The types $\UUptd$ do certainly not form a category {\color{red} of categories???}, 
+The type $\UUptd$ does certainly not form a category (the intended type of
+morphisms $A \ptdto B$ between two objects $A,B$ is not necessarily a set),
 but some constructions on it are reminiscent of functors. 
 \begin{definition}
-  A wild functor on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
+  A \emph{wild functor} on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
   \begin{align*}
     F_0 &:\UUptd \to \UUptd,\\
     F_1 &:\prod_{A,B:\UUptd} (A \ptdto B) \to (F_0(A) \ptdto F_0(B))\\
@@ -1672,12 +1699,11 @@ but some constructions on it are reminiscent of functors.
 \end{definition}
 
 As for functors, we usually write both $F_0$ and $ F_1$ only as $F$. The only
-relevant fact about $c$ and $u$ is that they exist, 
-{\color{red} even though their types are not propositions}. 
-Therefore we will often (abusively)
-denote a wild functor by its first two components only.
+relevant fact about $c$ and $u$ is that they exist, even though their types are
+not propositions. Therefore, we will often (abusively) denote a wild functor by
+its first two components only.
 
-\begin{example}~
+\begin{example}~\label{ex:loop-sus-wild-functors}%
   \begin{enumerate}
     \item There is a wild functor $\loopspace \null$ which maps a pointed type $A$
       (pointed at $a$) to $\loopspace \null A \defeq (a=a$)
@@ -1686,74 +1712,84 @@ denote a wild functor by its first two components only.
       \null (f): \loopspace \null A \ptdto \loopspace \null B$ defined as
       follows:
       \begin{displaymath}
-        \loopspace \null (f) (p) \defequi \inv{f_0} \cdot \ap f (p) \cdot f_0
+        \loopspace \null (f) (p) \defequi f_0 \cdot \ap f (p) \cdot \inv{f_0}
       \end{displaymath}
-      where $f_0: b=f(a)$ is the path pointing $f$. As noted in
-      \cref{sec:path-algebra}, the map $\loopspace \null (f)$ is pointed by the
-      path $\varpi_{f_0}:\refl b = \loopspace\null (f)(\refl a)$.
+      where $f_0: f(a) = b$ is the path pointing $f$.
       %
-      Whenever $b \jdeq f(a)$ and $f_0 \jdeq \refl {f(a)}$, we have
-      $\varpi_{f_0} \jdeq \refl {\refl {f(a)}}$, and in particular, it gives us
-      directly the witness $u$ of \cref{def:wild-functor}.
+      The map $\loopspace \null (f)$ is itself pointed by a path obtained by
+      using path algebra as follows:
+      \begin{displaymath}
+        \loopspace\null (f)(\refl a) =  f_0 \cdot \ap f (\refl a) \cdot \inv{f_0}
+        = f_0 \cdot \refl {f(a)} \inv{f_0}
+        = \refl b.
+      \end{displaymath}
+      A careful exposition of the witness created this way can be found in
+      \cite[\githubpath core/lib/types/LoopSpace.agda]{hott-agda}. It can also
+      be found the witnesses $c$ and $u$ justifying that $\loopspace \null$ is
+      a wild functor.
       %
-      Moreover, given $f:A \ptdto B$ and $g:B \ptdto C$, one has a path
-      $\xi_{f,f_0,g,g_0}(p): \loopspace\null (g\circ f)(p) =
-      \loopspace\null(g)(\loopspace\null(f)(p))$ given by a chain of path algebra steps:
-      \begin{displaymath}
-        \begin{split}
-        \xi_{f,f_0,g,g_0}(p) \defequi&
-        \ap{\inv {g_0}  \blank g_0}(\inv{\chi_{g,f_0,\inv{f_0}\ap f(p)}})\\
-        &\cdot
-        \ap{\inv {g_0}  \blank \ap g(f_0) g_0}(\inv{\chi_{g,\ap f(p),\inv{f_0}}})\\
-        &\cdot
-        \ap{\inv {g_0}  \blank \ap g (\ap f(p)) \ap g(f_0) g_0}(\inv{\iota_{f,f_0}})\\
-        &\cdot
-        \ap{\inv {g_0} \inv{\ap g(f_0)} \blank \ap g(f_0) g_0}(\gamma_{f,g}(p))\\
-        &\cdot
-        \ap { \blank \ap{g\circ f}(p) \ap g(f_0) g_0 } (\kappa_{g_0,\ap g (f_0)})
-      \end{split}
-      \end{displaymath}
-      \begin{displaymath}
-        \begin{tikzcd}
-          \inv{(\ap g(f_0) g_0)} \ap{g\circ f}(p) \ap g(f_0) g_0
-          \rar["\kappa"] \ar[ddddr, bend right, dashed]
-          & 
-          \inv {g_0} \inv{\ap g(f_0)} \ap{g\circ f}(p) \ap g(f_0) g_0 
-          \dar["\gamma"]
-          \\
-          &
-          \inv {g_0} \inv{\ap g(f_0)} \ap g(\ap f(p)) \ap g(f_0) g_0 
-          \dar["\inv \iota"]
-          \\
-          &
-          \inv {g_0} \ap g(\inv{f_0}) \ap g(\ap f(p)) \ap g(f_0) g_0 
-          \dar["\inv \chi"]
-          \\
-          &
-          \inv {g_0} \ap g(\inv{f_0} \ap f(p)) \ap g(f_0) g_0 
-          \dar["\inv \chi"]
-          \\
-          &
-          \inv {g_0} \ap g(\inv{f_0} \ap f(p) f_0) g_0 
-        \end{tikzcd}
-      \end{displaymath}
-      The importance thing to notice is that $\xi_{f,\refl {f(a)},g,
-      \refl{g(f(a))}}(\refl a) \jdeq \refl {\refl{g(f(a))}}$. Hence, one can
-      easily show, by double induction on $p:f(a)=x$ ($x:B$ being a free
-      endpoint) and $q:g(x) = y$ ($y:C$ being a free endpoint), that the
-      following triangle commutes:   
-      \begin{displaymath}
-        \begin{tikzcd}
-          \loopspace\null (g\circ f)(\refl a) \ar[rr, equal, "\xi_{f,p,g,q}(\refl a)"] 
-          \ar[dr, equal, "\varpi_{\ap g(p)q}"swap] & &
-          \loopspace\null (g)(\loopspace\null (f)(\refl a)) 
-          \ar[dl, equal, "\ap{\loopspace\null(g)}(\varpi_{p})\varpi_{q}"]
-          \\
-          & \refl c &
-        \end{tikzcd}
-      \end{displaymath}
-      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
-
+%%      Whenever $b \jdeq f(a)$ and $f_0 \jdeq \refl {f(a)}$, we have
+%%      $\varpi_{f_0} \jdeq \refl {\refl {f(a)}}$, and in particular, it gives us
+%%      directly the witness $u$ of \cref{def:wild-functor}.
+%%      %
+%%      Moreover, given $f:A \ptdto B$ and $g:B \ptdto C$, one has a path
+%%      $\xi_{f,f_0,g,g_0}(p): \loopspace\null (g\circ f)(p) =
+%%      \loopspace\null(g)(\loopspace\null(f)(p))$ given by a chain of path algebra steps:
+%%      \begin{displaymath}
+%%        \begin{split}
+%%        \xi_{f,f_0,g,g_0}(p) \defequi&
+%%        \ap{\inv {g_0}  \blank g_0}(\inv{\chi_{g,f_0,\inv{f_0}\ap f(p)}})\\
+%%        &\cdot
+%%        \ap{\inv {g_0}  \blank \ap g(f_0) g_0}(\inv{\chi_{g,\ap f(p),\inv{f_0}}})\\
+%%        &\cdot
+%%        \ap{\inv {g_0}  \blank \ap g (\ap f(p)) \ap g(f_0) g_0}(\inv{\iota_{f,f_0}})\\
+%%        &\cdot
+%%        \ap{\inv {g_0} \inv{\ap g(f_0)} \blank \ap g(f_0) g_0}(\gamma_{f,g}(p))\\
+%%        &\cdot
+%%        \ap { \blank \ap{g\circ f}(p) \ap g(f_0) g_0 } (\kappa_{g_0,\ap g (f_0)})
+%%      \end{split}
+%%      \end{displaymath}
+%%      \begin{displaymath}
+%%        \begin{tikzcd}
+%%          \inv{(\ap g(f_0) g_0)} \ap{g\circ f}(p) \ap g(f_0) g_0
+%%          \rar["\kappa"] \ar[ddddr, bend right, dashed]
+%%          & 
+%%          \inv {g_0} \inv{\ap g(f_0)} \ap{g\circ f}(p) \ap g(f_0) g_0 
+%%          \dar["\gamma"]
+%%          \\
+%%          &
+%%          \inv {g_0} \inv{\ap g(f_0)} \ap g(\ap f(p)) \ap g(f_0) g_0 
+%%          \dar["\inv \iota"]
+%%          \\
+%%          &
+%%          \inv {g_0} \ap g(\inv{f_0}) \ap g(\ap f(p)) \ap g(f_0) g_0 
+%%          \dar["\inv \chi"]
+%%          \\
+%%          &
+%%          \inv {g_0} \ap g(\inv{f_0} \ap f(p)) \ap g(f_0) g_0 
+%%          \dar["\inv \chi"]
+%%          \\
+%%          &
+%%          \inv {g_0} \ap g(\inv{f_0} \ap f(p) f_0) g_0 
+%%        \end{tikzcd}
+%%      \end{displaymath}
+%%      The importance thing to notice is that $\xi_{f,\refl {f(a)},g,
+%%      \refl{g(f(a))}}(\refl a) \jdeq \refl {\refl{g(f(a))}}$. Hence, one can
+%%      easily show, by double induction on $p:f(a)=x$ ($x:B$ being a free
+%%      endpoint) and $q:g(x) = y$ ($y:C$ being a free endpoint), that the
+%%      following triangle commutes:   
+%%      \begin{displaymath}
+%%        \begin{tikzcd}
+%%          \loopspace\null (g\circ f)(\refl a) \ar[rr, equal, "\xi_{f,p,g,q}(\refl a)"] 
+%%          \ar[dr, equal, "\varpi_{\ap g(p)q}"swap] & &
+%%          \loopspace\null (g)(\loopspace\null (f)(\refl a)) 
+%%          \ar[dl, equal, "\ap{\loopspace\null(g)}(\varpi_{p})\varpi_{q}"]
+%%          \\
+%%          & \refl c &
+%%        \end{tikzcd}
+%%      \end{displaymath}
+%%      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
+%%
     \item There is a wild functor $\susp \null$ which maps a pointed type $A$
       to $\susp A$ (pointed at the pole $N$), and maps a pointed function
       $f:A\ptdto B$ to the pointed function $\susp (f) : \susp A \ptdto \susp
@@ -1765,251 +1801,298 @@ denote a wild functor by its first two components only.
       \end{displaymath}
       Note that $\susp (f)$ is pointed by definition as it maps $N$ to $N$
       directly. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
-      straightforward through degenerate induction on the supsension.
+      straightforward through degenerate inductions on the supsension, and a
+      careful exposition can be found in
+      \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
   \end{enumerate}
 \end{example}
 
 \begin{definition}
   Given two wild functors $L$ and $R$, a wild adjunction of type $L\leftadjto
-  R$ is a dependent function $\Phi$ that maps pointed types $A,B:\UUptd$
-  to an element
+  R$ is the data of two dependent functions:
+  \begin{displaymath}
+    \eta : \prod_{A:\UUptd} A \to R \circ L(A), \quad
+    \epsilon : \prod_{A:\UUptd} L\circ R (A) \to A
+  \end{displaymath}
+  together with elements
+  \begin{gather*}
+    \mathrm{nat}_\eta : \prod_{A,B:\UUptd} \prod_{f:A\ptdto B} (R\circ L)(f) \circ \eta(A) = \eta(B) \circ f, \\
+    \mathrm{nat}_\epsilon : \prod_{A,B:\UUptd} \prod_{f:A\ptdto B} f \circ \epsilon(A) = (L\circ R)(f) \circ \epsilon(B).
+  \end{gather*}
+  and
+  \begin{displaymath}
+    \mathrm{rtr}_{\eta,\epsilon} : \prod_{A:\UUptd} R(\epsilon(A)) \circ \eta(RA) = \id_{RA}, \quad
+    \mathrm{ltr}_{\epsilon,\eta} : \prod_{A:\UUptd} \epsilon(LA) \circ L(\eta(A)) = \id_{LA}
+  \end{displaymath}
+\end{definition}
+Here again, even though the types of $\mathrm{nat}_\eta$,
+$\mathrm{nat}_\epsilon$, $\mathrm{ltr}_{\eta,\epsilon}$ and
+$\mathrm{rtr}_{\eta,\epsilon}$ are not propositions, one only cares about their
+existence, and therefore one usually omit them when denoting a wild
+adjunctions.
+
+\begin{remark}
+  As carefully proved in \cite[\githubpath theorems/homotopy/PtdAdjoint.agda]{hott-agda},
+  any wild adjunction induces a dependent function $\Phi$ that maps pointed
+  types $A,B:\UUptd$ to an equivalence
   \begin{displaymath}
     \Phi_{A,B} : (LA\ptdto B) \weq (A\ptdto RB)
   \end{displaymath}
-  such that $\Phi_{A,B}(\blank) \circ f = \Phi_{A',B} (\blank \circ L(f))$ for
-  any $f:A'\ptdto A$ and $\Phi_{A,B'}(g\circ\blank) = R(g)\circ \Phi_{A,B}
-  (\blank)$ for any $g:B\ptdto B'$.
-  \label{def:wild-adj}
-\end{definition}
+  given by $f \mapsto R(f) \circ \eta(A)$, with inverse the function given by
+  $g\mapsto \epsilon(B) \circ L(g)$.
+
+  This dependent function is natural in the following sense: for any
+  $A,B:\UUptd$, there are elements of $\Phi_{A,B}(\blank) \circ f = \Phi_{A',B}
+  (\blank \circ L(f))$ for any $f:A'\ptdto A$ and $\Phi_{A,B'}(g\circ\blank) =
+  R(g)\circ \Phi_{A,B} (\blank)$ for any $g:B\ptdto B'$.  \label{def:wild-adj}
+\end{remark}
 
 \begin{proposition}
   There is a wild adjunction $\susp \null \leftadjto \loopspace \null$.
   \label{prop:susp-loop-adjunction}
 \end{proposition}
 \begin{proof}
-  Let $A$ and $B$ be pointed types, with respective distinguished point $a$ and
-  $b$. Given $f:\susp A \ptdto B$ pointed by $f_0:b = f(N)$, define for every
-  $x:A$
-  \begin{displaymath}
-    \Phi_{A,B}(f) (x) \defequi \inv{f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(x)) \cdot f_0
-  \end{displaymath}
-  This function $\Phi_{A,B}(f): A \to \loopspace\null B$ is pointed by path algebra
-  \begin{displaymath}
-    \ap{\inv{f_0} \ap f(\blank) f_0 }(\omega_{\mrd(a)}) \cdot \varpi_{f_0} 
-  \end{displaymath}
-  
-  The function $\Phi_{A,B}$ is an equivalence: indeed define a pseudo-inverse
-  $\Psi_{A,B}$ as the function that maps $f: A\ptdto \loopspace\null B$ to the
-  pointed map $\susp A \ptdto B$ defined by induction through 
-  \begin{displaymath}
-    \Psi_{A,B}(f)(N) \defequi b,\quad \Psi_{A,B}(f)(S) \defequi b,\quad
-    \ap{\Psi_{A,B}(f)}\circ\mrd = f.
-  \end{displaymath}
-  The function $\Psi_{A,B}(f)$ is pointed by $\refl b$. For future references,
-  denote $\mu$ for the path $\ap{\Psi_{A,B}(f)}\circ \mrd = f$.
-  
-  Let us first show that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$ for any pointed map $f:A\to
-  \loopspace\null B$. Let us denote $f_0: \refl b = f(a)$ the path pointing
-  $f$. The function $\Phi_{A,B}(\Psi_{A,B}(f))$ maps $x:A$ to 
-  \begin{displaymath}
-    \refl b\cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}\mrd(x))\cdot \refl b
-  \end{displaymath}
-  There is a path $p_x$ from this element to $f(x)$ obtained by composing all the
-  following paths ({\color{red} Drawing? diagrams?}):
-  \begin{align*}
-    \ap{\refl b \cdot \blank \cdot \refl b}(\chi_{\Psi_{A,B}(f),\inv{\mrd(a)},\mrd(x)}),
-    \\
-    \ap{\refl b \cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}) \cdot \blank \cdot \refl b}(\mu(x)),
-    \\
-    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\iota_{\Psi_{A,B}(f),\mrd(a)}),
-    \\
-    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(\mu(a))),
-    \\
-    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(f_0)),
-    \\
-    \tau_{f(x)}
-  \end{align*}
-  ({\color{red} add a path in beginning of appendix $\tau_p: \refl x p \refl x
-  = p$ that also satisfies $\tau_{\refl x} \jdeq \refl{\refl x}$}).
+  We refer to \cite[\githubpath
+  theorems/homotopy/SuspAdjointLoop.agda]{hott-agda} for a proper proof.
+  %
+  However, we give the unit $\eta$ and counit $\epsilon$ for convenience.
 
-  To finish proving that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$, one shall now prove
-  that the transport of the path pointing $\Phi_{A,B}(\Psi_{A,B}(f))$ over $p$
-  is equal to $f_0$. In other words, we want the following triangle to commute:
+  Let $A$ be a pointed type with distinguished point $a_0:A$. Then define
   \begin{displaymath}
-    \begin{tikzcd}
-      \Phi_{A,B}(\Psi_{A,B}(f)) (a) \rar[equal, "p_a"] 
-      \drar[equal, "\ap{\refl b\cdot \ap{\Psi_{A,B}(f)}(\blank) \cdot \refl b}(\omega_{\mrd(a)}", swap]
-      & f(a) \dar[equal, "f_0"]
-      \\
-      & \refl b 
-    \end{tikzcd}
+    \eta(A) : A \ptdto \loopspace\null\susp A, \quad
+    a \mapsto \inv{\mrd(a_0)} \cdot \mrd(a)
   \end{displaymath}
-  {\color{red}This is true, basically just astract properties of $\omega$ against application of functions + little induction. Yet TODO properly!}  
-
-  We continue by showing giving an element of $\Psi_{A,B}(\Phi_{A,B}(f)) = f$
-  for any pointed map $f: \susp A \ptdto B$, where the path of $f$ is denoted
-  $f_0:b = f(N)$.  First let us give an element $p_f$ of
-  $\Psi_{A,B}(\Phi_{A,B}(f)) = f$ as (unpointed) functions, by induction on $\susp A$ by
-  providing: 
-  \begin{enumerate}
-    \item the path $f_0:\Psi_{A,B}(\Phi_{A,B}(f))(N) \jdeq b = f(N)$,
-    \item the path $\ap f(\mrd(a))\cdot f_0:\Psi_{A,B}(\Phi_{A,B}(f))(S) \jdeq b = f(S)$.
-  \end{enumerate}
-  All we need is now a path over $\pathover {f_0} {T}{\mrd(x)} {\ap f{\mrd(a)} \cdot
-  f_0}$ for any $x:A$, where $T$ is the type family $(y:\susp A) \mapsto
-  \Psi_{A,B}(\Phi_{A,B}(f))(y) = f(y)$. In other words, for any $x:A$, one
-  wants to provide a witness for the commutativity of the following square:
+  which is pointed by path algebra.
+  %
+  And define $\epsilon(A) : \susp \loopspace \null A \ptdto A$ by induction by
+  setting
   \begin{displaymath}
-    \begin{tikzcd}[column sep=large]
-      b \dar["\inv{f_0}\ap f(\inv{\mrd(a)}\mrd(x)) f_0"swap] \rar["f_0"] 
-      & f(N) \dar["\ap f (\mrd(x))"]
-      \\
-      b \rar["\ap f (\mrd(a))f_0"swap] & f(S)
-    \end{tikzcd}
+    \epsilon(A)(N) \defequi a_0,\quad
+    \epsilon(A)(S) \defequi a_0,\quad
+    \epsilon(A)\circ \mrd = \id_{\loopspace\null A}
   \end{displaymath}
-  The witness is simply provided by path algebra. The last bit of information
-  to provide is the compatibility of $p_f$ with the paths pointing
-  $\Psi_{A,B}(\Phi_{A,B}(f))$ and $f$: we must show that $p_f(N) \cdot refl b =
-  f_0$. This is immediate as we defined $p_f(N)$ to be $f_0$ definitionally.
-
-  It remains to prove that the equivalence $\Phi_{A,B}$ is natural in $A$ and
-  $B$ in the sense of \cref{def:wild-adj}.
+%%
+%%  with respective distinguished point $a$ and
+%%  $b$. Given $f:\susp A \ptdto B$ pointed by $f_0:b = f(N)$, define for every
+%%  $x:A$
+%%  \begin{displaymath}
+%%    \Phi_{A,B}(f) (x) \defequi \inv{f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(x)) \cdot f_0
+%%  \end{displaymath}
+%%  This function $\Phi_{A,B}(f): A \to \loopspace\null B$ is pointed by path algebra
+%%  \begin{displaymath}
+%%    \ap{\inv{f_0} \ap f(\blank) f_0 }(\omega_{\mrd(a)}) \cdot \varpi_{f_0} 
+%%  \end{displaymath}
+%%  
+%%  The function $\Phi_{A,B}$ is an equivalence: indeed define a pseudo-inverse
+%%  $\Psi_{A,B}$ as the function that maps $f: A\ptdto \loopspace\null B$ to the
+%%  pointed map $\susp A \ptdto B$ defined by induction through 
+%%  \begin{displaymath}
+%%    \Psi_{A,B}(f)(N) \defequi b,\quad \Psi_{A,B}(f)(S) \defequi b,\quad
+%%    \ap{\Psi_{A,B}(f)}\circ\mrd = f.
+%%  \end{displaymath}
+%%  The function $\Psi_{A,B}(f)$ is pointed by $\refl b$. For future references,
+%%  denote $\mu$ for the path $\ap{\Psi_{A,B}(f)}\circ \mrd = f$.
+%%  
+%%  Let us first show that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$ for any pointed map $f:A\to
+%%  \loopspace\null B$. Let us denote $f_0: \refl b = f(a)$ the path pointing
+%%  $f$. The function $\Phi_{A,B}(\Psi_{A,B}(f))$ maps $x:A$ to 
+%%  \begin{displaymath}
+%%    \refl b\cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}\mrd(x))\cdot \refl b
+%%  \end{displaymath}
+%%  There is a path $p_x$ from this element to $f(x)$ obtained by composing all the
+%%  following paths ({\color{red} Drawing? diagrams?}):
+%%  \begin{align*}
+%%    \ap{\refl b \cdot \blank \cdot \refl b}(\chi_{\Psi_{A,B}(f),\inv{\mrd(a)},\mrd(x)}),
+%%    \\
+%%    \ap{\refl b \cdot \ap{\Psi_{A,B}(f)}(\inv{\mrd(a)}) \cdot \blank \cdot \refl b}(\mu(x)),
+%%    \\
+%%    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\iota_{\Psi_{A,B}(f),\mrd(a)}),
+%%    \\
+%%    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(\mu(a))),
+%%    \\
+%%    \ap{\refl b \cdot \blank \cdot f(x) \cdot \refl b}(\ap{\inv\blank}(f_0)),
+%%    \\
+%%    \tau_{f(x)}
+%%  \end{align*}
+%%  ({\color{red} add a path in beginning of appendix $\tau_p: \refl x p \refl x
+%%  = p$ that also satisfies $\tau_{\refl x} \jdeq \refl{\refl x}$}).
+%%
+%%  To finish proving that $\Phi_{A,B}(\Psi_{A,B}(f)) = f$, one shall now prove
+%%  that the transport of the path pointing $\Phi_{A,B}(\Psi_{A,B}(f))$ over $p$
+%%  is equal to $f_0$. In other words, we want the following triangle to commute:
+%%  \begin{displaymath}
+%%    \begin{tikzcd}
+%%      \Phi_{A,B}(\Psi_{A,B}(f)) (a) \rar[equal, "p_a"] 
+%%      \drar[equal, "\ap{\refl b\cdot \ap{\Psi_{A,B}(f)}(\blank) \cdot \refl b}(\omega_{\mrd(a)}", swap]
+%%      & f(a) \dar[equal, "f_0"]
+%%      \\
+%%      & \refl b 
+%%    \end{tikzcd}
+%%  \end{displaymath}
+%%  {\color{red}This is true, basically just astract properties of $\omega$ against application of functions + little induction. Yet TODO properly!}  
+%%
+%%  We continue by showing giving an element of $\Psi_{A,B}(\Phi_{A,B}(f)) = f$
+%%  for any pointed map $f: \susp A \ptdto B$, where the path of $f$ is denoted
+%%  $f_0:b = f(N)$.  First let us give an element $p_f$ of
+%%  $\Psi_{A,B}(\Phi_{A,B}(f)) = f$ as (unpointed) functions, by induction on $\susp A$ by
+%%  providing: 
+%%  \begin{enumerate}
+%%    \item the path $f_0:\Psi_{A,B}(\Phi_{A,B}(f))(N) \jdeq b = f(N)$,
+%%    \item the path $\ap f(\mrd(a))\cdot f_0:\Psi_{A,B}(\Phi_{A,B}(f))(S) \jdeq b = f(S)$.
+%%  \end{enumerate}
+%%  All we need is now a path over $\pathover {f_0} {T}{\mrd(x)} {\ap f{\mrd(a)} \cdot
+%%  f_0}$ for any $x:A$, where $T$ is the type family $(y:\susp A) \mapsto
+%%  \Psi_{A,B}(\Phi_{A,B}(f))(y) = f(y)$. In other words, for any $x:A$, one
+%%  wants to provide a witness for the commutativity of the following square:
+%%  \begin{displaymath}
+%%    \begin{tikzcd}[column sep=large]
+%%      b \dar["\inv{f_0}\ap f(\inv{\mrd(a)}\mrd(x)) f_0"swap] \rar["f_0"] 
+%%      & f(N) \dar["\ap f (\mrd(x))"]
+%%      \\
+%%      b \rar["\ap f (\mrd(a))f_0"swap] & f(S)
+%%    \end{tikzcd}
+%%  \end{displaymath}
+%%  The witness is simply provided by path algebra. The last bit of information
+%%  to provide is the compatibility of $p_f$ with the paths pointing
+%%  $\Psi_{A,B}(\Phi_{A,B}(f))$ and $f$: we must show that $p_f(N) \cdot refl b =
+%%  f_0$. This is immediate as we defined $p_f(N)$ to be $f_0$ definitionally.
+%%
+%%  It remains to prove that the equivalence $\Phi_{A,B}$ is natural in $A$ and
+%%  $B$ in the sense of \cref{def:wild-adj}.
 \end{proof}
 
-
-\subsection{Old section: Symmetries of the $n$-Sphere}
-
-\todo[inline]{Nicolai: I have replaced the $n\geq 2$ development with my completed approach. I keep the old attempt here, it contains a few ideas which I have not used but which could still be of interest.}
-
-In this section, we want to generalize the work done on the $2$-sphere to higher
-spheres. More precisely, we will prove that
-\begin{theorem}
-    \label{thm:higher-spheres}
-    For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
-\end{theorem}
-
-If we manage to prove that $\id_{\Sn n}$ is not merely equal to $-\id_{\Sn n}$,
-then together with \cref{prop:sups-components-are-equiv}, one has the slightly
-better result:
-\begin{displaymath}
-(\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
-\end{displaymath}
-{\color{red} Maybe add a remark as: This is reminiscent of the well-know result
-    about the orthogonal group: $\mathrm O(n)$ is a Lie group with 2 connected
-    components, both diffeomorphic to $\mathrm{SO}(n)$.
-}
-%
-
-\cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
-of \cref{thm:higher-spheres}. We will now focus on the induction step. 
-%
-We take an interest in the following map, induced by the suspension wild functor:
-\begin{displaymath}
-\susp (\blank) : (\Sn n \ptdto \Sn n) \to (\Sn {n+1} \ptdto \Sn{n+1})
-\end{displaymath}
-The wild nature of the functor just vanishes once the function types are
-set-truncated.
-%
-In other words, it means that the following map is a morphism of monoids:
-\begin{displaymath}
-\setTrunc{\susp(\blank)} : \setTrunc{\Sn n \ptdto \Sn n} \to \setTrunc{\Sn {n+1} \ptdto \Sn{n+1}}
-\end{displaymath}
-
-\begin{proposition}
-    For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoids.
-    \label{prop:susp-iso-monoids}
-\end{proposition}
-\begin{proof}
-    {\color{red}Freudenthal + check Marc's diagram.}
-\end{proof}
-
-\begin{lemma}
-    Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
-    is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
-    \setTrunc{A \ptdto A}$.
-\end{lemma}
-\begin{proof}
-    Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
-    as $\settrunc{\inv f}$ is an inverse for it.
-    
-    Conversely, if $x:\setTrunc{A \ptdto A}$ is invertible, then 
-    it has a unique inverse $\inv x$, and we want to
-    produce an element of the type:
-    \begin{displaymath}
-    \sum_{y:\setTrunc{A \ptdweq A}} x = i(y)
-    \end{displaymath}
-    %
-    As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
-        \ptdweq A}$, this type is a set itself. Hence, one might assume
-    that $x \jdeq \settrunc f$ for some function $f:A \ptdto A$ as well
-    as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \ptdto A$. 
-    %
-    From the inverse law in the monoid $\setTrunc{A \ptdto A}$, one
-    derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
-    the proposition that $f$ is an equivalence, on can then assume actual
-    witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
-    pseudo-inverse for $f$, which solves the problem.
-\end{proof}
-
-\begin{corollary}
-    For any $n\geq 2$, $\setTrunc{\Sn n \ptdweq \Sn n} \weq \bn 2$.
-    \label{cor:Sn-pointed-weq-is-bool}
-\end{corollary}
-\begin{proof}
-    We have shown the result for $n=2$ in the previous chapter
-    (\cref{cor:equivalence-conn-component}). Suppose $n\geq 2$. By
-    \cref{prop:susp-iso-monoids}, the monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and
-    $\setTrunc{\Sn {n+1} \ptdto \Sn {n+1}}$ are equivalent. Hence, their respective
-    submonoids of invertible elements are also equivalent. By
-    \cref{lemma:invertible-truncated-Sn-pointed-weq}, the type $\setTrunc{\Sn n
-        \ptdweq \Sn n}$ is then equivalent to $\setTrunc{\Sn {n+1} \ptdweq \Sn
-        {n+1}}$.
-    
-    The result is then proved by induction on $n\geq 2$.
-\end{proof}
-
-To prove \cref{thm:higher-spheres}, we need to get from this result to {\em
-    unpointed} equivalences. For the next lemma, consider $\Sn n$ as a bare type
-and let us use $(\Sn n,x)$ to mean the type $\Sn n$ pointed by an element
-$x:\Sn n$.
-\begin{lemma}
-    Let $n\geq 2$. For all $x:\Sn n$, one has $\setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$.
-    \label{lemma:pointed-weq-free-point-codomain-is-bool}
-\end{lemma}
-\begin{proof}
-    The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
-    set, i.e.\ $0$-truncated.
-    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
-    $(n-2)$-connected. 
-    By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
-    it suffices to give an element of $P(N)$ to get a
-    dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
-    provided by \cref{cor:Sn-pointed-weq-is-bool}.
-\end{proof}
-
-We can now give a proof of \cref{thm:higher-spheres}.
-\begin{proof}[Proof of \cref{thm:higher-spheres}]
-    One relies on the well-know equivalence:
-    \begin{displaymath}
-    (\Sn n \weq \Sn n) = \sum_{x:\Sn n}\left( (\Sn n, N) \ptdweq (\Sn n, x) \right)
-    \end{displaymath}
-    By \cite[Thm 7.3.9]{HoTT}, the $k$-truncation of a total space
-    $\sum_{x:A}P(x)$ is equivalent to the $k$-truncation of the space
-    $\sum_{x:A}\Trunc{P(x)}_k$. Hence, we find:
-    \begin{align*}
-    \setTrunc{\Sn n = \Sn n} &\weq \setTrunc{\Sn n \weq \Sn n} \\
-    &\weq \setTrunc{\sum_{x:\Sn n} (\Sn n, N) \weq (\Sn n, x)} \\
-    &\weq \setTrunc{\sum_{x:\Sn n} \setTrunc{(\Sn n, N) \weq (\Sn n, x)}} \\
-    &\weq \setTrunc{\Sn n \times \bn 2} \\
-    &\weq \setTrunc{\Sn n} \times \setTrunc{\bn 2} \\
-    &\weq \bn 2
-    \end{align*}
-\end{proof}
-
-
-\bibliographystyle{alpha}
-\bibliography{bib}
-
+%%\subsection{Old section: Symmetries of the $n$-Sphere}
+%%
+%%\todo[inline]{Nicolai: I have replaced the $n\geq 2$ development with my completed approach. I keep the old attempt here, it contains a few ideas which I have not used but which could still be of interest.}
+%%
+%%In this section, we want to generalize the work done on the $2$-sphere to higher
+%%spheres. More precisely, we will prove that
+%%\begin{theorem}
+%%    \label{thm:higher-spheres}
+%%    For all $n\geq 1$, $\setTrunc{\Sn n = \Sn n} \weq \bn 2$.
+%%\end{theorem}
+%%
+%%If we manage to prove that $\id_{\Sn n}$ is not merely equal to $-\id_{\Sn n}$,
+%%then together with \cref{prop:sups-components-are-equiv}, one has the slightly
+%%better result:
+%%\begin{displaymath}
+%%(\Sn n = \Sn n) \weq \bn 2 \times \conncomp{(\Sn n = \Sn n)}{\id_{\Sn n}}
+%%\end{displaymath}
+%%{\color{red} Maybe add a remark as: This is reminiscent of the well-know result
+%%    about the orthogonal group: $\mathrm O(n)$ is a Lie group with 2 connected
+%%    components, both diffeomorphic to $\mathrm{SO}(n)$.
+%%}
+%%%
+%%
+%%\cref{sec:sphere} provides the base case for a proof by induction on $n \geq 2$
+%%of \cref{thm:higher-spheres}. We will now focus on the induction step. 
+%%%
+%%We take an interest in the following map, induced by the suspension wild functor:
+%%\begin{displaymath}
+%%\susp (\blank) : (\Sn n \ptdto \Sn n) \to (\Sn {n+1} \ptdto \Sn{n+1})
+%%\end{displaymath}
+%%The wild nature of the functor just vanishes once the function types are
+%%set-truncated.
+%%%
+%%In other words, it means that the following map is a morphism of monoids:
+%%\begin{displaymath}
+%%\setTrunc{\susp(\blank)} : \setTrunc{\Sn n \ptdto \Sn n} \to \setTrunc{\Sn {n+1} \ptdto \Sn{n+1}}
+%%\end{displaymath}
+%%
+%%\begin{proposition}
+%%    For $n\geq 2$, $\setTrunc{\susp(\blank)}$ is an isomorphism of monoids.
+%%    \label{prop:susp-iso-monoids}
+%%\end{proposition}
+%%\begin{proof}
+%%    {\color{red}Freudenthal + check Marc's diagram.}
+%%\end{proof}
+%%
+%%\begin{lemma}
+%%    Let $A$ be a pointed type. The type of invertible elements in the monoid $\setTrunc{A \ptdto A}$
+%%    is the (essential) image of the induced inclusion $i:\setTrunc{A \ptdweq A} \to
+%%    \setTrunc{A \ptdto A}$.
+%%\end{lemma}
+%%\begin{proof}
+%%    Obviously, the truncation $\settrunc{f}$ of an equivalence $f$ is invertible,
+%%    as $\settrunc{\inv f}$ is an inverse for it.
+%%    
+%%    Conversely, if $x:\setTrunc{A \ptdto A}$ is invertible, then 
+%%    it has a unique inverse $\inv x$, and we want to
+%%    produce an element of the type:
+%%    \begin{displaymath}
+%%    \sum_{y:\setTrunc{A \ptdweq A}} x = i(y)
+%%    \end{displaymath}
+%%    %
+%%    As $x=i(y)$ is a proposition for every $y$ in the set $\setTrunc{A
+%%        \ptdweq A}$, this type is a set itself. Hence, one might assume
+%%    that $x \jdeq \settrunc f$ for some function $f:A \ptdto A$ as well
+%%    as its inverse $\inv x \jdeq \settrunc g$ for some $g:A \ptdto A$. 
+%%    %
+%%    From the inverse law in the monoid $\setTrunc{A \ptdto A}$, one
+%%    derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
+%%    the proposition that $f$ is an equivalence, on can then assume actual
+%%    witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
+%%    pseudo-inverse for $f$, which solves the problem.
+%%\end{proof}
+%%
+%%\begin{corollary}
+%%    For any $n\geq 2$, $\setTrunc{\Sn n \ptdweq \Sn n} \weq \bn 2$.
+%%    \label{cor:Sn-pointed-weq-is-bool}
+%%\end{corollary}
+%%\begin{proof}
+%%    We have shown the result for $n=2$ in the previous chapter
+%%    (\cref{cor:equivalence-conn-component}). Suppose $n\geq 2$. By
+%%    \cref{prop:susp-iso-monoids}, the monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and
+%%    $\setTrunc{\Sn {n+1} \ptdto \Sn {n+1}}$ are equivalent. Hence, their respective
+%%    submonoids of invertible elements are also equivalent. By
+%%    \cref{lemma:invertible-truncated-Sn-pointed-weq}, the type $\setTrunc{\Sn n
+%%        \ptdweq \Sn n}$ is then equivalent to $\setTrunc{\Sn {n+1} \ptdweq \Sn
+%%        {n+1}}$.
+%%    
+%%    The result is then proved by induction on $n\geq 2$.
+%%\end{proof}
+%%
+%%To prove \cref{thm:higher-spheres}, we need to get from this result to {\em
+%%    unpointed} equivalences. For the next lemma, consider $\Sn n$ as a bare type
+%%and let us use $(\Sn n,x)$ to mean the type $\Sn n$ pointed by an element
+%%$x:\Sn n$.
+%%\begin{lemma}
+%%    Let $n\geq 2$. For all $x:\Sn n$, one has $\setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$.
+%%    \label{lemma:pointed-weq-free-point-codomain-is-bool}
+%%\end{lemma}
+%%\begin{proof}
+%%    The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
+%%    set, i.e.\ $0$-truncated.
+%%    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
+%%    $(n-2)$-connected. 
+%%    By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
+%%    it suffices to give an element of $P(N)$ to get a
+%%    dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
+%%    provided by \cref{cor:Sn-pointed-weq-is-bool}.
+%%\end{proof}
+%%
+%%We can now give a proof of \cref{thm:higher-spheres}.
+%%\begin{proof}[Proof of \cref{thm:higher-spheres}]
+%%    One relies on the well-know equivalence:
+%%    \begin{displaymath}
+%%    (\Sn n \weq \Sn n) = \sum_{x:\Sn n}\left( (\Sn n, N) \ptdweq (\Sn n, x) \right)
+%%    \end{displaymath}
+%%    By \cite[Thm 7.3.9]{HoTT}, the $k$-truncation of a total space
+%%    $\sum_{x:A}P(x)$ is equivalent to the $k$-truncation of the space
+%%    $\sum_{x:A}\Trunc{P(x)}_k$. Hence, we find:
+%%    \begin{align*}
+%%    \setTrunc{\Sn n = \Sn n} &\weq \setTrunc{\Sn n \weq \Sn n} \\
+%%    &\weq \setTrunc{\sum_{x:\Sn n} (\Sn n, N) \weq (\Sn n, x)} \\
+%%    &\weq \setTrunc{\sum_{x:\Sn n} \setTrunc{(\Sn n, N) \weq (\Sn n, x)}} \\
+%%    &\weq \setTrunc{\Sn n \times \bn 2} \\
+%%    &\weq \setTrunc{\Sn n} \times \setTrunc{\bn 2} \\
+%%    &\weq \bn 2
+%%    \end{align*}
+%%\end{proof}
+%%
+%%
+%%\printbibliography
+%%
 \end{document}
 
 
