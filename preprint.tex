@@ -1090,16 +1090,16 @@ where we use that the suspension $\susp$ acts like a functor on morphisms:
     \begin{equation} \label{eq:susp-monoid-morphism}
     (\Sn n \to_* \Sn n) \xrightarrow{\susp} (\Sn {n+1} \to_* \Sn {n+1})
     \end{equation}
-    is a $0$-connected morphism of H-monoids.
+    is a $0$-connected morphism of wild monoids.
 \end{restatable}
 
 As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see
 that $\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$ is
 an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n
-\to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, the argument of
-\cref{TODO:refer-to-earlier-result} applies.
+\to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, we will be able
+to conclude that $\Sn n = \Sn n$ has two connected components.
 
-\subsection{Connectedness of the H-Monoid Morphism}
+\subsection{Connectedness of the morphism of wild monoids}
 %
 The goal of this subsection is to prove \cref{thm:susp-is-monoid-iso}. We need
 some preparation.  First of all, recall that we have a wild adjunction $\susp
@@ -1253,7 +1253,10 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in
   commutes.
 \end{lemma}
 \begin{proof}%
- Consider the following:
+  Recall that $\Sn {n+1} \jdeq \susp {\Sn n}$ and $\loopspace {n+1}(A) \jdeq
+  \loopspace n (\loopspace\null A)$ for any pointed type $A$, so that we are
+  free to use them interchangeably
+  in the following diagram:
 \begin{equation}
 \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
 \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
@@ -1263,16 +1266,15 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in
 \node (D) at (1,0) {$(\Sn {n+1} \to_* \Sn {n+1})$}; 
 \node (E) at (1,1) {$(\Sn n \to_* \Omega \Sigma \Sn n)$};
 
-\draw[arrow] (A) to node [left] {$\phi^n$} (B);
-\draw[arrow] (B) to node [above] {$\Omega^n(\sigma)$} (C);
+\draw[arrow] (A) to node [left] {$\phi^n_{\Sn n}$} (B);
+\draw[arrow] (B) to node [above] {$\loopspace n(\sigma_{\Sn n})$} (C);
 %  \draw[arrow] (D) to node [right] {$\sim$} (C);
 \draw[arrow] (A) to node [above] {$\susp$} (D);
-\draw[arrow] (D) to node [right] {$\phi$} (E);
-\draw[arrow] (E) to node [right] {$\phi^n$} (C);
-\draw[arrow] (A) to node [above right] {$\sigma \circ \blank$} (E);
+\draw[arrow] (D) to node [right] {$\Phi_{\Sn n,\Sn {n+1}}$} (E);
+\draw[arrow] (E) to node [right] {$\phi^n_{\loopspace\null(\Sn {n+1})}$} (C);
+\draw[arrow] (A) to node [above right] {$\sigma_{\Sn n} \circ \blank$} (E);
 \end{tikzpicture}
 \end{equation}
-  \todo[inline]{Pierre: the diagram should be completed with an extra $\Phi^{-1}$ on the right decomposing $\phi^n$.}
 The top triangle commutes by \cref{lem:adj-prop}.
 The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.
 \end{proof}
@@ -1282,7 +1284,7 @@ in terms of $\sigma$.
 Our motivation for this characterisation is that we know something about $\sigma$ through the following result:
 
 \begin{theorem}[{Freudenthal suspension theorem \cite[Thm 8.6.4]{HoTT}}] \label{thm:freudenthal}
-    If $X$ is $n$-connected and pointed, with $n \geq 0$, then the map $\sigma$ is $2n$-connected. \qed
+    If $X$ is $n$-connected and pointed, with $n \geq 0$, then the map $\sigma_X$ is $2n$-connected. \qed
 \end{theorem}
 
 
@@ -1292,7 +1294,7 @@ Choosing $X$ to be $\Sn n$ and using that $\Sn n$ is $(n-1)$-truncated \cite[Cor
 \begin{corollary} \label{cor:sigma-truncated}
 For $n \geq 1$, the map
 \begin{equation} 
-\sigma : \Sn n \to \Omega(\Sn {n+1})
+  \sigma_{\Sn n} : \Sn n \to \Omega(\Sn {n+1})
 \end{equation}
 is $2(n-1)$-truncated.
 \end{corollary}
@@ -1309,7 +1311,7 @@ To make use of this, we show how connectedness of functions interacts with loop 
     We need to show that the fibre
     \begin{equation}
 %        \higherTrunc {k-1} {\Sigma q : a_1 = a_2. \ap{f}(q) = p}
-        \Sigma q : a_1 = a_2. \ap{f}(q) = p
+      \sum_{q : a_1 = a_2}\ap{f}(q) = p
     \end{equation}
     is $(k-1)$-connected.
     
@@ -1318,17 +1320,17 @@ To make use of this, we show how connectedness of functions interacts with loop 
     $\highertrunc k {(a_1, p)}$ 
     and  
     $\highertrunc k {(a_2, \refl {f(a_2)})}$ of 
-    the type $\higherTrunc k {f^{-1}(a_2)}$, which is contractible by the connectedness assumption on $f$.
+    the type $\higherTrunc k {f^{-1}(f(a_2))}$, which is contractible by the connectedness assumption on $f$.
     Therefore, the type of equalities between the two chosen elements is contractible as well.
     By \cite[Theorem 7.3.12]{HoTT}, this type of equalities is equivalent to
     \begin{equation} \label{eq:eq-in-truncated-fibre}
     \higherTrunc {k-1} {(a_1, p) = (a_2, \refl {f(a_2)})}.
     \end{equation} 
-    By \cite[Theorem 2.7.2 and todo-find-number]{HoTT}, 
+    However, 
 %    the equality type $(a_1,p) = (a_2,\refl {f(a_2)})$ is 
     this type is further equivalent to
     \begin{equation}
-    \higherTrunc {k-1} {\Sigma(q : a_1 = a_2). \ap f(q) = p},
+      \higherTrunc {k-1} {\sum_{q : a_1 = a_2} \ap f(q) = p},
     \end{equation} 
     and the contractibility of this type is exactly what we had to show.
 \end{proof}
@@ -1340,7 +1342,7 @@ By $k$-fold application of the above lemma, we get:
     
     Building on \cref{cor:sigma-truncated} we get that, for $n \geq 1$, the map
     \begin{equation} 
-    \sigma : \Omega^n(\Sn n) \to \Omega^{n+1}(\Sn {n+1})
+      \loopspace n (\sigma_{\Sn n}) : \Omega^n(\Sn n) \to \Omega^{n+1}(\Sn {n+1})
     \end{equation}
     is $(n-2)$-connected.
     \qed
@@ -1354,9 +1356,9 @@ We are now ready to restate and prove \cref{thm:susp-is-monoid-iso}:
     preservation of the monoid structure is just the (wild) functoriality of $\susp$.
     
     What is left to show is $0$-connectedness.
-    In the commuting square of \cref{lem:sigma-susp}, the two vertical maps are equivalences and the bottom horizontal map is $(n-2)$-truncated by \cref{cor:n-2-connected}.
+    In the commutative square of \cref{lem:sigma-susp}, the two vertical maps are equivalences and the bottom horizontal map is $(n-2)$-truncated by \cref{cor:n-2-connected}.
     This implies that the top horizontal map $\susp$ is $(n-2)$-connected as well.
-    By assumption we have $(n-2) \geq 0$, which means that an $(n-2)$-connected map is also $0$-truncated.
+    By assumption we have $(n-2) \geq 0$, which means that an $(n-2)$-connected map is also $0$-connected.
 \end{proof}
 
 \subsection{The Connected Components of $\boldsymbol{\Sn n = \Sn n}$}
@@ -1388,12 +1390,12 @@ We have the following general result:
 \begin{proof}
     Assume $f : X \to Y$.
     We calculate
-    \begin{alignat}{3}
-    &\quad && \pi_1^{-1}(f) \\
-    \equiv &&&  \Sigma\left(\Sigma(g : X \to Y).g(x) = y\right). (g = f) \\
-    \simeq &&&  f(x) = y, \label{eq:simplified-preimage}
-    \end{alignat}
-    where we use that the dependent pair type $\Sigma(g : X \to Y). g = f$ is contractible.
+    \begin{align}
+      \pi_1^{-1}(f)
+      &\weq \sum_{g : X \to Y}(g(x) = y) \times (g = f) \\
+      &\weq f(x) = y, \label{eq:simplified-preimage}
+    \end{align}
+    where we use that the dependent pair type $\sum_{g : X \to Y} (g = f)$ is contractible.
     Since $Y$ is $n$-connected, the type \eqref{eq:simplified-preimage} is $(n-1)$-connected by \cref{lem:conn-ap}.
 %    
 %    \begin{alignat}{2}
@@ -1491,7 +1493,9 @@ The first observation we make is simple:
 \end{proposition}
 \begin{proof}
     For $n=1$ and $n=2$, this statement is given by the main result of \cref{sec:circle-case} and by \cref{prop:equiv-susp-comp}, respectively.
-    \todo[inline]{Nicolai: Need to fill in the argument for $n>2$. Something like $\susp$ preserves equivalence of components.}
+    \todo[inline]{Nicolai: Need to fill in the argument for $n>2$. Something like $\susp$ preserves equivalence of components.
+    
+    Pierre: still missing that piece. Basically, one would like $\Trunc{\susp f = \susp g} \to \Trunc{f = g}$ and I am just able to prove that $\Trunc{\prod_x\mrd(f(x)) = \mrd(g(x))}$. There is no reason for $\mrd$ to have a retraction in full generality (or at least I recall that it as the conclusion we reached with Marc after a brainstorming session).}
 \end{proof}
 
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
@@ -1517,8 +1521,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     as groups.
 \end{theorem}
 
-\todo[inline]{Pierre: choose between the two proofs.}
-\begin{proof}[Alternative proof]
+\begin{proof}%[Alternative proof]
   The following sequence is a fiber sequence by definition:
   \begin{displaymath}
     (\Sn n \ptdto \Sn n) \stackrel \iota \to (\Sn n \to \Sn n) \stackrel {\ev_\ast}\to \Sn n
@@ -1547,51 +1550,51 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     \fgr (\Sn n = \Sn n) \weq \fgr (\Sn n \to \Sn n) \weq \hgr {n+1} (\Sn n) \weq \ZZ \slash 2\ZZ
   \end{displaymath}
 \end{proof}
-\begin{proof}
-    Consider the following maps:
-    
-    \newdimen\R
-    \R=4cm
-    
-    \newcommand{\rot}{120}
-    
-    \begin{equation*} 
-    \begin{tikzpicture}[baseline=(current bounding box.center)]
-    \node (P1) at (\rot+300:\R) {$\Omega^{n+1}(\Sn n)$}; 
-    \node (P2) at (\rot+240:\R) {$\Omega(\Omega^{n}(\Sn n))$}; 
-    \node (P3) at (\rot+180:\R) {$\Omega(\Sn n \to_* \Sn n)$}; 
-    \node (P4) at (\rot+120:\R) {$\Omega(\Sn n \to \Sn n)$}; 
-    \node (P5) at (\rot+60:\R) {$\Omega(\Sn n \simeq \Sn n)$}; 
-    \node (P6) at (\rot+0:\R) {$\Omega(\Sn n = \Sn n)$}; 
-
-    \draw[<->, tikzshortarrow] (P1) to node [above right] {$\sim$} (P2);
-    \draw[<-, tikzshortarrow] (P2) to node [below right] {$\Omega(\Phi^n)$} (P3);
-    \draw[->, tikzshortarrow] (P3) to node [above] { $\Omega(\pi_1)$} (P4);
-    \draw[<->, tikzshortarrow] (P5) to node [above left] {$\sim$} (P6);
-    \draw[->, tikzshortarrow] (P5) to node [below left] {$\Omega(\pi_1)$} (P4);
-    \end{tikzpicture}
-    \end{equation*}
-The two upper arrows as well as the map $\Omega(\Phi^n)$ are evidently equivalences.
-The two remaining maps are both labelled as $\Omega(\pi_1)$,
-but it is important to note that these are different projections:
-\begin{align}
-& \pi_1 : (\Sn n \simeq \Sn n) \to (\Sn n \to \Sn n) \label{eq:project-eqv} \\
-& \pi_1 : (\Sn n \to_* \Sn n) \to (\Sn n\to \Sn n) \label{eq:project-point}
-\end{align}
-The map \eqref{eq:project-eqv} is the projection which drops the proof that a map is an equivalence. Since this is a proposition, the map $\pi_1$ is an embedding, and $\Omega(\pi_1)$ is an equivalence.
-The map \eqref{eq:project-point} instead drops the information that the base point is preserved, and is $(n-2)$-connected by \cref{lem:forget-points-conn}.
-By \cref{lem:conn-ap}, this implies that $\Omega(\pi_1)$ is $(n-3)$-connected.
-Since we have assumed $n \geq 3$, it is in particular $0$-connected and taking the $0$-truncation of the hexagon gives us an equivalence
-\begin{equation}
-    \setTrunc{\Omega(\Sn n = \Sn n)} \simeq \setTrunc{\Omega^{n+1}(\Sn n)}.
-\end{equation}
-By Brunerie's results 
-%note: these results are NOT in Guillaume's thesis, but only in the paper. I only checked the arxiv version, the published on is behind a paywall.
-\cite[Corollaries 3 and 4 of the arXiv version]{brunerie2019james}, the fundamental groups on the right-hand side is $\ZZ \slash 2\ZZ$.
-
-The calculation above a priori only shows an equivalence of types (i.e.\ $\fgr(\Sn n = \Sn n) = \bn 2$).
-The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
-\end{proof}
+%%\begin{proof}
+%%    Consider the following maps:
+%%    
+%%    \newdimen\R
+%%    \R=4cm
+%%    
+%%    \newcommand{\rot}{120}
+%%    
+%%    \begin{equation*} 
+%%    \begin{tikzpicture}[baseline=(current bounding box.center)]
+%%    \node (P1) at (\rot+300:\R) {$\Omega^{n+1}(\Sn n)$}; 
+%%    \node (P2) at (\rot+240:\R) {$\Omega(\Omega^{n}(\Sn n))$}; 
+%%    \node (P3) at (\rot+180:\R) {$\Omega(\Sn n \to_* \Sn n)$}; 
+%%    \node (P4) at (\rot+120:\R) {$\Omega(\Sn n \to \Sn n)$}; 
+%%    \node (P5) at (\rot+60:\R) {$\Omega(\Sn n \simeq \Sn n)$}; 
+%%    \node (P6) at (\rot+0:\R) {$\Omega(\Sn n = \Sn n)$}; 
+%%
+%%    \draw[<->, tikzshortarrow] (P1) to node [above right] {$\sim$} (P2);
+%%    \draw[<-, tikzshortarrow] (P2) to node [below right] {$\Omega(\Phi^n)$} (P3);
+%%    \draw[->, tikzshortarrow] (P3) to node [above] { $\Omega(\pi_1)$} (P4);
+%%    \draw[<->, tikzshortarrow] (P5) to node [above left] {$\sim$} (P6);
+%%    \draw[->, tikzshortarrow] (P5) to node [below left] {$\Omega(\pi_1)$} (P4);
+%%    \end{tikzpicture}
+%%    \end{equation*}
+%%The two upper arrows as well as the map $\Omega(\Phi^n)$ are evidently equivalences.
+%%The two remaining maps are both labelled as $\Omega(\pi_1)$,
+%%but it is important to note that these are different projections:
+%%\begin{align}
+%%& \pi_1 : (\Sn n \simeq \Sn n) \to (\Sn n \to \Sn n) \label{eq:project-eqv} \\
+%%& \pi_1 : (\Sn n \to_* \Sn n) \to (\Sn n\to \Sn n) \label{eq:project-point}
+%%\end{align}
+%%The map \eqref{eq:project-eqv} is the projection which drops the proof that a map is an equivalence. Since this is a proposition, the map $\pi_1$ is an embedding, and $\Omega(\pi_1)$ is an equivalence.
+%%The map \eqref{eq:project-point} instead drops the information that the base point is preserved, and is $(n-2)$-connected by \cref{lem:forget-points-conn}.
+%%By \cref{lem:conn-ap}, this implies that $\Omega(\pi_1)$ is $(n-3)$-connected.
+%%Since we have assumed $n \geq 3$, it is in particular $0$-connected and taking the $0$-truncation of the hexagon gives us an equivalence
+%%\begin{equation}
+%%    \setTrunc{\Omega(\Sn n = \Sn n)} \simeq \setTrunc{\Omega^{n+1}(\Sn n)}.
+%%\end{equation}
+%%By Brunerie's results 
+%%%note: these results are NOT in Guillaume's thesis, but only in the paper. I only checked the arxiv version, the published on is behind a paywall.
+%%\cite[Corollaries 3 and 4 of the arXiv version]{brunerie2019james}, the fundamental groups on the right-hand side is $\ZZ \slash 2\ZZ$.
+%%
+%%The calculation above a priori only shows an equivalence of types (i.e.\ $\fgr(\Sn n = \Sn n) = \bn 2$).
+%%The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
+%%\end{proof}
 
 This calculation also allows us to see that the result from \cref{sec:circle-case} does not generalise:
 
@@ -1603,7 +1606,7 @@ This calculation also allows us to see that the result from \cref{sec:circle-cas
 \end{proposition}
 \begin{proof}
     Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
-    Without loss of generality, we can assume that $\varphi(\refl{})$ lies in the left summand, 
+    Without loss of generality, we can assume that $\varphi(\refl{\Sn n})$ lies in the left summand, 
     i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$. 
     By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $N$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
     As the fundamental groups on both sides do not coincide, $\varphi$ cannot be an equivalence.
@@ -1684,16 +1687,51 @@ Let us finally summarise the results of the current section, putting \cref{thm:h
 
 \subsection{Wild functors}
 \label{sec:wild-functors}
-The type $\UUptd$ does certainly not form a category (the intended type of
-morphisms $A \ptdto B$ between two objects $A,B$ is not necessarily a set),
-but some constructions on it are reminiscent of functors. 
+\def\hom(#1,#2){#1 \rightsquigarrow #2}
+%
+The types $\UUptd$ and $\UU$ do certainly not form categories in the usual
+sense (the intended type of morphisms $A \ptdto B$ and $A\to B$ between two
+objects $A,B$ is not necessarily a set), but some constructions on it are
+reminiscent of functors. This motivates the few following definitions.
+
 \begin{definition}
-  A \emph{wild functor} on $\UUptd$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
+  A \emph{wild category} is a dependent tuple $(\cat C, \hom( , ), \circ, \id, \alpha,
+  \iota)$ where:
   \begin{align*}
-    F_0 &:\UUptd \to \UUptd,\\
-    F_1 &:\prod_{A,B:\UUptd} (A \ptdto B) \to (F_0(A) \ptdto F_0(B))\\
-    c &: \prod_{A,B,C:\UUptd}\prod_{f:A\ptdto B, g:B\ptdto C}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
-    u &: \prod_{A:\UUptd} F_1(\id_A) = \id_{F_0(A)}
+    \cat C&: \UU \\
+    \hom( , )&: \cat C \times \cat C \to \UU \\
+    \circ&: \prod_{a,b,c:\cat C} \hom(b,c) \times \hom(a,b) \to \hom(a,c) 
+    \quad (\text{notation}\ g\circ f \defequi \circ(a,b,c)(g,f)) \\
+    \id&: \prod_{a:\cat C} \hom(a,a) \quad (\text{notation}\ \id_a \defequi \id(a)) \\
+    \alpha&: \prod_{a,b,c,d:\cat C} \prod_{f:\hom(a,b)} \prod_{g:\hom(b,c)} \prod_{h:\hom(c,d)}
+    h\circ (g \circ f) = (h \circ g) \circ f \\
+    \iota&: \prod_{a,b:\cat C} \prod_{f:\hom(a,b)} (f\circ \id_a = f) \times (f = \id_b \circ f)
+  \end{align*}
+  \label{defn:wild-cat}
+\end{definition}
+One makes the abuse to denote a category by only its carrier type $\cat C$ when
+all the remaining data are clear from context.
+
+\begin{example}
+  The types $\UU$ together with function types, identity functions and the
+  usual composition, is a wild category. The elements $\alpha$ and $\iota$ are
+  given by function extensionality.
+ 
+  Similarly, the type $\UUptd$ together with $\ptdto$, identity functions
+  pointed by $\refl{}$ paths, and composition of pointed functions, is a wild
+  category. Again, the elements $\alpha$ and $\iota$ are given by function
+  extensionality, completed by path algebra.
+\end{example}
+
+\begin{definition}
+  Let $\cat C,\cat D$ be two wild categories.
+  %
+  A \emph{wild functor} from $\cat C \to \cat D$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
+  \begin{align*}
+    F_0 &:\cat C \to \cat D,\\
+    F_1 &:\prod_{a,b:\cat C} \hom(a,b) \to \hom(F_0(a), F_0(b))\\
+    c &: \prod_{a,b,c:\cat C}\prod_{f:\hom(a,b)}\prod_{g:\hom(a,c)}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
+    u &: \prod_{a:\cat C} F_1(\id_a) = \id_{F_0(a)}
   \end{align*}
   \label{def:wild-functor}
 \end{definition}
@@ -2089,10 +2127,12 @@ adjunctions.
 %%    &\weq \bn 2
 %%    \end{align*}
 %%\end{proof}
-%%
-%%
-%%\printbibliography
-%%
+
+
+
+
+\printbibliography
+
 \end{document}
 
 
