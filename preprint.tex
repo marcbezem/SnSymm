@@ -814,35 +814,44 @@ is where the complexity hides: one wants to prove that the degree
 map is an injection on connected components. To do so, we will define
 another map $\bar d: (\Sp \ptdto \Sp) \to \ZZ$, which is easily proven an
 injection on connected components, and then we will prove that $d = \bar d$.
-Recall that for any types $A,B$ pointed by $a$ and $b$,
-respectively, there is an equivalence
-\begin{displaymath}
-  \Phi_{A,B}: (\susp A \ptdto B) \weq (A \ptdto \loopspace \null B) 
-\end{displaymath}
-that takes a function $f:\susp A \to B$ pointed by $f_0: f(N)=b$ and maps it to 
-\begin{displaymath}
-  {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot \inv{f_0} : A \to \loopspace\null B
-\end{displaymath}
-which is pointed by the path $\varpi_{f}:{f_0} \cdot (\ap f (\inv
-\mrd(a)\mrd(a))) \cdot \inv{f_0} = \refl{b}$ given by path algebra operations.
 
-In particular, for each type $A$, one gets a {\em unit} function 
-\begin{displaymath}
-  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A,
- \text{ pointed by $\varpi_{\id_{\susp A}}$}.
-\end{displaymath}
-The map $\eta_A$ is involved in the so-called triangle identity: for any type $B$,
-there is an element of the following type
+Recall from \cref{ex:loop-sus-wild-functors} that for each pointed type $A$,
+there is a map $\eta_A : A \ptdto \loopspace\null \susp A$. These maps are such
+that the following function is an equivalence for each $A,B:\UUptd$ (see
+\cref{def:wild-adj}):
 \begin{equation}
-  \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
+  \Phi_{A,B} \defequi \loopspace \null \blank \circ \eta_A :  (\susp A \ptdto B) \weq (A \ptdto \loopspace \null B)
   \label{eq:triangle-identity-unit}
 \end{equation}
-given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:f(N)=b$
-\begin{displaymath}
-  \loopspace\null(f) \circ \eta_A \jdeq {f_0} \cdot \ap f (\eta_A(\blank)) \cdot \inv{f_0} 
-  = {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot \inv{f_0} \jdeq \Phi_{A,B}(f). 
-\end{displaymath}
-
+%%
+%%pointed by $a$ and $b$,
+%%respectively, there is an equivalence
+%%\begin{displaymath}
+%%  \Phi_{A,B}:
+%%\end{displaymath}
+%%that takes a function $f:\susp A \to B$ pointed by $f_0: f(N)=b$ and maps it to 
+%%\begin{displaymath}
+%%  {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot \inv{f_0} : A \to \loopspace\null B
+%%\end{displaymath},
+%%which is pointed by path algebra.
+%%
+%%One has morevover, for each type pointed type $A$, a {\em unit} function 
+%%\begin{displaymath}
+%%  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A,
+%% \text{ pointed by $\varpi_{\id_{\susp A}}$}.
+%%\end{displaymath}
+%%The map $\eta_A$ is involved in the so-called triangle identity: for any type $B$,
+%%there is an element of the following type
+%%\begin{equation}
+%%  \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
+%%  \label{eq:triangle-identity-unit}
+%%\end{equation}
+%%given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:f(N)=b$
+%%\begin{displaymath}
+%%  \loopspace\null(f) \circ \eta_A \jdeq {f_0} \cdot \ap f (\eta_A(\blank)) \cdot \inv{f_0} 
+%%  = {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot \inv{f_0} \jdeq \Phi_{A,B}(f). 
+%%\end{displaymath}
+%%
 There is now an equivalence $\gamma:(\Sp \ptdto \Sp) \weq \loopspace 2 \Sp$ defined as
 the composition:
 \begin{displaymath}
@@ -852,7 +861,7 @@ the composition:
   \loopspace 2 \Sp,
 \end{displaymath}
 using that $\Sc \weq \susp{\bn 2}$, and with $\ev_0$ evaluating its argument 
-in the element of $\bn 2$ that is not the point of $\bn 2$ as as pointed type.					
+in the element of $\bn 2$ that is not the distinguished point of the pointed type $\bn 2$.					
 We now define $\bar d$ as the composition
 \begin{displaymath}
   (\Sp \ptdto \Sp) \stackrel \gamma \to \loopspace 2 \Sp \stackrel {\settrunc\blank} \to 
@@ -1730,7 +1739,7 @@ all the remaining data are clear from context.
   \begin{align*}
     F_0 &:\cat C \to \cat D,\\
     F_1 &:\prod_{a,b:\cat C} \hom(a,b) \to \hom(F_0(a), F_0(b))\\
-    c &: \prod_{a,b,c:\cat C}\prod_{f:\hom(a,b)}\prod_{g:\hom(a,c)}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
+    c &: \prod_{a,b,c:\cat C}\prod_{f:\hom(a,b)}\prod_{g:\hom(b,c)}F_1(g\circ f) = F_1(g) \circ F_1(f)\\
     u &: \prod_{a:\cat C} F_1(\id_a) = \id_{F_0(a)}
   \end{align*}
   \label{def:wild-functor}
@@ -1743,12 +1752,11 @@ its first two components only.
 
 \begin{example}~\label{ex:loop-sus-wild-functors}%
   \begin{enumerate}
-    \item There is a wild functor $\loopspace \null$ which maps a pointed type $A$
-      (pointed at $a$) to $\loopspace \null A \defeq (a=a$)
-      (pointed at $\refl a$), and maps
-      a pointed function $f: A \ptdto B$ to the pointed function $\loopspace
-      \null (f): \loopspace \null A \ptdto \loopspace \null B$ defined as
-      follows:
+    \item There is a wild functor $\loopspace \null$ from $\UUptd$ to itself
+      which maps a pointed type $A$ (pointed at $a$) to $\loopspace \null A
+      \defeq (a=a$) (pointed at $\refl a$), and maps a pointed function $f: A
+      \ptdto B$ to the pointed function $\loopspace \null (f): \loopspace \null
+      A \ptdto \loopspace \null B$ defined as follows:
       \begin{displaymath}
         \loopspace \null (f) (p) \defequi f_0 \cdot \ap f (p) \cdot \inv{f_0}
       \end{displaymath}
@@ -1828,10 +1836,10 @@ its first two components only.
 %%      \end{displaymath}
 %%      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
 %%
-    \item There is a wild functor $\susp \null$ which maps a pointed type $A$
-      to $\susp A$ (pointed at the pole $N$), and maps a pointed function
-      $f:A\ptdto B$ to the pointed function $\susp (f) : \susp A \ptdto \susp
-      B$ defined by induction as follows:
+    \item There is a wild functor $\susp \null$ from $\UUptd$ to itself which
+      maps a pointed type $A$ to $\susp A$ (pointed at the pole $N$), and maps
+      a pointed function $f:A\ptdto B$ to the pointed function $\susp (f) :
+      \susp A \ptdto \susp B$ defined by induction as follows:
       \begin{displaymath}
         \susp (f) (N) \defequi N,\quad
         \susp (f) (S) \defequi S,\quad
@@ -1842,25 +1850,45 @@ its first two components only.
       straightforward through degenerate inductions on the supsension, and a
       careful exposition can be found in
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
+
+    \item There is a wild functor $\setTrunc \blank$ from $\UUptd$ to $\UU$
+      which maps a pointed type $(A,a_0)$ to $\setTrunc{A}$ and a pointed map
+      $(f,f_0)$ to the map $\setTrunc f$ defined by induction as $\settrunc x
+      \mapsto \settrunc{f(x)}$. The witnesses $c$ and $u$ are defined
+      respectively by the fact that the two following types are clearly
+      inhabited:
+      \begin{gather*}
+        \setTrunc g \circ \setTrunc f \circ \settrunc \blank = \settrunc \blank \circ (g\circ f),
+        \\
+        \setTrunc{\id} \circ \settrunc \blank = \settrunc \blank \circ \id
+      \end{gather*}
+
+    \item Building on the previous examples, there is for each $n:\NN$, a wild
+      functor $\hgr n$ from $\UUptd$ to $\UU$ which acts on objects an maps as
+      $\setTrunc{\loopspace n (\blank)}$. The witnesses $c$ and $u$ are given by
+      successive transport and concatenation of the same witnesses for
+      $\loopspace\null$ and $\setTrunc \blank$.
+      \todo{Should it be made more precise by defining composition of wild functors in full gen. ?}
   \end{enumerate}
 \end{example}
 
 \begin{definition}
-  Given two wild functors $L$ and $R$, a wild adjunction of type $L\leftadjto
+  Let be given a wild functor $L$ from $\cat C$ to $\cat D$, and a wild functor
+  $R$ from $\cat D$ to $\cat C$. A \emph{wild adjunction} of type $L\leftadjto
   R$ is the data of two dependent functions:
   \begin{displaymath}
-    \eta : \prod_{A:\UUptd} A \to R \circ L(A), \quad
-    \epsilon : \prod_{A:\UUptd} L\circ R (A) \to A
+    \eta : \prod_{a:\cat C} \hom(a,R \circ L(a)), \quad
+    \epsilon : \prod_{b:\cat D} \hom(L\circ R (b), b)
   \end{displaymath}
   together with elements
   \begin{gather*}
-    \mathrm{nat}_\eta : \prod_{A,B:\UUptd} \prod_{f:A\ptdto B} (R\circ L)(f) \circ \eta(A) = \eta(B) \circ f, \\
-    \mathrm{nat}_\epsilon : \prod_{A,B:\UUptd} \prod_{f:A\ptdto B} f \circ \epsilon(A) = (L\circ R)(f) \circ \epsilon(B).
+    \mathrm{nat}_\eta : \prod_{a,a':\cat C} \prod_{f:\hom(a,a')} (R\circ L)(f) \circ \eta(a) = \eta(a') \circ f, \\
+    \mathrm{nat}_\epsilon : \prod_{b,b':\UUptd} \prod_{f:\hom(b,b')} f \circ \epsilon(b) = (L\circ R)(f) \circ \epsilon(b').
   \end{gather*}
   and
   \begin{displaymath}
-    \mathrm{rtr}_{\eta,\epsilon} : \prod_{A:\UUptd} R(\epsilon(A)) \circ \eta(RA) = \id_{RA}, \quad
-    \mathrm{ltr}_{\epsilon,\eta} : \prod_{A:\UUptd} \epsilon(LA) \circ L(\eta(A)) = \id_{LA}
+    \mathrm{ltr}_{\epsilon,\eta} : \prod_{a:\cat C} \epsilon(L(a)) \circ L(\eta(a)) = \id_{L(a)}, \quad
+    \mathrm{rtr}_{\eta,\epsilon} : \prod_{b:\cat D} R(\epsilon(b)) \circ \eta(R(b)) = \id_{R(b)}
   \end{displaymath}
 \end{definition}
 Here again, even though the types of $\mathrm{nat}_\eta$,
@@ -1869,20 +1897,26 @@ $\mathrm{rtr}_{\eta,\epsilon}$ are not propositions, one only cares about their
 existence, and therefore one usually omit them when denoting a wild
 adjunctions.
 
-\begin{remark}
-  As carefully proved in \cite[\githubpath theorems/homotopy/PtdAdjoint.agda]{hott-agda},
-  any wild adjunction induces a dependent function $\Phi$ that maps pointed
-  types $A,B:\UUptd$ to an equivalence
+\begin{remark} \label{def:wild-adj}
+  As carefully proven in \cite[\githubpath
+  theorems/homotopy/PtdAdjoint.agda]{hott-agda}, any such wild adjunction of
+  induces a dependent function $\Phi$ that maps elements $a:\cat C$ and $b:\cat
+  D$ to an equivalence
   \begin{displaymath}
-    \Phi_{A,B} : (LA\ptdto B) \weq (A\ptdto RB)
+    \Phi_{a,b} : (\hom(L(a),b)) \weq (\hom(a,R(b))
   \end{displaymath}
-  given by $f \mapsto R(f) \circ \eta(A)$, with inverse the function given by
-  $g\mapsto \epsilon(B) \circ L(g)$.
+  given by $f \mapsto R(f) \circ \eta(a)$, with inverse the function given by
+  $g\mapsto \epsilon(b) \circ L(g)$.
 
-  This dependent function is natural in the following sense: for any
-  $A,B:\UUptd$, there are elements of $\Phi_{A,B}(\blank) \circ f = \Phi_{A',B}
-  (\blank \circ L(f))$ for any $f:A'\ptdto A$ and $\Phi_{A,B'}(g\circ\blank) =
-  R(g)\circ \Phi_{A,B} (\blank)$ for any $g:B\ptdto B'$.  \label{def:wild-adj}
+  This dependent function is natural in the following sense: for any $a,a':\cat
+  C$ and $b,b':\cat D$, there are elements of $\Phi_{a,b}(\blank) \circ f =
+  \Phi_{a',b} (\blank \circ L(f))$ for any $f:\hom(a',a)$ and
+  $\Phi_{a,b'}(g\circ\blank) = R(g)\circ \Phi_{a,b} (\blank)$ for any
+  $g:\hom(b,b')$. 
+  
+  (To be precise, this is proven in \cite{hott-agda} only for wild functors $L$
+  and $R$ from $\UUptd$ to $\UUptd$. This is the only case we need for this
+paper, hence we rely on this proof.)
 \end{remark}
 
 \begin{proposition}
@@ -2128,8 +2162,28 @@ adjunctions.
 %%    \end{align*}
 %%\end{proof}
 
+\begin{remark}
+  Define a \emph{wild monoid} to be a pointed type $(M,1)$ equipped with a
+  function $\cdot : M \times M \to M$ and elements:
+  \begin{gather*}
+    \alpha: \prod_{x,y,z:M}x\cdot(y\cdot z) = (x\cdot y) \cdot z \\
+    \iota: \prod_{x:M} (x\cdot 1 = x) \times (x = 1 \cdot x)
+  \end{gather*}
+  If $M$ is a set, then the type of $\alpha$ and $\iota$ become propositions
+  and we are left with just a usual monoid. In particular, for any wild monoid
+  $M$, the type $\setTrunc M$ has a natural monoid structure.
 
+  Note that in any wild category $\cat C$, an object $a:\cat C$ induces a
+  \emph{wild monoid} structure on $\hom(a,a)$, pointed at $\id a$ with the
+  multiplication $\circ(a,a,a)$ and the witnesses $\alpha(a,a,a)$ and
+  $\iota(a,a)$. 
 
+  As examples, one has wild monoids for each $n:\NN$, namely $\Sn n \ptdto \Sn
+  n$, $\Sn n \to \Sn n$, $\setTrunc{\Sn n \ptdto \Sn n}$ and $\setTrunc{\Sn n
+  \to \Sn n}$. The last two are simply monoids by the remark above on set
+  truncations of wild monoids.
+  \label{rem:wild-monoids}
+\end{remark}
 
 \printbibliography
 
