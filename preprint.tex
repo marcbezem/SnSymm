@@ -1718,7 +1718,7 @@ reminiscent of functors. This motivates the few following definitions.
   \end{align*}
   \label{defn:wild-cat}
 \end{definition}
-One makes the abuse to denote a category by only its carrier type $\cat C$ when
+One makes the abuse to denote a wild category by only its carrier type $\cat C$ when
 all the remaining data are clear from context.
 
 \begin{example}
@@ -1765,8 +1765,8 @@ its first two components only.
       The map $\loopspace \null (f)$ is itself pointed by a path obtained by
       using path algebra as follows:
       \begin{displaymath}
-        \loopspace\null (f)(\refl a) =  f_0 \cdot \ap f (\refl a) \cdot \inv{f_0}
-        = f_0 \cdot \refl {f(a)} \inv{f_0}
+        \loopspace\null (f)(\refl a) \defequal  f_0 \cdot \ap f (\refl a) \cdot \inv{f_0}
+        = f_0 \cdot \refl {f(a)} \cdot \inv{f_0}
         = \refl b.
       \end{displaymath}
       A careful exposition of the witness created this way can be found in
@@ -1845,8 +1845,8 @@ its first two components only.
         \susp (f) (S) \defequi S,\quad
         \ap{\susp (f)} \circ \mrd = \mrd \circ f.
       \end{displaymath}
-      Note that $\susp (f)$ is pointed by definition as it maps $N$ to $N$
-      directly. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
+      Note that $\susp (f)$ is pointed by $\refl{N}$ as it maps $N$ to $N$
+      by definition. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
       straightforward through degenerate inductions on the supsension, and a
       careful exposition can be found in
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
