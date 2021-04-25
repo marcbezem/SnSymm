@@ -1704,7 +1704,7 @@ objects $A,B$ is not necessarily a set), but some constructions on it are
 reminiscent of functors. This motivates the few following definitions.
 
 \begin{definition}
-  A \emph{wild category} is a dependent tuple $(\cat C, \hom( , ), \circ, \id, \alpha,
+  A \emph{wild category in} $\UU$ is a dependent tuple $(\cat C, \hom( , ), \circ, \id, \alpha,
   \iota)$ where:
   \begin{align*}
     \cat C&: \UU \\
@@ -1722,8 +1722,8 @@ One makes the abuse to denote a wild category by only its carrier type $\cat C$ 
 all the remaining data are clear from context.
 
 \begin{example}
-  The types $\UU$ together with function types, identity functions and the
-  usual composition, is a wild category. The elements $\alpha$ and $\iota$ are
+  The type $\UU_i$ together with function types, identity functions and the
+	usual composition, is a wild category in $\UU_{i+1}$, for any $i$. (We will henceforth ignore universe levels and just write $\UU$.) The elements $\alpha$ and $\iota$ are
   given by function extensionality.
  
   Similarly, the type $\UUptd$ together with $\ptdto$, identity functions
@@ -1847,7 +1847,7 @@ its first two components only.
       \end{displaymath}
       Note that $\susp (f)$ is pointed by $\refl{N}$ as it maps $N$ to $N$
       by definition. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
-      straightforward through degenerate inductions on the supsension, and a
+      defined through easy inductions on the supsension, and a
       careful exposition can be found in
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
 
@@ -1855,8 +1855,7 @@ its first two components only.
       which maps a pointed type $(A,a_0)$ to $\setTrunc{A}$ and a pointed map
       $(f,f_0)$ to the map $\setTrunc f$ defined by induction as $\settrunc x
       \mapsto \settrunc{f(x)}$. The witnesses $c$ and $u$ are defined
-      respectively by the fact that the two following types are clearly
-      inhabited:
+      by using well-known inhabitants of the following two types, respectively:
       \begin{gather*}
         \setTrunc g \circ \setTrunc f \circ \settrunc \blank = \settrunc \blank \circ (g\circ f),
         \\
