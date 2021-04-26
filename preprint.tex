@@ -14,7 +14,7 @@
 \usepackage[
   backend=biber,
   bibencoding=utf8,
-  style=alphabetic]
+style=alphabetic,maxbibnames=9,maxcitenames=9]
   {biblatex}
 \addbibresource{bib.bib}
 
@@ -121,16 +121,19 @@ We deviate from \cite{HoTT} in denoting path composition:
 if $p:x=y$ and $q:y=z$ are paths, then we denote their
 composition by $qp$, or by $q\cdot p$.
 
-We postulate a type $\NN$ of natural numbers and a type $\ZZ$ of
-integers with their respective inductive properties
-(cf.~\cite[Ch.??]{HoTT}). We allow also several higher inductive types
-that are defined in the HoTT-book: propositional truncation,
-suspension, and the circle. Considering their importance in this
-paper, we recall them in full\footnote{\color{red}Or maybe we should
-  make an appendix of that? MB is for an appendix!}:
+We postulate a type $\NN$ of natural numbers with its inductive property
+(cf.~\cite[Chapter 1.9]{HoTT}), from which is crafted a type $\ZZ$ of integers
+as in \cite[\githubpath core/lib/types/Int.agda]{hott-agda}. The crucial
+property of $\ZZ$ (proved in previously cited file), is that it has decidable
+equality. We allow also several higher inductive types that are defined in
+\cite{HoTT}: propositional and set truncations, suspension, and the circle.
+Considering their importance in this paper, we recall them in full
+%%\footnote{\color{red}Or
+%%  maybe we should make an appendix of that? MB is for an appendix!}
+:
 \begin{enumerate}
-\item the {\em propositional truncation} of a type $A$ is a type
-  $\Trunc A$ defined by
+\item the {\em propositional truncation} of a type $A$ is a type $\Trunc A$
+  defined by
   \begin{itemize}
   \item a map $\trunc \blank \from A \to \Trunc A$, and
   \item a dependent function
@@ -138,7 +141,7 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
   \end{itemize}
   with the following induction rule:
   \begin{quote}
-    given a type family $T\from \Trunc A \to \UU$ such that every
+    given a type family $T\from \Trunc A \to \UU$ such that
     $T(x)$ is a proposition for each $x\from \Trunc A$, every
     dependent function
     \begin{displaymath}
@@ -150,6 +153,28 @@ paper, we recall them in full\footnote{\color{red}Or maybe we should
     \end{displaymath}
     such that $\ind(s)(\trunc a) \jdeq s(a)$ for all $a\from A$.
   \end{quote}
+\item the {\em set truncation} of a type $A$ is a type $\setTrunc A$
+  defined by
+  \begin{itemize}
+  \item a map $\settrunc \blank \from A \to \setTrunc A$, and
+  \item a dependent function
+    $\istrunc {0} \from \prod_{x,y\from \setTrunc A}\prod_{p,q: x=y} p = q$
+  \end{itemize}
+  with the following induction rule:
+  \begin{quote}
+    given a type family $T\from \setTrunc A \to \UU$ such that
+    $T(x)$ is a set for each $x\from \setTrunc A$, every
+    dependent function
+    \begin{displaymath}
+      s\from \prod_{a\from A}T(\settrunc a)
+    \end{displaymath}
+    defines a dependent function
+    \begin{displaymath}
+      \ind(s)\from\prod_{x\from \setTrunc A} T(x)
+    \end{displaymath}
+    such that $\ind(s)(\settrunc a) \jdeq s(a)$ for all $a\from A$.
+  \end{quote}
+
 \item the {\em suspension} of a type $A$ is a type $\susp A$ defined
   by
   \begin{itemize}
@@ -1031,15 +1056,30 @@ and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
 
 It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
 $\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well-known type.
+%
+\newcommand{\topSp}{S^2}%
+The only result the authors are aware of concerning the shape of these
+components is a result proved in classical topology about the topological
+$2$-sphere in \cite[Thm.~4.1]{hansen}. Denote $\topSp$ for the topological
+$2$-sphere, and $\operatorname M(\topSp,\topSp)$ for the space of continuous
+maps from $S$ to $S$ with the uniform topology:
+\begin{theorem}
+  The connected component the identity map in $\operatorname M(\topSp,\topSp)$
+  is homotopy equivalent to $\operatorname{SO}(3)\times \Omega$, where $\Omega$
+  is the universal covering space of the connected component of the constant
+  loop in $\loopspace 2 (\topSp)$.
+  \label{thm:hansen}
+\end{theorem}
+
 However, one can still establish that both connected components are equivalent.
 In fact, it has little to do with $\Sp$ itself, and one can state a more
 general result.
 \begin{proposition} \label{prop:equiv-susp-comp}
-  Let $A$ be a pointed type. Then:
+  Let $A$ be a type. Then:
   \begin{displaymath}
     \conncomp{(\susp A = \susp A)}{\id_{\susp A}} \weq \conncomp{(\susp A = \susp A)}{-\id_{\susp A}}
   \end{displaymath}
-  \label{prop:sups-components-are-equiv}
+  \label{prop:susp-components-are-equiv}
 \end{proposition}
 \begin{proof}
   Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $N$
@@ -1082,11 +1122,11 @@ general result.
 \label{sec:higher-sphere}
 
 
-\todo[inline]{Nicolai: I assume that, in previous sections, we have established the following: $\susp$ is a wild functor (could probably be called an \emph{H-functor}); the general definition of $\Sn n$ recursively on $n$; that $\Sn n \to \Sn n$ is an H-monoid (``wild monoid''; decide on terminology). 
-If we can show that, for $n = 1$ and $n=2$, this monoid is isomorphic to $(\ZZ,\times)$, we could formulate \cref{thm:higher-spheres-2} a bit more nicely; but currently, the text only assumes that the type of symmetries has two connected components. If any definition is missing, we need to add it below.
-
-Pierre: I think everything is there now.
-}
+%%\todo[inline]{Nicolai: I assume that, in previous sections, we have established the following: $\susp$ is a wild functor (could probably be called an \emph{H-functor}); the general definition of $\Sn n$ recursively on $n$; that $\Sn n \to \Sn n$ is an H-monoid (``wild monoid''; decide on terminology). 
+%%If we can show that, for $n = 1$ and $n=2$, this monoid is isomorphic to $(\ZZ,\times)$, we could formulate \cref{thm:higher-spheres-2} a bit more nicely; but currently, the text only assumes that the type of symmetries has two connected components. If any definition is missing, we need to add it below.
+%%
+%%Pierre: I think everything is there now.
+%%}
 
 Having discussed the cases $n = 1$ and $n = 2$ in some detail, we finally wish to establish the result that $\Sn n = \Sn n$ has two connected components, for all $n \geq 1$.
 The main ideas for the proof are already contained in the result that $\pi_n(\Sn n) = \ZZ$ \cite{licataBrunerie_s1again} and the definition of degrees by Buchholtz and Favonia \cite{Buchholtz2018CellularCI}, but the argument that we need does not seem to have been spelled out in detail so far.
@@ -1536,7 +1576,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     (\Sn n \ptdto \Sn n) \stackrel \iota \to (\Sn n \to \Sn n) \stackrel {\ev_\ast}\to \Sn n
   \end{displaymath}
   where $\iota$ is the map forgetting the pointing path, and where $\ev_\ast$
-  is the evaluation at the point of $\Sn n$. By \cite[find lemma]{HoTT}, this
+  is the evaluation at the point of $\Sn n$. By \cite[Theorem 8.4.6]{HoTT}, this
   induces a long exact sequence of groups:
   \begin{displaymath}
     \dots \to \hgr{k+1} (\Sn n) 
@@ -1694,12 +1734,11 @@ Let us finally summarise the results of the current section, putting \cref{thm:h
 %%
 %%
 
-\subsection{Wild functors}
 \label{sec:wild-functors}
 \def\hom(#1,#2){#1 \rightsquigarrow #2}
 %
 The types $\UUptd$ and $\UU$ do certainly not form categories in the usual
-sense (the intended type of morphisms $A \ptdto B$ and $A\to B$ between two
+sense (the intended types of morphisms $A \ptdto B$ and $A\to B$ between two
 objects $A,B$ is not necessarily a set), but some constructions on it are
 reminiscent of functors. This motivates the few following definitions.
 
@@ -1721,6 +1760,16 @@ reminiscent of functors. This motivates the few following definitions.
 One makes the abuse to denote a wild category by only its carrier type $\cat C$ when
 all the remaining data are clear from context.
 
+\begin{remark}
+  To be fully rigourous, one must say a word about the levels of universe one
+  allows in the definition of wild categories. Assuming we have a cumulative
+  hierarchy of universes $\UU_0 : \UU_1 : \ldots$, we choose to consider
+  locally small wild categories, by which are meant wild categories such that
+  $\cat C:\UU_{i+1}$ and $\hom(,): \cat C \times \cat C \to \UU_i$ for some
+  $i\geq 0$.
+  \label{rem:universes-locally-small-cats}
+\end{remark}
+
 \begin{example}
   The type $\UU_i$ together with function types, identity functions and the
 	usual composition, is a wild category in $\UU_{i+1}$, for any $i$. (We will henceforth ignore universe levels and just write $\UU$.) The elements $\alpha$ and $\iota$ are
@@ -1735,7 +1784,7 @@ all the remaining data are clear from context.
 \begin{definition}
   Let $\cat C,\cat D$ be two wild categories.
   %
-  A \emph{wild functor} from $\cat C \to \cat D$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
+  A \emph{wild functor} from $\cat C$ to $\cat D$ is a dependent $4$-tuple $(F_0,F_1,c,u)$ where:
   \begin{align*}
     F_0 &:\cat C \to \cat D,\\
     F_1 &:\prod_{a,b:\cat C} \hom(a,b) \to \hom(F_0(a), F_0(b))\\
@@ -1745,10 +1794,27 @@ all the remaining data are clear from context.
   \label{def:wild-functor}
 \end{definition}
 
-As for functors, we usually write both $F_0$ and $ F_1$ only as $F$. The only
-relevant fact about $c$ and $u$ is that they exist, even though their types are
-not propositions. Therefore, we will often (abusively) denote a wild functor by
-its first two components only.
+As for non-wild functors, we usually write both $F_0$ and $ F_1$ only as $F$.
+The only relevant fact about $c$ and $u$ is that they exist, even though their
+types are not propositions. Therefore, we will often (abusively) denote a wild
+functor by its first two components only.
+
+\begin{proposition}
+  Given wild functors $F:\cat C \to \cat D$ and $G:\cat D \to \cat E$, there is a composite wild functor $G\circ F :\cat C \to \cat E$ with first components:
+  \begin{align*}
+    (G\circ F)_0 &\defequi G_0\circ F_0, \\ 
+    (G\circ F)_1 &\defequi (a,b) \mapsto G_1(F_0(a),F_0(b)) \circ F_1(a,b)
+  \end{align*}
+  \label{prop:composition-wild-functors}
+\end{proposition}
+\begin{proof}
+  Denote $c_F, u_F$ and $c_G,u_G$ the witnesses of functoriality for $F$ and
+  $G$ respectively. Then one gets:
+  \begin{align*}
+    c_{G\circ F}(a,b,c)(f,g) &\defequi c_G(F_0(a),F_0(b),F_0(c),F_1(f),F_1(g)) \cdot \ap{G_1} ( c_F(a,b,c,f,g) ) \\
+    u_{G\circ F}(a) &\defequi u_G(F_0(a)) \cdot \ap {G_1} (u_F(a))
+  \end{align*}
+\end{proof}
 
 \begin{example}~\label{ex:loop-sus-wild-functors}%
   \begin{enumerate}
@@ -1836,10 +1902,10 @@ its first two components only.
 %%      \end{displaymath}
 %%      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
 %%
-    \item There is a wild functor $\susp \null$ from $\UUptd$ to itself which
-      maps a pointed type $A$ to $\susp A$ (pointed at the pole $N$), and maps
-      a pointed function $f:A\ptdto B$ to the pointed function $\susp (f) :
-      \susp A \ptdto \susp B$ defined by induction as follows:
+    \item There is a wild functor $\susp \null$ from $\UU$ to $\UUptd$ which
+      maps a type $A$ to $\susp A$ (pointed at the pole $N$), and maps a
+      function $f:A\to B$ to the pointed function $\susp (f) : \susp A \ptdto
+      \susp B$ defined by induction as follows:
       \begin{displaymath}
         \susp (f) (N) \defequi N,\quad
         \susp (f) (S) \defequi S,\quad
@@ -1850,7 +1916,12 @@ its first two components only.
       defined through easy inductions on the supsension, and a
       careful exposition can be found in
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
-
+    \item There is a wild functor $U:\UUptd \to \UU$ that maps a pointed type
+      $(A,a_0)$ to $A$ and a pointed maps $(f,f_0)$ to $f$. The witnesses $c$
+      and $u$ are both given by reflexivity. In pratice, the application of $U$
+      is left implicit: we write for example $\susp(X)$ for $\susp (U (X))$
+      when $X$ is a pointed type. In particular, depending on the context, the
+      wild functor $\susp$ can be considered to have domain $\UUptd$.
     \item There is a wild functor $\setTrunc \blank$ from $\UUptd$ to $\UU$
       which maps a pointed type $(A,a_0)$ to $\setTrunc{A}$ and a pointed map
       $(f,f_0)$ to the map $\setTrunc f$ defined by induction as $\settrunc x
@@ -1862,12 +1933,13 @@ its first two components only.
         \setTrunc{\id} \circ \settrunc \blank = \settrunc \blank \circ \id
       \end{gather*}
 
-    \item Building on the previous examples, there is for each $n:\NN$, a wild
+    \item Building on the previous examples and
+      \cref{prop:composition-wild-functors}, there is for each $n:\NN$, a wild
       functor $\hgr n$ from $\UUptd$ to $\UU$ which acts on objects an maps as
-      $\setTrunc{\loopspace n (\blank)}$. The witnesses $c$ and $u$ are given by
-      successive transport and concatenation of the same witnesses for
+      $\setTrunc{\loopspace n (\blank)}$. The witnesses $c$ and $u$ are given
+      by successive transport and concatenation of the same witnesses for
       $\loopspace\null$ and $\setTrunc \blank$.
-      \todo{Should it be made more precise by defining composition of wild functors in full gen. ?}
+%%      \todo{Should it be made more precise by defining composition of wild functors in full gen. ?}
   \end{enumerate}
 \end{example}
 
