@@ -1965,16 +1965,16 @@ functor by its first two components only.
 Here again, even though the types of $\mathrm{nat}_\eta$,
 $\mathrm{nat}_\epsilon$, $\mathrm{ltr}_{\eta,\epsilon}$ and
 $\mathrm{rtr}_{\eta,\epsilon}$ are not propositions, one only cares about their
-existence, and therefore one usually omit them when denoting a wild
+existence, and therefore one usually omits them when denoting a wild
 adjunctions.
 
 \begin{remark} \label{def:wild-adj}
   As carefully proven in \cite[\githubpath
-  theorems/homotopy/PtdAdjoint.agda]{hott-agda}, any such wild adjunction of
+  theorems/homotopy/PtdAdjoint.agda]{hott-agda}, any such wild adjunction
   induces a dependent function $\Phi$ that maps elements $a:\cat C$ and $b:\cat
   D$ to an equivalence
   \begin{displaymath}
-    \Phi_{a,b} : (\hom(L(a),b)) \weq (\hom(a,R(b))
+    \Phi_{a,b} : (\hom(L(a),b)) \weq (\hom(a,R(b)))
   \end{displaymath}
   given by $f \mapsto R(f) \circ \eta(a)$, with inverse the function given by
   $g\mapsto \epsilon(b) \circ L(g)$.
