@@ -1739,7 +1739,7 @@ Let us finally summarise the results of the current section, putting \cref{thm:h
 %
 The types $\UUptd$ and $\UU$ do certainly not form categories in the usual
 sense (the intended types of morphisms $A \ptdto B$ and $A\to B$ between two
-objects $A,B$ is not necessarily a set), but some constructions on it are
+objects $A,B$ are not necessarily sets), but some constructions on $\UUptd$ and $\UU$ are
 reminiscent of functors. This motivates the few following definitions.
 
 \begin{definition}
@@ -1918,7 +1918,7 @@ functor by its first two components only.
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
     \item There is a wild functor $U:\UUptd \to \UU$ that maps a pointed type
       $(A,a_0)$ to $A$ and a pointed maps $(f,f_0)$ to $f$. The witnesses $c$
-      and $u$ are both given by reflexivity. In pratice, the application of $U$
+      and $u$ are both given by reflexivity. In practice, the application of $U$
       is left implicit: we write for example $\susp(X)$ for $\susp (U (X))$
       when $X$ is a pointed type. In particular, depending on the context, the
       wild functor $\susp$ can be considered to have domain $\UUptd$.
@@ -1935,7 +1935,7 @@ functor by its first two components only.
 
     \item Building on the previous examples and
       \cref{prop:composition-wild-functors}, there is for each $n:\NN$, a wild
-      functor $\hgr n$ from $\UUptd$ to $\UU$ which acts on objects an maps as
+      functor $\hgr n$ from $\UUptd$ to $\UU$ which acts on objects and maps as
       $\setTrunc{\loopspace n (\blank)}$. The witnesses $c$ and $u$ are given
       by successive transport and concatenation of the same witnesses for
       $\loopspace\null$ and $\setTrunc \blank$.
@@ -1946,7 +1946,7 @@ functor by its first two components only.
 \begin{definition}
   Let be given a wild functor $L$ from $\cat C$ to $\cat D$, and a wild functor
   $R$ from $\cat D$ to $\cat C$. A \emph{wild adjunction} of type $L\leftadjto
-  R$ is the data of two dependent functions:
+  R$ consists of the data of two dependent functions:
   \begin{displaymath}
     \eta : \prod_{a:\cat C} \hom(a,R \circ L(a)), \quad
     \epsilon : \prod_{b:\cat D} \hom(L\circ R (b), b)
