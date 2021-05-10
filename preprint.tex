@@ -2240,19 +2240,17 @@ paper, hence we rely on this proof.)
     \alpha: \prod_{x,y,z:M}x\cdot(y\cdot z) = (x\cdot y) \cdot z \\
     \iota: \prod_{x:M} (x\cdot 1 = x) \times (x = 1 \cdot x)
   \end{gather*}
-  If $M$ is a set, then the type of $\alpha$ and $\iota$ become propositions
+  If $M$ is a set, then the types of $\alpha$ and $\iota$ become propositions
   and we are left with just a usual monoid. In particular, for any wild monoid
-  $M$, the type $\setTrunc M$ has a natural monoid structure.
+  $M$, the type $\setTrunc M$ has the induced monoid structure.
 
-  Note that in any wild category $\cat C$, an object $a:\cat C$ induces a
-  \emph{wild monoid} structure on $\hom(a,a)$, pointed at $\id a$ with the
-  multiplication $\circ(a,a,a)$ and the witnesses $\alpha(a,a,a)$ and
+  Note that any wild category $\cat C$, for any object $a:\cat C$, induces a
+  \emph{wild monoid} structure on $\hom(a,a)$, pointed at $\id_a$ with the
+  multiplication $\circ(a,a,a)$ and the witnesses $\alpha(a,a,a,a)$ and
   $\iota(a,a)$. 
 
-  As examples, one has wild monoids for each $n:\NN$, namely $\Sn n \ptdto \Sn
-  n$, $\Sn n \to \Sn n$, $\setTrunc{\Sn n \ptdto \Sn n}$ and $\setTrunc{\Sn n
-  \to \Sn n}$. The last two are simply monoids by the remark above on set
-  truncations of wild monoids.
+  For example, $\Sn n \ptdto \Sn n$ and $\Sn n \to \Sn n$ are wild monoids for each $n:\NN$,
+  yielding ordinary  monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and $\setTrunc{\Sn n \to \Sn n}$.
   \label{rem:wild-monoids}
 \end{remark}
 
