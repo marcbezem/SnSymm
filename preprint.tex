@@ -1946,20 +1946,20 @@ functor by its first two components only.
 \begin{definition}
   Let be given a wild functor $L$ from $\cat C$ to $\cat D$, and a wild functor
   $R$ from $\cat D$ to $\cat C$. A \emph{wild adjunction} of type $L\leftadjto
-  R$ consists of the data of two dependent functions:
+  R$ consists of the data of two dependent functions, the unit and the counit:
   \begin{displaymath}
     \eta : \prod_{a:\cat C} \hom(a,R \circ L(a)), \quad
-    \epsilon : \prod_{b:\cat D} \hom(L\circ R (b), b)
+    \epsilon : \prod_{b:\cat D} \hom(L\circ R (b), b),
   \end{displaymath}
-  together with elements
+  together with elements witnessing the naturality of the unit and the counit
   \begin{gather*}
     \mathrm{nat}_\eta : \prod_{a,a':\cat C} \prod_{f:\hom(a,a')} (R\circ L)(f) \circ \eta(a) = \eta(a') \circ f, \\
-    \mathrm{nat}_\epsilon : \prod_{b,b':\cat D} \prod_{f:\hom(b,b')} f \circ \epsilon(b) = \epsilon(b') \circ (L\circ R)(f).
+    \mathrm{nat}_\epsilon : \prod_{b,b':\cat D} \prod_{f:\hom(b,b')} f \circ \epsilon(b) = \epsilon(b') \circ (L\circ R)(f),
   \end{gather*}
-  and
+  and elements witnessing the triangle identities
   \begin{displaymath}
     \mathrm{ltr}_{\epsilon,\eta} : \prod_{a:\cat C} \epsilon(L(a)) \circ L(\eta(a)) = \id_{L(a)}, \quad
-    \mathrm{rtr}_{\eta,\epsilon} : \prod_{b:\cat D} R(\epsilon(b)) \circ \eta(R(b)) = \id_{R(b)}
+    \mathrm{rtr}_{\eta,\epsilon} : \prod_{b:\cat D} R(\epsilon(b)) \circ \eta(R(b)) = \id_{R(b)}.
   \end{displaymath}
 \end{definition}
 Here again, even though the types of $\mathrm{nat}_\eta$,
@@ -2246,8 +2246,8 @@ paper, hence we rely on this proof.)
 
   Note that any wild category $\cat C$, for any object $a:\cat C$, induces a
   \emph{wild monoid} structure on $\hom(a,a)$, pointed at $\id_a$ with the
-  multiplication $\circ(a,a,a)$ and the witnesses $\alpha(a,a,a,a)$ and
-  $\iota(a,a)$. 
+  multiplication $\circ(a,a,a)$ and the witnesses $\alpha(a,a,a,a)$
+  coming from $\cat C$. 
 
   For example, $\Sn n \ptdto \Sn n$ and $\Sn n \to \Sn n$ are wild monoids for each $n:\NN$,
   yielding ordinary  monoids $\setTrunc{\Sn n \ptdto \Sn n}$ and $\setTrunc{\Sn n \to \Sn n}$.
