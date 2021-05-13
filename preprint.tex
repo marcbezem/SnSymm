@@ -1507,7 +1507,7 @@ Recall that we are ultimately interested in the group $\setTrunc{\Sn n = \Sn n}$
     %
     From the inverse law in the monoid $\setTrunc{A \to A}$, one
     derives that both $fg$ and $gf$ are merely equal to $\id_{A}$. To prove
-    the proposition that $f$ is an equivalence, on can then assume actual
+    the proposition that $f$ is an equivalence, one can then assume actual
     witnesses of $fg=\id_{A}$ and $gf=\id_{A}$. Then $g$ is a
     pseudo-inverse for $f$, which solves the problem.
 \end{proof}
@@ -1528,6 +1528,160 @@ We now see that there are two connected components of symmetries of spheres:
   Then \cref{lemma:invertible-truncated-Sn-pointed-weq} allows us to conclude.
 \end{proof}
 
+\subsection{Concrete Symmetries of $\boldsymbol{\Sn n}$}
+
+%%% tikz and color:
+
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+\definecolor{darkblue}{rgb}{0,0,1}
+
+\tikzset{
+	tikzforeground/.style={
+		-latex,
+		shorten >=0.2cm,
+		shorten <=0.2cm, 
+		line width = 1.5pt,
+		preaction={draw, -, line width=5pt, white},
+	},
+	tikzbackground/.style={
+		-latex,
+		shorten >=0.2cm,
+		shorten <=0.2cm, 
+		line width = 1.1pt,
+	},
+	tikzmiddle/.style={
+		-latex,
+		shorten >=0.2cm,
+		shorten <=0.2cm, 
+		line width = .8pt,
+		preaction={draw, -, line width=3pt, white},
+	},
+}
+
+
+As in the cases of $\Sc$ and $\Sp$, we want to construct one concrete element for each of the two connected components of symmetries on $\Sn n$ that were established in \cref{thm:higher-spheres-2}.
+As before, these two elements are given as $\id$ and $-\id : \Sn n \to \Sn n$.
+It is clear that they are symmetries (i.e.\ equivalences), as each is self-inverse.
+What is less obvious is that they are distinguishable, i.e.\ represent the two different components in \cref{thm:higher-spheres-2} rather than the same.
+Instead of showing $\id \neq -\id$ as in \cref{lemma:S2-id-neq-minusid}, we show that suspension and ``negation'' commute in \cref{lem:susp-neg-commute}.
+
+In this subsection, we annotate the constructors of the suspension with their type in order to avoid ambiguity.
+For example, for any type $A$, we have $-\id_A : \susp(A) \to \susp(A)$ defined by
+$N_{\susp(A)} \mapsto S_{\susp(A)}$, $S_{\susp(A)} \mapsto N_{\susp(A)}$, and $\mrd_{\susp(A)}(a) \mapsto \inv{\mrd_{\susp(A)}(a)}$.
+For $f : A \to B$, we have $\susp(f) : \susp(A) \to \susp(B)$ given by $N_{\susp(A)} \mapsto N_{\susp(B)}$, $S_{\susp(A)} \mapsto S_{\susp(B)}$, and $\mrd_{\susp(A)}(a) \mapsto \mrd_{\susp(B)}(f(a))$.
+Moreover, we use colours to make the connections between formulas and diagrams easier to identify.
+
+\begin{lemma} \label{lem:susp-neg-commute}
+	For any type $A$, the two functions $\susp(-\id_{\susp(A)})$ and $-\id_{\susp(\susp(A))}$ of type $\susp(\susp(A)) \to \susp(\susp(A))$ are equal.
+\end{lemma}
+\begin{proof}
+	Using function extensionality and assuming $x : \susp(\susp(A))$, we need to construct $h(x) : \susp(-\id_{\susp(A)})(x) = -\id_{\susp(\susp(A))}(x)$.
+	We do induction on $x$ and define:
+	\begin{alignat}{10}
+	& \color{darkgreen}{
+		h(N_{\susp(\susp(A))})
+	  } 
+	&\; 
+	& \color{darkgreen}{
+		\defequi 
+	  }
+	&\quad 
+	& \color{darkgreen}{
+		\mrd_{\susp(\susp(A))}(N_{\susp(A}) 
+	  }	
+  	&\; 
+	& \color{darkgreen}{ 
+		: 
+	  }
+	&\quad 
+	& \color{darkgreen}{
+		N_{\susp(\susp(A))} = S_{\susp(\susp(A))}
+	  }
+  	\\
+	& \color{darkblue}{
+		h(S_{\susp(\susp(A))}) 
+	  }
+	&& \defequi &
+	& \color{darkblue}{
+		\inv{\left(\mrd_{\susp(\susp(A))}(S_{\susp(A)})\right)} 
+	  }
+  	&& : &
+	& \color{darkblue}{
+		S_{\susp(\susp(A))} = N_{\susp(\susp(A))}
+	  }
+	\end{alignat}
+	
+	The last component to be defined is, for all $y : \susp(A)$, a higher path $\ap h(\mrd_{\susp(\susp(A))}(y))$.
+	After rewriting path-overs as path composition using a standard lemma \cite[Lem~2.11.2]{HoTT}, the type of this component becomes a commutativity proof for the square
+	
+	\begin{equation}\label{eq:y-commute}
+	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
+	\node[text=darkgreen] (N1) at (0,0) {$N_{\susp(\susp(A))}$};
+	\node[text=darkgreen] (S1) at (0,1) {$S_{\susp(\susp(A))}$};
+	\node[text=darkblue] (S2) at (1,0) {$S_{\susp(\susp(A))}$};
+	\node[text=darkblue] (N2) at (1,1) {$N_{\susp(\susp(A))}$};
+	\draw[-latex,text=darkgreen] (N1) to node[left] {$\mrd_{\susp(\susp(A))}(N_{\susp(A})$} (S1);
+	\draw[-latex,text=darkblue] (N2) to node[right] {$\mrd_{\susp(\susp(A))}(S_{\susp(A)})$} (S2);
+	\draw[-latex] (N1) to node[above] {$\mrd_{\susp(\susp(A))}(-\id_{\susp(\susp(A))}(y))$} (S2);
+	\draw[-latex] (N2) to node[above] {$\mrd_{\susp(\susp(A))}(y)$} (S1);
+	\end{tikzpicture}
+	\end{equation}
+	We do induction on $y$.
+	To simplify the presentation, we write
+	\begin{align}
+	&N \defequi N_{\susp(\susp(A))} \\
+	&S \defequi S_{\susp(\susp(A))} \\
+	&m_N \defequi \mrd_{\susp(\susp(A))}(N_{\susp(A}) \\
+	&m_S \defequi \mrd_{\susp(\susp(A))}(S_{\susp(A)})
+	\end{align}
+	For $y \equiv N_{\susp(A)}$, after simplifying (normalising) the terms, the square \eqref{eq:y-commute} becomes
+	\begin{equation}\label{eq:N-commute}
+	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
+	\node[text=darkgreen] (N1) at (0,0) {$N$};
+	\node[text=darkgreen] (S1) at (0,1) {$S$};
+	\node[text=darkblue] (S2) at (1,0) {$S$};
+	\node[text=darkblue] (N2) at (1,1) {$N$};
+	\draw[-latex,text=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[-latex,text=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
+	\draw[-latex] (N2) to node[above] {$m_N$} (S1);
+	\end{tikzpicture}
+	\end{equation}
+	with the obvious commutativity proof $p$.
+%	 : m_N \cdot \inv{m_N} = m_S \cdot \inv{m_S}$.
+	Similarly, for $y \equiv S_{\susp(A)}$, the square \eqref{eq:y-commute} becomes
+	\begin{equation}\label{eq:S-commute}
+	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
+	\node[text=darkgreen] (N1) at (0,0) {$N$};
+	\node[text=darkgreen] (S1) at (0,1) {$S$};
+	\node[text=darkblue] (S2) at (1,0) {$S$};
+	\node[text=darkblue] (N2) at (1,1) {$N$};
+	\draw[-latex,text=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[-latex,text=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex] (N1) to node[above] {$m_N$} (S2);
+	\draw[-latex] (N2) to node[above] {$m_S$} (S1);
+	\end{tikzpicture}
+	\end{equation}
+	with the obvious commutativity proof $q$.
+	
+	Finally, we consider the third case of the induction on $y$, namely the case that $y$ is a path of the form $\mrd_{\susp(A)}(z)$ for some $z : A$.
+	In this case, we need to show an equality between the discussed squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality depends on (i.e.\ lies over) the equality that stems from the top horizontal arrow in \eqref{eq:y-commute}, i.e.\  $\ap{\mrd_{\susp(\susp(A))}}\left(\ap{-\id_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z))\right)$,
+	and the equality stemming from the bottom horizontal arrow in \eqref{eq:y-commute}, i.e.\
+	$\ap{\mrd_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z)))$.
+	
+	\todo[inline]{TODO: complete (N.)}
+	
+\end{proof}
+
+
+
+\begin{corollary}
+	For any $n$, we have $\id_{\Sn n} \neq -\id_{\Sn n}$.
+\end{corollary}
+\begin{proof}
+	\todo[inline]{TODO: complete (N.)}
+\end{proof}
+
 
 
 \subsection{The Structure of the Components of $\boldsymbol{(\Sn n = \Sn n)}$}
@@ -1542,7 +1696,9 @@ The first observation we make is simple:
     For $n=1$ and $n=2$, this statement is given by the main result of \cref{sec:circle-case} and by \cref{prop:equiv-susp-comp}, respectively.
     \todo[inline]{Nicolai: Need to fill in the argument for $n>2$. Something like $\susp$ preserves equivalence of components.
     
-    Pierre: still missing that piece. Basically, one would like $\Trunc{\susp f = \susp g} \to \Trunc{f = g}$ and I am just able to prove that $\Trunc{\prod_x\mrd(f(x)) = \mrd(g(x))}$. There is no reason for $\mrd$ to have a retraction in full generality (or at least I recall that it as the conclusion we reached with Marc after a brainstorming session).}
+    Pierre: still missing that piece. Basically, one would like $\Trunc{\susp f = \susp g} \to \Trunc{f = g}$ and I am just able to prove that $\Trunc{\prod_x\mrd(f(x)) = \mrd(g(x))}$. There is no reason for $\mrd$ to have a retraction in full generality (or at least I recall that it as the conclusion we reached with Marc after a brainstorming session).
+
+	Nicolai: This should now follow from the new subsection above. I'm working on it.}
 \end{proof}
 
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
