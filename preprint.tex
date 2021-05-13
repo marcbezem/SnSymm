@@ -442,7 +442,7 @@ In order to prove our goal (cf.~\cref{eq:symm-cricle}), it remains to
 exhibit equivalences from $\Sc$ to both
 $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ and
 $\conncomp{(\Sc=\Sc)}{-\id_\Sc}$. First note that because $\Sc=\Sc$ is
-a subtype of $\Sc\to\Sc$, the connected component of some equivalence
+a subtype of $\Sc\to\Sc$, the connected component of any equivalence
 $\varphi$ in $\Sc=\Sc$ is equivalent to the connected component of
 $\varphi$ seen as a function in $\Sc \to \Sc$. In particular,
 \begin{displaymath}
@@ -481,7 +481,7 @@ and $-\id_\Sc$ is mapped to $(\base,-1)$ through this
 equivalence. Because $\ZZ$ is a set and $\Sc$ is connected, the
 connected components of $\Sc\times\ZZ$ are easy to understand: for
 every $x:\Sc$ and $k:\ZZ$, the connected component of $(x,k)$ is
-equivalent to the type of all those pairs $(x',k)$ for
+equivalent to the type of all pairs $(x',k)$ for
 $x'\from\Sc$. In particular, every connected component of
 $\Sc\times\ZZ$ is equivalent to $\Sc$. In particular, one gets
 equivalences:
@@ -515,7 +515,7 @@ In this section, we will prove that the canonical inclusion:
   \left(\Sp = \Sp\right)
 \end{equation}
 is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
-define by $\Sp$-induction as the function such that
+defined by $\Sp$-induction as the function such that
 $-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
 $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$. 
 
@@ -525,9 +525,9 @@ $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
 \end{lemma}
 \begin{proof}
   We are to produce an element of the type $\prod_{x:\Sp}T(x)$ where $T$ is the
-  type family defined by $T(x)\defequi x= (-\id_\Sp \circ -\id_\Sp)(x)$. Let us
+  type family defined by $T(x)\defequi (x= (-\id_\Sp \circ -\id_\Sp)(x))$. Let us
   use $\Sp$-induction for this purpose. By definition of $-\id_\Sp$, $T(N)
-  \jdeq N$ and $T(S) \jdeq S$. Hence one can select $\refl N:T(N)$ and $\refl
+  \jdeq (N=N)$ and $T(S) \jdeq (S=S)$. Hence one can take $\refl N:T(N)$ and $\refl
   S:T(S)$. To complete $\Sp$-induction, one should now provide an element of
   type $\prod_{y:\Sc} \pathover{\refl N} T {\mrd y} {\refl S}$. However,
   transporting over a meridian in the family $T$ is conjugation by the
@@ -568,7 +568,7 @@ well understood. This is not the case for $\Sp$: for example, it is
 certainly not $2$-truncated (\cite{brunerie:thesis}), and it expected
 to be provably not $n$-truncated for any $n$.
 
-The main tool for this section is the Hopf family, defined by Brunerie
+The main tool for this section is the Hopf family, as defined by Brunerie
 in~\cite{brunerie:thesis}, to get an analog in HoTT of the Hopf
 fibration in topology. First, let us define, uniformly in $x\from\Sc$, a
 function $\iota_x\from \Sc\to\Sc$ by $\Sc$-induction, putting
@@ -747,7 +747,7 @@ set-truncation $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
 Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
 $\setTrunc{\loopspace\null\tau}: \hgr 2(\Sp) \to \hgr 1(\Sc)$ on the set-truncations.
-Composing with the known isomorphism $\hgr 1(\Sc) \weq \ZZ$, one
+Composing with the known isomorphism $\hgr 1(\Sc) \weq \ZZ$ \cite[Cor. 8.1.11]{HoTT}, one
 ends up with a group isomorphism $\zeta: \hgr 2(\Sp) \to \ZZ$. The degree of a
 pointed map is then defined as the image of $1$ through the induced morphism
 between the second homotopy groups, transported back and forth by $\zeta$. 
@@ -767,11 +767,11 @@ a path.
   \label{lem:deg-independent-path}
 \end{lemma}
 \begin{proof}
-  Let us first prove that $x=N$ is connected for every $x:\Sp$. Because $\Sp$
-  is connected and that $\isconn(x=N)$ is a proposition for each $x$, one only
-  have to check that $\isconn(N=N)$. This is well-known. Hence, $d(f,\blank) :
-  (f(N) = N) \to \ZZ$ is a map from a connected type to a set, hence it is
-  constant. 
+  Let us first prove that $x=N$ is connected for every $x:\Sp$. Since being
+  connected is a proposition and $\Sp$ itself is connected, one only
+  has to check that $\isconn(N=N)$, which is \cite[Cor. 8.3.3]{HoTT}.
+  Hence, $d(f,\blank) : (f(N) = N) \to \ZZ$ is a map from a connected type to a set,
+  hence it is constant. 
 \end{proof}
 
 \begin{proposition}
@@ -1937,9 +1937,9 @@ functor by its first two components only.
       \cref{prop:composition-wild-functors}, there is for each $n:\NN$, a wild
       functor $\hgr n$ from $\UUptd$ to $\UU$ which acts on objects and maps as
       $\setTrunc{\loopspace n (\blank)}$. The witnesses $c$ and $u$ are given
-      by successive transport and concatenation of the same witnesses for
-      $\loopspace\null$ and $\setTrunc \blank$.
-%%      \todo{Should it be made more precise by defining composition of wild functors in full gen. ?}
+      by successive transport and composition of the same witnesses for
+      $\loopspace\null$ and $\setTrunc \blank$, 
+      as explained in \cref{prop:composition-wild-functors}.
   \end{enumerate}
 \end{example}
 
