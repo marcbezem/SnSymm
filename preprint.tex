@@ -26,7 +26,7 @@ style=alphabetic,maxbibnames=9,maxcitenames=9]
 
 %%% only for writing. Remove in the final version.
 \usepackage{todonotes}
-\usepackage{showlabels}
+%\usepackage{showlabels}
 
 \usepackage[capitalize]{cleveref}
 
@@ -69,6 +69,8 @@ tikzshortarrow/.style={
     thick,
 }
 }
+\usetikzlibrary{arrows}
+
 
 \renewcommand{\ap}[1]{\left[{#1}\right]}
 \newcommand{\ptdto}{\to_\ast}%
@@ -1534,26 +1536,35 @@ We now see that there are two connected components of symmetries of spheres:
 
 \definecolor{darkgreen}{rgb}{0,0.4,0}
 \definecolor{darkblue}{rgb}{0,0,1}
+\definecolor{darkred}{rgb}{.7,0,0}
 
 \tikzset{
 	tikzforeground/.style={
 		-latex,
-		shorten >=0.2cm,
-		shorten <=0.2cm, 
+%		shorten >=0.2cm,
+%		shorten <=0.2cm, 
 		line width = 1.5pt,
 		preaction={draw, -, line width=5pt, white},
 	},
 	tikzbackground/.style={
 		-latex,
-		shorten >=0.2cm,
-		shorten <=0.2cm, 
-		line width = 1.1pt,
+%		shorten >=0.2cm,
+%		shorten <=0.2cm, 
+		line width = 1.0pt,
 	},
-	tikzmiddle/.style={
-		-latex,
+%	tikzmiddle/.style={
+%		-latex,
+%		shorten >=0.2cm,
+%		shorten <=0.2cm, 
+%		line width = .8pt,
+%		preaction={draw, -, line width=3pt, white},
+%	},
+	tikzequal/.style={
+		-,
+		double,
 		shorten >=0.2cm,
 		shorten <=0.2cm, 
-		line width = .8pt,
+		line width = 1.4pt,
 		preaction={draw, -, line width=3pt, white},
 	},
 }
@@ -1574,11 +1585,14 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 \begin{lemma} \label{lem:susp-neg-commute}
 	For any type $A$, the two functions $\susp(-\id_{\susp(A)})$ and $-\id_{\susp(\susp(A))}$ of type $\susp(\susp(A)) \to \susp(\susp(A))$ are equal.
 \end{lemma}
+
+The proof of this lemma is by Ulrik Buchholtz, who presented a formalisation in cubical Agda.
+Here, we give the argument on paper:
 \begin{proof}
 	Using function extensionality and assuming $x : \susp(\susp(A))$, we need to construct $h(x) : \susp(-\id_{\susp(A)})(x) = -\id_{\susp(\susp(A))}(x)$.
 	We do induction on $x$ and define:
 	\begin{alignat}{10}
-	& \color{darkgreen}{
+	&\color{darkgreen}{
 		h(N_{\susp(\susp(A))})
 	  } 
 	&\; 
@@ -1597,18 +1611,20 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	& \color{darkgreen}{
 		N_{\susp(\susp(A))} = S_{\susp(\susp(A))}
 	  }
+  	\label{eq:green}
   	\\
 	& \color{darkblue}{
 		h(S_{\susp(\susp(A))}) 
 	  }
-	&& \defequi &
+	&&\color{darkblue}{\defequi} &
 	& \color{darkblue}{
 		\inv{\left(\mrd_{\susp(\susp(A))}(S_{\susp(A)})\right)} 
 	  }
-  	&& : &
+  	&& \color{darkblue}{:} &
 	& \color{darkblue}{
 		S_{\susp(\susp(A))} = N_{\susp(\susp(A))}
 	  }
+  	\label{eq:blue}
 	\end{alignat}
 	
 	The last component to be defined is, for all $y : \susp(A)$, a higher path $\ap h(\mrd_{\susp(\susp(A))}(y))$.
@@ -1626,7 +1642,6 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	\draw[-latex] (N2) to node[above] {$\mrd_{\susp(\susp(A))}(y)$} (S1);
 	\end{tikzpicture}
 	\end{equation}
-	We do induction on $y$.
 	To simplify the presentation, we write
 	\begin{align}
 	&N \defequi N_{\susp(\susp(A))} \\
@@ -1634,6 +1649,7 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	&m_N \defequi \mrd_{\susp(\susp(A))}(N_{\susp(A}) \\
 	&m_S \defequi \mrd_{\susp(\susp(A))}(S_{\susp(A)})
 	\end{align}
+	We do induction on $y$.
 	For $y \equiv N_{\susp(A)}$, after simplifying (normalising) the terms, the square \eqref{eq:y-commute} becomes
 	\begin{equation}\label{eq:N-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
@@ -1641,13 +1657,13 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	\node[text=darkgreen] (S1) at (0,1) {$S$};
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
-	\draw[-latex,text=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
 	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
 	\draw[-latex] (N2) to node[above] {$m_N$} (S1);
 	\end{tikzpicture}
 	\end{equation}
-	with the obvious commutativity proof $p$.
+	with the obvious commutativity proof $c(m_S,m_N) : m_S \cdot \inv{m_S} = m_N \cdot \inv{m_N}$ (given $p$, $q$, we define $c(p,q) : p \cdot \inv{p} = q \cdot \inv{q}$ by path induction on $p$ and $q$).
 %	 : m_N \cdot \inv{m_N} = m_S \cdot \inv{m_S}$.
 	Similarly, for $y \equiv S_{\susp(A)}$, the square \eqref{eq:y-commute} becomes
 	\begin{equation}\label{eq:S-commute}
@@ -1656,26 +1672,101 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	\node[text=darkgreen] (S1) at (0,1) {$S$};
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
-	\draw[-latex,text=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
 	\draw[-latex] (N1) to node[above] {$m_N$} (S2);
 	\draw[-latex] (N2) to node[above] {$m_S$} (S1);
 	\end{tikzpicture}
 	\end{equation}
-	with the obvious commutativity proof $q$.
+	with the trivial commutativity proof $\refl{} : m_N \cdot \inv{m_S} = m_N \cdot \inv{m_S}$.
 	
 	Finally, we consider the third case of the induction on $y$, namely the case that $y$ is a path of the form $\mrd_{\susp(A)}(z)$ for some $z : A$.
-	In this case, we need to show an equality between the discussed squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality depends on (i.e.\ lies over) the equality that stems from the top horizontal arrow in \eqref{eq:y-commute}, i.e.\  $\ap{\mrd_{\susp(\susp(A))}}\left(\ap{-\id_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z))\right)$,
-	and the equality stemming from the bottom horizontal arrow in \eqref{eq:y-commute}, i.e.\
-	$\ap{\mrd_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z)))$.
+	In this case, we need to show an equality between $p$ and $\refl{}$ (the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}), and this equality lies over (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
+	We write $\alpha$ for the top horizontal arrow in \eqref{eq:y-commute} with $y 
+	\equiv \mrd_{\susp(A)}(z)$,
+	\begin{equation}\label{eq:alpha-def}
+	\alpha \defequi \ap{\mrd_{\susp(\susp(A))}}\left(\ap{-\id_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z))\right)
+	\end{equation}
+	of type $m_S = m_N$, and $\beta$ for the bottom horizontal arrow, i.e.\
+	\begin{equation}
+	\beta \defequi \ap{\mrd_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z)))
+	\end{equation}
+	of type $m_N = m_S$.
+	Writing path overs as composition as before, the first square $c(m_S,m_N)$ becomes the composition
+	\begin{equation}\label{eq:first-square-composed}
+	(\alpha^{-1} \cdot \inv{m_S}) \star c(m_S,m_N) \star (m_N \cdot \ap{\inv{}}\beta)
+	\end{equation}
+	of type $m_N \cdot \inv{m_S} = m_N \cdot \inv{m_S}$.
+	In \eqref{eq:first-square-composed}, $\cdot$ denotes whiskering and $\star$ horizontal composition. The situation can be depicted as follows:
+	\begin{equation}\label{eq:N-commute-with-ears}
+	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
+	\node[text=darkgreen] (N1) at (0,0) {$N$};
+	\node[text=darkgreen] (S1) at (0,1) {$S$};
+	\node[text=darkblue] (S2) at (1,0) {$S$};
+	\node[text=darkblue] (N2) at (1,1) {$N$};
+	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
+	\draw[-latex] (N2) to node[above] {$m_N$} (S1);
+	\draw[-latex, bend left = 60] (N1) to node[above] {$m_N$} (S2);
+	\draw[latex-, bend right = 60] (S1) to node[above] {$m_S$} (N2);
+	\node[] (A) at (0.5,.5) {$c(m_S,m_N)$};
+	\node[] (phantom1) at (.5,-.9) {};
+	\node[] (phantom2) at (.5,-.2) {};
+	\node[] (phantom3) at (.5,1.05) {};
+	\node[] (phantom4) at (.5,1.7) {};
+	\draw[-latex,line width=.7mm] (phantom2) to node[left] {$\alpha$} (phantom1);
+	\draw[-latex,line width=.7mm] (phantom3) to node[left] {$\beta$} (phantom4);
 	
-	\todo[inline]{TODO: complete (N.)}
-	
+	\end{tikzpicture}
+	\end{equation}
+	The goal is now to show that \eqref{eq:first-square-composed} is equal to the trivial proof $\refl{}$.
+	Rewriting the definition \eqref{eq:alpha-def} using standard path algebra steps, we get $\alpha = \inv{\beta}$, and \eqref{eq:first-square-composed} simplifies to
+	\begin{equation}\label{eq:whiskered-square}
+	(\beta \cdot \inv{m_S}) \star c(m_S,m_N) \star (m_N \cdot \ap{\inv{}}\beta).
+	\end{equation}
+	As suggested by Ulrik Buchholtz, the easiest way to show that this expression is trivial is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N$, $m_S$ as well as an arbitrary higher path $\alpha$. Path inductions on $m_N$ and $\alpha$ replace all paths including $c(m_S,m_N)$ in the expression by $\refl{}$, and the equality of \eqref{eq:whiskered-square} and $\refl{}$ becomes obvious.
 \end{proof}
 
+\begin{remark}
+	In cubical type theory, the problem of proving an equality between the squares \eqref{eq:N-commute} and \eqref{eq:S-commute} naturally becomes the problem of filling the following cube:
+	
+	\begin{equation}\label{eq:ulriks-cube}
+	\begin{tikzpicture}[x=6.5cm,y=-3cm,baseline=(current bounding box.center)]
+	\node[text=darkgreen] (N1F) at (0,0) {$N$};
+	\node[text=darkgreen] (S1F) at (0,1) {$S$};
+	\node[text=darkblue] (S2F) at (1,0) {$S$};
+	\node[text=darkblue] (N2F) at (1,1) {$N$};
+	
+	\node[text=darkgreen] (N1B) at (-.3,-.3) {$N$};
+	\node[text=darkgreen] (S1B) at (-.3,.7) {$S$};
+	\node[text=darkblue] (S2B) at (.7,-.3) {$S$};
+	\node[text=darkblue] (N2B) at (.7,.7) {$N$};
+	
+	
+	\draw[tikzbackground,text=darkgreen,color=darkgreen] (N1B) to node[left] {$m_N$} (S1B);
+	\draw[tikzbackground,text=darkblue,color=darkblue] (N2B) to node[right] {$m_S$} (S2B);
+	\draw[tikzbackground] (N1B) to node[above] {$m_N$} (S2B);
+	\draw[tikzbackground] (N2B) to node[above] {$m_S$} (S1B);
+	
+	\draw[tikzequal,color=darkgreen] (N1F) to node {} (N1B);
+	\draw[tikzequal,color=darkblue] (N2F) to node {} (N2B);
+	\draw[tikzequal,color=darkgreen] (S1F) to node {} (S1B);
+	\draw[tikzequal,color=darkblue] (S2F) to node {} (S2B);
+	
+	\draw[tikzforeground,text=darkgreen,color=darkgreen] (N1F) to node[left] {$m_N$} (S1F);
+	\draw[tikzforeground,text=darkblue,color=darkblue] (N2F) to node[right] {$m_S$} (S2F);
+	\draw[tikzforeground] (N1F) to node[above] {$m_S$} (S2F);
+	\draw[tikzforeground] (N2F) to node[above] {$m_N$} (S1F);
+	
+	\end{tikzpicture}
+	\end{equation}
+	The front square is \eqref{eq:N-commute}, the back square is \eqref{eq:S-commute}, the left and right are trivial, the top is $\alpha$, and the bottom is $\beta$, each appropriately oriented.
+	The colours indicate the squares that came from the definitions in \eqref{eq:green} and \eqref{eq:blue}.
+\end{remark}
 
 
-\begin{corollary}
+\begin{corollary}\label{cor:id-not-minus-id}
 	For any $n$, we have $\id_{\Sn n} \neq -\id_{\Sn n}$.
 \end{corollary}
 \begin{proof}
@@ -1698,7 +1789,7 @@ The first observation we make is simple:
     
     Pierre: still missing that piece. Basically, one would like $\Trunc{\susp f = \susp g} \to \Trunc{f = g}$ and I am just able to prove that $\Trunc{\prod_x\mrd(f(x)) = \mrd(g(x))}$. There is no reason for $\mrd$ to have a retraction in full generality (or at least I recall that it as the conclusion we reached with Marc after a brainstorming session).
 
-	Nicolai: This should now follow from the new subsection above. I'm working on it.}
+	Nicolai: TODO: follows from \cref{prop:equiv-susp-comp} and \cref{cor:id-not-minus-id}}
 \end{proof}
 
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
