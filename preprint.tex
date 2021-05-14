@@ -1516,7 +1516,7 @@ Recall that we are ultimately interested in the group $\setTrunc{\Sn n = \Sn n}$
 
 We now see that there are two connected components of symmetries of spheres:
 \begin{theorem} \label{thm:higher-spheres-2}
-    For any $n \geq 1$, we have an equivalence of type
+    For any $n \geq 1$, we have an equivalence of types
     \begin{equation}
     \higherTrunc 0 {\Sn n= \Sn n} \weq \bn 2
     \end{equation} 
@@ -1767,10 +1767,18 @@ Here, we give the argument on paper:
 
 
 \begin{corollary}\label{cor:id-not-minus-id}
-	For any $n$, we have $\id_{\Sn n} \neq -\id_{\Sn n}$.
+	For any $n \geq 1$, we have $\id_{\Sn n} \neq -\id_{\Sn n}$, and any symmetry of $\Sn n$ is merely equal to either $\id_{\Sn n}$ or $-\id_{\Sn n}$.
 \end{corollary}
 \begin{proof}
-	\todo[inline]{TODO: complete (N.)}
+	We know the statement for $n \equiv 1$ and $n \equiv 2$ from the previous sections.
+	The rest is done by induction on $n$, so we assume $\id_{\Sn n} \neq -\id_{\Sn n}$.
+	By 
+	\cref{cor:higher-spheres-2-comp}, we have $\susp(\id_{\Sn n}) \neq \susp(-\id_{\Sn n})$.
+	As $\id_{\Sn {n+1}} = \susp(\id_{\Sn n})$ trivially holds and 
+	we further have $-\id_{\Sn {n+1}} = \susp(-\id_{\Sn n})$
+	by \cref{lem:susp-neg-commute}, .
+	the claimed inequality follows.
+	Therefore, the two symmetries lie in different components, and any symmetry lies in one of the two components given by \cref{thm:higher-spheres-2}.
 \end{proof}
 
 
@@ -1785,11 +1793,7 @@ The first observation we make is simple:
 \end{proposition}
 \begin{proof}
     For $n=1$ and $n=2$, this statement is given by the main result of \cref{sec:circle-case} and by \cref{prop:equiv-susp-comp}, respectively.
-    \todo[inline]{Nicolai: Need to fill in the argument for $n>2$. Something like $\susp$ preserves equivalence of components.
-    
-    Pierre: still missing that piece. Basically, one would like $\Trunc{\susp f = \susp g} \to \Trunc{f = g}$ and I am just able to prove that $\Trunc{\prod_x\mrd(f(x)) = \mrd(g(x))}$. There is no reason for $\mrd$ to have a retraction in full generality (or at least I recall that it as the conclusion we reached with Marc after a brainstorming session).
-
-	Nicolai: TODO: follows from \cref{prop:equiv-susp-comp} and \cref{cor:id-not-minus-id}}
+	For $n \geq 3$, it follows from \cref{prop:equiv-susp-comp} and \cref{cor:id-not-minus-id}.
 \end{proof}
 
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
