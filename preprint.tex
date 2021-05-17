@@ -1580,6 +1580,7 @@ In this subsection, we annotate the constructors of the suspension with their ty
 For example, for any type $A$, we have $-\id_A : \susp(A) \to \susp(A)$ defined by
 $N_{\susp(A)} \mapsto S_{\susp(A)}$, $S_{\susp(A)} \mapsto N_{\susp(A)}$, and $\mrd_{\susp(A)}(a) \mapsto \inv{\mrd_{\susp(A)}(a)}$.
 For $f : A \to B$, we have $\susp(f) : \susp(A) \to \susp(B)$ given by $N_{\susp(A)} \mapsto N_{\susp(B)}$, $S_{\susp(A)} \mapsto S_{\susp(B)}$, and $\mrd_{\susp(A)}(a) \mapsto \mrd_{\susp(B)}(f(a))$.
+Notice that the index of $\mrd$ is redondant when applied to an argument as its type is then inferrable from the type of the argument. We shall then use $\mrd(a)$ instead of $\mrd_{\susp(A)}(a)$ for $a:A$ whenever it make the text more readable.
 Moreover, we use colours to make the connections between formulas and diagrams easier to identify.
 
 \begin{lemma} \label{lem:susp-neg-commute}
@@ -1589,65 +1590,43 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 The proof of this lemma is due to Ulrik Buchholtz, who presented a formalisation in cubical Agda.
 Here, we give the argument on paper:
 \begin{proof}
-	Using function extensionality and assuming $x : \susp(\susp(A))$, we need to construct $h(x) : \susp(-\id_{\susp(A)})(x) = -\id_{\susp(\susp(A))}(x)$.
-	We do induction on $x$ and define:
-	\begin{alignat}{10}
-	&\color{darkgreen}{
-		h(N_{\susp(\susp(A))})
-	  } 
-	&\; 
-	& \color{darkgreen}{
-		\defequi 
-	  }
-	&\quad 
-	& \color{darkgreen}{
-		\mrd_{\susp(\susp(A))}(N_{\susp(A}) 
-	  }	
-  	&\; 
-	& \color{darkgreen}{ 
-		: 
-	  }
-	&\quad 
-	& \color{darkgreen}{
-		N_{\susp(\susp(A))} = S_{\susp(\susp(A))}
-	  }
-  	\label{eq:green}
-  	\\
-	& \color{darkblue}{
-		h(S_{\susp(\susp(A))}) 
-	  }
-	&&\color{darkblue}{\defequi} &
-	& \color{darkblue}{
-		\inv{\left(\mrd_{\susp(\susp(A))}(S_{\susp(A)})\right)} 
-	  }
-  	&& \color{darkblue}{:} &
-	& \color{darkblue}{
-		S_{\susp(\susp(A))} = N_{\susp(\susp(A))}
-	  }
-  	\label{eq:blue}
-	\end{alignat}
-	
-	The last component to be defined is, for all $y : \susp(A)$, a higher path $\ap h(\mrd_{\susp(\susp(A))}(y))$.
-	After rewriting path-overs as path composition using a standard lemma \cite[Lem~2.11.2]{HoTT}, the type of this component becomes a commutativity proof for the square
+  \def\cg{\color{darkgreen}}
+  \def\cb{\color{darkblue}}
+  Using function extensionality and assuming $x : \susp\susp A$, we need to construct $h(x)$ of type $T(x) \defequi ( \susp(-\id_{\susp A})(x) = -\id_{\susp{\susp A}}(x) )$.
+  We do induction on $x$ and define:
+  \begin{alignat}{2}
+    \cg h(N_{\susp\susp A})	
+    & \cg \defequi \mrd(N_{\susp A}) 
+    && \cg :  N_{\susp\susp A} = S_{\susp\susp A} 
+    \label{eq:green}
+    \\
+    \cb h(S_{\susp\susp A}) 
+    & \cb \defequi \inv{\left(\mrd(S_{\susp A})\right)} 
+    && \cb : S_{\susp\susp A} = N_{\susp\susp A} 
+    \label{eq:blue}
+  \end{alignat}
+      
+        The last component to be defined is, for all $y : \susp A$, a higher path $\ap h(\mrd(y))$ whose type is $\pathover {h(N_{\susp\susp A})} T {\mrd(y)} {h(S_{\susp\susp A})}$.
+	After rewriting path-overs as path composition using \cite[Lem~2.11.3]{HoTT}, the type of this component is equivalen to the the type of commutativity proof for the square:
 	
 	\begin{equation}\label{eq:y-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
-	\node[text=darkgreen] (N1) at (0,0) {$N_{\susp(\susp(A))}$};
-	\node[text=darkgreen] (S1) at (0,1) {$S_{\susp(\susp(A))}$};
-	\node[text=darkblue] (S2) at (1,0) {$S_{\susp(\susp(A))}$};
-	\node[text=darkblue] (N2) at (1,1) {$N_{\susp(\susp(A))}$};
-	\draw[-latex,text=darkgreen] (N1) to node[left] {$\mrd_{\susp(\susp(A))}(N_{\susp(A})$} (S1);
-	\draw[-latex,text=darkblue] (N2) to node[right] {$\mrd_{\susp(\susp(A))}(S_{\susp(A)})$} (S2);
-	\draw[-latex] (N1) to node[above] {$\mrd_{\susp(\susp(A))}(-\id_{\susp(\susp(A))}(y))$} (S2);
-	\draw[-latex] (N2) to node[above] {$\mrd_{\susp(\susp(A))}(y)$} (S1);
+	\node[text=darkgreen] (N1) at (0,0) {$N_{\susp\susp A}$};
+	\node[text=darkgreen] (S1) at (0,1) {$S_{\susp\susp A}$};
+	\node[text=darkblue] (S2) at (1,0) {$S_{\susp\susp A}$};
+	\node[text=darkblue] (N2) at (1,1) {$N_{\susp\susp A}$};
+	\draw[-latex,text=darkgreen] (N1) to node[left] {$\mrd(N_{\susp A})$} (S1);
+        \draw[-latex,text=darkblue] (S2) to node[right] {$\inv{\mrd(S_{\susp A})}$} (N2);
+	\draw[-latex] (N1) to node[above] {$\mrd(-\id_{\susp \susp A}(y))$} (S2);
+        \draw[-latex] (S1) to node[above] {$\inv{\mrd(y)}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
 	To simplify the presentation, we write
 	\begin{align}
-	&N \defequi N_{\susp(\susp(A))} \\
-	&S \defequi S_{\susp(\susp(A))} \\
-	&m_N \defequi \mrd_{\susp(\susp(A))}(N_{\susp(A}) \\
-	&m_S \defequi \mrd_{\susp(\susp(A))}(S_{\susp(A)})
+	N & \defequi N_{\susp \susp A} \\
+	S & \defequi S_{\susp \susp A} \\
+	m_N & \defequi \mrd(N_{\susp A}) \\
+	m_S & \defequi \mrd(S_{\susp A})
 	\end{align}
 	We do induction on $y$.
 	For $y \equiv N_{\susp(A)}$, after simplifying (normalising) the terms, the square \eqref{eq:y-commute} becomes
@@ -1658,12 +1637,12 @@ Here, we give the argument on paper:
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
 	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
+        \draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
 	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
-	\draw[-latex] (N2) to node[above] {$m_N$} (S1);
+        \draw[-latex] (S1) to node[above] {$\inv{m_N}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
-	with the obvious commutativity proof $c(m_S,m_N) : m_S \cdot \inv{m_S} = m_N \cdot \inv{m_N}$ (given $p$, $q$, we define $c(p,q) : p \cdot \inv{p} = q \cdot \inv{q}$ by path induction on $p$ and $q$).
+        with the obvious commutativity proof $c(m_S,m_N) : \inv{m_S} \cdot {m_S} = \inv{m_N} \cdot {m_N}$ (given $p$, $q$, we define $c(p,q) : \inv{p}\cdot p = \inv{q}\cdot q$ by path induction on $p$ and $q$ such that $c(\refl{},\refl{}) \jdeq \refl{}$).
 %	 : m_N \cdot \inv{m_N} = m_S \cdot \inv{m_S}$.
 	Similarly, for $y \equiv S_{\susp(A)}$, the square \eqref{eq:y-commute} becomes
 	\begin{equation}\label{eq:S-commute}
@@ -1673,30 +1652,43 @@ Here, we give the argument on paper:
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
 	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
+        \draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
 	\draw[-latex] (N1) to node[above] {$m_N$} (S2);
-	\draw[-latex] (N2) to node[above] {$m_S$} (S1);
+        \draw[-latex] (S1) to node[above] {$\inv{m_S}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
-	with the trivial commutativity proof $\refl{} : m_N \cdot \inv{m_S} = m_N \cdot \inv{m_S}$.
+        with the trivial commutativity proof $\refl{} : \inv{m_S} \cdot {m_N} = \inv{m_S} \cdot m_N$.
 	
-	Finally, we consider the third case of the induction on $y$, namely the case that $y$ is a path of the form $\mrd_{\susp(A)}(z)$ for some $z : A$.
-	In this case, we need to show an equality between $p$ and $\refl{}$ (the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}), and this equality lies over (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
-	We write $\alpha$ for the top horizontal arrow in \eqref{eq:y-commute} with $y 
-	\equiv \mrd_{\susp(A)}(z)$,
-	\begin{equation}\label{eq:alpha-def}
-	\alpha \defequi \ap{\mrd_{\susp(\susp(A))}}\left(\ap{-\id_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z))\right)
-	\end{equation}
-	of type $m_S = m_N$, and $\beta$ for the bottom horizontal arrow, i.e.\
-	\begin{equation}
-	\beta \defequi \ap{\mrd_{\susp(\susp(A))}}(\mrd_{\susp(A)}(z)))
-	\end{equation}
-	of type $m_N = m_S$.
-	Writing path overs as composition as before, the first square $c(m_S,m_N)$ becomes the composition
+	Finally, we consider the third case of the induction on $y$, namely the case that $y$ is a path of the form $\mrd(z)$ for some $z : A$.
+        In this case, we need to find an element of the pathover type $\pathover {c(m_S,m_N)} U {\mrd(z)} \refl{}$ where the type family $U$ is given by:
+        \begin{displaymath}
+          U(y) \defequi \left( \inv{m_S} \cdot \mrd(-\id_{\susp\susp A}(y)) = \inv{\mrd(y)} \cdot m_N\right)
+        \end{displaymath}
+        In other words, one needs to show an equality between the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality lies over $\mrd(z)$ in the type family $U$ given at each point $y$ by square~\eqref{eq:y-commute}.
+%%      (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
+        We first need to understand transport in $U$ over a path $p$ in $\susp A$. %
+        The intuition is that the top and bottom arrows of square~\eqref{eq:y-commute} can be deformed by p while the vertical arrows remain constant. This suggests that the transport of $c:U(y)$ over $p:y=y'$ is given by:
+        \begin{displaymath}
+          \ap {\blank \cdot m_N} (\ap {\inv{} \circ \mrd} (p)) 
+          \cdot c \cdot
+          \inv{\left( \ap{\inv{m_S} \cdot \blank} (\ap {\mrd \circ -\id_{\susp\susp A}} (p)) \right)}
+          : U(y')
+        \end{displaymath}
+        \todo[inline]{One can use whiskering here if you find it easier to parse.}
+        Formally, one prove it by path induction over $p$, the case for $p\jdeq \refl y$ being given by standard path algebra.
+        We now instantiate this transport for $p \jdeq \mrd(z)$ with $z:A$. Write:
+        \begin{alignat}{2}
+	\alpha &\defequi \ap{\mrd}\left(\ap{-\id_{\susp\susp A}}(\mrd(z))\right) && : m_S=m_N
+        \label{eq:alpha-def}
+        \\
+        \beta &\defequi \ap\mrd(\mrd(z)) && : m_N=m_S
+        \label{eq:beta-def}
+	\end{alignat}
+	Then the transport of the first square $c(m_S,m_N)$ is given by the composition
 	\begin{equation}\label{eq:first-square-composed}
-	(\alpha^{-1} \cdot \inv{m_S}) \star c(m_S,m_N) \star (m_N \cdot \ap{\inv{}}\beta)
+          (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \alpha^{-1})
 	\end{equation}
-	of type $m_N \cdot \inv{m_S} = m_N \cdot \inv{m_S}$.
+	of type $\inv{m_S} \cdot m_N = \inv{m_S} \cdot m_N$.
 	In \eqref{eq:first-square-composed}, $\cdot$ denotes whiskering and $\star$ horizontal composition. The situation can be depicted as follows:
 	\begin{equation}\label{eq:N-commute-with-ears}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
@@ -1717,15 +1709,14 @@ Here, we give the argument on paper:
 	\node[] (phantom4) at (.5,1.7) {};
 	\draw[-latex,line width=.7mm] (phantom2) to node[left] {$\alpha$} (phantom1);
 	\draw[-latex,line width=.7mm] (phantom3) to node[left] {$\beta$} (phantom4);
-	
 	\end{tikzpicture}
 	\end{equation}
-	The goal is now to show that \eqref{eq:first-square-composed} is equal to the trivial proof $\refl{}$.
-	Rewriting the definition \eqref{eq:alpha-def} using standard path algebra steps, we get $\alpha = \inv{\beta}$, and \eqref{eq:first-square-composed} simplifies to
+        The goal is now to show that \eqref{eq:first-square-composed} is equal to the trivial proof $\refl{}$ filling square~\eqref{eq:S-commute}.
+        Unfolding the definition of $-\id_{\susp\susp A}$ in~\eqref{eq:alpha-def} and using standard path algebra steps, we get $\alpha = \inv{\beta}$, and then \eqref{eq:first-square-composed} simplifies to
 	\begin{equation}\label{eq:whiskered-square}
-	(\beta \cdot \inv{m_S}) \star c(m_S,m_N) \star (m_N \cdot \ap{\inv{}}\beta).
+          (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
 	\end{equation}
-	As suggested by Ulrik Buchholtz, the easiest way to show that this expression is trivial is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N$, $m_S$ as well as an arbitrary higher path $\alpha$. Path inductions on $m_N$ and $\alpha$ replace all paths including $c(m_S,m_N)$ in the expression by $\refl{}$, and the equality of \eqref{eq:whiskered-square} and $\refl{}$ becomes obvious.
+        As suggested by Ulrik Buchholtz, the easiest way to show that this expression is trivial is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N$, $m_S$ as well as an arbitrary higher path $\beta: m_N=m_S$. We start by doing path induction on $m_N$, and we have to fill the task for $S\jdeq S$, $m_N\jdeq \refl N$ and for arbitrary $m_S:N=N$ and $\beta: m_N = m_S$. One can then perform path induction on $\beta$, and we are to prove that Eq.~\eqref{eq:whiskered-square} is trivial when $m_S\jdeq m_N$ and $\beta \jdeq \refl{m_N}$. But then, as $m_N \jdeq \refl N$, all paths appearing in Eq.~{eq:whiskered-square}, including $c(m_S,m_N)$, are reflexivity paths. Hence we can conclude by simple path algebra.
 \end{proof}
 
 \begin{remark}
@@ -1776,8 +1767,7 @@ Here, we give the argument on paper:
 	\cref{cor:higher-spheres-2-comp}, we have $\susp(\id_{\Sn n}) \neq \susp(-\id_{\Sn n})$.
 	As $\id_{\Sn {n+1}} = \susp(\id_{\Sn n})$ trivially holds and 
 	we further have $-\id_{\Sn {n+1}} = \susp(-\id_{\Sn n})$
-	by \cref{lem:susp-neg-commute}, .
-	the claimed inequality follows.
+	by \cref{lem:susp-neg-commute}, the claimed inequality follows.
 	Therefore, the two symmetries lie in different components, and any symmetry lies in one of the two components given by \cref{thm:higher-spheres-2}.
 \end{proof}
 
