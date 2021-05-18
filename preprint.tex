@@ -1662,7 +1662,7 @@ Here, we give the argument on paper:
 	Finally, we consider the third case of the induction on $y$, namely the case that $y$ is a path of the form $\mrd(z)$ for some $z : A$.
         In this case, we need to find an element of the pathover type $\pathover {c(m_S,m_N)} U {\mrd(z)} \refl{}$ where the type family $U$ is given by:
         \begin{displaymath}
-          U(y) \defequi \left( \inv{m_S} \cdot \mrd(-\id_{\susp\susp A}(y)) = \inv{\mrd(y)} \cdot m_N\right)
+          U(y) \defequi \left( \inv{m_S} \cdot \mrd(-\id_{\susp A}(y)) = \inv{\mrd(y)} \cdot m_N\right)
         \end{displaymath}
         In other words, one needs to show an equality between the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality lies over $\mrd(z)$ in the type family $U$ given at each point $y$ by square~\eqref{eq:y-commute}.
 %%      (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
@@ -1671,14 +1671,14 @@ Here, we give the argument on paper:
         \begin{displaymath}
           \ap {\blank \cdot m_N} (\ap {\inv{} \circ \mrd} (p)) 
           \cdot c \cdot
-          \inv{\left( \ap{\inv{m_S} \cdot \blank} (\ap {\mrd \circ -\id_{\susp\susp A}} (p)) \right)}
+          \inv{\left( \ap{\inv{m_S} \cdot \blank} (\ap {\mrd \circ -\id_{\susp A}} (p)) \right)}
           : U(y')
         \end{displaymath}
         \todo[inline]{One can use whiskering here if you find it easier to parse.}
         Formally, one prove it by path induction over $p$, the case for $p\jdeq \refl y$ being given by standard path algebra.
         We now instantiate this transport for $p \jdeq \mrd(z)$ with $z:A$. Write:
         \begin{alignat}{2}
-	\alpha &\defequi \ap{\mrd}\left(\ap{-\id_{\susp\susp A}}(\mrd(z))\right) && : m_S=m_N
+	\alpha &\defequi \ap{\mrd}\left(\ap{-\id_{\susp A}}(\mrd(z))\right) && : m_S=m_N
         \label{eq:alpha-def}
         \\
         \beta &\defequi \ap\mrd(\mrd(z)) && : m_N=m_S
@@ -1757,7 +1757,23 @@ Here, we give the argument on paper:
 \end{remark}
 
 
-\begin{remark} Experimental picture
+\begin{remark} Experimental picture(s). Let $\alpha: m_S=m_N$ and $\beta: m_N=m_S$.
+\begin{center}
+  \begin{tikzcd}[column sep=6em]
+    
+      m_S^{-1} m_N \arrow[equal]{r}{\ap{m_S^{-1}\cdot\blank}(\alpha^{-1})}& 
+      m_S^{-1} m_S \arrow[equal]{r}{c(m_S,m_N)}& 
+      m_N^{-1} m_N \arrow[equal]{r}{\ap{(\blank\cdot m_N)\circ{}^{-1}}(\beta)} & 
+      m_S^{-1} m_N \\
+   
+      m_S^{-1} m_N\arrow[equal]{rrr}{\refl{}}&&&
+      m_S^{-1} m_N
+  \end{tikzcd}
+\end{center}
+
+
+
+
 \begin{center}
   \begin{tikzpicture}
     \matrix (m) [matrix of nodes, column sep=4em, row sep=9em] {
