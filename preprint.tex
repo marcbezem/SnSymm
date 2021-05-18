@@ -1617,7 +1617,7 @@ Here, we give the argument on paper:
 	\node[text=darkblue] (N2) at (1,1) {$N_{\susp\susp A}$};
 	\draw[-latex,text=darkgreen] (N1) to node[left] {$\mrd(N_{\susp A})$} (S1);
         \draw[-latex,text=darkblue] (S2) to node[right] {$\inv{\mrd(S_{\susp A})}$} (N2);
-	\draw[-latex] (N1) to node[above] {$\mrd(-\id_{\susp \susp A}(y))$} (S2);
+	\draw[-latex] (N1) to node[above] {$\mrd(-\id_{\susp A}(y))$} (S2);
         \draw[-latex] (S1) to node[above] {$\inv{\mrd(y)}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
@@ -1712,7 +1712,7 @@ Here, we give the argument on paper:
 	\end{tikzpicture}
 	\end{equation}
         The goal is now to show that \eqref{eq:first-square-composed} is equal to the trivial proof $\refl{}$ filling square~\eqref{eq:S-commute}.
-        Unfolding the definition of $-\id_{\susp\susp A}$ in~\eqref{eq:alpha-def} and using standard path algebra steps, we get $\alpha = \inv{\beta}$, and then \eqref{eq:first-square-composed} simplifies to
+        Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def} and using standard path algebra steps, we get $\alpha = \inv{\beta}$, and then \eqref{eq:first-square-composed} simplifies to
 	\begin{equation}\label{eq:whiskered-square}
           (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
 	\end{equation}
