@@ -1906,7 +1906,66 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
 %%\end{proof}
 
-This calculation also allows us to see that the result from \cref{sec:circle-case} does not generalise:
+\begin{theorem}[Conjecture + start of proof?]
+  $\fgr (\Sp = \Sp) \neq 0$
+  \label{thm:S2-eq-S2-not-simply-connected}
+\end{theorem}
+\begin{proof}
+  Consider the same long exact sequence as in the previous proof:
+  \begin{displaymath}
+    \dots \to \hgr 2 (\Sp) \overset d \to \fgr (\Sp \ptdto \Sp) \to \fgr (\Sp \to \Sp)
+    \to \fgr (\Sp) \to \dots
+  \end{displaymath}
+  As $\fgr (\Sp) = 0$, the map $\fgr(\Sp \ptdto \Sp) \to \fgr (\Sp \to \Sp)$ is
+  an epimorphism. In order to prove that $\fgr(\Sp \to \Sp) \neq 0$, it
+  suffices to show that the kernel of this map is not the whole group $\fgr(\Sp
+  \ptdto \Sp)$. However, this kernel is precisely the image of the map denoted
+  $d$ in virtue of the exactness of the sequence. Hence, we are to prove that
+  $d$ is not surjective.
+
+  Let us try to understand $d$: by definition of the long exact sequence
+  (cf.~\cite[Thm.~8.4.6]{HoTT}), $d$ is the $\setTrunc {\loopspace{} (\partial)
+  \circ \inv{\blank}}$ where $\partial : \loopspace{} (\Sp) \to (\Sp \ptdto
+  \Sp)$ is defined by
+  \begin{equation}
+    p \mapsto (\id_{\Sp}, p)
+    \label{eq:def-delta}
+  \end{equation}
+  In particular, path induction shows that $\loopspace{}(\partial)$ maps a loop
+  $\alpha : \refl N = \refl N$ to the element of $(\id_\Sp,\refl N) = (\id_\Sp,
+  \refl N)$ whose components are:
+  \begin{equation}
+    \refl{\id_\Sp} : \id_\Sp = \id_\Sp, \quad \alpha: \refl N = \refl N
+  \end{equation}
+  where the second component is seen as the filler for the triangle:
+  \begin{equation}
+    \begin{tikzcd}
+      & N \dlar["\refl N"swap] \drar["\refl N"] &
+      \\
+      \id_\Sp(N) \ar[rr,"\refl{\id_\Sp}(N)" swap] & & \id_\Sp(N)
+    \end{tikzcd}
+  \end{equation}
+  Recall that $\hgr 2 (\Sp) \simeq \ZZ$ and that this equivalence identifies $1:\ZZ$ with 
+  \begin{equation}
+    \upsilon \defequi \settrunc{\loopspace{}(\sigma_{\Sc})(\Sloop)} : \hgr 2(\Sp)
+    \label{eq:1-in-pi2-S2}
+  \end{equation}
+  To prove that $d$ is not surjective, one need only to prove that
+  $d(\upsilon)$ does not generates $\fgr(\Sp \ptdto \Sp)$. That is one only
+  needs to find an element $\alpha:(\id_\Sp,\refl N) = (\id_\Sp, \refl N)$ such
+  that for all $k:\ZZ$, $\settrunc\alpha \neq d(\upsilon)^k$. Notice that for
+  $k:\ZZ$, 
+  \begin{equation}
+    d(\upsilon)^k = d(\settrunc{\loopspace{}(\sigma_\Sc)(\Sloop^k)})
+    = \settrunc{\loopspace{}(\partial)\inv{ \left( 
+        \loopspace{}(\sigma_\Sc)(\Sloop^k)
+    \right)}}
+  \end{equation}
+  \todo[inline]{Find such an $\alpha$! I'm not sure how yet.}
+\end{proof}
+
+This calculation also allows us to see that the result from
+\cref{sec:circle-case} does not generalise:
 
 \begin{proposition}\label{prop:not-generalising}
     For $n \geq 3$, we have
