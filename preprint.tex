@@ -1757,19 +1757,24 @@ Here, we give the argument on paper:
 \end{remark}
 
 
-\begin{remark} Experimental picture. Let $\alpha: m_S=m_N$ and $\beta: m_N=m_S$.
+\begin{remark} Let $\beta: m_N=m_S$.
+Then the following diagram for (\ref{eq:whiskered-square}) commutes:
 \begin{center}
-  \begin{tikzcd}[column sep=6em]
-    
-      {\color{blue}m_S^{-1}}\cdot m_S \arrow[equal]{rrr}{c(m_S,m_N)}
-                   \arrow[swap, equal]{dd}{\ap{{\color{blue}m_S^{-1}}\cdot\blank}(\alpha^{-1})}&&& 
-      m_N^{-1}\cdot {\color{darkgreen}m_N} \arrow[equal]{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ{}^{-1}}(\beta)} \\\\
-      {\color{blue}m_S^{-1}}\cdot m_N \arrow[equal]{rrr}{\refl{}}&&&
-      m_S^{-1}\cdot {\color{darkgreen}m_N} \\
- 
+  \begin{tikzcd}[column sep=6em,labels={font=\normalsize}]
+    m_N^{-1}\cdot {\color{darkgreen}m_N} 
+      \arrow[swap, equal, "\downarrow"']{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ{}^{-1}}(\beta)}&&
+    {\color{blue}m_S^{-1}}\cdot m_S 
+      \arrow[swap, equal, "{c(m_S,m_N)}", "\leftarrow"']{ll}
+      \arrow[equal, "\uparrow"']{dd}{\ap{{\color{blue}m_S^{-1}}\cdot\blank}(\beta)}
+ \\\\
+      m_S^{-1}\cdot {\color{darkgreen}m_N} &&
+      {\color{blue}m_S^{-1}}\cdot m_N \arrow[swap, equal, "\leftarrow"']{ll}{\refl{}}
   \end{tikzcd}
 \end{center}
-
+Proof. First generalize to any points $n,s:\susp\susp A$, paths $m_n,m_s: n=s$ and $\beta: m_n=m_s$.
+Applying path induction to first $m_n$ and then $\beta$ reduces to the case in which
+all paths are reflexivity paths. Note that this is true for $c$ by definition.
+In this case the diagram commutes trivially, so it commutes in general.
 
 \end{remark}
 
