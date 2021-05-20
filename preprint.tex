@@ -1667,7 +1667,9 @@ Here, we give the argument on paper:
         In other words, one needs to show an equality between the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality lies over $\mrd(z)$ in the type family $U$ given at each point $y$ by square~\eqref{eq:y-commute}.
 %%      (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
         We first need to understand transport in $U$ over a path $p$ in $\susp A$. %
-        The intuition is that the top and bottom arrows of square~\eqref{eq:y-commute} can be deformed by p while the vertical arrows remain constant. This suggests that the transport of $c:U(y)$ over $p:y=y'$ is given by:
+        The intuition is that the top and bottom arrows of square~\eqref{eq:y-commute} 
+        can be deformed by $p$ while the vertical arrows remain constant. 
+        This suggests that the transport of $c:U(y)$ over $p:y=y'$ is given by:
         \begin{displaymath}
           \ap {\blank \cdot m_N} (\ap {\inv{} \circ \mrd} (p)) 
           \cdot c \cdot
@@ -1675,8 +1677,10 @@ Here, we give the argument on paper:
           : U(y')
         \end{displaymath}
         \todo[inline]{One can use whiskering here if you find it easier to parse.}
-        Formally, one prove it by path induction over $p$, the case for $p\jdeq \refl y$ being given by standard path algebra.
-        We now instantiate this transport for $p \jdeq \mrd(z)$ with $z:A$. Write:
+        Formally this follows again from \cite[Lem~2.11.3]{HoTT}, 
+        to be proved by path induction over $p$, the case for $p\jdeq \refl y$ being 
+        given by standard path algebra.
+        We now instantiate this transport with $p \jdeq \mrd(z)$ for $z:A$. Write:
         \begin{alignat}{2}
 	\alpha &\defequi \ap{\mrd}\left(\ap{-\id_{\susp A}}(\mrd(z))\right) && : m_S=m_N
         \label{eq:alpha-def}
@@ -1684,12 +1688,15 @@ Here, we give the argument on paper:
         \beta &\defequi \ap\mrd(\mrd(z)) && : m_N=m_S
         \label{eq:beta-def}
 	\end{alignat}
-	Then the transport of the first square $c(m_S,m_N)$ is given by the composition
+	Then the transport of $c(m_S,m_N)$, the filler of square (\ref{eq:N-commute}),
+        is given by the composition
 	\begin{equation}\label{eq:first-square-composed}
-          (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \alpha^{-1})
+          \ap{(\blank\cdot {\color{darkgreen}m_N})\circ{}^{-1}}(\beta) \cdot c(m_S,m_N) \cdot 
+                            \ap{{\color{blue}\inv{m_S}}\cdot\blank}(\inv{\alpha})
+          %: \inv{m_S} \cdot m_N = \inv{m_S} \cdot 
 	\end{equation}
-	of type $\inv{m_S} \cdot m_N = \inv{m_S} \cdot m_N$.
-	In \eqref{eq:first-square-composed}, $\cdot$ denotes whiskering and $\star$ vertical composition. The situation can be depicted as follows:
+	of type ${\color{blue}\inv{m_S}} \cdot m_N = \inv{m_S} \cdot {\color{darkgreen}m_N}$.
+	The situation can be depicted as follows:
 	\begin{equation}\label{eq:N-commute-with-ears}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
 	\node[text=darkgreen] (N1) at (0,0) {$N$};
@@ -1697,27 +1704,54 @@ Here, we give the argument on paper:
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
 	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue,color=darkblue] (N2) to node[right] {$m_S$} (S2);
+	\draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
 	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
-	\draw[-latex] (N2) to node[above] {$m_N$} (S1);
+	\draw[-latex] (S1) to node[above] {$\inv{m_N}$} (N2);
 	\draw[-latex, bend left = 60] (N1) to node[above] {$m_N$} (S2);
-	\draw[latex-, bend right = 60] (S1) to node[above] {$m_S$} (N2);
+	\draw[latex-, bend left = 60] (N2) to node[above] {$\inv{m_S}$} (S1);
 	\node[] (A) at (0.5,.5) {$c(m_S,m_N)$};
-	\node[] (phantom1) at (.5,-.9) {};
-	\node[] (phantom2) at (.5,-.2) {};
-	\node[] (phantom3) at (.5,1.05) {};
-	\node[] (phantom4) at (.5,1.7) {};
-	\draw[-latex,line width=.7mm] (phantom2) to node[left] {$\alpha$} (phantom1);
-	\draw[-latex,line width=.7mm] (phantom3) to node[left] {$\beta$} (phantom4);
+	\node[] (phantom1) at (.5,-1.0) {};
+	\node[] (phantom2) at (.5,-.1) {};
+	\node[] (phantom3) at (.5,0.9) {};
+	\node[] (phantom4) at (.5,1.85) {};
+	\draw[-latex,cell] (phantom2) to node[left] {$\alpha$} (phantom1);
+	\draw[-latex,cell] (phantom3) to node[right] {$\ap{\inv{}}\beta$} (phantom4);
 	\end{tikzpicture}
 	\end{equation}
-        The goal is now to show that \eqref{eq:first-square-composed} is equal to the trivial proof $\refl{}$ filling square~\eqref{eq:S-commute}.
-        Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def} and using standard path algebra steps, we get $\alpha = \inv{\beta}$, and then \eqref{eq:first-square-composed} simplifies to
-	\begin{equation}\label{eq:whiskered-square}
-          (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
-	\end{equation}
-        As suggested by Ulrik Buchholtz, the easiest way to show that this expression is trivial is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N$, $m_S$ as well as an arbitrary higher path $\beta: m_N=m_S$. We start by doing path induction on $m_N$, and we have to fill the task for $S\jdeq S$, $m_N\jdeq \refl N$ and for arbitrary $m_S:N=N$ and $\beta: m_N = m_S$. One can then perform path induction on $\beta$, and we are to prove that Eq.~\eqref{eq:whiskered-square} is trivial when $m_S\jdeq m_N$ and $\beta \jdeq \refl{m_N}$. But then, as $m_N \jdeq \refl N$, all paths appearing in Eq.~{eq:whiskered-square}, including $c(m_S,m_N)$, are reflexivity paths. Hence we can conclude by simple path algebra.
+        The goal is now to show that \eqref{eq:first-square-composed} is equal 
+        to the trivial proof $\refl{}$ filling square~\eqref{eq:S-commute},
+        the outer `square' of (\ref{eq:N-commute-with-ears}).
+        Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def} and using standard path
+        algebra steps, we get $\alpha = \inv{\beta}$, 
+        and then this task simplifies to showing that the following diagram commutes:
+\begin{center}
+  \begin{tikzcd}[column sep=6em,labels={font=\normalsize}]
+    m_N^{-1}\cdot {\color{darkgreen}m_N} 
+      \arrow[swap, equal, "\downarrow"']{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ\inv{}}(\beta)}&&
+    {\color{blue}\inv{m_S}}\cdot m_S 
+      \arrow[swap, equal, "{c(m_S,m_N)}", "\leftarrow"']{ll}
+      \arrow[equal, "\uparrow"']{dd}{\ap{{\color{blue}\inv{m_S}}\cdot\blank}(\beta)}
+ \\\\
+      \inv{m_S}\cdot {\color{darkgreen}m_N} &&
+      {\color{blue}\inv{m_S}}\cdot m_N \arrow[swap, equal, "\leftarrow"']{ll}{\refl{}}
+  \end{tikzcd}
+\end{center}
+
+%	\begin{equation}\label{eq:whiskered-square}
+ %         (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
+%	\end{equation}
+ 
+       As suggested by Ulrik Buchholtz, the easiest way to show that the above diagram commutes
+       is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N,m_S : N=S$, 
+       as well as to an arbitrary higher path $\beta: m_N=m_S$. One starts by doing path 
+       induction on $m_N$, reducing the task to the case $S\jdeq N$ and $m_N\jdeq \refl N$,
+       and arbitrary $m_S:N=N$ and $\beta: m_N = m_S$. One can then do path induction on $\beta$, 
+       reducing the task to the case $m_S\jdeq m_N$ and $\beta \jdeq \refl{m_N}$. 
+       But now, as $m_N \jdeq \refl N$, all paths appearing in the above diagram,
+       including $c(m_S,m_N)$, are reflexivity paths. 
+       Hence we can conclude by simple path algebra.
 \end{proof}
+
 
 \begin{remark}
 	In cubical type theory, the problem of proving an equality between the squares \eqref{eq:N-commute} and \eqref{eq:S-commute} naturally becomes the problem of filling the following cube:
@@ -1754,28 +1788,6 @@ Here, we give the argument on paper:
 	\end{equation}
 	The front square is \eqref{eq:N-commute}, the back square is \eqref{eq:S-commute}, the left and right are trivial, the top is $\alpha$, and the bottom is $\beta$, each appropriately oriented.
 	The colours indicate the squares that came from the definitions in \eqref{eq:green} and \eqref{eq:blue}.
-\end{remark}
-
-
-\begin{remark} Let $\beta: m_N=m_S$.
-Then the following diagram for (\ref{eq:whiskered-square}) commutes:
-\begin{center}
-  \begin{tikzcd}[column sep=6em,labels={font=\normalsize}]
-    m_N^{-1}\cdot {\color{darkgreen}m_N} 
-      \arrow[swap, equal, "\downarrow"']{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ{}^{-1}}(\beta)}&&
-    {\color{blue}m_S^{-1}}\cdot m_S 
-      \arrow[swap, equal, "{c(m_S,m_N)}", "\leftarrow"']{ll}
-      \arrow[equal, "\uparrow"']{dd}{\ap{{\color{blue}m_S^{-1}}\cdot\blank}(\beta)}
- \\\\
-      m_S^{-1}\cdot {\color{darkgreen}m_N} &&
-      {\color{blue}m_S^{-1}}\cdot m_N \arrow[swap, equal, "\leftarrow"']{ll}{\refl{}}
-  \end{tikzcd}
-\end{center}
-Proof. First generalize to any points $n,s:\susp\susp A$, paths $m_n,m_s: n=s$ and $\beta: m_n=m_s$.
-Applying path induction to first $m_n$ and then $\beta$ reduces to the case in which
-all paths are reflexivity paths. Note that this is true for $c$ by definition.
-In this case the diagram commutes trivially, so it commutes in general.
-
 \end{remark}
 
 
