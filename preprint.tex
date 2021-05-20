@@ -1587,8 +1587,8 @@ Moreover, we use colours to make the connections between formulas and diagrams e
 	For any type $A$, the two functions $\susp(-\id_{\susp(A)})$ and $-\id_{\susp(\susp(A))}$ of type $\susp(\susp(A)) \to \susp(\susp(A))$ are equal.
 \end{lemma}
 
-The proof of this lemma is due to Ulrik Buchholtz, who presented a formalisation in cubical Agda.
-Here, we give the argument on paper:
+The proof of this lemma is due to Ulrik Buchholtz, who presented a formalisation in cubical Agda
+in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 \begin{proof}
   \def\cg{\color{darkgreen}}
   \def\cb{\color{darkblue}}
@@ -1676,7 +1676,7 @@ Here, we give the argument on paper:
           \inv{\left( \ap{\inv{m_S} \cdot \blank} (\ap {\mrd \circ -\id_{\susp A}} (p)) \right)}
           : U(y')
         \end{displaymath}
-        \todo[inline]{One can use whiskering here if you find it easier to parse.}
+ %\todo[inline]{One can use whiskering here if you find it easier to parse.}
         Formally this follows again from \cite[Lem~2.11.3]{HoTT}, 
         to be proved by path induction over $p$, the case for $p\jdeq \refl y$ being 
         given by standard path algebra.
@@ -1693,7 +1693,6 @@ Here, we give the argument on paper:
 	\begin{equation}\label{eq:first-square-composed}
           \ap{(\blank\cdot {\color{darkgreen}m_N})\circ{}^{-1}}(\beta) \cdot c(m_S,m_N) \cdot 
                             \ap{{\color{blue}\inv{m_S}}\cdot\blank}(\inv{\alpha})
-          %: \inv{m_S} \cdot m_N = \inv{m_S} \cdot 
 	\end{equation}
 	of type ${\color{blue}\inv{m_S}} \cdot m_N = \inv{m_S} \cdot {\color{darkgreen}m_N}$.
 	The situation can be depicted as follows:
@@ -1741,7 +1740,8 @@ Here, we give the argument on paper:
  %         (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
 %	\end{equation}
  
-       As suggested by Ulrik Buchholtz, the easiest way to show that the above diagram commutes
+       As suggested by Ulrik Buchholtz \cite{doublesusp},
+       the easiest way to show that the above diagram commutes
        is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N,m_S : N=S$, 
        as well as to an arbitrary higher path $\beta: m_N=m_S$. One starts by doing path 
        induction on $m_N$, reducing the task to the case $S\jdeq N$ and $m_N\jdeq \refl N$,
