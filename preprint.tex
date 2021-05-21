@@ -86,12 +86,11 @@ tikzshortarrow/.style={
 \begin{abstract}
   In this paper, we investigate the symmetries of the spheres $\Sn n$
   ($n\geq 1)$ in univalent foundations.
-
-  The case $n=1$ has a slick answer: $(\Sc = \Sc) \weq (\Sc +
-  \Sc)$. Unfortunately, it is expected that the result does not
-  generalize for $n>1$. However, we show that the type $\Sn n = \Sn n$
-  has two equivalent connected components and we exhibit members for
-  each component.
+  The case $n=1$ of the circle has a slick answer: $(\Sc = \Sc) \weq (\Sc +
+  \Sc)$. Unfortunately, the generalisation of this result to $n>1$ is provably wrong.
+  Instead, we show that the type $\Sn n = \Sn n$ consist of
+  two equivalent connected components. We construct concrete elements
+  in each component.
 \end{abstract}
 
 
@@ -1708,13 +1707,14 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	\draw[-latex] (S1) to node[above] {$\inv{m_N}$} (N2);
 	\draw[-latex, bend left = 60] (N1) to node[above] {$m_N$} (S2);
 	\draw[latex-, bend left = 60] (N2) to node[above] {$\inv{m_S}$} (S1);
-	\node[] (A) at (0.5,.5) {$c(m_S,m_N)$};
+	%\node[] (A) at (0.5,.5) {$c(m_S,m_N)$};
 	\node[] (phantom1) at (.5,-1.0) {};
 	\node[] (phantom2) at (.5,-.1) {};
 	\node[] (phantom3) at (.5,0.9) {};
 	\node[] (phantom4) at (.5,1.85) {};
 	\draw[-latex,cell] (phantom2) to node[left] {$\alpha$} (phantom1);
 	\draw[-latex,cell] (phantom3) to node[right] {$\ap{\inv{}}\beta$} (phantom4);
+        \draw[-latex,cell, shorten >=3em, shorten <=3em] (S2) to node[midway,fill=white]{$c(m_S,m_N)$} (S1);
 	\end{tikzpicture}
 	\end{equation}
         The goal is now to show that \eqref{eq:first-square-composed} is equal 
@@ -1723,31 +1723,32 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
         Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def} and using standard path
         algebra steps, we get $\alpha = \inv{\beta}$, 
         and then this task simplifies to showing that the following diagram commutes:
-\begin{center}
+\begin{equation}\label{eq:3-cell}
   \begin{tikzcd}[column sep=6em,labels={font=\normalsize}]
     m_N^{-1}\cdot {\color{darkgreen}m_N} 
-      \arrow[swap, equal, "\downarrow"']{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ\inv{}}(\beta)}&&
+      \arrow[Rightarrow, swap]{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ\inv{}}(\beta)}
+      \arrow[Leftarrow]{rr}{c(m_S,m_N)}&&
     {\color{blue}\inv{m_S}}\cdot m_S 
-      \arrow[swap, equal, "{c(m_S,m_N)}", "\leftarrow"']{ll}
-      \arrow[equal, "\uparrow"']{dd}{\ap{{\color{blue}\inv{m_S}}\cdot\blank}(\beta)}
+      \arrow[Leftarrow, swap]{dd}{\ap{{\color{blue}\inv{m_S}}\cdot\blank}(\beta)}
  \\\\
-      \inv{m_S}\cdot {\color{darkgreen}m_N} &&
-      {\color{blue}\inv{m_S}}\cdot m_N \arrow[swap, equal, "\leftarrow"']{ll}{\refl{}}
+    \inv{m_S}\cdot {\color{darkgreen}m_N}
+       \arrow[Leftarrow, swap]{rr}{\refl{}} &&
+    {\color{blue}\inv{m_S}}\cdot m_N 
   \end{tikzcd}
-\end{center}
+\end{equation}
 
 %	\begin{equation}\label{eq:whiskered-square}
  %         (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta) 
 %	\end{equation}
  
        As suggested by Ulrik Buchholtz \cite{doublesusp},
-       the easiest way to show that the above diagram commutes
+       the easiest way to show that (\ref{eq:3-cell}) commutes
        is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N,m_S : N=S$, 
        as well as to an arbitrary higher path $\beta: m_N=m_S$. One starts by doing path 
        induction on $m_N$, reducing the task to the case $S\jdeq N$ and $m_N\jdeq \refl N$,
        and arbitrary $m_S:N=N$ and $\beta: m_N = m_S$. One can then do path induction on $\beta$, 
        reducing the task to the case $m_S\jdeq m_N$ and $\beta \jdeq \refl{m_N}$. 
-       But now, as $m_N \jdeq \refl N$, all paths appearing in the above diagram,
+       But now, as $m_N \jdeq \refl N$, all paths appearing in the diagram,
        including $c(m_S,m_N)$, are reflexivity paths. 
        Hence we can conclude by simple path algebra.
 \end{proof}
@@ -1786,8 +1787,11 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	
 	\end{tikzpicture}
 	\end{equation}
-	The front square is \eqref{eq:N-commute}, the back square is \eqref{eq:S-commute}, the left and right are trivial, the top is $\alpha$, and the bottom is $\beta$, each appropriately oriented.
-	The colours indicate the squares that came from the definitions in \eqref{eq:green} and \eqref{eq:blue}.
+	The front square is \eqref{eq:N-commute}, the back square is \eqref{eq:S-commute}, 
+        the left and right are $\refl{}$, the top is $\alpha$, and the bottom is $\beta$, 
+        each appropriately oriented.
+	The colours indicate the squares that came from the 
+        definitions in \eqref{eq:green} and \eqref{eq:blue}.
 \end{remark}
 
 
