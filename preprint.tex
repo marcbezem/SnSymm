@@ -1,4 +1,4 @@
-\documentclass[english,a4]{article}
+\documentclass[english,a4paper]{article}
 
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{enumitem}
@@ -1178,7 +1178,7 @@ equivalence of function spaces (see \cref{def:wild-adj})
     For pointed types $C$ and $D$, the following commutes (up to homotopy):
     \begin{equation}
     \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
-    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
     \node (A) at (0,0) {$(C \to_* D)$}; 
     \node (D) at (1,0) {$(\susp C \to_* \susp D)$}; 
     \node (C) at (1,1) {$(C \to_* \Omega \susp D)$}; 
@@ -1210,7 +1210,7 @@ The equivalence $\Phi$ also satisfies the following lemma:
     The following square commutes (up to homotopy):
     \begin{equation}
     \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
-    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
     \node (A) at (0,0) {$(\susp X \to_* A)$}; 
     \node (D) at (1,0) {$(\susp X \to_* B)$}; 
     \node (B) at (0,1) {$(X \to_* \Omega A)$}; 
@@ -1255,7 +1255,7 @@ $\phi_A^1(f:\Sc \ptdto A) \defequi \loopspace\null (f)(\Sloop)$ and for $n\geq
     For all $n \geq 0$ and $f$ as above, the diagram
     \begin{equation}
     \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
-    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
     \node (A) at (0,0) {$(\Sn n \to_* A)$}; 
     \node (D) at (1,0) {$(\Sn n \to_* B)$}; 
     \node (B) at (0,1) {$\Omega^n A$}; 
@@ -1288,7 +1288,7 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in
   The maps $\sigma_{\Sn n}$ and $\susp$ are equal up to canonical isomorphism, i.e.\ the square
   \begin{equation} \label{eq:needs-to-commute}
     \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
-    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+    \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
     \node (A) at (0,0) {$(\Sn n \to_* \Sn n)$}; 
     \node (B) at (0,1) {$\Omega^n(\Sn n)$}; 
     \node (C) at (1,1) {$\Omega^{n+1}(\Sn {n+1})$}; 
@@ -1309,7 +1309,7 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in
   in the following diagram:
 \begin{equation}
 \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
-\tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,-latex}}
+\tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
 \node (A) at (0,0) {$(\Sn n \to_* \Sn n)$}; 
 \node (B) at (0,2) {$\Omega^n(\Sn n)$}; 
 \node (C) at (1,2) {$\Omega^{n+1}(\Sn {n+1})$}; 
@@ -1539,20 +1539,20 @@ We now see that there are two connected components of symmetries of spheres:
 
 \tikzset{
 	tikzforeground/.style={
-		-latex,
+		->,
 %		shorten >=0.2cm,
 %		shorten <=0.2cm, 
 		line width = 1.5pt,
 		preaction={draw, -, line width=5pt, white},
 	},
 	tikzbackground/.style={
-		-latex,
+		->,
 %		shorten >=0.2cm,
 %		shorten <=0.2cm, 
 		line width = 1.0pt,
 	},
 %	tikzmiddle/.style={
-%		-latex,
+%		->,
 %		shorten >=0.2cm,
 %		shorten <=0.2cm, 
 %		line width = .8pt,
@@ -1614,10 +1614,10 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	\node[text=darkgreen] (S1) at (0,1) {$S_{\susp\susp A}$};
 	\node[text=darkblue] (S2) at (1,0) {$S_{\susp\susp A}$};
 	\node[text=darkblue] (N2) at (1,1) {$N_{\susp\susp A}$};
-	\draw[-latex,text=darkgreen] (N1) to node[left] {$\mrd(N_{\susp A})$} (S1);
-        \draw[-latex,text=darkblue] (S2) to node[right] {$\inv{\mrd(S_{\susp A})}$} (N2);
-	\draw[-latex] (N1) to node[above] {$\mrd(-\id_{\susp A}(y))$} (S2);
-        \draw[-latex] (S1) to node[above] {$\inv{\mrd(y)}$} (N2);
+	\draw[->,text=darkgreen] (N1) to node[left] {$\mrd(N_{\susp A})$} (S1);
+        \draw[->,text=darkblue] (S2) to node[right] {$\inv{\mrd(S_{\susp A})}$} (N2);
+	\draw[->] (N1) to node[above] {$\mrd(-\id_{\susp A}(y))$} (S2);
+        \draw[->] (S1) to node[above] {$\inv{\mrd(y)}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
 	To simplify the presentation, we write
@@ -1635,10 +1635,10 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	\node[text=darkgreen] (S1) at (0,1) {$S$};
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
-	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-        \draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
-	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
-        \draw[-latex] (S1) to node[above] {$\inv{m_N}$} (N2);
+	\draw[->,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+        \draw[->,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
+	\draw[->] (N1) to node[above] {$m_S$} (S2);
+        \draw[->] (S1) to node[above] {$\inv{m_N}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
         with the obvious commutativity proof $c(m_S,m_N) : \inv{m_S} \cdot {m_S} = \inv{m_N} \cdot {m_N}$ (given $p$, $q$, we define $c(p,q) : \inv{p}\cdot p = \inv{q}\cdot q$ by path induction on $p$ and $q$ such that $c(\refl{},\refl{}) \jdeq \refl{}$).
@@ -1650,10 +1650,10 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	\node[text=darkgreen] (S1) at (0,1) {$S$};
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
-	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-        \draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
-	\draw[-latex] (N1) to node[above] {$m_N$} (S2);
-        \draw[-latex] (S1) to node[above] {$\inv{m_S}$} (N2);
+	\draw[->,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+        \draw[->,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
+	\draw[->] (N1) to node[above] {$m_N$} (S2);
+        \draw[->] (S1) to node[above] {$\inv{m_S}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
         with the trivial commutativity proof $\refl{} : \inv{m_S} \cdot {m_N} = \inv{m_S} \cdot m_N$.
@@ -1701,20 +1701,20 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	\node[text=darkgreen] (S1) at (0,1) {$S$};
 	\node[text=darkblue] (S2) at (1,0) {$S$};
 	\node[text=darkblue] (N2) at (1,1) {$N$};
-	\draw[-latex,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
-	\draw[-latex,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
-	\draw[-latex] (N1) to node[above] {$m_S$} (S2);
-	\draw[-latex] (S1) to node[above] {$\inv{m_N}$} (N2);
-	\draw[-latex, bend left = 60] (N1) to node[above] {$m_N$} (S2);
-	\draw[latex-, bend left = 60] (N2) to node[above] {$\inv{m_S}$} (S1);
+	\draw[->,text=darkgreen,color=darkgreen] (N1) to node[left] {$m_N$} (S1);
+	\draw[->,text=darkblue,color=darkblue] (S2) to node[right] {$\inv{m_S}$} (N2);
+	\draw[->] (N1) to node[above] {$m_S$} (S2);
+	\draw[->] (S1) to node[above] {$\inv{m_N}$} (N2);
+	\draw[->, bend left = 60] (N1) to node[above] {$m_N$} (S2);
+	\draw[<-, bend left = 60] (N2) to node[above] {$\inv{m_S}$} (S1);
 	%\node[] (A) at (0.5,.5) {$c(m_S,m_N)$};
 	\node[] (phantom1) at (.5,-1.0) {};
 	\node[] (phantom2) at (.5,-.1) {};
 	\node[] (phantom3) at (.5,0.9) {};
 	\node[] (phantom4) at (.5,1.85) {};
-	\draw[-latex,cell] (phantom2) to node[left] {$\alpha$} (phantom1);
-	\draw[-latex,cell] (phantom3) to node[right] {$\ap{\inv{}}\beta$} (phantom4);
-        \draw[-latex,cell, shorten >=3em, shorten <=3em] (S2) to node[midway,fill=white]{$c(m_S,m_N)$} (S1);
+	\draw[->,cell] (phantom2) to node[left] {$\alpha$} (phantom1);
+	\draw[->,cell] (phantom3) to node[right] {$\ap{\inv{}}\beta$} (phantom4);
+        \draw[->,cell, shorten >=3em, shorten <=3em] (S2) to node[midway,fill=white]{$c(m_S,m_N)$} (S1);
 	\end{tikzpicture}
 	\end{equation}
         The goal is now to show that \eqref{eq:first-square-composed} is equal 
