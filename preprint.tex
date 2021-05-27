@@ -223,7 +223,7 @@ Considering their importance in this paper, we recall them in full
   \end{quote}
 \end{enumerate}
 The spheres $\Sn n$ are then defined by induction on $n:\NN$ by
-$\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 1$.
+$\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 2$.
 
 
 \paragraph{Plan of the paper.}%
@@ -504,7 +504,7 @@ Finally, one can compose all the equivalences that we exhibited:
   & \weq \Sc + \Sc.
 \end{align*}
 
-\section{Symmetries of the $\boldsymbol 2$-sphere}
+\section{Symmetries of the \texorpdfstring{$\boldsymbol 2$}{2}-sphere}
 \label{sec:sphere}
 
 In this section, we will prove that the canonical inclusion:
@@ -554,7 +554,7 @@ in~\cref{sec:circle-case}:
 \item then, we will prove that every equivalence in $\Sp=\Sp$ is
   either in the connected component of $\id_\Sp$ or in the connected
   component of $-\id_\Sp$,
-\item finally, we will prove that the connected component of $\id_\Sp$
+\item finally, we will prove that the connected components of $\id_\Sp$
   and $-\id_\Sp$ are equivalent to each other.
 \end{itemize}
 Notice that the last step is less ambitious than in the case of $\Sc$,
@@ -705,7 +705,6 @@ with some (2-)path algebra we can get an element of type
   from $\Sc$ to the connected component at $\id_\Sc$ of $\Sc=\Sc$. One ends up
   then with the equation $\Sloop^2 = \refl \base$, or in other words $2=0$ in
   $\zet$, which is absurd.
-  
 \end{proof}
 
 The previous lemma proves that $\id_\Sp$ and $-\id_\Sp$ belong 
@@ -954,7 +953,7 @@ $\tau(\eta_{\Sc}(z)) =
   $\loopspace\null \Sc$. However, we have seen in \cref{lem:eta-S1-section-tau}
   that $\tau$ is a retraction of $\eta_{\Sc}$. Hence it follows that:
   \begin{displaymath}
-    \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.
+    \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.\qedhere
   \end{displaymath}
 \end{proof}
 
@@ -1119,7 +1118,7 @@ general result.
   %
 \end{proof}
 
-\section{Symmetries of the $\boldsymbol n$-sphere}
+\section{Symmetries of the \texorpdfstring{$\boldsymbol n$}{n}-sphere}
 \label{sec:higher-sphere}
 
 
@@ -1606,7 +1605,7 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
   \end{alignat}
       
         The last component to be defined is, for all $y : \susp A$, a higher path $\ap h(\mrd(y))$ whose type is $\pathover {h(N_{\susp\susp A})} T {\mrd(y)} {h(S_{\susp\susp A})}$.
-	After rewriting path-overs as path composition using \cite[Lem~2.11.3]{HoTT}, the type of this component is equivalent to the the type of commutativity proof for the square:
+	After rewriting path-overs as path composition using \cite[Lem~2.11.3]{HoTT}, the type of this component is equivalent to the the type of commutativity proofs for the square:
 	
 	\begin{equation}\label{eq:y-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
@@ -2164,7 +2163,7 @@ Let us finally summarise the results of the current section, putting \cref{thm:h
 \label{sec:wild-functors}
 \def\hom(#1,#2){#1 \rightsquigarrow #2}
 %
-The types $\UUptd$ and $\UU$ do certainly not form categories in the usual
+The types $\UUptd$ and $\UU$ certainly do not form categories in the usual
 sense (the intended types of morphisms $A \ptdto B$ and $A\to B$ between two
 objects $A,B$ are not necessarily sets), but some constructions on $\UUptd$ and $\UU$ are
 reminiscent of functors. This motivates the few following definitions.
@@ -2239,7 +2238,7 @@ functor by its first two components only.
   $G$ respectively. Then one gets:
   \begin{align*}
     c_{G\circ F}(a,b,c)(f,g) &\defequi c_G(F_0(a),F_0(b),F_0(c),F_1(f),F_1(g)) \cdot \ap{G_1} ( c_F(a,b,c,f,g) ) \\
-    u_{G\circ F}(a) &\defequi u_G(F_0(a)) \cdot \ap {G_1} (u_F(a))
+    u_{G\circ F}(a) &\defequi u_G(F_0(a)) \cdot \ap {G_1} (u_F(a))\qedhere
   \end{align*}
 \end{proof}
 
@@ -2439,7 +2438,7 @@ paper, hence we rely on this proof.)
   \begin{displaymath}
     \epsilon(A)(N) \defequi a_0,\quad
     \epsilon(A)(S) \defequi a_0,\quad
-    \ap{\epsilon(A)}\circ \mrd = \id_{\loopspace\null A}
+    \ap{\epsilon(A)}\circ \mrd = \id_{\loopspace\null A}.\qedhere
   \end{displaymath}
 %%
 %%  with respective distinguished point $a$ and
