@@ -21,8 +21,10 @@ style=alphabetic,maxbibnames=9,maxcitenames=9]
 % fundamental group notation uses this
 \usepackage{upgreek}
 
-
-
+\pdfadjustspacing=1
+\brokenpenalty=10000 %%% No hyphenation across page breaks
+\synctex=1
+\mathtoolsset{mathic}
 
 %%% only for writing. Remove in the final version.
 \usepackage{todonotes}
@@ -1410,7 +1412,7 @@ We are now ready to restate and prove \cref{thm:susp-is-monoid-iso}:
     By assumption we have $(n-2) \geq 0$, which means that an $(n-2)$-connected map is also $0$-connected.
 \end{proof}
 
-\subsection{The Connected Components of $\boldsymbol{\Sn n = \Sn n}$}
+\subsection{The Connected Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
 Having shown \cref{thm:susp-is-monoid-iso}, we are now able to determine the number of connected components of symmetries of $\Sn n$.
 Set-truncating a $0$-connected map gives an equivalences, and therefore:
@@ -1528,7 +1530,7 @@ We now see that there are two connected components of symmetries of spheres:
   Then \cref{lemma:invertible-truncated-Sn-pointed-weq} allows us to conclude.
 \end{proof}
 
-\subsection{Concrete Symmetries of $\boldsymbol{\Sn n}$}
+\subsection{Concrete Symmetries of \texorpdfstring{$\boldsymbol{\Sn n}$}{Sn}}
 
 %%% tikz and color:
 
@@ -1809,8 +1811,7 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 \end{proof}
 
 
-
-\subsection{The Structure of the Components of $\boldsymbol{(\Sn n = \Sn n)}$}
+\subsection{The Structure of the Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
 Having established that there are exactly two connected components of $(\Sn n = \Sn n)$, we want to examine the structure of each of these components.
 The first observation we make is simple:
@@ -1960,7 +1961,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   $\fgr (\Sp = \Sp) = \ZZ/2 \ZZ$
   \label{thm:S2-eq-S2-not-simply-connected}
 \end{theorem}
-\begin{proof}~
+\begin{proof}  (cf.~\cite{gwwhitehead})
 
   \todo[inline]{Incomplete.}
   This is a variation on the definition of Brunerie's number in \cite[Section
