@@ -922,38 +922,40 @@ $\tau(\eta_{\Sc}(z)) =
   \begin{displaymath}
     \begin{tikzcd}
       (\Sp \ptdto \Sp) \ar[r,"\loopspace\null"] \ar[dd,"\Phi_{\Sc,\Sp}"{swap}]
-      \drar[phantom,"\textcircled{\small 1}"{description, near start}] 
+      \drar[phantom,"\circled{1}"{description, near start}]
       & (\loopspace \null \Sp \ptdto \loopspace\null\Sp) \ar[r,"\loopspace\null"] \ar[ddl,"\blank\circ\eta_{\Sc}"] 
-      \dar["\textcircled{\small 2}", phantom]
+      \dar["\circled{2}", phantom]
       & (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"] 
       \ar[r,"\setTrunc\blank"] \dar["\blank\circ \loopspace\null(\eta_{\Sc})"swap] 
-      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\textcircled{\small 5}", phantom] &
+      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\circled{5}", phantom] &
       \\
-      & {} \drar["\textcircled{\small 3}"{near end}, phantom] 
+      & {} \drar["\circled{3}"{near end}, phantom]
       & (\loopspace\null\Sc \ptdto \loopspace 2 \Sp) \dar["\blank\circ\eta_{\bn 2}"swap] 
-      \drar["\textcircled{\small 4}", phantom] &
+      \drar["\circled{4}", phantom] &
       & \hgr 2(\Sp)
       \\
       (\Sc \ptdto \loopspace\null\Sp) \ar[rr,"\Phi_{\bn 2,\loopspace\null\Sp}"swap] \ar[urr,"\loopspace\null"] & 
       & (\bn 2 \ptdto \loopspace 2 \Sp) \rar["\ev_0"swap] & \loopspace 2 \Sp \urar["\settrunc\blank"swap] & 
     \end{tikzcd}
   \end{displaymath}
-  We will do that by proving that each of the small inner diagrams denoted
-  $\textcircled{\small 1},\dots,\textcircled{\small 5}$ commute, for elementary
-  reasons. Triangles $\textcircled{\small 1}$ and $\textcircled{\small 3}$
-  commute as instances of \cref{eq:triangle-identity-unit}. The commutativity
-  of square $\textcircled{\small 2}$ simply expresses the functoriality of
-  $\loopspace\null$. In order to prove that $\textcircled{\small 4}$ and
-  $\textcircled{\small 5}$ commute, we first need to define what is denoted
-  $\ell$: by definition, we set $\ell \defequi \loopspace\null
-  (\eta_\Sc)(\Sloop)$.  Then it is almost immediate that $\textcircled{\small
-  4}$ commutes because under the equivalence $\Sc = \susp {\bn 2}$, one has
-  $\Sloop = \eta_{\bn 2}(0)$.  Now the commutativity of $\textcircled{\small
-  5}$ will follow from the functoriality of $\setTrunc\blank$ once we have
-  shown $\settrunc \ell = \inv\zeta(1)$. By definition of $\zeta$, this is
-  equivalent to showing that $\loopspace\null(\tau) (\ell) = \Sloop$ in
-  $\loopspace\null \Sc$. However, we have seen in \cref{lem:eta-S1-section-tau}
-  that $\tau$ is a retraction of $\eta_{\Sc}$. Hence it follows that:
+  We will do that by proving that each of the small inner diagrams
+  denoted $\circled{1},\dots,\circled{5}$ commute, for elementary
+  reasons. Triangles $\circled{1}$ and $\circled{3}$ commute as
+  instances of \cref{eq:triangle-identity-unit}. The commutativity of
+  square $\circled{2}$ simply expresses the functoriality of
+  $\loopspace\null$. In order to prove that $\circled{4}$ and
+  $\circled{5}$ commute, we first need to define what is denoted
+  $\ell$: by definition, we set
+  $\ell \defequi \loopspace\null (\eta_\Sc)(\Sloop)$.  Then it is
+  almost immediate that $\circled{4}$ commutes because under the
+  equivalence $\Sc = \susp {\bn 2}$, one has
+  $\Sloop = \eta_{\bn 2}(0)$.  Now the commutativity of $\circled{5}$
+  will follow from the functoriality of $\setTrunc\blank$ once we have
+  shown $\settrunc \ell = \inv\zeta(1)$. By definition of $\zeta$,
+  this is equivalent to showing that
+  $\loopspace\null(\tau) (\ell) = \Sloop$ in $\loopspace\null
+  \Sc$. However, we have seen in \cref{lem:eta-S1-section-tau} that
+  $\tau$ is a retraction of $\eta_{\Sc}$. Hence it follows that:
   \begin{displaymath}
     \loopspace\null(\tau)(\ell) = \loopspace\null(\tau)(\loopspace\null(\eta_\Sc)(\Sloop)) = \Sloop.\qedhere
   \end{displaymath}
