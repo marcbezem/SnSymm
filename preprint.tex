@@ -1828,9 +1828,9 @@ The first observation we make is simple:
 The rest of this subsection is devoted to calculating the fundamental group of this type, which also allows us to see that the equivalence $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise for $n > 1$.
 
 \begin{lemma}
-  For any $n\geq 1$, there is a group ismorphism:
+  For any $n\geq 1$, there is a group isomorphism:
   \begin{displaymath}
-    \xi_n: \fgr(\Sn n \ptdto \Sn n) \weq \hgr {n+1} (\Sn n) 
+    \xi_n: \fgr(\Sn n \ptdto \Sn n, \id) \weq \hgr {n+1} (\Sn n)
   \end{displaymath}
   \label{lem:fgr-ptd-endomaps-Sn}
 \end{lemma}
@@ -1838,10 +1838,10 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   Recall the equivalence $\phi_{\Sn n}^n : (\Sn n \ptdto \Sn n) \to \loopspace
   {n} (\Sn n)$, defined just before \cref{lem:iterated-ap-Sigma}. Note that
   this is not a pointed equivalence. Indeed, $\phi_{\Sc}^1$ maps $(\id_\Sc,
-  \refl\base)$ to $\Sloop: \loopspace(\Sc)$ and from there, one can prove by
+  \refl\base)$ to $\Sloop: \loopspace\null(\Sc)$ and from there, one can prove by
   induction that $\phi_{\Sn n}^n$ maps $(\id_{\Sn n}, \refl N)$ to a point in
   $\loopspace n (\Sn n)$ which is mapped to $\pm 1:\ZZ$ by the set truncation
-  $\loopspace n (\Sn n) \to \hgr n (\Sn) \weq \ZZ$. However, the distinguished
+  $\loopspace n (\Sn n) \to \hgr n (\Sn n) \weq \ZZ$. However, the distinguished
   point of $\loopspace n (\Sn n)$ is the iterated $\refl{}$, which is sent to
   $0:\ZZ$ by this set truncation.
 
@@ -1862,6 +1862,22 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   n (\Sn n))}$.
 \end{proof}
 
+\begin{remark}
+  More generally, since $\Sn n \ptdto \Sn n$ is a wild group,
+  given any $\alpha,\beta : \Sn n \ptdto \Sn n$,
+  there is an equivalence between the corresponding components
+  \[
+    \conncomp{(\Sn n \ptdto \Sn n)}{\alpha} \weq
+    \conncomp{(\Sn n \ptdto \Sn n)}{\beta}.
+  \]
+  This is given by $\gamma \mapsto \gamma + \beta - \alpha$,
+  where we write the group operation additively.
+  This induces group isomorphisms
+  \[
+    \fgr(\Sn n \ptdto \Sn n, \alpha) \weq
+    \fgr(\Sn n \ptdto \Sn n, \beta).
+  \]
+\end{remark}
 %\begin{theorem}
 %    The fundamental group of the type of symmetries on $\Sn n$ is
 %    as follows.
