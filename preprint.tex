@@ -1812,6 +1812,83 @@ in \cite{doublesusp}. Here, we give the argument in the style of \cite{HoTT}:
 	Therefore, the two symmetries lie in different components, and any symmetry lies in one of the two components given by \cref{thm:higher-spheres-2}.
 \end{proof}
 
+\subsection{Interlude on Whitehead products}
+
+Before focusing on the components of $\Sn n = \Sn n$,
+we'll need a few general results on Whitehead products.
+
+We recall a few standard operations on types that can be constructed using pushouts. The \emph{pushout} of a span $A \stackrel f\leftarrow C \stackrel g\to B$ is the higher inductive type $D$ defined by
+\begin{itemize}
+\item two maps $\inl : A \to D$ and $\inr : B \to D$, and
+  a dependent function $\glue : \prod_{x:C} \inl(f(x)) = \inr(g(x))$
+\end{itemize}
+with the following induction rule:
+\begin{quote}
+  given a type family $T\from D \to \UU$, every
+  triple of elements
+  \begin{displaymath}
+    \ell\from \prod_{a\from A}T(\inl(a)), \quad
+    r\from \prod_{b\from B}T(\inr(b)), \quad
+    p\from \prod_{x\from C}\pathover {\ell(f(x))} T {\glue\,x} {r(g(x))}
+  \end{displaymath}
+  defines a dependent function
+  \begin{displaymath}
+    \ind(\ell,r,p)\from\prod_{x\from D} T(x)
+  \end{displaymath}
+  such that
+  \begin{gather*}
+    \ind(\ell,r,p)(\inl\,a) \jdeq \ell(a), \quad
+    \ind(\ell,r,p)(\inr\,b) \jdeq r(b),\\
+    \ap{\ind(\ell,r,p)}(\glue x) = p(x)\ \text{for all}\ x\from C.
+  \end{gather*}
+\end{quote}
+The rules for the pushout ensure that we have a commutative square
+\[
+  \begin{tikzcd}
+    C \ar[r,"g"]\ar[d,"f"'] & B \ar[d,"\inr"] \\
+    A \ar[r,"\inl"'] & D,
+  \end{tikzcd}
+\]
+and any other commutative square with the same span induces a unique
+map to $D$.  If the induced map is an equivalence, then we say the
+square is a \emph{pushout square}.
+
+Recall that the \emph{join} $A * B$ of two types $A$ and $B$
+is the pushout of the product projections:
+\[
+  \begin{tikzcd}
+    A \times B \ar[r,"\snd"]\ar[d,"\fst"'] & B \ar[d,"\inr"] \\
+    A \ar[r,"\inl"'] & A * B
+  \end{tikzcd}
+\]
+Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$
+is the pushout of the point inclusions:
+\[
+  \begin{tikzcd}
+    1 \ar[r,"\ast_B"]\ar[d,"\ast_A"'] & B \ar[d,"\inr"] \\
+    A \ar[r,"\inl"'] & A \vee B
+  \end{tikzcd}
+\]
+In this case, we have the \emph{wedge inclusion} $i : A \vee B \to A \times B$
+with $i(\inl a) \jdeq (a , \ast_B)$, $i(\inr b) \jdeq (\ast_A, b)$,
+and $\ap{i}(\glue\ast) = \refl{(\ast_A,\ast_B)}$.
+
+For the rest of this section we fix two pointed types $A$ and $B$.
+We repeat here the definition of the generalized Whitehead product
+from \cite[Sec.~3.3]{brunerie:thesis}.
+\begin{definition}
+  Given pointed types $A$ and $B$, there is
+  a map $W = W_{A,B} : A * B \to \susp A \vee \susp B$
+  making a pushout square with the wedge inclusion $i$:
+  \[
+    \begin{tikzcd}
+      A * B \ar[r,"W"]\ar[d] & \susp A \vee \susp B\ar[d,"i"] \\
+      1 \ar[r] & \susp A \times \susp B
+    \end{tikzcd}
+  \]
+\end{definition}
+We have $W(\inl a) \jdeq \inr N$, $W(\inr b) \jdeq \inl N$,
+and $\ap{W}(\glue(a,b)) = \ap{\inl}(\varphi_A(a)) \cdot \ap{\inr}(\varphi_B(b))$.
 
 \subsection{The Structure of the Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
@@ -1895,7 +1972,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 \begin{theorem} \label{thm:fund-grp-of-symmetries}
     For $n \geq 3$, the fundamental group of the type of symmetries on $\Sn n$ is the cyclic group of order $2$:
     \begin{equation}
-    \fgr(\Sn n = \Sn n) = \ZZ \slash 2\ZZ
+    \fgr(\Sn n = \Sn n, \id) = \ZZ \slash 2\ZZ
     \end{equation}
     as groups.
 \end{theorem}
@@ -1903,10 +1980,13 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 \begin{proof}%[Alternative proof]
   The following sequence is a fiber sequence by definition:
   \begin{displaymath}
-    (\Sn n \ptdto \Sn n) \stackrel \iota \to (\Sn n \to \Sn n) \stackrel {\ev_\ast}\to \Sn n
+    (\Sn n \ptdto \Sn n) \stackrel \iota \longrightarrow_\ast
+    (\Sn n \to \Sn n) \stackrel {\ev_\ast} \longrightarrow_\ast \Sn n
   \end{displaymath}
   where $\iota$ is the map forgetting the pointing path, and where $\ev_\ast$
-  is the evaluation at the point of $\Sn n$. By \cite[Theorem 8.4.6]{HoTT}, this
+  is the evaluation at the point of $\Sn n$.
+  Recall that we're using $\id$ as the base point in the function types here.
+  By \cite[Theorem 8.4.6]{HoTT}, this
   induces a long exact sequence of groups:
   \begin{displaymath}
     \dots \to \hgr{k+1} (\Sn n) 
@@ -1926,7 +2006,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   \end{displaymath}
   In particular for $n\geq 3$, $k\defequi 2$ enters the condition, and one gets:
   \begin{displaymath}
-    \fgr (\Sn n = \Sn n) \weq \fgr (\Sn n \to \Sn n) \weq \hgr {n+1} (\Sn n) \weq \ZZ \slash 2\ZZ
+    \fgr (\Sn n = \Sn n) \weq \fgr (\Sn n \to \Sn n) \weq \hgr {n+1} (\Sn n) \weq \ZZ \slash 2\ZZ\qedhere
   \end{displaymath}
 \end{proof}
 %%\begin{proof}
