@@ -63,13 +63,16 @@ style=alphabetic,maxbibnames=9,maxcitenames=9]
     /tikz/commutative diagrams/Rightarrow
   }%
 }%
-
 \tikzset{
 tikzshortarrow/.style={
     shorten >=0.2cm,
-    shorten <=0.2cm, 
+    shorten <=0.2cm,
     thick,
+  }
 }
+\tikzset{pushout/.style={%
+    commutative diagrams/.cd,dr,phantom,"\ulcorner", very near end
+  }%
 }
 \usetikzlibrary{arrows}
 
@@ -903,7 +906,7 @@ The function $\eta_{\Sc}$ is a section of $\tau$, that is, $\tau\circ\eta_{\Sc} 
 \end{lemma}
 \begin{proof} For all $z\in\Sc$ we can calculate:
 $\tau(\eta_{\Sc}(z)) = 
-\tau(\ap{\id_{\Sp}}(\inv{\mrd(\base)} \mrd(z)) = 
+\tau(\ap{\id_{\Sp}}(\inv{\mrd(\base)} \mrd(z))) =
 \ap{\hopf}(\inv{\mrd(\base)} \mrd(z))(\base) = 
 (\iota_{\base}^{-1} \circ \iota_z) (\base) =
 \id_{\Sc}^{-1}(\iota_z (\base)) = z$.
@@ -1845,7 +1848,7 @@ with the following induction rule:
 The rules for the pushout ensure that we have a commutative square
 \[
   \begin{tikzcd}
-    C \ar[r,"g"]\ar[d,"f"'] & B \ar[d,"\inr"] \\
+    C \ar[r,"g"]\ar[d,"f"']\ar[pushout] & B \ar[d,"\inr"] \\
     A \ar[r,"\inl"'] & D,
   \end{tikzcd}
 \]
@@ -1853,11 +1856,24 @@ and any other commutative square with the same span induces a unique
 map to $D$.  If the induced map is an equivalence, then we say the
 square is a \emph{pushout square}.
 
+The other higher inductive types we've used so far, the circle,
+suspensions, and truncations, can all be defined in terms of
+pushouts. For example, the suspension $\susp A$ is the pushout of the unique
+span $1 \leftarrow A \to 1$.
+
+Another instance of a pushout if the \emph{cofiber} of a map $f : A \to B$,
+$\cof(f)$:
+\[
+  \begin{tikzcd}
+    A \ar[r,"f"]\ar[d]\ar[pushout] & B \ar[d,"\inr"] \\
+    1 \ar[r,"\inl"'] & \cof(f)
+  \end{tikzcd}
+\]
 Recall that the \emph{join} $A * B$ of two types $A$ and $B$
 is the pushout of the product projections:
 \[
   \begin{tikzcd}
-    A \times B \ar[r,"\snd"]\ar[d,"\fst"'] & B \ar[d,"\inr"] \\
+    A \times B \ar[r,"\snd"]\ar[d,"\fst"']\ar[pushout] & B \ar[d,"\inr"] \\
     A \ar[r,"\inl"'] & A * B
   \end{tikzcd}
 \]
@@ -1865,7 +1881,7 @@ Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$
 is the pushout of the point inclusions:
 \[
   \begin{tikzcd}
-    1 \ar[r,"\ast_B"]\ar[d,"\ast_A"'] & B \ar[d,"\inr"] \\
+    1 \ar[r,"\ast_B"]\ar[d,"\ast_A"']\ar[pushout] & B \ar[d,"\inr"] \\
     A \ar[r,"\inl"'] & A \vee B
   \end{tikzcd}
 \]
@@ -1877,18 +1893,117 @@ For the rest of this section we fix two pointed types $A$ and $B$.
 We repeat here the definition of the generalized Whitehead product
 from \cite[Sec.~3.3]{brunerie:thesis}.
 \begin{definition}
-  Given pointed types $A$ and $B$, there is
-  a map $W = W_{A,B} : A * B \to \susp A \vee \susp B$
+  There is a map $W = W_{A,B} : A * B \to \susp A \vee \susp B$
   making a pushout square with the wedge inclusion $i$:
   \[
     \begin{tikzcd}
-      A * B \ar[r,"W"]\ar[d] & \susp A \vee \susp B\ar[d,"i"] \\
+      A * B \ar[r,"W"]\ar[d]\ar[pushout] & \susp A \vee \susp B\ar[d,"i"] \\
       1 \ar[r] & \susp A \times \susp B
     \end{tikzcd}
   \]
+  We have $W(\inl a) \jdeq \inr N$, $W(\inr b) \jdeq \inl N$,
+  and\footnote{Here we're using a different sign convention
+    than in \cite{brunerie:thesis}.}
+  \[
+    \ap{W}(\glue(a,b)) = \ap{\inl}(\sigma_A(a))^{-1}
+    \cdot (\glue\ast)^{-1} \cdot \ap{\inr}(\sigma_B(b)).
+  \]
 \end{definition}
-We have $W(\inl a) \jdeq \inr N$, $W(\inr b) \jdeq \inl N$,
-and $\ap{W}(\glue(a,b)) = \ap{\inl}(\varphi_A(a)) \cdot \ap{\inr}(\varphi_B(b))$.
+Recall that the \emph{smash product} $A \wedge B$ of pointed types $A$ and $B$
+is the cofiber of the wedge inclusion,
+\[
+  \begin{tikzcd}
+    A \vee B \ar[r,"i"]\ar[d]\ar[pushout] & A \times B \ar[d,"q"] \\
+    1 \ar[r,"*"'] & D,
+  \end{tikzcd}
+\]
+where we write $q : A \times B \to A \wedge B$ for the quotient map.
+\begin{lemma}
+  The map $\theta : A * B \to \susp(A \times B)$
+  defined by $\theta(\inl a) \jdeq N$,
+  $\theta(\inr b) \jdeq S$, and
+  $\ap\theta(\glue(a,b)) = \mrd(a,b)$,
+  induces an equivalence
+  $\susp q \circ \theta : A * B \to \susp(A \wedge B)$.
+\end{lemma}
+In terms of this, we can give an alternate definition of the Whitehead product map.
+\begin{definition}
+  Let $W' = W'_{A,B} : \susp(A \wedge B) \to \susp A \vee \susp B$
+  be induced from the commutator of the projections,
+  $[p_1,p_2] = p_1 + p_2 - p_1 - p_2 : \susp(A \times B) \to \susp A \vee \susp B$,
+  together with the nullhomotopy of the composition with the wedge inclusion,
+  $[p_1,p_2] \circ \susp i : \susp(A \vee B) \to \susp A \vee \susp B$.
+\end{definition}
+Here we're using the identification $\susp(A \wedge B) = \susp(\cof(i))
+= \cof(\susp i)$.
+In the case where $A \jdeq B \jdeq \Sn 0$, this reproduces the usual attaching map for the torus, $\Sc \to \Sc \vee \Sc$.
+Note that there's in general no projection maps from a smash product,
+$A \wedge B \to A$ or $A \wedge B \to B$.
+\begin{lemma}
+  There is an identification $W = W' \circ \susp q \circ \theta
+  : A * B \to \susp A \vee \susp B$.
+\end{lemma}
+\begin{proof}
+  By definition of $W'$ we have for $k \defequi W' \circ \susp q \circ \theta$
+  that $k(\inl a) \jdeq \inl N$, $k(\inr b) \jdeq \inr N$, and
+  \begin{gather*}
+    \ap{k}(\glue(a,b)) = \ap{\inr}(\sigma_B\,b)^{-1} \cdot \glue\ast
+    \cdot \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1} \\
+    \cdot \ap{\inr}(\sigma_B\,b) \cdot \glue\ast
+    \cdot \ap{\inl}(\sigma_A\,a).
+  \end{gather*}
+  We define a homotopy $h$ from $W$ to $k$
+  using induction on the join.
+  We set:
+  \begin{align*}
+    h(\inl a) &\defequi \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1}
+  : \inr N = \inl N \\
+    h(\inr b) &\defequi (\sigma_B\,b)^{-1} \cdot \glue\ast : \inl N = \inr N
+  \end{align*}
+  Finally, we must produce an element of
+  $\prod_{a\from A}\prod_{b\from B} \pathover {h(\inl a)} {\lambda z.W(z)=k(z)}
+  {\glue(a,b)} {h(\inr b)}$, which corresponds to filling the following square:
+  \[
+    \begin{tikzcd}
+      \inr N\ar[d,"{(\glue\ast)^{-1}}"']\ar[rr,"{\refl{}}"] &
+      &
+      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &
+      \inr N\ar[r,"{(\glue\ast)^{-1}}"] &
+      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"] &
+      \inl N\ar[rr,"{\refl{}}"] &
+      &
+      \inl N\ar[d,"{\glue\ast}"]
+      \\
+      \inl N\ar[d,"{\ap{\inl}(\sigma_A\,a)^{-1}}"'] &
+      &
+      &
+      &
+      &
+      &
+      &
+      \inr N\ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
+      \\
+      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
+      \inl N\ar[r,"{\glue\ast}"'] &
+      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
+      \inr N\ar[r,"{(\glue\ast)^{-1}}"'] &
+      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"']&
+      \inl N\ar[r,"{\glue\ast}"'] &
+      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
+      \inr N
+    \end{tikzcd}
+  \]
+  We fill this with standard path algebra operations.
+\end{proof}
+By composing pushout squares, we get the following diagram:
+\[
+  \begin{tikzcd}
+    \susp(A \wedge B) \ar[r,"W'"]\ar[d]\ar[pushout]
+    & \susp A \vee \susp B\ar[d,"i"]\ar[r]\ar[pushout] & 1\ar[d] \\
+    1 \ar[r] & \susp A \times \susp B\ar[r] & \susp^2(A \wedge B)
+  \end{tikzcd}
+\]
+
 
 \subsection{The Structure of the Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
