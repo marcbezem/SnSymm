@@ -74,6 +74,9 @@ tikzshortarrow/.style={
     commutative diagrams/.cd,dr,phantom,"\ulcorner", very near end
   }%
 }
+\tikzset{
+    rotninety/.style={anchor=south, rotate=90, inner sep=2pt}
+}
 \usetikzlibrary{arrows}
 
 
@@ -1861,14 +1864,14 @@ suspensions, and truncations, can all be defined in terms of
 pushouts. For example, the suspension $\susp A$ is the pushout of the unique
 span $1 \leftarrow A \to 1$.
 
-Another instance of a pushout if the \emph{cofiber} of a map $f : A \to B$,
-$\cof(f)$:
-\[
-  \begin{tikzcd}
-    A \ar[r,"f"]\ar[d]\ar[pushout] & B \ar[d,"\inr"] \\
-    1 \ar[r,"\inl"'] & \cof(f)
-  \end{tikzcd}
-\]
+%Another instance of a pushout if the \emph{cofiber} of a map $f : A \to B$,
+%$\cof(f)$:
+%\[
+%  \begin{tikzcd}
+%    A \ar[r,"f"]\ar[d]\ar[pushout] & B \ar[d,"\inr"] \\
+%    1 \ar[r,"\inl"'] & \cof(f)
+%  \end{tikzcd}
+%\]
 Recall that the \emph{join} $A * B$ of two types $A$ and $B$
 is the pushout of the product projections:
 \[
@@ -1902,108 +1905,323 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
     \end{tikzcd}
   \]
   We have $W(\inl a) \jdeq \inr N$, $W(\inr b) \jdeq \inl N$,
-  and\footnote{Here we're using a different sign convention
-    than in \cite{brunerie:thesis}.}
+  and
   \[
-    \ap{W}(\glue(a,b)) = \ap{\inl}(\sigma_A(a))^{-1}
+    \ap{W}(\glue(a,b)) = \ap{\inl}(\sigma_A(a))
     \cdot (\glue\ast)^{-1} \cdot \ap{\inr}(\sigma_B(b)).
   \]
 \end{definition}
-Recall that the \emph{smash product} $A \wedge B$ of pointed types $A$ and $B$
-is the cofiber of the wedge inclusion,
-\[
-  \begin{tikzcd}
-    A \vee B \ar[r,"i"]\ar[d]\ar[pushout] & A \times B \ar[d,"q"] \\
-    1 \ar[r,"*"'] & D,
-  \end{tikzcd}
-\]
-where we write $q : A \times B \to A \wedge B$ for the quotient map.
-\begin{lemma}
-  The map $\theta : A * B \to \susp(A \times B)$
-  defined by $\theta(\inl a) \jdeq N$,
-  $\theta(\inr b) \jdeq S$, and
-  $\ap\theta(\glue(a,b)) = \mrd(a,b)$,
-  induces an equivalence
-  $\susp q \circ \theta : A * B \to \susp(A \wedge B)$.
-\end{lemma}
-In terms of this, we can give an alternate definition of the Whitehead product map.
+%Recall that the \emph{smash product} $A \wedge B$ of pointed types $A$ and $B$
+%is the cofiber of the wedge inclusion,
+%\[
+%  \begin{tikzcd}
+%    A \vee B \ar[r,"i"]\ar[d]\ar[pushout] & A \times B \ar[d,"q"] \\
+%    1 \ar[r,"*"'] & D,
+%  \end{tikzcd}
+%\]
+%where we write $q : A \times B \to A \wedge B$ for the quotient map.
+%\begin{lemma}
+%  The map $\theta : A * B \to \susp(A \times B)$
+%  defined by $\theta(\inl a) \jdeq N$,
+%  $\theta(\inr b) \jdeq S$, and
+%  $\ap\theta(\glue(a,b)) = \mrd(a,b)$,
+%  induces an equivalence
+%  $\susp q \circ \theta : A * B \to \susp(A \wedge B)$.
+%\end{lemma}
+%In terms of this, we can give an alternate definition of the Whitehead product map.
+%\begin{definition}
+%  Let $W' = W'_{A,B} : \susp(A \wedge B) \to \susp A \vee \susp B$
+%  be induced from the commutator of the projections,
+%  $[p_1,p_2] = p_1 + p_2 - p_1 - p_2 : \susp(A \times B) \to \susp A \vee \susp B$,
+%  together with the nullhomotopy of the composition with the wedge inclusion,
+%  $[p_1,p_2] \circ \susp i : \susp(A \vee B) \to \susp A \vee \susp B$.
+%\end{definition}
+%Here we're using the identification $\susp(A \wedge B) = \susp(\cof(i))
+%= \cof(\susp i)$.
+%In the case where $A \jdeq B \jdeq \Sn 0$, this reproduces the usual attaching map for the torus, $\Sc \to \Sc \vee \Sc$.
+%Note that there's in general no projection maps from a smash product,
+%$A \wedge B \to A$ or $A \wedge B \to B$.
+%\begin{lemma}
+%  There is an identification $W = W' \circ \susp q \circ \theta
+%  : A * B \to \susp A \vee \susp B$.
+%\end{lemma}
+%\begin{proof}
+%  By definition of $W'$ we have for $k \defequi W' \circ \susp q \circ \theta$
+%  that $k(\inl a) \jdeq \inl N$, $k(\inr b) \jdeq \inr N$, and
+%  \begin{gather*}
+%    \ap{k}(\glue(a,b)) = \ap{\inr}(\sigma_B\,b)^{-1} \cdot \glue\ast
+%    \cdot \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1} \\
+%    \cdot \ap{\inr}(\sigma_B\,b) \cdot \glue\ast
+%    \cdot \ap{\inl}(\sigma_A\,a).
+%  \end{gather*}
+%  We define a homotopy $h$ from $W$ to $k$
+%  using induction on the join.
+%  We set:
+%  \begin{align*}
+%    h(\inl a) &\defequi \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1}
+%  : \inr N = \inl N \\
+%    h(\inr b) &\defequi (\sigma_B\,b)^{-1} \cdot \glue\ast : \inl N = \inr N
+%  \end{align*}
+%  Finally, we must produce an element of
+%  $\prod_{a\from A}\prod_{b\from B} \pathover {h(\inl a)} {\lambda z.W(z)=k(z)}
+%  {\glue(a,b)} {h(\inr b)}$, which corresponds to filling the following square:
+%  \[
+%    \begin{tikzcd}
+%      \inr N\ar[d,"{(\glue\ast)^{-1}}"']\ar[rr,"{\refl{}}"] &
+%      &
+%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &
+%      \inr N\ar[r,"{(\glue\ast)^{-1}}"] &
+%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"] &
+%      \inl N\ar[rr,"{\refl{}}"] &
+%      &
+%      \inl N\ar[d,"{\glue\ast}"]
+%      \\
+%      \inl N\ar[d,"{\ap{\inl}(\sigma_A\,a)^{-1}}"'] &
+%      &
+%      &
+%      &
+%      &
+%      &
+%      &
+%      \inr N\ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
+%      \\
+%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
+%      \inl N\ar[r,"{\glue\ast}"'] &
+%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
+%      \inr N\ar[r,"{(\glue\ast)^{-1}}"'] &
+%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"']&
+%      \inl N\ar[r,"{\glue\ast}"'] &
+%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
+%      \inr N
+%    \end{tikzcd}
+%  \]
+%  We fill this with standard path algebra operations.
+%\end{proof}
+% By composing pushout squares, we get the following diagram:
+% \[
+%   \begin{tikzcd}
+%     \susp(A \wedge B) \ar[r,"W'"]\ar[d]\ar[pushout]
+%     & \susp A \vee \susp B\ar[d,"i"]\ar[r]\ar[pushout] & 1\ar[d] \\
+%     1 \ar[r] & \susp A \times \susp B\ar[r] & \susp^2(A \wedge B)
+%   \end{tikzcd}
+% \]
+We now also fix another pointed type $X$.
 \begin{definition}
-  Let $W' = W'_{A,B} : \susp(A \wedge B) \to \susp A \vee \susp B$
-  be induced from the commutator of the projections,
-  $[p_1,p_2] = p_1 + p_2 - p_1 - p_2 : \susp(A \times B) \to \susp A \vee \susp B$,
-  together with the nullhomotopy of the composition with the wedge inclusion,
-  $[p_1,p_2] \circ \susp i : \susp(A \vee B) \to \susp A \vee \susp B$.
-\end{definition}
-Here we're using the identification $\susp(A \wedge B) = \susp(\cof(i))
-= \cof(\susp i)$.
-In the case where $A \jdeq B \jdeq \Sn 0$, this reproduces the usual attaching map for the torus, $\Sc \to \Sc \vee \Sc$.
-Note that there's in general no projection maps from a smash product,
-$A \wedge B \to A$ or $A \wedge B \to B$.
-\begin{lemma}
-  There is an identification $W = W' \circ \susp q \circ \theta
-  : A * B \to \susp A \vee \susp B$.
-\end{lemma}
-\begin{proof}
-  By definition of $W'$ we have for $k \defequi W' \circ \susp q \circ \theta$
-  that $k(\inl a) \jdeq \inl N$, $k(\inr b) \jdeq \inr N$, and
-  \begin{gather*}
-    \ap{k}(\glue(a,b)) = \ap{\inr}(\sigma_B\,b)^{-1} \cdot \glue\ast
-    \cdot \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1} \\
-    \cdot \ap{\inr}(\sigma_B\,b) \cdot \glue\ast
-    \cdot \ap{\inl}(\sigma_A\,a).
-  \end{gather*}
-  We define a homotopy $h$ from $W$ to $k$
-  using induction on the join.
-  We set:
-  \begin{align*}
-    h(\inl a) &\defequi \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1}
-  : \inr N = \inl N \\
-    h(\inr b) &\defequi (\sigma_B\,b)^{-1} \cdot \glue\ast : \inl N = \inr N
-  \end{align*}
-  Finally, we must produce an element of
-  $\prod_{a\from A}\prod_{b\from B} \pathover {h(\inl a)} {\lambda z.W(z)=k(z)}
-  {\glue(a,b)} {h(\inr b)}$, which corresponds to filling the following square:
+  The generalized Whitehead product of $\alpha : \susp A \ptdto X$
+  and $\beta : \susp B \ptdto X$
+  is the composition
   \[
-    \begin{tikzcd}
-      \inr N\ar[d,"{(\glue\ast)^{-1}}"']\ar[rr,"{\refl{}}"] &
-      &
-      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &
-      \inr N\ar[r,"{(\glue\ast)^{-1}}"] &
-      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"] &
-      \inl N\ar[rr,"{\refl{}}"] &
-      &
-      \inl N\ar[d,"{\glue\ast}"]
-      \\
-      \inl N\ar[d,"{\ap{\inl}(\sigma_A\,a)^{-1}}"'] &
-      &
-      &
-      &
-      &
-      &
-      &
-      \inr N\ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
-      \\
-      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
-      \inl N\ar[r,"{\glue\ast}"'] &
-      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
-      \inr N\ar[r,"{(\glue\ast)^{-1}}"'] &
-      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"']&
-      \inl N\ar[r,"{\glue\ast}"'] &
-      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
-      \inr N
-    \end{tikzcd}
+    [\alpha, \beta] \defeq (\alpha \vee \beta) \circ W_{A,B}
+    : A * B \ptdto X.
   \]
-  We fill this with standard path algebra operations.
-\end{proof}
-By composing pushout squares, we get the following diagram:
+\end{definition}
+If $A\jdeq \Sn p$ and $B\jdeq\Sn q$,
+then $A * B \weq \Sn{p+q+1}$,
+so we obtain a map
+\[
+  [\blank,\blank] : \hgr {p+1}(X) \times \hgr {q+1}(X) \to \hgr{p+q+1}(X),
+\]
+which is the usual Whitehead product on homotopy groups.
+
+Fix now a pointed map $\beta : \susp B \ptdto X$,
+and consider the evaluation fiber sequence
+\[
+  \conncomp{(\susp B \ptdto X)}{\beta}
+  \ptdto \conncomp{(\susp B \to X)}{\beta}
+  \ptdto X.
+\]
+(It's not necessary to take connected components.
+Doing so allows us to emphasize the base points of the various function types.)
+
+Let us consider the associated long exact sequence
 \[
   \begin{tikzcd}
-    \susp(A \wedge B) \ar[r,"W'"]\ar[d]\ar[pushout]
-    & \susp A \vee \susp B\ar[d,"i"]\ar[r]\ar[pushout] & 1\ar[d] \\
-    1 \ar[r] & \susp A \times \susp B\ar[r] & \susp^2(A \wedge B)
+    \cdots \ar[r]\ar[d,phantom, "\partial_\beta"{xshift=-8ex,yshift=1ex}] &
+    \pi_{n+1}(\susp B \to X, \beta) \ar[r] \ar[d, phantom, ""{coordinate, name=Z}] &
+    \pi_{n+1}(X) \ar[dll, rounded corners,
+    to path={ -- ([xshift=8.5ex]\tikztostart.center)
+      |- (Z) [near end]\tikztonodes
+      -| ([xshift=-13ex]\tikztotarget.center) -- (\tikztotarget)}] \\
+    \pi_n(\susp B \ptdto X,\beta) \ar[r] &
+    \pi_n(\susp B \to X,\beta) \ar[r] &
+    \cdots
   \end{tikzcd}
 \]
+We wish to express the connecting homomorphism $\partial_\beta$ at $n\ge0$
+in terms of the generalized Whitehead product.
+Before taking set truncations, we identify both in the following diagram,
+which we're going to show commutes:
+\begin{equation}\label{eq:Whitehead-special}
+  \begin{tikzcd}
+    (\susp{\Sn n} \ptdto X)
+    \ar[r,"\partial_\beta"] \ar[d,"\rho_\beta"'] &
+    (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}{\beta})
+    \ar[d,"\xi_\beta\circ\blank","\sim" rotninety] \\
+    (\Sn n * B \ptdto X) &
+    (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}{0}) \ar[l,"\sim"]
+  \end{tikzcd}
+\end{equation}
+Since nothing hinges on having a sphere $\Sn n$, let us generalize
+and construct a commuting diagram for any pointed type $A$:
+\begin{equation}\label{eq:Whitehead-general}
+  \begin{tikzcd}
+    (\susp A \ptdto X)
+    \ar[r,"\partial_\beta"] \ar[d,"\rho_\beta"'] &
+    (A \ptdto \conncomp{(\susp B \ptdto X)}{\beta})
+    \ar[d,"\xi_\beta\circ\blank","\sim" rotninety] \\
+    (A * B \ptdto X) &
+    (A \ptdto \conncomp{(\susp B \ptdto X)}{0}) \ar[l,"\sim"']\ar[l,"\varphi"]
+  \end{tikzcd}
+\end{equation}
+Here, $\rho_\beta \defequi [\blank,\beta]$ is the Whitehead product,
+explicitly:
+\newcommand*\miniast[2]{\mathbin{{}_{#1}^{#2}\ast}}
+\begin{align*}
+  \rho_\beta(\alpha)\,(\inl a) &\jdeq \beta(N) \\
+  \rho_\beta(\alpha)\,(\inr b) &\jdeq \alpha(N) \\
+  \ap{\rho_\beta(\alpha)} (\glue(a,b)) &= \ap{\alpha}(\sigma_A\,a) \cdot
+                                         \miniast\alpha\beta \cdot
+                                         \ap{\beta}(\sigma_B\,b)
+\end{align*}
+Here we write $\miniast\alpha\beta \defequi \alpha_\ast^{-1} \cdot \beta_\ast : \beta(N) = \alpha(N)$ for short.
+The map $\rho_\beta(\alpha)$ is pointed by $\beta_\ast : \beta(N) = \ast_X$.
 
+Since $\susp B$ is a wild cogroup, the type $\susp B \ptdto X$
+is a wild group, so all its components are equivalent.
+Concretely, we have an equivalence
+$\xi_\beta : \conncomp{(\susp B \ptdto X)}{\beta} \weq_\ast
+\conncomp{(\susp B \ptdto X)}{0}$ given by
+(we don't include the propositional parts, which are in any case not needed):
+\begin{align*}
+  \xi_\beta(\gamma)\, (N) &\jdeq \gamma(N) \\
+  \xi_\beta(\gamma)\, (S) &\jdeq \beta(N) \\
+  \ap{\xi_\beta(\gamma)}(\mrd b)
+                          &= \ap{\beta}(\sigma_B\,b)^{-1} \cdot
+                            \miniast\beta\gamma \cdot
+                            \ap{\gamma}(\sigma_B\,b)
+\end{align*}
+The bottom map in \eqref{eq:Whitehead-general} corresponds to the wild adjunction
+$(\blank \wedge B) \dashv (B \ptdto \blank)$ composed with the equivalences
+$A \wedge \susp B \simeq_\ast A \wedge (\Sc \wedge B) \simeq_\ast \susp(A \wedge B)
+\simeq_\ast A * B$, where $\wedge$ denotes the smash product.
+However, to keep things a bit simpler, let us define directly the resulting equivalence
+$\varphi : (A \ptdto \conncomp{(\susp B \ptdto X)}{0})
+\to (A * B \ptdto X)$:
+\begin{align*}
+  \varphi(h) (\inl a) &\jdeq h(a,N) \\
+  \varphi(h) (\inr b) &\jdeq \ast_X \\
+  \ap{\varphi(h)} (\glue(a,b)) &= (h\,a)_\ast \cdot \ap{h\,a}(\sigma_B\,b)
+\end{align*}
+The map $\varphi(h)$ is pointed by the path $(h\,\ast_A)_\ast : h(\ast_A,N) = \ast_X$.
+
+Before we can verify the commutativity of \eqref{eq:Whitehead-general},
+we also need to spell out the action of the boundary map $\partial_\beta$ itself:
+$\partial_\beta(\alpha)(a) \jdeq \beta$ as an unpointed function,
+but with a new pointedness path:
+\[
+  (\partial_\beta(\alpha)(a))_\ast \defequi
+  \loopspace\null\alpha(\sigma_A\,a) \cdot \beta_\ast
+  = \alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a) \cdot \miniast\alpha\beta
+  : \beta(N) = \ast_X
+\]
+The map $\partial_\beta(\alpha)$ is itself pointed by the evident pointed homotopy
+$\partial_\beta(\alpha)_\ast : \partial_\beta(\alpha)(\ast_A) \sim_\ast \beta$
+that obtains from the identification $\sigma_A\,\ast_A = \refl{N}$.
+
+With the preliminaries out of the way, let us show that $\rho_\beta$ can be identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank) \circ \partial_\beta$. Let $\alpha : \susp A \ptdto X$.
+Unfolding the above definitions, let us first examine
+$h \defequi \xi_\beta\circ (\partial_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\ptdto X)}{0}$:
+\begin{align*}
+  h(a,N) &\jdeq h(a,S) \jdeq \beta(N) \\
+  \ap{h\,a}(\mrd b)
+         &= \ap{\beta}(\sigma_B\,b)^{-1}
+           \cdot \beta_\ast^{-1}
+           \cdot (\partial_\beta(\alpha)(a))_\ast
+           \cdot \ap{\beta}(\sigma_B\,b) \\
+         &= \ap{\beta}(\sigma_B\,b)^{-1}
+           \cdot \miniast\beta\alpha
+           \cdot \ap{\alpha}(\sigma_A\,a)
+           \cdot \miniast\alpha\beta
+           \cdot \ap{\beta}(\sigma_B\,b) \\
+  (h\,a)_\ast
+         &= (\partial_\beta(\alpha)(a))_\ast \\
+         &= \alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a)
+           \cdot \miniast\alpha\beta
+\end{align*}
+Finally, we can insert this into the definition of $\varphi$
+to obtain the function $g \defequi \psi_\beta(\alpha) = \varphi(h) : A * B \ptdto X$:
+\begin{align*}
+  g(\inl a) &\jdeq h(a,N) = \beta(N) \\
+  g(\inr b) &\jdeq \ast_X \\
+  \ap{g}(\glue(a,b))
+            &= (h\,a)_\ast \cdot \ap{h\,a}(\sigma_B\,b) \\
+            &= (h\,a)_\ast \cdot \ap{h\,a}(\mrd{\ast_B}^{-1}\cdot\mrd b) \\
+            &= (h\,a)_\ast \cdot \ap{h\,a}(\mrd{\ast_B})^{-1}
+              \cdot \ap{h\,a}(\mrd b) \\
+            &= \bigl(\alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a)
+              \cdot \miniast\alpha\beta\bigr)
+              \cdot \bigl(\miniast\beta\alpha
+              \cdot \ap{\alpha}(\sigma_A\,a)
+              \cdot \miniast\alpha\beta\bigr)^{-1} \\
+            &\phantom{=} \cdot
+              \bigl(\ap{\beta}(\sigma_B\,b)^{-1}
+           \cdot \miniast\beta\alpha
+           \cdot \ap{\alpha}(\sigma_A\,a)
+           \cdot \miniast\alpha\beta
+           \cdot \ap{\beta}(\sigma_B\,b)\bigr) \\
+            &= \beta_\ast
+              \cdot \ap{\beta}(\sigma_B\,b)^{-1}
+              \cdot \miniast\beta\alpha
+              \cdot \ap{\alpha}(\sigma_A\,a)
+              \cdot \miniast\alpha\beta
+              \cdot \ap{\beta}(\sigma_B\,b)
+\end{align*}
+We also get $g_\ast = \beta_\ast$. It only remains to construct a pointed homotopy $H : \rho_\beta(\alpha) \sim_\ast g$. Again this is done by induction on an element of the join:
+\begin{align*}
+  H(\inl a) &\defequi \refl{} : \beta(N) = \beta(N) \\
+  H(\inr b) &\defequi \beta_\ast \cdot \ap{\beta}(\sigma_B\,b)^{-1} \cdot
+              \miniast\beta\alpha : \alpha(N) = \beta(N)
+\end{align*}
+Finally, we must produce an element of
+$\prod_{a\from A}\prod_{b\from B} \pathover
+{H(\inl a)} {\lambda z.\rho_\beta(\alpha)(z)=g(z)} {\glue(a,b)} {H(\inr b)}$,
+which corresponds to filling the following square:
+\[
+  \begin{tikzcd}
+    \beta(N)  \ar[ddd,"{\refl{}}"']\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &[10pt]
+    \beta(N)  \ar[r,"{\miniast\alpha\beta}"] &[-15pt]
+    \alpha(N) \ar[r,"{\ap{\inl}(\sigma_A\,a)}"] &[10pt]
+    \alpha(N) \ar[rrr,"{\refl{}}"] &[-15pt]
+    &[10pt]
+    &[-20pt]
+    \alpha(N) \ar[d,"{\miniast\beta\alpha}"]
+    \\[-5pt]
+    &
+    &
+    &
+    &
+    &
+    &
+    \beta(N)  \ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
+    \\[10pt]
+    &
+    &
+    &
+    &
+    &
+    &
+    \beta(N)  \ar[d,"{\beta_\ast}"]
+    \\[-10pt]
+    \beta(N)  \ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
+    \beta(N)  \ar[r,"{\miniast\alpha\beta}"'] &
+    \alpha(N) \ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
+    \alpha(N) \ar[r,"{\miniast\beta\alpha}"'] &
+    \beta(N)  \ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
+    \beta(N)  \ar[r,"{\beta_\ast}"'] &
+    \ast_X
+  \end{tikzcd}
+\]
+We fill this with standard path algebra operations.
 
 \subsection{The Structure of the Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
