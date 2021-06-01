@@ -2223,6 +2223,29 @@ which corresponds to filling the following square:
 \]
 We fill this with standard path algebra operations.
 
+Specializing again to the case where $B \jdeq \Sn q$ is a sphere,
+we have proved the following:
+\begin{theorem}\label{thm:sort-of-ehp}
+  For any $\beta : \Sn{q+1} \ptdto X$ representing an element of $\hgr{q+1}(X)$,
+  there is a long exact sequence
+  \[
+    \begin{tikzcd}
+      \cdots \ar[r]\ar[d,phantom, "\rho_\beta"{xshift=-8ex,yshift=1ex}] &
+      \pi_{n+1}(\Sn{q+1} \to X, \beta)
+      \ar[r] \ar[d, phantom, ""{coordinate, name=Z}] &
+      \pi_{n+1}(X) \ar[dll, rounded corners,
+      to path={ -- ([xshift=8.5ex]\tikztostart.center)
+        |- (Z) [near end]\tikztonodes
+        -| ([xshift=-13ex]\tikztotarget.center) -- (\tikztotarget)}] \\
+      \pi_{n+q+1}(X) \ar[r] &
+      \pi_n(\Sn{q+1} \to X,\beta) \ar[r] &
+      \cdots
+    \end{tikzcd}
+  \]
+  where the connecting homomorphisms are Whitehead products
+  $\rho_\beta = [\blank,\beta]$.
+\end{theorem}
+
 \subsection{The Structure of the Components of \texorpdfstring{$\boldsymbol{\Sn n = \Sn n}$}{Sn = Sn}}
 
 Having established that there are exactly two connected components of $(\Sn n = \Sn n)$, we want to examine the structure of each of these components.
