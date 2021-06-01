@@ -1864,14 +1864,6 @@ suspensions, and truncations, can all be defined in terms of
 pushouts. For example, the suspension $\susp A$ is the pushout of the unique
 span $1 \leftarrow A \to 1$.
 
-%Another instance of a pushout if the \emph{cofiber} of a map $f : A \to B$,
-%$\cof(f)$:
-%\[
-%  \begin{tikzcd}
-%    A \ar[r,"f"]\ar[d]\ar[pushout] & B \ar[d,"\inr"] \\
-%    1 \ar[r,"\inl"'] & \cof(f)
-%  \end{tikzcd}
-%\]
 Recall that the \emph{join} $A * B$ of two types $A$ and $B$
 is the pushout of the product projections:
 \[
@@ -1911,100 +1903,7 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
     \cdot (\glue\ast)^{-1} \cdot \ap{\inr}(\sigma_B(b)).
   \]
 \end{definition}
-%Recall that the \emph{smash product} $A \wedge B$ of pointed types $A$ and $B$
-%is the cofiber of the wedge inclusion,
-%\[
-%  \begin{tikzcd}
-%    A \vee B \ar[r,"i"]\ar[d]\ar[pushout] & A \times B \ar[d,"q"] \\
-%    1 \ar[r,"*"'] & D,
-%  \end{tikzcd}
-%\]
-%where we write $q : A \times B \to A \wedge B$ for the quotient map.
-%\begin{lemma}
-%  The map $\theta : A * B \to \susp(A \times B)$
-%  defined by $\theta(\inl a) \jdeq N$,
-%  $\theta(\inr b) \jdeq S$, and
-%  $\ap\theta(\glue(a,b)) = \mrd(a,b)$,
-%  induces an equivalence
-%  $\susp q \circ \theta : A * B \to \susp(A \wedge B)$.
-%\end{lemma}
-%In terms of this, we can give an alternate definition of the Whitehead product map.
-%\begin{definition}
-%  Let $W' = W'_{A,B} : \susp(A \wedge B) \to \susp A \vee \susp B$
-%  be induced from the commutator of the projections,
-%  $[p_1,p_2] = p_1 + p_2 - p_1 - p_2 : \susp(A \times B) \to \susp A \vee \susp B$,
-%  together with the nullhomotopy of the composition with the wedge inclusion,
-%  $[p_1,p_2] \circ \susp i : \susp(A \vee B) \to \susp A \vee \susp B$.
-%\end{definition}
-%Here we're using the identification $\susp(A \wedge B) = \susp(\cof(i))
-%= \cof(\susp i)$.
-%In the case where $A \jdeq B \jdeq \Sn 0$, this reproduces the usual attaching map for the torus, $\Sc \to \Sc \vee \Sc$.
-%Note that there's in general no projection maps from a smash product,
-%$A \wedge B \to A$ or $A \wedge B \to B$.
-%\begin{lemma}
-%  There is an identification $W = W' \circ \susp q \circ \theta
-%  : A * B \to \susp A \vee \susp B$.
-%\end{lemma}
-%\begin{proof}
-%  By definition of $W'$ we have for $k \defequi W' \circ \susp q \circ \theta$
-%  that $k(\inl a) \jdeq \inl N$, $k(\inr b) \jdeq \inr N$, and
-%  \begin{gather*}
-%    \ap{k}(\glue(a,b)) = \ap{\inr}(\sigma_B\,b)^{-1} \cdot \glue\ast
-%    \cdot \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1} \\
-%    \cdot \ap{\inr}(\sigma_B\,b) \cdot \glue\ast
-%    \cdot \ap{\inl}(\sigma_A\,a).
-%  \end{gather*}
-%  We define a homotopy $h$ from $W$ to $k$
-%  using induction on the join.
-%  We set:
-%  \begin{align*}
-%    h(\inl a) &\defequi \ap{\inl}(\sigma_A\,a)^{-1} \cdot (\glue\ast)^{-1}
-%  : \inr N = \inl N \\
-%    h(\inr b) &\defequi (\sigma_B\,b)^{-1} \cdot \glue\ast : \inl N = \inr N
-%  \end{align*}
-%  Finally, we must produce an element of
-%  $\prod_{a\from A}\prod_{b\from B} \pathover {h(\inl a)} {\lambda z.W(z)=k(z)}
-%  {\glue(a,b)} {h(\inr b)}$, which corresponds to filling the following square:
-%  \[
-%    \begin{tikzcd}
-%      \inr N\ar[d,"{(\glue\ast)^{-1}}"']\ar[rr,"{\refl{}}"] &
-%      &
-%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &
-%      \inr N\ar[r,"{(\glue\ast)^{-1}}"] &
-%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"] &
-%      \inl N\ar[rr,"{\refl{}}"] &
-%      &
-%      \inl N\ar[d,"{\glue\ast}"]
-%      \\
-%      \inl N\ar[d,"{\ap{\inl}(\sigma_A\,a)^{-1}}"'] &
-%      &
-%      &
-%      &
-%      &
-%      &
-%      &
-%      \inr N\ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
-%      \\
-%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
-%      \inl N\ar[r,"{\glue\ast}"'] &
-%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
-%      \inr N\ar[r,"{(\glue\ast)^{-1}}"'] &
-%      \inl N\ar[r,"{\ap{\inl}(\sigma_A\,a)^{-1}}"']&
-%      \inl N\ar[r,"{\glue\ast}"'] &
-%      \inr N\ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
-%      \inr N
-%    \end{tikzcd}
-%  \]
-%  We fill this with standard path algebra operations.
-%\end{proof}
-% By composing pushout squares, we get the following diagram:
-% \[
-%   \begin{tikzcd}
-%     \susp(A \wedge B) \ar[r,"W'"]\ar[d]\ar[pushout]
-%     & \susp A \vee \susp B\ar[d,"i"]\ar[r]\ar[pushout] & 1\ar[d] \\
-%     1 \ar[r] & \susp A \times \susp B\ar[r] & \susp^2(A \wedge B)
-%   \end{tikzcd}
-% \]
+
 We now also fix another pointed type $X$.
 \begin{definition}
   The generalized Whitehead product of $\alpha : \susp A \ptdto X$
