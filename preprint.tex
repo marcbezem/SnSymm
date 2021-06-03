@@ -2314,114 +2314,123 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   $\fgr (\Sp = \Sp) = \ZZ/2 \ZZ$
   \label{thm:S2-eq-S2-not-simply-connected}
 \end{theorem}
-\begin{proof}  (cf.~\cite{gwwhitehead})
+\begin{proof}
+  Note that this is following the proof (in classical topology) of \cite{gwwhitehead}.
 
-  \todo[inline]{Incomplete.}
-  This is a variation on the definition of Brunerie's number in \cite[Section
-  3.4]{brunerie:thesis}.
-  Consider the same long exact sequence as in the previous proof:
+  Let us consider the long exact sequence given by \cref{thm:sort-of-ehp} when
+  specialized to $X \jdeq \Sp$, $q=1$ and $\beta\jdeq (\id_\Sp, \refl N): \Sp
+  \ptdto \Sp$. The element in $\hgr 2(\Sp)$ represented by $(\id_\Sp, \refl N)$
+  is:
   \begin{equation}
-    \label{eq:LES-Sp}%
-    \dots \to \hgr 2 (\Sp) \overset \delta \to 
-    \fgr (\Sp \ptdto \Sp) \overset{\fgr(\iota)} \to 
-    \fgr (\Sp \to \Sp)
-    \to \fgr (\Sp) \to \dots
+    i_2 \defequi \settrunc{\loopspace{}(\sigma_\Sc)(\Sloop)}
+    \label{eq:def-i2-gen-pi2S2}
   \end{equation}
-  Recall we are interested in computing $\fgr(\Sp = \Sp)$, which is equivalent
-  to $\fgr(\Sp \to \Sp)$. As $\fgr (\Sp) = 0$, the map $\fgr(\iota) : \fgr (\Sp
-  \ptdto \Sp) \to \fgr (\Sp \to \Sp)$ is an epimorphism. It follows that
-  $\fgr(\Sp \to \Sp)$ is equivalent to the quotient $\fgr(\Sp \ptdto \Sp) /
-  \ker(\fgr(\iota))$. By exactness of \cref{eq:LES-Sp}, $\ker(\fgr(\iota))$ is
-  equivalent to $\im(\delta)$. Recall from \cref{lem:fgr-ptd-endomaps-Sn} that
-  there is a group isomorphism
+  Recall that this element $i_2$ generates the group $\hgr 2(\Sp)$, which is
+  isomorphic to $\ZZ$.
+  
+  We then have an exact sequence:
   \begin{equation}
-    \xi: \fgr(\Sp \ptdto \Sp) \weq \hgr 3 (\Sp)
-    \label{eq:fgr-ptd-endomap-Sp}
+    \hgr 2(\Sp) \overset{[\blank, i_2]} \to \hgr 3(\Sp) 
+    \overset\kappa \to \fgr (\Sp \to \Sp, \id_\Sp) \to \fgr (\Sp)
+    \label{eq:exact-seq-compute-pi1-S2eqS2}
   \end{equation}
-  The group $\hgr 2 (\Sp)$ is isomorphic to $\ZZ$ and therefore contains a
-  generator, namely $i_2 \defequi \settrunc{\phi_{\Sp}^2(\id_\Sp,\refl N)}$ (we
-  are following notation from \cite{brunerie:thesis}). 
-  As there is also a group isomorpism $\chi: \hgr 3 (\Sp) \weq \ZZ$, we have an
-  isomorphism:
+  We consider the type $\Sp \to \Sp$ as pointed at the elemnt $\id_\Sp$. Hence,
+  we write only $\fgr(\Sp \to \Sp)$ instead of $\fgr(\Sp\to\Sp,\id_\Sp)$.
+  %
+  The sphere $\Sp$ is simply connected, that is $\fgr(\Sp) = 0$. By exactness,
+  it means that:
   \begin{equation}
-    \fgr(\Sp \to \Sp) \simeq \ZZ/ n \ZZ
-    \label{eq:fgr-Sp-eq-Sp-n-undetermined}
+    \fgr(\Sp \to \Sp) \weq \im(\kappa) \weq \hgr 3(\Sp) / \ker(\kappa)
+    \weq \hgr 3 (\Sp) / \langle [i_2,i_2] \rangle
+    \label{eq:fgr-SpeqSp-as-quotient}
   \end{equation}
-  where $n = \lvert \chi(\xi(\delta(i_2))) \rvert$. 
 
-  Our goal is to prove that $n$ is Brunerie's number from
-  \cite{brunerie:thesis}. In other words, we want to prove that
-  $\xi(\delta(i_2))$ is, up to the sign, the element $[i_2,i_2] : \hgr 3
-  (\Sp)$, where $[\blank, \blank]: \hgr 2(\Sp) \times \hgr 2(\Sp) \to \hgr
-  3(\Sp)$ is the Whitehead product defined in \cite[Section
-  3.3]{brunerie:thesis}. One way to do so is to prove that the map $\xi\circ
-  \delta$ is equal to the map $[\blank, i_2]$.
+  Recall from \cref{lem:fgr-ptd-endomaps-Sn} that there is a group isomorphism
+  $\xi_2: \hgr 3 (\Sp) \weq Z$. Hence, one has:
+  \begin{equation}
+    \fgr (\Sp = \Sp) \weq \fgr (\Sp \to \Sp) \weq \ZZ / \xi_2([i_2,i_2])\ZZ
+    \label{eq:fgr-SpeqSp-ZovernZ}
+  \end{equation}
+  We now invoke the main result from \cite{brunerie:thesis} to conclude that
+  $\fgr (\Sp = \Sp) = \ZZ/2\ZZ$ (as groups).
 
-  By definition of the long exact sequence (cf.~\cite[Thm.~8.4.6]{HoTT}),
-  $\delta$ is $\setTrunc {\loopspace{} (\partial) \circ \inv{\blank}}$ where
-  $\partial : \loopspace{} (\Sp) \to (\Sp \ptdto \Sp)$ is defined by
-  \begin{equation}
-    p \mapsto (\id_{\Sp}, p)
-    \label{eq:def-delta}
-  \end{equation}
-  We can then compute $\xi(\delta(i_2))$ a little further:
-  \begin{align*}
-    \xi(\delta(i_2)) &= \fgr(\psi_2\circ\phi_\Sp^2)
-    \left(
-      \settrunc{\loopspace{}(\partial)(\inv{i_2})}
-    \right) 
-    \\
-    &= \settrunc{\loopspace{}(\psi_2 \circ \phi_\Sp^2 \circ \partial)(\inv{i_2})} 
-  \end{align*}
-  However, the map $\psi_2\circ \phi_\Sp^2\circ \partial$ maps an element
-  $p:\loopspace{}(\Sp)$ to the element $\inv{\phi_\Sp^2(\id_\Sp,\refl N)}\cdot
-  \phi_\Sp^2(\id_\Sp, p)$. Unfolding the definition of $\phi_\Sp^2$, we find: 
-  \begin{equation}
-    \psi_2 \circ \phi_\Sp^2\circ \partial (p) = 
-    \inv{\loopspace{}(\sigma_\Sc)(\Sloop)} \cdot 
-    \loopspace{} (p\cdot \sigma_\Sc(\blank) \cdot \inv p) (\Sloop)
-    \label{eq:unfolding-delooping-xi-delta}
-  \end{equation}
+%% --- OLD PARTIAL PROOF ---
+%% Maybe make a remark about the alternative presentation of Brunerie's number.
 %%
-%%  In particular, path induction shows that $\loopspace{}(\partial)$ maps a loop
-%%  $\alpha : \refl N = \refl N$ to the element of $(\id_\Sp,\refl N) = (\id_\Sp,
-%%  \refl N)$ whose components are:
+%%  \todo[inline]{Incomplete.}
+%%  This is a variation on the definition of Brunerie's number in \cite[Section
+%%  3.4]{brunerie:thesis}.
+%%  Consider the same long exact sequence as in the previous proof:
 %%  \begin{equation}
-%%    \refl{\id_\Sp} : \id_\Sp = \id_\Sp, \quad \alpha: \refl N = \refl N
+%%    \label{eq:LES-Sp}%
+%%    \dots \to \hgr 2 (\Sp) \overset \delta \to 
+%%    \fgr (\Sp \ptdto \Sp) \overset{\fgr(\iota)} \to 
+%%    \fgr (\Sp \to \Sp)
+%%    \to \fgr (\Sp) \to \dots
 %%  \end{equation}
-%%  where the second component is seen as the filler for the triangle:
+%%  Recall we are interested in computing $\fgr(\Sp = \Sp)$, which is equivalent
+%%  to $\fgr(\Sp \to \Sp)$. As $\fgr (\Sp) = 0$, the map $\fgr(\iota) : \fgr (\Sp
+%%  \ptdto \Sp) \to \fgr (\Sp \to \Sp)$ is an epimorphism. It follows that
+%%  $\fgr(\Sp \to \Sp)$ is equivalent to the quotient $\fgr(\Sp \ptdto \Sp) /
+%%  \ker(\fgr(\iota))$. By exactness of \cref{eq:LES-Sp}, $\ker(\fgr(\iota))$ is
+%%  equivalent to $\im(\delta)$. Recall from \cref{lem:fgr-ptd-endomaps-Sn} that
+%%  there is a group isomorphism
 %%  \begin{equation}
-%%    \begin{tikzcd}
-%%      & N \dlar["\refl N"swap] \drar["\refl N"] &
-%%      \\
-%%      \id_\Sp(N) \ar[rr,"\refl{\id_\Sp}(N)" swap] & & \id_\Sp(N)
-%%    \end{tikzcd}
+%%    \xi: \fgr(\Sp \ptdto \Sp) \weq \hgr 3 (\Sp)
+%%    \label{eq:fgr-ptd-endomap-Sp}
 %%  \end{equation}
-%%  Moreover, by the proof of \cref{lem:fgr-ptd-endomaps-Sn}, $\xi$ is the map
-%%  Recall that $\hgr 2 (\Sp) \simeq \ZZ$ and that this equivalence identifies $1:\ZZ$ with 
+%%  The group $\hgr 2 (\Sp)$ is isomorphic to $\ZZ$ and therefore contains a
+%%  generator, namely $i_2 \defequi \settrunc{\phi_{\Sp}^2(\id_\Sp,\refl N)}$ (we
+%%  are following notation from \cite{brunerie:thesis}). 
+%%  As there is also a group isomorpism $\chi: \hgr 3 (\Sp) \weq \ZZ$, we have an
+%%  isomorphism:
 %%  \begin{equation}
-%%    \upsilon \defequi \settrunc{\loopspace{}(\sigma_{\Sc})(\Sloop)} : \hgr 2(\Sp)
-%%    \label{eq:1-in-pi2-S2}
+%%    \fgr(\Sp \to \Sp) \simeq \ZZ/ n \ZZ
+%%    \label{eq:fgr-Sp-eq-Sp-n-undetermined}
 %%  \end{equation}
-%%  We can compute $d(\upsilon)$ further:
+%%  where $n = \lvert \chi(\xi(\delta(i_2))) \rvert$. 
+%%
+%%  Our goal is to prove that $n$ is Brunerie's number from
+%%  \cite{brunerie:thesis}. In other words, we want to prove that
+%%  $\xi(\delta(i_2))$ is, up to the sign, the element $[i_2,i_2] : \hgr 3
+%%  (\Sp)$, where $[\blank, \blank]: \hgr 2(\Sp) \times \hgr 2(\Sp) \to \hgr
+%%  3(\Sp)$ is the Whitehead product defined in \cite[Section
+%%  3.3]{brunerie:thesis}. One way to do so is to prove that the map $\xi\circ
+%%  \delta$ is equal to the map $[\blank, i_2]$.
+%%
+%%  By definition of the long exact sequence (cf.~\cite[Thm.~8.4.6]{HoTT}),
+%%  $\delta$ is $\setTrunc {\loopspace{} (\partial) \circ \inv{\blank}}$ where
+%%  $\partial : \loopspace{} (\Sp) \to (\Sp \ptdto \Sp)$ is defined by
 %%  \begin{equation}
-%%    d(\upsilon) = d(\settrunc{\loopspace{}(\sigma_\Sc)(\Sloop)})
-%%    = \settrunc{\loopspace{}(\partial\circ \sigma_\Sc)(\inv \Sloop)}
+%%    p \mapsto (\id_{\Sp}, p)
+%%    \label{eq:def-delta}
 %%  \end{equation}
-%%  We want to understand the subgroup generated by $d(\upsilon)$ in $\fgr (\Sp \ptdto\Sp)$
-%%  
-%%  To prove that $d$ is not surjective, one need only to prove that
-%%  $d(\upsilon)$ does not generates $\fgr(\Sp \ptdto \Sp)$. That is one only
-%%  needs to find an element $\alpha:(\id_\Sp,\refl N) = (\id_\Sp, \refl N)$ such
-%%  that for all $k:\ZZ$, $\settrunc\alpha \neq d(\upsilon)^k$. Notice that for
-%%  $k:\ZZ$, 
-%%  \begin{equation}
-%%    d(\upsilon)^k = d(\settrunc{\loopspace{}(\sigma_\Sc)(\Sloop^k)})
-%%    = \settrunc{\loopspace{}(\partial)\inv{ \left( 
-%%        \loopspace{}(\sigma_\Sc)(\Sloop^k)
-%%    \right)}}
-%%  \end{equation}
-%%  \todo[inline]{Find such an $\alpha$! I'm not sure how yet.}
+%%  Let us denote $\iota_2 \defequi \loopspace\null (\sigma_\Sc)(\Sloop)$, so
+%%  that $i_2 \jdeq \settrunc {\iota_2}$. We can then compute $\xi(\delta(i_2))$
+%%  a little further:
+%%  \begin{align*}
+%%    \xi(\delta(i_2)) &= \fgr(\psi_2\circ\phi_\Sp^2)
+%%    \left(
+%%      \settrunc{\loopspace{}(\partial)(\inv{\iota_2})}
+%%    \right) 
+%%    \\
+%%    &= \settrunc{\loopspace{}(\psi_2 \circ \phi_\Sp^2 \circ \partial)(\inv{\iota_2})} 
+%%  \end{align*}
+%%  However, the map $\psi_2\circ \phi_\Sp^2\circ \partial$ maps an element
+%%  $p:\loopspace{}(\Sp)$ to the element $\inv{\phi_\Sp^2(\id_\Sp,\refl N)}\cdot
+%%  \phi_\Sp^2(\id_\Sp, p)$. Unfolding the definition of $\phi_\Sp^2$, we find: 
+%%  \begin{align}
+%%    \psi_2 \circ \phi_\Sp^2\circ \partial (p) &= 
+%%    \inv{\iota_2} \cdot 
+%%    \loopspace{} 
+%%    \left(
+%%      \loopspace{} (\id_\Sp,p) \circ \sigma_\Sc(\blank)
+%%    \right) (\Sloop) \\
+%%    &= \inv{\iota_2} \cdot \loopspace 2(\id_\Sp, p)(\iota_2)
+%%    \label{eq:unfolding-delooping-xi-delta}
+%%  \end{align}
+%%
+%%
 \end{proof}
 
 This calculation also allows us to see that the result from
