@@ -2079,7 +2079,7 @@ We also get $g_\ast = \beta_\ast$. It only remains to construct a pointed homoto
 \begin{align*}
   H(\inl a) &\defequi \refl{} : \beta(N) = \beta(N) \\
   H(\inr b) &\defequi \beta_\ast \cdot \ap{\beta}(\sigma_B\,b)^{-1} \cdot
-              \miniast\beta\alpha : \alpha(N) = \beta(N)
+              \miniast\beta\alpha : \alpha(N) = \ast_X
 \end{align*}
 Finally, we must produce an element of
 $\prod_{a\from A}\prod_{b\from B} \pathover
@@ -2087,9 +2087,9 @@ $\prod_{a\from A}\prod_{b\from B} \pathover
 which corresponds to filling the following square:
 \[
   \begin{tikzcd}
-    \beta(N)  \ar[ddd,"{\refl{}}"']\ar[r,"{\ap{\inr}(\sigma_B\,b)}"] &[10pt]
+    \beta(N)  \ar[ddd,"{\refl{}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
     \beta(N)  \ar[r,"{\miniast\alpha\beta}"] &[-15pt]
-    \alpha(N) \ar[r,"{\ap{\inl}(\sigma_A\,a)}"] &[10pt]
+    \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"] &[10pt]
     \alpha(N) \ar[rrr,"{\refl{}}"] &[-15pt]
     &[10pt]
     &[-20pt]
@@ -2097,25 +2097,29 @@ which corresponds to filling the following square:
     \\[-5pt]
     &
     &
+%\beta(N) \ar[d,"{H(\inl a)}"'] \ar[rr,"{\ap{\rho_\beta(\alpha)}(\glue(a,b))}"]
     &
     &
+%\alpha(N) \ar[d,"{H(\inr b)}"]
     &
     &
-    \beta(N)  \ar[d,"{\ap{\inr}(\sigma_B\,b)^{-1}}"]
+    \beta(N)  \ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"]
     \\[10pt]
     &
     &
+%\beta(N) \ar[rr,"{\ap{g}(\glue(a,b))}"]
     &
     &
+%\ast_X
     &
     &
     \beta(N)  \ar[d,"{\beta_\ast}"]
     \\[-10pt]
-    \beta(N)  \ar[r,"{\ap{\inr}(\sigma_B\,b)}"'] &
+    \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)}"'] &
     \beta(N)  \ar[r,"{\miniast\alpha\beta}"'] &
-    \alpha(N) \ar[r,"{\ap{\inl}(\sigma_A\,a)}"'] &
+    \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"'] &
     \alpha(N) \ar[r,"{\miniast\beta\alpha}"'] &
-    \beta(N)  \ar[r,"{\ap{\inr}(\sigma_B\,b)^{-1}}"'] &
+    \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"'] &
     \beta(N)  \ar[r,"{\beta_\ast}"'] &
     \ast_X
   \end{tikzcd}
