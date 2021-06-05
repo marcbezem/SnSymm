@@ -2312,7 +2312,8 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
 %%\end{proof}
 
-\begin{theorem}
+\todo[inline]{\cref{thm:Sp-sym=Z/2} should be moved to another place/section. And, if \cref{thm:Sp-sym=Z/2} is moved to a place \emph{before} \cref{thm:fund-grp-of-symmetries}, then the statement text of \cref{thm:Sp-sym=Z/2} should not be shorter than the text of \cref{thm:fund-grp-of-symmetries}.}
+\begin{theorem} \label{thm:Sp-sym=Z/2}
   $\fgr (\Sp = \Sp) = \ZZ/2 \ZZ$
   \label{thm:S2-eq-S2-not-simply-connected}
 \end{theorem}
@@ -2435,32 +2436,46 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%
 \end{proof}
 
-This calculation also allows us to see that the result from
-\cref{sec:circle-case} does not generalise:
 
-\begin{proposition}\label{prop:not-generalising}
-    For $n \geq 3$, we have
-    \begin{equation}
-    (\Sn n = \Sn n) \not= (\Sn n + \Sn n)
-    \end{equation}
-\end{proposition}
-\begin{proof}
-    Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
-    Without loss of generality, we can assume that $\varphi(\refl{\Sn n})$ lies in the left summand, 
-    i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$. 
-    By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $N$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
-    As the fundamental groups on both sides do not coincide, $\varphi$ cannot be an equivalence.
-\end{proof}
-
-Let us finally summarise the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries,prop:not-generalising} together:
+Let us summarise the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries} together:
 
 \begin{theorem}
     For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\ZZ \slash 2\ZZ$.
-    The characterisation $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise.
+%    The characterisation $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise.
 \end{theorem}
+
+\todo[inline]{Nicolai: We probably want to organise this differently. Feel free to change in whatever way you like, I don't see how to present this nicely.}
+
+Finally, we note that the result from \cref{sec:circle-case} does not generalise:
+
+\begin{proposition}\label{prop:not-generalising}
+	For $n \geq 2$, we have
+	\begin{equation}
+	(\Sn n = \Sn n) \not= (\Sn n + \Sn n)
+	\end{equation}
+\end{proposition}
+\begin{proof}
+	Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
+	Without loss of generality, we can assume that $\varphi(\refl{\Sn n})$ lies in the left summand, 
+	i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$. 
+	By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $N$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
+	At the same time, the fundamental group of the left-hand side is non-trivial by
+	\cref{thm:Sp-sym=Z/2,thm:fund-grp-of-symmetries}.
+	Therefore, $\varphi$ cannot be an equivalence.
+\end{proof}
+
+
+
+
+
+
+
 
 \section{Appendix}
 \label{sec:appendix}
+
+
+
 
 
 
