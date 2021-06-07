@@ -1870,15 +1870,18 @@ is the pushout of the product projections:
     A \ar[r,"\inl"'] & A * B
   \end{tikzcd}
 \]
+If $A$ is pointed, then we take the base point of $A*B$ to be $\inl(*_A)$.
 Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$
-is the pushout of the point inclusions:
+is the pushout of the point inclusions
 \[
   \begin{tikzcd}
     1 \ar[r,"\ast_B"]\ar[d,"\ast_A"']\ar[pushout] & B \ar[d,"\inr"] \\
-    A \ar[r,"\inl"'] & A \vee B
+    A \ar[r,"\inl"'] & A \vee B,
   \end{tikzcd}
 \]
-In this case, we have the \emph{wedge inclusion} $i : A \vee B \to A \times B$
+again with $\inl(*_A)$ as the base point.
+In this case, we also have the \emph{wedge inclusion}
+$i : A \vee B \ptdto A \times B$
 with $i(\inl a) \jdeq (a , \ast_B)$, $i(\inr b) \jdeq (\ast_A, b)$,
 and $\ap{i}(\glue\ast) = \refl{(\ast_A,\ast_B)}$.
 
