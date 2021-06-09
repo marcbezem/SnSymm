@@ -1854,38 +1854,81 @@ The rules for the pushout ensure that we have a commutative square
   \end{tikzcd}
 \]
 and any other commutative square with the same span induces a unique
-map to $D$.  If the induced map is an equivalence, then we say the
+map from $D$.  If the induced map is an equivalence, then we say the
 square is a \emph{pushout square}.
 
-The other higher inductive types we've used so far, the circle,
-suspensions, and truncations, can all be defined in terms of
-pushouts. For example, the suspension $\susp A$ is the pushout of the unique
-span $1 \leftarrow A \to 1$.
+The other higher inductive types we've used so far, the circle, suspensions,
+and truncations, can all be defined in terms of pushouts. For example, the
+suspension $\susp A$ is equivalent to the pushout of the unique span $1
+\leftarrow A \to 1$.
 
-Recall that the \emph{join} $A * B$ of two types $A$ and $B$
-is the pushout of the product projections:
-\[
+Another instance of such a pushout construction is the \emph{join} $A * B$ of
+two types $A$ and $B$, defined as the pushout of the product projections:
+\begin{equation}
   \begin{tikzcd}
     A \times B \ar[r,"\snd"]\ar[d,"\fst"']\ar[pushout] & B \ar[d,"\inr"] \\
     A \ar[r,"\inl"'] & A * B
   \end{tikzcd}
-\]
-If $A$ is pointed, then we take the base point of $A*B$ to be $\inl(*_A)$.
-Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$
-is the pushout of the point inclusions
+\end{equation}
+Notice that if $A$ is pointed at a point $a_0$, then we make the join $A*B$ a
+type pointed at $\inl(a_0)$.
+\begin{lemma}
+  Let $A$ and $B$ be pointed types, repectively pointed at $a_0$ and  $b_0$.
+  Then, for every pointed type $X$, there is an equivalence of type:
+  \begin{equation}
+    (A \ptdto (B \ptdto \loopspace{}X)) \weq (A*B \ptdto X)
+    \label{eq:UMP-join-loopspace-version}
+  \end{equation}
+  \label{lemma:UMP-join-vs-loopspace}
+\end{lemma}
+\begin{proof}
+  Given $f: A \ptdto (B \ptdto \loopspace{}X)$, construct $\bar f:A*B \ptdto X$
+  by induction:
+  \begin{equation}
+    \begin{aligned}
+      \bar f(\inl(a)) &\defequi x_0 \quad \text{for }a:A \\
+      \bar f(\inr(b)) &\defequi x_0 \quad \text{for }b:B \\
+      \ap{\bar f}(\glue(a,b)) &= f(a)(b) \quad \text{for }a:A,b:B 
+    \end{aligned}
+    \label{eq:def-barf-from-join-UMP}
+  \end{equation}
+  The map $\bar f$ is trivially pointed.
+
+  This construction $f\mapsto \bar f$ admits an inverse. Indeed, as $A$ and $B$
+  are both pointed, for any $a:A$ and $b:B$, one has a an element $\ell_{a,b}$
+  of $\loopspace{}(A*B)$ constructed as the following composition of paths:
+  \begin{equation}
+    \begin{tikzcd}[column sep=large]
+      \inl(a_0) \rar["{\glue(a_0,b)}"] & \inr(b) \rar["\inv{\glue(a,b)}"] 
+      & \inl(a) \rar["{\glue(a,b_0)}"] & \inr(b_0) \rar["\inv{\glue(a_0,b_0)}"]
+      & \inl(a_0)
+    \end{tikzcd}
+    \label{eq:def-ellab-as-square}
+  \end{equation}
+  Then, to any $g:A*B \ptdto X$, one can map the function $\hat g: a \mapsto
+  (b\mapsto \loopspace\null(g)(\ell_{a,b}))$. The map $\hat g$ is a pointed, as
+  $\ell_{a_0,b_0} = \refl{\inl(a_0)}$ by path algebra. The construction $g
+  \mapsto \hat g$ provides an inverse to $f \mapsto \bar f$.
+\end{proof}
+
+Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$, with
+respective distinguished points $a_0$ and $b_0$, is the pushout of the
+point inclusions:
 \[
   \begin{tikzcd}
-    1 \ar[r,"\ast_B"]\ar[d,"\ast_A"']\ar[pushout] & B \ar[d,"\inr"] \\
-    A \ar[r,"\inl"'] & A \vee B,
+    1 \ar[r,"b_0"]\ar[d,"a_0"']\ar[pushout] & B \ar[d,"\inr"] \\
+    A \ar[r,"\inl"'] & A \vee B
   \end{tikzcd}
 \]
-again with $\inl(*_A)$ as the base point.
-In this case, we also have the \emph{wedge inclusion}
-$i : A \vee B \ptdto A \times B$
-with $i(\inl a) \jdeq (a , \ast_B)$, $i(\inr b) \jdeq (\ast_A, b)$,
-and $\ap{i}(\glue\ast) = \refl{(\ast_A,\ast_B)}$.
+This is a pointed type, with point $\inl(a_0)$.
+%
+There is a (pointed) map $i : A \vee B \to A \times B$, called \emph{wedge
+inclusion}, defined by $i(\inl a) \jdeq (a , b_0)$, $i(\inr b) \jdeq (a_0, b)$,
+and $\ap{i}(\glue\ast) = \refl{(a_0,b_0)}$ (where $\ast$ is the unique element
+of $1$).
 
-For the rest of this section we fix two pointed types $A$ and $B$.
+For the rest of this section we fix two pointed types $A$ and $B$, and we
+denote $a_0$ and $b_0$ the respective distinguished point of $A$ and $B$. 
 We repeat here the definition of the generalized Whitehead product
 from \cite[Sec.~3.3]{brunerie:thesis}.
 \begin{definition}
@@ -1903,10 +1946,13 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
     \ap{W}(\glue(a,b)) = \ap{\inl}(\sigma_A(a))
     \cdot (\glue\ast)^{-1} \cdot \ap{\inr}(\sigma_B(b)).
   \]
+  The map $W_{A,B}$ is pointed by the path $\inv{(\glue \ast)} : W(\inl(a_0))
+  \jdeq \inr(N) = \inl(N)$.
 \end{definition}
 
-We now also fix another pointed type $X$.
+We now also fix another pointed type $X$, with distinguished point $x_0$.
 \begin{definition}
+  \label{defn:gen-Whitehead-product}
   The generalized Whitehead product of $\alpha : \susp A \ptdto X$
   and $\beta : \susp B \ptdto X$
   is the composition
@@ -1916,15 +1962,29 @@ We now also fix another pointed type $X$.
   \]
 \end{definition}
 If $A\jdeq \Sn p$ and $B\jdeq\Sn q$,
-then $A * B \weq \Sn{p+q+1}$,
-so we obtain a map
+then $A * B \weq \Sn{p+q+1}$\todo{Reference},
+one can obtain a map
 \[
   [\blank,\blank] : \hgr {p+1}(X) \times \hgr {q+1}(X) \to \hgr{p+q+1}(X),
 \]
-which is the usual Whitehead product on homotopy groups.
+which is the usual Whitehead product on homotopy groups. Explicitely, given
+$a:\hgr {p+1} (X)$ and $b:\hgr {q+1} (X)$, one wants to define the element
+$[a,b]$ of the set $\hgr {p+q+1} (X)$. As we are targeting a set, one can as
+well assume $a \jdeq \settrunc{\alpha}$ and $b \jdeq \settrunc{\beta}$ for
+$\alpha:\loopspace{p+1}(X)$ and $\beta:\loopspace{q+1}(X)$. Using the
+equivalences
+\begin{equation}
+  \loopspace{p+1}(X) \weq \susp\Sn {p} \ptdto X, \quad
+  \loopspace{q+1}(X) \weq \susp\Sn {q} \ptdto X,
+  \label{eq:equiv-loopspace-map-from-sphere-whitehead}
+\end{equation}
+one gets pointed maps, abusively denoted again $\alpha: \susp \Sn {p} \ptdto
+X$ and $\beta: \susp \Sn {q} \ptdto X$. The element $[a,b] : \hgr{p+q+1}(X)$ is then
+defined as $\settrunc{[\alpha,\beta]}$ (where $[\alpha, \beta]$ is defined
+following \cref{defn:gen-Whitehead-product}).
 
-Fix now a pointed map $\beta : \susp B \ptdto X$,
-and consider the evaluation fiber sequence
+Fix now a pointed map $\beta : \susp B \ptdto X$, whose pointing path is
+$\beta_0:\beta(N) = x_0$, and consider the evaluation fiber sequence
 \[
   \conncomp{(\susp B \ptdto X)}{\beta}
   \ptdto \conncomp{(\susp B \to X)}{\beta}
@@ -1949,24 +2009,40 @@ Let us consider the associated long exact sequence
 \]
 We wish to express the connecting homomorphism $\partial_\beta$ at $n\ge0$
 in terms of the generalized Whitehead product.
-Before taking set truncations, we identify both in the following diagram,
-which we're going to show commutes:
+%
+\newcommand{\wunit}{1} %unit in wild group
+%
+In order to do so, we will reason on the map $\delta_\beta: (\susp \Sn n \ptdto X)
+\to (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}\beta)$ such that 
+\begin{equation}
+  \setTrunc{
+    \phi_{\conncomp{(\susp B \ptdto X)}\beta}^n \circ 
+    \delta_\beta \circ 
+    \inv{\left( \phi_X^{n+1} \right)}
+  }
+  = \partial_\beta
+  \label{eq:def-delta-beta}
+\end{equation}
+We are going to construct a commuting square of the following form:
 \begin{equation}\label{eq:Whitehead-special}
   \begin{tikzcd}
     (\susp{\Sn n} \ptdto X)
-    \ar[r,"\partial_\beta"] \ar[d,"\rho_\beta"'] &
+    \ar[r,"\delta_\beta"] \ar[d,"\rho_\beta"'] &
     (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}{\beta})
     \ar[d,"\xi_\beta\circ\blank","\sim" rotninety] \\
     (\Sn n * B \ptdto X) &
-    (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}{0}) \ar[l,"\sim"]
+    (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}{\wunit}) \ar[l,"\varphi"] \ar[l,"\sim"']
   \end{tikzcd}
 \end{equation}
+The maps $\xi_\beta$ and $\varphi$ are to be defined, and the element of $\susp
+B \ptdto X$ denoted $\wunit$ is the constant map at $x_0$.
+
 Since nothing hinges on having a sphere $\Sn n$, let us generalize
-and construct a commuting diagram for any pointed type $A$:
+and construct a commuting diagram for any pointed connected type $A$:
 \begin{equation}\label{eq:Whitehead-general}
   \begin{tikzcd}
     (\susp A \ptdto X)
-    \ar[r,"\partial_\beta"] \ar[d,"\rho_\beta"'] &
+    \ar[r,"\delta_\beta"] \ar[d,"\rho_\beta"'] &
     (A \ptdto \conncomp{(\susp B \ptdto X)}{\beta})
     \ar[d,"\xi_\beta\circ\blank","\sim" rotninety] \\
     (A * B \ptdto X) &
@@ -1975,7 +2051,7 @@ and construct a commuting diagram for any pointed type $A$:
 \end{equation}
 Here, $\rho_\beta \defequi [\blank,\beta]$ is the Whitehead product,
 explicitly:
-\newcommand*\miniast[2]{\mathbin{{}_{#1}^{#2}\ast}}
+\newcommand*\miniast[2]{\nu_{#1,#2}}
 \begin{align*}
   \rho_\beta(\alpha)\,(\inl a) &\jdeq \beta(N) \\
   \rho_\beta(\alpha)\,(\inr b) &\jdeq \alpha(N) \\
@@ -1983,60 +2059,99 @@ explicitly:
                                          \miniast\alpha\beta \cdot
                                          \ap{\beta}(\sigma_B\,b)
 \end{align*}
-Here we write $\miniast\alpha\beta \defequi \alpha_\ast^{-1} \cdot \beta_\ast : \beta(N) = \alpha(N)$ for short.
-The map $\rho_\beta(\alpha)$ is pointed by $\beta_\ast : \beta(N) = \ast_X$.
+Here we write $\miniast\alpha\beta \defequi \alpha_0^{-1} \cdot \beta_0 :
+\beta(N) = \alpha(N)$ for short, where $\alpha_0:\alpha(N) = x_0$ is the path
+pointing $\alpha$.
+The map $\rho_\beta(\alpha)$ is pointed by the path $\beta_0 :
+\rho_\beta(\alpha) (\inl a) \jdeq \beta(N) = x_0$.
 
-Since $\susp B$ is a wild cogroup, the type $\susp B \ptdto X$
-is a wild group, so all its components are equivalent.
-Concretely, we have an equivalence
-$\xi_\beta : \conncomp{(\susp B \ptdto X)}{\beta} \weq_\ast
-\conncomp{(\susp B \ptdto X)}{0}$ given by
-(we don't include the propositional parts, which are in any case not needed):
-\begin{align*}
-  \xi_\beta(\gamma)\, (N) &\jdeq \gamma(N) \\
-  \xi_\beta(\gamma)\, (S) &\jdeq \beta(N) \\
+Let us now describe $\xi_\beta$. Since $\susp B \ptdto X$ is equivalent to $B \ptdto \loopspace\null X$, and because $\loopspace\null X$ is a wild group, so is $\susp B \ptdto X$. Its unit is the map $\wunit$ already described. The multiplication of two elements $\gamma$ and $\gamma'$ is defined by induction:
+\begin{equation}
+  \begin{aligned}
+    \gamma \times \gamma' (N) &\defequi \gamma(N) \\
+    \gamma \times \gamma' (S) &\defequi \gamma'(S) \\
+    \ap{\gamma \times \gamma'} (\mrd (b) ) &= 
+    \ap{\gamma'}(\mrd(b)) \cdot \miniast{\gamma'}{\gamma} \cdot \ap\gamma(\sigma_B(b))
+  \end{aligned}
+  \label{eq:wild-group-from-susp-product}
+\end{equation}
+The inverse of an element $\gamma$ is given by $\gamma \circ (-\id_{\susp B})$
+(where $-\id_{\susp B}$ is pointed by $\inv{\mrd(b_0)}$).  Then, there is an
+equivalence $(\susp B \ptdto X) \weq (\susp B \ptdto X)$ that maps $\gamma$ to
+$\gamma \times \inv \beta$. This equivalence sends the connected component at
+$\beta$ to the connected component at $\wunit$, hence providing the pointed
+equivalence $\xi_\beta$. Explicitly:
+\begin{align}
+  \xi_\beta(\gamma)(N) &\jdeq \gamma(N) \\
+  \xi_\beta(\gamma)(S) &\jdeq \beta(N) \\
   \ap{\xi_\beta(\gamma)}(\mrd b)
                           &= \ap{\beta}(\sigma_B\,b)^{-1} \cdot
                             \miniast\beta\gamma \cdot
                             \ap{\gamma}(\sigma_B\,b)
-\end{align*}
-The bottom map in \eqref{eq:Whitehead-general} corresponds to the wild adjunction
-$(\blank \wedge B) \dashv (B \ptdto \blank)$ composed with the equivalences
-$A \wedge \susp B \simeq_\ast A \wedge (\Sc \wedge B) \simeq_\ast \susp(A \wedge B)
-\simeq_\ast A * B$, where $\wedge$ denotes the smash product.
-However, to keep things a bit simpler, let us define directly the resulting equivalence
-$\varphi : (A \ptdto \conncomp{(\susp B \ptdto X)}{0})
-\to (A * B \ptdto X)$:
-\begin{align*}
-  \varphi(h) (\inl a) &\jdeq h(a,N) \\
-  \varphi(h) (\inr b) &\jdeq \ast_X \\
-  \ap{\varphi(h)} (\glue(a,b)) &= (h\,a)_\ast \cdot \ap{h\,a}(\sigma_B\,b)
-\end{align*}
-The map $\varphi(h)$ is pointed by the path $(h\,\ast_A)_\ast : h(\ast_A,N) = \ast_X$.
+\end{align}
+
+Let us now define $\varphi$ from diagram \eqref{eq:Whitehead-general}. Since
+$A$ is connected, hence the inclusion of $A \ptdto \conncomp{(\susp B \ptdto
+X)}{\wunit}$ in $A \ptdto (\susp B \ptdto X)$ is an equivalence. Now, use the
+equivalence between $\susp B \ptdto X$ and $B \to \loopspace\null X$ before
+simply applying \cref{lemma:UMP-join-vs-loopspace}. Then the
+composition of equivalences:
+\begin{equation}
+  \begin{tikzcd}[column sep=large]
+    (A \ptdto \conncomp{(\susp B \ptdto X)}{\wunit}) \rar[hookrightarrow]
+    & (A \ptdto (\susp B \ptdto X)) \dlar[ 
+      rounded corners,
+      to path={
+        (\tikztostart.east) -| 
+        ([xshift=1em, yshift=-2em]\tikztostart.east) -|
+        node[near start, fill=white] {\footnotesize$\Phi_{B,X}\circ \blank$}
+        ([xshift=-1em]\tikztotarget.west) -- 
+        (\tikztotarget.west)
+      }
+    ]\\
+    (A \ptdto (B \ptdto \loopspace{}X)) \rar["f \mapsto \bar f"']
+    & (A*B \ptdto X)
+  \end{tikzcd}
+  \label{eq:def-varphi-no-smash}
+\end{equation}
+%%corresponds to the wild adjunction
+%%$(\blank \wedge B) \dashv (B \ptdto \blank)$ composed with the equivalences
+%%$A \wedge \susp B \simeq_\ast A \wedge (\Sc \wedge B) \simeq_\ast \susp(A \wedge B)
+%%\simeq_\ast A * B$, where $\wedge$ denotes the smash product.
+%%However, to keep things a bit simpler, let us define directly the resulting equivalence
+%%$\varphi : (A \ptdto \conncomp{(\susp B \ptdto X)}{0})
+%%\to (A * B \ptdto X)$:
+can be identified with the function $\varphi$ defined by induction as follows:
+\begin{align}
+\varphi(h) (\inl a) &\jdeq h(a)(N) \\
+  \varphi(h) (\inr b) &\jdeq x_0 \\
+  \ap{\varphi(h)} (\glue(a,b)) &= (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b))
+\end{align}
+The map $\varphi(h)$ is pointed by the path $(h(a_0))_0 : h(a_0)(N) = x_0$.
 
 Before we can verify the commutativity of \eqref{eq:Whitehead-general},
-we also need to spell out the action of the boundary map $\partial_\beta$ itself:
-$\partial_\beta(\alpha)(a) \jdeq \beta$ as an unpointed function,
+we also need to spell out the action of the boundary map $\delta_\beta$ itself:
+$\delta_\beta(\alpha)(a) \jdeq \beta$ as an unpointed function,
 but with a new pointedness path:
 \[
-  (\partial_\beta(\alpha)(a))_\ast \defequi
-  \loopspace\null\alpha(\sigma_A\,a) \cdot \beta_\ast
-  = \alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a) \cdot \miniast\alpha\beta
+  (\delta_\beta(\alpha)(a))_0 \defequi
+  (\loopspace\null\alpha\circ\sigma_A)(a) \cdot \beta_0
+  = \alpha_0 \cdot \ap{\alpha}(\sigma_A(a)) \cdot \miniast\alpha\beta
   : \beta(N) = \ast_X
 \]
-The map $\partial_\beta(\alpha)$ is itself pointed by the evident pointed homotopy
-$\partial_\beta(\alpha)_\ast : \partial_\beta(\alpha)(\ast_A) \sim_\ast \beta$
+The map $\delta_\beta(\alpha)$ is itself pointed by the evident pointed homotopy
+$\delta_\beta(\alpha)_\ast : \delta_\beta(\alpha)(\ast_A) \sim_\ast \beta$
 that obtains from the identification $\sigma_A\,\ast_A = \refl{N}$.
 
-With the preliminaries out of the way, let us show that $\rho_\beta$ can be identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank) \circ \partial_\beta$. Let $\alpha : \susp A \ptdto X$.
+With the preliminaries out of the way, let us show that $\rho_\beta$ can be identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank) \circ \delta_\beta$. Let $\alpha : \susp A \ptdto X$.
 Unfolding the above definitions, let us first examine
-$h \defequi \xi_\beta\circ (\partial_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\ptdto X)}{0}$:
+$h \defequi \xi_\beta\circ (\delta_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\ptdto X)}{0}$:
 \begin{align*}
   h(a,N) &\jdeq h(a,S) \jdeq \beta(N) \\
   \ap{h\,a}(\mrd b)
          &= \ap{\beta}(\sigma_B\,b)^{-1}
            \cdot \beta_\ast^{-1}
-           \cdot (\partial_\beta(\alpha)(a))_\ast
+           \cdot (\delta_\beta(\alpha)(a))_\ast
            \cdot \ap{\beta}(\sigma_B\,b) \\
          &= \ap{\beta}(\sigma_B\,b)^{-1}
            \cdot \miniast\beta\alpha
@@ -2044,7 +2159,7 @@ $h \defequi \xi_\beta\circ (\partial_\beta(\alpha)) : A \ptdto \conncomp{(\susp 
            \cdot \miniast\alpha\beta
            \cdot \ap{\beta}(\sigma_B\,b) \\
   (h\,a)_\ast
-         &= (\partial_\beta(\alpha)(a))_\ast \\
+         &= (\delta_\beta(\alpha)(a))_\ast \\
          &= \alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a)
            \cdot \miniast\alpha\beta
 \end{align*}
