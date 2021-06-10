@@ -2075,6 +2075,8 @@ Let us now describe $\xi_\beta$. Since $\susp B \ptdto X$ is equivalent to $B \p
   \end{aligned}
   \label{eq:wild-group-from-susp-product}
 \end{equation}
+The map $\gamma \times \gamma'$ is pointed by the path $\gamma_0: \gamma(N) =
+x_0$ pointing $\gamma$ itself.
 The inverse of an element $\gamma$ is given by $\gamma \circ (-\id_{\susp B})$
 (where $-\id_{\susp B}$ is pointed by $\inv{\mrd(b_0)}$).  Then, there is an
 equivalence $(\susp B \ptdto X) \weq (\susp B \ptdto X)$ that maps $\gamma$ to
@@ -2089,6 +2091,8 @@ equivalence $\xi_\beta$. Explicitly:
                             \miniast\beta\gamma \cdot
                             \ap{\gamma}(\sigma_B\,b)
 \end{align}
+Notice that $\xi_\beta(\gamma)$ is pointed by the path $\gamma_0$ that points
+$\gamma$.
 
 Let us now define $\varphi$ from diagram \eqref{eq:Whitehead-general}. Since
 $A$ is connected, hence the inclusion of $A \ptdto \conncomp{(\susp B \ptdto
@@ -2133,47 +2137,53 @@ Before we can verify the commutativity of \eqref{eq:Whitehead-general},
 we also need to spell out the action of the boundary map $\delta_\beta$ itself:
 $\delta_\beta(\alpha)(a) \jdeq \beta$ as an unpointed function,
 but with a new pointedness path:
-\[
+\begin{equation}
   (\delta_\beta(\alpha)(a))_0 \defequi
-  (\loopspace\null\alpha\circ\sigma_A)(a) \cdot \beta_0
+  (\loopspace\null(\alpha)\circ\sigma_A)(a) \cdot \beta_0
   = \alpha_0 \cdot \ap{\alpha}(\sigma_A(a)) \cdot \miniast\alpha\beta
-  : \beta(N) = \ast_X
-\]
-The map $\delta_\beta(\alpha)$ is itself pointed by the evident pointed homotopy
-$\delta_\beta(\alpha)_\ast : \delta_\beta(\alpha)(\ast_A) \sim_\ast \beta$
-that obtains from the identification $\sigma_A\,\ast_A = \refl{N}$.
+  : \beta(N) = x_0
+\end{equation}
+The map $\delta_\beta(\alpha)$ is itself pointed: the element
+$\delta_\beta(\alpha)(a_0)$ is the map $\beta$ pointed by the path
+$\alpha_0\cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha \beta$; using
+that the path $\sigma_A(a_0) = \refl N$ given by path algebra, one finds a path
+$(\delta_\beta(\alpha)(a_0))_0 = \beta_0$, providing a element of
+$\delta_\beta(\alpha)(a_0) = \beta$ as pointed functions.
 
-With the preliminaries out of the way, let us show that $\rho_\beta$ can be identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank) \circ \delta_\beta$. Let $\alpha : \susp A \ptdto X$.
+With the preliminaries out of the way, let us show that $\rho_\beta$ can be
+identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank)
+\circ \delta_\beta$. Let $\alpha : \susp A \ptdto X$.
+%
 Unfolding the above definitions, let us first examine
 $h \defequi \xi_\beta\circ (\delta_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\ptdto X)}{0}$:
 \begin{align*}
-  h(a,N) &\jdeq h(a,S) \jdeq \beta(N) \\
-  \ap{h\,a}(\mrd b)
-         &= \ap{\beta}(\sigma_B\,b)^{-1}
-           \cdot \beta_\ast^{-1}
-           \cdot (\delta_\beta(\alpha)(a))_\ast
-           \cdot \ap{\beta}(\sigma_B\,b) \\
-         &= \ap{\beta}(\sigma_B\,b)^{-1}
-           \cdot \miniast\beta\alpha
-           \cdot \ap{\alpha}(\sigma_A\,a)
-           \cdot \miniast\alpha\beta
-           \cdot \ap{\beta}(\sigma_B\,b) \\
-  (h\,a)_\ast
-         &= (\delta_\beta(\alpha)(a))_\ast \\
-         &= \alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a)
+  h(a)(N) &\jdeq h(a)(S) \jdeq \beta(N) \\
+  \ap{h(a)}(\mrd(b))
+  &= \ap{\beta}(\sigma_B(b))^{-1}
+     \cdot \beta_0^{-1}
+     \cdot (\delta_\beta(\alpha)(a))_0
+     \cdot \ap{\beta}(\sigma_B(b)) \\
+   &= \ap{\beta}(\sigma_B(b))^{-1}
+     \cdot \miniast\beta\alpha
+     \cdot \ap{\alpha}(\sigma_A(a))
+     \cdot \miniast\alpha\beta
+     \cdot \ap{\beta}(\sigma_B(b)) \\
+  (h(a))_0
+  &= (\delta_\beta(\alpha)(a))_0 \\
+  &= \alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
            \cdot \miniast\alpha\beta
 \end{align*}
 Finally, we can insert this into the definition of $\varphi$
 to obtain the function $g \defequi \psi_\beta(\alpha) = \varphi(h) : A * B \ptdto X$:
 \begin{align*}
-  g(\inl a) &\jdeq h(a,N) = \beta(N) \\
-  g(\inr b) &\jdeq \ast_X \\
+g(\inl a) &\jdeq h(a)(N) = \beta(N) \\
+  g(\inr b) &\jdeq x_0 \\
   \ap{g}(\glue(a,b))
-            &= (h\,a)_\ast \cdot \ap{h\,a}(\sigma_B\,b) \\
-            &= (h\,a)_\ast \cdot \ap{h\,a}(\mrd{\ast_B}^{-1}\cdot\mrd b) \\
-            &= (h\,a)_\ast \cdot \ap{h\,a}(\mrd{\ast_B})^{-1}
-              \cdot \ap{h\,a}(\mrd b) \\
-            &= \bigl(\alpha_\ast \cdot \ap{\alpha}(\sigma_A\,a)
+  &= (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b)) \\
+  &= (h(a))_0 \cdot \ap{h(a)}(\inv{\mrd(b_0)} \cdot\mrd b) \\
+  &= (h(a))_0 \cdot \inv{\ap{h(a)}(\mrd{\ast_B})}
+    \cdot \ap{h(a)}(\mrd (b)) \\
+    &= \bigl(\alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
               \cdot \miniast\alpha\beta\bigr)
               \cdot \bigl(\miniast\beta\alpha
               \cdot \ap{\alpha}(\sigma_A\,a)
@@ -2184,29 +2194,37 @@ to obtain the function $g \defequi \psi_\beta(\alpha) = \varphi(h) : A * B \ptdt
            \cdot \ap{\alpha}(\sigma_A\,a)
            \cdot \miniast\alpha\beta
            \cdot \ap{\beta}(\sigma_B\,b)\bigr) \\
-            &= \beta_\ast
+            &= \beta_0
               \cdot \ap{\beta}(\sigma_B\,b)^{-1}
               \cdot \miniast\beta\alpha
               \cdot \ap{\alpha}(\sigma_A\,a)
               \cdot \miniast\alpha\beta
               \cdot \ap{\beta}(\sigma_B\,b)
 \end{align*}
-We also get $g_\ast = \beta_\ast$. It only remains to construct a pointed homotopy $H : \rho_\beta(\alpha) \sim_\ast g$. Again this is done by induction on an element of the join:
+The path $g_0$ pointing $g$ is, by definition of $\varphi$, the path
+$(h(a_0))_0 = \alpha_0 \cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha
+\beta$. It only remains to construct a path $H : \rho_\beta(\alpha) = g$ as
+mere functions such that the type $g_0 \cdot H(\inl(a_0)) = \beta_0$ as an
+element. We proceed by induction on an element of the join:
 \begin{align*}
-  H(\inl a) &\defequi \refl{} : \beta(N) = \beta(N) \\
-  H(\inr b) &\defequi \beta_\ast \cdot \ap{\beta}(\sigma_B\,b)^{-1} \cdot
-              \miniast\beta\alpha : \alpha(N) = \ast_X
+  H(\inl a) &\defequi \refl{\beta(N)} : \beta(N) = \beta(N) \\
+  H(\inr b) &\defequi \beta_0 \cdot \ap{\beta}(\sigma_B(b))^{-1} \cdot
+              \miniast\beta\alpha : \alpha(N) = x_0
 \end{align*}
 Finally, we must produce an element of
-$\prod_{a\from A}\prod_{b\from B} \pathover
-{H(\inl a)} {\lambda z.\rho_\beta(\alpha)(z)=g(z)} {\glue(a,b)} {H(\inr b)}$,
+\begin{equation}
+  \prod_{a\from A}\prod_{b\from B} \left( 
+    \pathover {H(\inl a)} {z\mapsto \rho_\beta(\alpha)(z)=g(z)} 
+    {\glue(a,b)} {H(\inr b)}
+  \right)
+\end{equation}
 which corresponds to filling the following square:
 \[
   \begin{tikzcd}
-    \beta(N)  \ar[ddd,"{\refl{}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
+    \beta(N)  \ar[ddd,"{\refl{\beta(N)}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
     \beta(N)  \ar[r,"{\miniast\alpha\beta}"] &[-15pt]
     \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"] &[10pt]
-    \alpha(N) \ar[rrr,"{\refl{}}"] &[-15pt]
+    \alpha(N) \ar[rrr,"{\refl{\alpha(N)}}"] &[-15pt]
     &[10pt]
     &[-20pt]
     \alpha(N) \ar[d,"{\miniast\beta\alpha}"]
@@ -2229,18 +2247,21 @@ which corresponds to filling the following square:
 %\ast_X
     &
     &
-    \beta(N)  \ar[d,"{\beta_\ast}"]
+    \beta(N)  \ar[d,"{\beta_0}"]
     \\[-10pt]
     \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)}"'] &
     \beta(N)  \ar[r,"{\miniast\alpha\beta}"'] &
     \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"'] &
     \alpha(N) \ar[r,"{\miniast\beta\alpha}"'] &
     \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"'] &
-    \beta(N)  \ar[r,"{\beta_\ast}"'] &
+    \beta(N)  \ar[r,"{\beta_0}"'] &
     \ast_X
   \end{tikzcd}
 \]
-We fill this with standard path algebra operations.
+We fill this with standard path algebra operations. This proves that
+$\rho_\beta(\alpha)$ and $g$ are equal as mere functions. We must still check
+that $g_0 \cdot H(\inl(a_0)) = \beta_0$. As $H(\inl(a_0)) = \refl {\beta(N)}$,
+one can rely on path algebra operation to reduce $(h_(a_0))_0$ to $\beta_0$.
 
 Specializing again to the case where $B \jdeq \Sn q$ is a sphere,
 we have proved the following:
