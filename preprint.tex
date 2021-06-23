@@ -1928,18 +1928,18 @@ and $\ap{i}(\glue\ast) = \refl{(a_0,b_0)}$ (where $\ast$ is the unique element
 of $1$).
 
 For the rest of this section we fix two pointed types $A$ and $B$, and we
-denote $a_0$ and $b_0$ the respective distinguished point of $A$ and $B$. 
+denote $a_0$ and $b_0$ the base points of $A$ and $B$.
 We repeat here the definition of the generalized Whitehead product
 from \cite[Sec.~3.3]{brunerie:thesis}.
 \begin{definition}
   There is a map $W = W_{A,B} : A * B \to \susp A \vee \susp B$
   making a pushout square with the wedge inclusion $i$:
-  \[
+  \begin{equation}\label{eq:def-join-wedge-pushout}
     \begin{tikzcd}
       A * B \ar[r,"W"]\ar[d]\ar[pushout] & \susp A \vee \susp B\ar[d,"i"] \\
       1 \ar[r] & \susp A \times \susp B
     \end{tikzcd}
-  \]
+  \end{equation}
   We have $W(\inl a) \jdeq \inr N$, $W(\inr b) \jdeq \inl N$,
   and
   \[
@@ -1949,6 +1949,8 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
   The map $W_{A,B}$ is pointed by the path $\inv{(\glue \ast)} : W(\inl(a_0))
   \jdeq \inr(N) = \inl(N)$.
 \end{definition}
+The fact that \eqref{eq:def-join-wedge-pushout} is a pushout square is
+deduced using the $3{\times}3$-lemma in \cite[Prop.~3.3.2]{brunerie:thesis}.
 
 We now also fix another pointed type $X$, with distinguished point $x_0$.
 \begin{definition}
@@ -1962,11 +1964,11 @@ We now also fix another pointed type $X$, with distinguished point $x_0$.
   \]
 \end{definition}
 If $A\jdeq \Sn p$ and $B\jdeq\Sn q$,
-then $A * B \weq \Sn{p+q+1}$\todo{Reference},
-one can obtain a map
-\[
+then $A * B \weq \Sn{p+q+1}$~\cite[Prop.~1.8.8]{brunerie:thesis},
+so one can obtain a map
+\begin{equation}\label{eq:whitehead-product}
   [\blank,\blank] : \hgr {p+1}(X) \times \hgr {q+1}(X) \to \hgr{p+q+1}(X),
-\]
+\end{equation}
 which is the usual Whitehead product on homotopy groups. Explicitely, given
 $a:\hgr {p+1} (X)$ and $b:\hgr {q+1} (X)$, one wants to define the element
 $[a,b]$ of the set $\hgr {p+q+1} (X)$. As we are targeting a set, one can as
