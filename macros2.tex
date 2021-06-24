@@ -1,17 +1,17 @@
 %% cleveref setup
-\crefname{lem}{lemma}{lemmas}
-\crefname{prop}{proposition}{propositions}
-\crefname{thm}{theorem}{theorems}
-\crefname{cor}{corollary}{corollaries}
-\crefname{rem}{remark}{remarks}
-\crefname{exa}{example}{examples}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{thm}{Theorem}{Theorems}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{rem}{Remark}{Remarks}
+\crefname{exa}{Example}{Examples}
 
 %% Macros
 \let\oldequiv\equiv
 
 \newcommand*{\from}{:}
 \newcommand*{\blank}{\mathord{\color{lightgray}-}}
-\newcommand*{\inv}[1]{{#1}^{-1}}
+\newcommand*{\inv}[1]{#1^{-1}}
 
 \newcommand*{\set}[1]{\{#1\}}
 \newcommand*{\refl}[1]{\mathop{{\mathit{refl}}_{#1}}}
@@ -154,6 +154,8 @@
 \newcommand*{\pathpair}[2]{\overline{({#1},{#2})}}
 
 %% global tikz styles
+\usetikzlibrary{arrows}
+
 \tikzset{cell/.style={%
     shorten <=1em,%
     shorten >=1em,
@@ -174,4 +176,38 @@ tikzshortarrow/.style={
 \tikzset{
     rotninety/.style={anchor=south, rotate=90, inner sep=2pt}
 }
-\usetikzlibrary{arrows}
+
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+\definecolor{darkblue}{rgb}{0,0,1}
+\definecolor{darkred}{rgb}{.7,0,0}
+
+\tikzset{
+	tikzforeground/.style={
+		->,
+%		shorten >=0.2cm,
+%		shorten <=0.2cm,
+		line width = 0.8pt,
+		preaction={draw, -, line width=5pt, white},
+	},
+	tikzbackground/.style={
+		->,
+%		shorten >=0.2cm,
+%		shorten <=0.2cm,
+		line width = 0.4pt,
+	},
+%	tikzmiddle/.style={
+%		->,
+%		shorten >=0.2cm,
+%		shorten <=0.2cm,
+%		line width = .8pt,
+%		preaction={draw, -, line width=3pt, white},
+%	},
+	tikzequal/.style={
+		-,
+		double,
+		shorten >=0.2cm,
+		shorten <=0.2cm,
+		line width = 0.6pt,
+		preaction={draw, -, line width=3pt, white},
+	},
+}

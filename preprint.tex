@@ -1146,7 +1146,7 @@ with \cite{HoTT}:
   \sigma_X : X \to \Omega(\susp X), \quad x \mapsto \mrd(x_0)^{-1} \mrd(x).
 \end{equation}
 If $A$ is a second pointed type, the adjunction can also be described via an
-equivalence of function spaces (see \cref{def:wild-adj})
+equivalence of function spaces (see \cref{def:wild-adj}):
 \begin{equation}\label{eq:adj-equivalence-susp-loopspace}
   \Phi_{X,A} : (\susp(X) \ptdto A) \simeq (X \ptdto \Omega(A)),\quad
   f \mapsto \loopspace \null (f)(\inv{\mrd (x_0)} \mrd(\blank))
@@ -1191,7 +1191,8 @@ equivalence of function spaces (see \cref{def:wild-adj})
 The equivalence $\Phi$ also satisfies the following lemma:
 \begin{lem} \label{lem:ap-Sigma}
     Let $X$ be a pointed type and $f : A \ptdto B$ be a pointed function.
-    The following square commutes (up to homotopy):
+    The following square commutes
+    {\normalfont(}\kern-1pt up to homotopy{\normalfont)}:
     \begin{equation}
     \begin{tikzpicture}[x=5cm,y=-1.75cm,baseline=(current bounding box.center)]
     \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
@@ -1515,44 +1516,6 @@ We now see that there are two connected components of symmetries of spheres:
 
 \subsection{Concrete symmetries of \texorpdfstring{$\boldsymbol{\Sn n}$}{Sn}}
 
-%%% tikz and color:
-
-\definecolor{darkgreen}{rgb}{0,0.4,0}
-\definecolor{darkblue}{rgb}{0,0,1}
-\definecolor{darkred}{rgb}{.7,0,0}
-
-\tikzset{
-	tikzforeground/.style={
-		->,
-%		shorten >=0.2cm,
-%		shorten <=0.2cm,
-		line width = 0.8pt,
-		preaction={draw, -, line width=5pt, white},
-	},
-	tikzbackground/.style={
-		->,
-%		shorten >=0.2cm,
-%		shorten <=0.2cm,
-		line width = 0.4pt,
-	},
-%	tikzmiddle/.style={
-%		->,
-%		shorten >=0.2cm,
-%		shorten <=0.2cm,
-%		line width = .8pt,
-%		preaction={draw, -, line width=3pt, white},
-%	},
-	tikzequal/.style={
-		-,
-		double,
-		shorten >=0.2cm,
-		shorten <=0.2cm,
-		line width = 0.6pt,
-		preaction={draw, -, line width=3pt, white},
-	},
-}
-
-
 As in the cases of $\Sc$ and $\Sp$, we want to construct one concrete element for each of the two connected components of symmetries on $\Sn n$ that were established in \cref{thm:higher-spheres-2}.
 As before, these two elements are given as $\id$ and $-\id : \Sn n \to \Sn n$.
 It is clear that they are symmetries (i.e.\ equivalences), as each is self-inverse.
@@ -1863,29 +1826,33 @@ type pointed at $\inl(a_0)$.
   by induction:
   \begin{equation}
     \begin{aligned}
-      \bar f(\inl(a)) &\defequi x_0 \quad \text{for }a:A \\
-      \bar f(\inr(b)) &\defequi x_0 \quad \text{for }b:B \\
-      \ap{\bar f}(\glue(a,b)) &= f(a)(b) \quad \text{for }a:A,b:B
+      \bar f(\inl(a)) &\defequi x_0 \quad \text{for $a:A$} \\
+      \bar f(\inr(b)) &\defequi x_0 \quad \text{for $b:B$} \\
+      \ap{\bar f}(\glue(a,b)) &\defis f(a)(b) \quad \text{for $a:A,b:B$}
     \end{aligned}
     \label{eq:def-barf-from-join-UMP}
   \end{equation}
   The map $\bar f$ is trivially pointed.
 
   This construction $f\mapsto \bar f$ admits an inverse. Indeed, as $A$ and $B$
-  are both pointed, for any $a:A$ and $b:B$, one has a an element $\ell_{a,b}$
+  are both pointed, for any $a:A$ and $b:B$, one has a an element $\tau_{a,b}$
   of $\loopspace{}(A*B)$ constructed as the following composition of paths:
   \begin{equation}
     \begin{tikzcd}[column sep=large]
-      \inl(a_0) \rar["{\glue(a_0,b)}"] & \inr(b) \rar["\inv{\glue(a,b)}"]
-      & \inl(a) \rar["{\glue(a,b_0)}"] & \inr(b_0) \rar["\inv{\glue(a_0,b_0)}"]
+      \inl(a_0) \rar["{\glue(a_0,b_0)}"] & \inr(b_0) \rar["\inv{\glue(a,b_0)}"]
+      & \inl(a) \rar["{\glue(a,b)}"] & \inr(b) \rar["\inv{\glue(a_0,b)}"]
       & \inl(a_0)
     \end{tikzcd}
-    \label{eq:def-ellab-as-square}
+    \label{eq:def-tau-ab-as-square}
   \end{equation}
   Then, to any $g:A*B \ptdto X$, one can map the function $\hat g: a \mapsto
-  (b\mapsto \loopspace\null(g)(\ell_{a,b}))$. The map $\hat g$ is a pointed, as
-  $\ell_{a_0,b_0} = \refl{\inl(a_0)}$ by path algebra. The construction $g
+  (b\mapsto \loopspace\null(g)(\tau_{a,b}))$.
+  The map $\hat g$ is a pointed, as
+  $\tau_{a_0,b} = \tau_{a,b_0} = \refl{\inl(a_0)}$ for all $a:A$ and $b:B$
+  by path algebra.
+  The construction $g
   \mapsto \hat g$ provides an inverse to $f \mapsto \bar f$.
+  A proof of this has been formalized in cubical Agda~\cite{joinloopadj}.
 \end{proof}
 
 Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$, with
@@ -1928,6 +1895,7 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
 \end{defi}
 The fact that \eqref{eq:def-join-wedge-pushout} is a pushout square is
 deduced using the $3{\times}3$-lemma in \cite[Prop.~3.3.2]{brunerie:thesis}.
+However, this fact plays no role in our arguments below.
 
 We now also fix another pointed type $X$, with distinguished point $x_0$.
 \begin{defi}
@@ -1991,15 +1959,15 @@ in terms of the generalized Whitehead product.
 %
 \newcommand{\wunit}{1} %unit in wild group
 %
-In order to do so, we will reason on the map $\delta_\beta: (\susp \Sn n \ptdto X)
+In order to do so, we will reason about the map $\delta_\beta: (\susp \Sn n \ptdto X)
 \to (\Sn n \ptdto \conncomp{(\susp B \ptdto X)}\beta)$ such that
 \begin{equation}
-  \setTrunc{
+  \Trunc[\big]{
     \phi_{\conncomp{(\susp B \ptdto X)}\beta}^n \circ
     \delta_\beta \circ
     \inv{\left( \phi_X^{n+1} \right)}
-  }
-  = \partial_\beta
+  }_0
+  = \partial_\beta.
   \label{eq:def-delta-beta}
 \end{equation}
 We are going to construct a commuting square of the following form:
@@ -2049,7 +2017,7 @@ Let us now describe $\xi_\beta$. Since $\susp B \ptdto X$ is equivalent to $B \p
   \begin{aligned}
     \gamma \times \gamma' (N) &\defequi \gamma(N) \\
     \gamma \times \gamma' (S) &\defequi \gamma'(S) \\
-    \ap{\gamma \times \gamma'} (\mrd (b) ) &=
+    \ap{\gamma \times \gamma'} (\mrd (b) ) &\defis
     \ap{\gamma'}(\mrd(b)) \cdot \miniast{\gamma'}{\gamma} \cdot \ap\gamma(\sigma_B(b))
   \end{aligned}
   \label{eq:wild-group-from-susp-product}
@@ -2073,12 +2041,15 @@ equivalence $\xi_\beta$. Explicitly:
 Notice that $\xi_\beta(\gamma)$ is pointed by the path $\gamma_0$ that points
 $\gamma$.
 
-Let us now define $\varphi$ from diagram \eqref{eq:Whitehead-general}. Since
-$A$ is connected, hence the inclusion of $A \ptdto \conncomp{(\susp B \ptdto
-X)}{\wunit}$ in $A \ptdto (\susp B \ptdto X)$ is an equivalence. Now, use the
-equivalence between $\susp B \ptdto X$ and $B \to \loopspace\null X$ before
-simply applying \cref{lemma:UMP-join-vs-loopspace}. Then the
-composition of equivalences:
+Let us now define $\varphi$ from diagram \eqref{eq:Whitehead-general}.
+Since $A$ is connected, the inclusion of
+$A \ptdto \conncomp{(\susp B \ptdto X)}{\wunit}$
+in $A \ptdto (\susp B \ptdto X)$ is an equivalence.
+Now, use the equivalence between $\susp B \ptdto X$
+and $B \to \loopspace\null X$ before
+simply applying \cref{lemma:UMP-join-vs-loopspace}.
+Unfolding definition, we see that the composition of
+equivalences
 \begin{equation}
   \begin{tikzcd}[column sep=large]
     (A \ptdto \conncomp{(\susp B \ptdto X)}{\wunit}) \rar[hookrightarrow]
@@ -2106,11 +2077,13 @@ composition of equivalences:
 %%\to (A * B \ptdto X)$:
 can be identified with the function $\varphi$ defined by induction as follows:
 \begin{align}
-\varphi(h) (\inl a) &\jdeq h(a)(N) \\
-  \varphi(h) (\inr b) &\jdeq x_0 \\
-  \ap{\varphi(h)} (\glue(a,b)) &= (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b))
+  \varphi(h) (\inl a) &\defequi x_0 \\
+  \varphi(h) (\inr b) &\defequi x_0 \\
+  \ap{\varphi(h)} (\glue(a,b))
+                      &\defis (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b))
+                        \cdot \inv{(h(a))_0}
 \end{align}
-The map $\varphi(h)$ is pointed by the path $(h(a_0))_0 : h(a_0)(N) = x_0$.
+The map $\varphi(h)$ is pointed by the reflexivity path at $x_0$.
 
 Before we can verify the commutativity of \eqref{eq:Whitehead-general},
 we also need to spell out the action of the boundary map $\delta_\beta$ itself:
@@ -2124,8 +2097,8 @@ but with a new pointedness path:
 \end{equation}
 The map $\delta_\beta(\alpha)$ is itself pointed: the element
 $\delta_\beta(\alpha)(a_0)$ is the map $\beta$ pointed by the path
-$\alpha_0\cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha \beta$; using
-that the path $\sigma_A(a_0) = \refl N$ given by path algebra, one finds a path
+$\alpha_0\cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha \beta$;
+using the fact that $\sigma_A(a_0) = \refl N$, one finds a path
 $(\delta_\beta(\alpha)(a_0))_0 = \beta_0$, providing a element of
 $\delta_\beta(\alpha)(a_0) = \beta$ as pointed functions.
 
@@ -2155,92 +2128,137 @@ $h \defequi \xi_\beta\circ (\delta_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\
 Finally, we can insert this into the definition of $\varphi$
 to obtain the function $g \defequi \psi_\beta(\alpha) = \varphi(h) : A * B \ptdto X$:
 \begin{align*}
-g(\inl a) &\jdeq h(a)(N) = \beta(N) \\
-  g(\inr b) &\jdeq x_0 \\
+  g(\inl a)
+  &\jdeq x_0 \\
+  g(\inr b)
+  &\jdeq x_0 \\
   \ap{g}(\glue(a,b))
-  &= (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b)) \\
-  &= (h(a))_0 \cdot \ap{h(a)}(\inv{\mrd(b_0)} \cdot\mrd b) \\
-  &= (h(a))_0 \cdot \inv{\ap{h(a)}(\mrd{\ast_B})}
-    \cdot \ap{h(a)}(\mrd (b)) \\
-    &= \bigl(\alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
-              \cdot \miniast\alpha\beta\bigr)
-              \cdot \bigl(\miniast\beta\alpha
-              \cdot \ap{\alpha}(\sigma_A\,a)
-              \cdot \miniast\alpha\beta\bigr)^{-1} \\
-            &\phantom{=} \cdot
-              \bigl(\ap{\beta}(\sigma_B\,b)^{-1}
-           \cdot \miniast\beta\alpha
-           \cdot \ap{\alpha}(\sigma_A\,a)
-           \cdot \miniast\alpha\beta
-           \cdot \ap{\beta}(\sigma_B\,b)\bigr) \\
-            &= \beta_0
-              \cdot \ap{\beta}(\sigma_B\,b)^{-1}
-              \cdot \miniast\beta\alpha
-              \cdot \ap{\alpha}(\sigma_A\,a)
-              \cdot \miniast\alpha\beta
-              \cdot \ap{\beta}(\sigma_B\,b)
+  &= (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b)) \cdot \inv{(h(a))_0} \\
+  &= (h(a))_0 \cdot \ap{h(a)}(\inv{\mrd(b_0)} \cdot\mrd b)
+    \cdot \inv{(h(a))_0} \\
+  &= (h(a))_0 \cdot \inv{\ap{h(a)}(\mrd{b_0})}
+    \cdot \ap{h(a)}(\mrd (b)) \cdot \inv{(h(a))_0} \\
+  &= \bigl(\alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
+    \cdot \miniast\alpha\beta\bigr)
+    \cdot \bigl(\miniast\beta\alpha
+    \cdot \ap{\alpha}(\sigma_A\,a)
+    \cdot \miniast\alpha\beta\bigr)^{-1} \\
+  &\phantom{=} \cdot
+    \bigl(\ap{\beta}(\sigma_B\,b)^{-1}
+    \cdot \miniast\beta\alpha
+    \cdot \ap{\alpha}(\sigma_A\,a)
+    \cdot \miniast\alpha\beta
+    \cdot \ap{\beta}(\sigma_B\,b)\bigr)
+    \cdot \bigl(\alpha_0 \cdot \ap{\alpha}(\sigma_A(a))^{-1} \\
+  &= \beta_0
+    \cdot \ap{\beta}(\sigma_B\,b)^{-1}
+    \cdot \miniast\beta\alpha
+    \cdot \ap{\alpha}(\sigma_A\,a)
+    \cdot \miniast\alpha\beta
+    \cdot \ap{\beta}(\sigma_B\,b)
+    \cdot \miniast\beta\alpha
+    \cdot \ap{\alpha}(\sigma_A\,a)^{-1}
+    \cdot \alpha_0^{-1}
 \end{align*}
-The path $g_0$ pointing $g$ is, by definition of $\varphi$, the path
-$(h(a_0))_0 = \alpha_0 \cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha
-\beta$. It only remains to construct a path $H : \rho_\beta(\alpha) = g$ as
-mere functions such that the type $g_0 \cdot H(\inl(a_0)) = \beta_0$ as an
+The path $g_0$ pointing $g$ is, by definition of $\varphi$,
+the reflexivity path at $x_0$.
+It only remains to construct a path $H : \rho_\beta(\alpha) = g$ as
+mere functions such that the type $H(\inl(a_0)) = \beta_0$ has an
 element. We proceed by induction on an element of the join:
 \begin{align*}
-  H(\inl a) &\defequi \refl{\beta(N)} : \beta(N) = \beta(N) \\
-  H(\inr b) &\defequi \beta_0 \cdot \ap{\beta}(\sigma_B(b))^{-1} \cdot
-              \miniast\beta\alpha : \alpha(N) = x_0
+  H(\inl a) &\defequi \alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
+              \cdot \miniast\alpha\beta : \beta(N) = x_0 \\
+  H(\inr b) &\defequi \beta_0 \cdot \ap{\beta}(\sigma_B(b))^{-1}
+              \cdot \miniast\beta\alpha : \alpha(N) = x_0
 \end{align*}
 Finally, we must produce an element of
-\begin{equation}
+\begin{equation}\label{eq:big-whitehead-pathover}
   \prod_{a\from A}\prod_{b\from B} \left(
     \pathover {H(\inl a)} {z\mapsto \rho_\beta(\alpha)(z)=g(z)}
     {\glue(a,b)} {H(\inr b)}
   \right)
 \end{equation}
-which corresponds to filling the following square:
-\[
-  \begin{tikzcd}
-    \beta(N)  \ar[ddd,"{\refl{\beta(N)}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
-    \beta(N)  \ar[r,"{\miniast\alpha\beta}"] &[-15pt]
-    \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"] &[10pt]
-    \alpha(N) \ar[rrr,"{\refl{\alpha(N)}}"] &[-15pt]
-    &[10pt]
-    &[-20pt]
-    \alpha(N) \ar[d,"{\miniast\beta\alpha}"]
-    \\[-5pt]
-    &
-    &
-%\beta(N) \ar[d,"{H(\inl a)}"'] \ar[rr,"{\ap{\rho_\beta(\alpha)}(\glue(a,b))}"]
-    &
-    &
-%\alpha(N) \ar[d,"{H(\inr b)}"]
-    &
-    &
-    \beta(N)  \ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"]
-    \\[10pt]
-    &
-    &
-%\beta(N) \ar[rr,"{\ap{g}(\glue(a,b))}"]
-    &
-    &
-%\ast_X
-    &
-    &
-    \beta(N)  \ar[d,"{\beta_0}"]
-    \\[-10pt]
-    \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)}"'] &
-    \beta(N)  \ar[r,"{\miniast\alpha\beta}"'] &
-    \alpha(N) \ar[r,"{\ap{\alpha}(\sigma_A\,a)}"'] &
-    \alpha(N) \ar[r,"{\miniast\beta\alpha}"'] &
-    \beta(N)  \ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"'] &
-    \beta(N)  \ar[r,"{\beta_0}"'] &
-    \ast_X
+which corresponds to filling the square in~\cref{fig:big-whitehead-square}.
+\begin{figure}
+  \centering
+  \[
+  \begin{tikzcd}[column sep=large]
+    \beta(N)\ar[r,"{\miniast\alpha\beta}"]
+    \ar[ddd,"{\ap{\beta}(\sigma_B\,b)}"']
+    \ar[rrrddd,tikzequal,dashed] &
+    \alpha(N)\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"]
+    \ar[rrdd,tikzequal,dashed] &
+    \alpha(N)\ar[r,"{\alpha_0}"]
+    \ar[rd,tikzequal,dashed] &
+    x_0\ar[d,"{\alpha_0^{-1}}"] \\
+    & & &
+    \alpha(N)\ar[d,"{\ap{\alpha}(\sigma_A\,a)^{-1}}"] \\
+    & & &
+    \alpha(N)\ar[d,"{\miniast\beta\alpha}"] \\
+    \beta(N)\ar[ddd,"{\miniast\alpha\beta}"']
+    \ar[rrrd,tikzequal,dashed] & & &
+    \beta(N)\ar[d,"{\ap{\beta}(\sigma_B\,b)}"] \\
+    & & &
+    \beta(N)\ar[d,"{\miniast\alpha\beta}"] \\
+    & & &
+    \alpha(N)\ar[d,"{\ap{\alpha}(\sigma_A\,a)}"] \\
+    \alpha(N)\ar[ddd,"{\ap{\alpha}(\sigma_A\,a)}"']
+    \ar[rrru,tikzequal,dashed] & & &
+    \alpha(N)\ar[d,"{\miniast\beta\alpha}"] \\
+    & & &
+    \beta(N)\ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"] \\
+    & & &
+    \beta(N)\ar[d,"{\beta_0}"] \\
+    \alpha(N)\ar[r,"{\miniast\beta\alpha}"']
+    \ar[rrruuu,tikzequal,dashed] &
+    \beta(N)\ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"']
+    \ar[rruu,tikzequal,dashed] &
+    \beta(N)\ar[r,"{\beta_0}"']
+    \ar[ru,tikzequal,dashed] & x_0
+%\ar[ddd,"{\refl{\beta(N)}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
+%\ar[r,"{\miniast\alpha\beta}"] &[-15pt]
+%\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"] &[10pt]
+%\ar[rrr,"{\refl{\alpha(N)}}"] &[-15pt]
+%
+%
+%\ar[d,"{\miniast\beta\alpha}"]
+%
+%
+%
+%d,"{H(\inl a)}"'] \ar[rr,"{\ap{\rho_\beta(\alpha)}(\glue(a,b))}"]
+%
+%
+%[d,"{H(\inr b)}"]
+%
+%
+%\ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"]
+%
+%
+%
+%rr,"{\ap{g}(\glue(a,b))}"]
+%
+%
+%
+%
+%
+%\ar[d,"{\beta_0}"]
+%
+%\ar[r,"{\ap{\beta}(\sigma_B\,b)}"'] &
+%\ar[r,"{\miniast\alpha\beta}"'] &
+%\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"'] &
+%\ar[r,"{\miniast\beta\alpha}"'] &
+%\ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"'] &
+%\ar[r,"{\beta_0}"'] &
+%
   \end{tikzcd}
-\]
-We fill this with standard path algebra operations. This proves that
-$\rho_\beta(\alpha)$ and $g$ are equal as mere functions. We must still check
-that $g_0 \cdot H(\inl(a_0)) = \beta_0$. As $H(\inl(a_0)) = \refl {\beta(N)}$,
-one can rely on path algebra operation to reduce $(h_(a_0))_0$ to $\beta_0$.
+  \]
+  \caption{The square corresponding to \eqref{eq:big-whitehead-pathover}.}
+  \label{fig:big-whitehead-square}
+\end{figure}
+We fill this as indicated. This proves that
+$\rho_\beta(\alpha)$ and $g$ are equal as mere functions.
+We must still check that $H(\inl(a_0)) = \beta_0$.
+This follows directly from $\ap{\alpha}(\sigma_A\,a_0) = \refl{}$.
 
 Specializing again to the case where $B \jdeq \Sn q$ is a sphere,
 we have proved the following:
