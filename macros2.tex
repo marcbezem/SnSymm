@@ -8,14 +8,24 @@
 }
 
 \theoremstyle{plain}
+
 \renewtheorem{thm}{Theorem}[section]
+\crefname{thm}{Theorem}{Theorems}
 \renewtheorem{cor}[thm]{Corollary}
+\crefname{cor}{Corollary}{Corollaries}
 \renewtheorem{lem}[thm]{Lemma}
+\crefname{lem}{Lemma}{Lemmas}
 \renewtheorem{prop}[thm]{Proposition}
+\crefname{prop}{Proposition}{Propositions}
+
 \theoremstyle{definition}
+
 \renewtheorem{rem}[thm]{Remark}
+\crefname{rem}{Remark}{Remarks}
 \renewtheorem{exa}[thm]{Example}
+\crefname{exa}{Example}{Examples}
 \renewtheorem{defi}[thm]{Definition}
+\crefname{defi}{Definition}{Definitions}
 
 % Meta-macros for:
 \newcommand*{\constant}[1]{\mathrm{#1}}% defined constants : roman
