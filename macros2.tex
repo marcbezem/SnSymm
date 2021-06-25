@@ -1,10 +1,21 @@
-%% cleveref setup
-\crefname{lem}{Lemma}{Lemmas}
-\crefname{prop}{Proposition}{Propositions}
-\crefname{thm}{Theorem}{Theorems}
-\crefname{cor}{Corollary}{Corollaries}
-\crefname{rem}{Remark}{Remarks}
-\crefname{exa}{Example}{Examples}
+%% to get the correct cleveref functionality
+%% we redefine the thm enviroments from lmcs.cls
+\newcommand{\renewtheorem}[1]{%
+  \expandafter\let\csname #1\endcsname\relax
+  \expandafter\let\csname c@#1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+  \newtheorem{#1}%
+}
+
+\theoremstyle{plain}
+\renewtheorem{thm}{Theorem}[section]
+\renewtheorem{cor}[thm]{Corollary}
+\renewtheorem{lem}[thm]{Lemma}
+\renewtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\renewtheorem{rem}[thm]{Remark}
+\renewtheorem{exa}[thm]{Example}
+\renewtheorem{defi}[thm]{Definition}
 
 % Meta-macros for:
 \newcommand*{\constant}[1]{\mathrm{#1}}% defined constants : roman
