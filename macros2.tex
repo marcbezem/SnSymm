@@ -6,6 +6,11 @@
 \crefname{rem}{Remark}{Remarks}
 \crefname{exa}{Example}{Examples}
 
+% Meta-macros for:
+\newcommand*{\constant}[1]{\mathrm{#1}}% defined constants : roman
+\newcommand*{\constructor}[1]{\textsc{#1}} % constructors : small caps
+\newcommand*{\typeformer}[1]{\mathrm{#1}} % (uppercase) typeformers : roman
+
 %% Macros
 \let\oldequiv\equiv
 
@@ -14,34 +19,32 @@
 \newcommand*{\inv}[1]{#1^{-1}}
 
 \newcommand*{\set}[1]{\{#1\}}
-\newcommand*{\refl}[1]{\mathop{{\mathit{refl}}_{#1}}}
-\newcommand*{\refloi}[1]{\mathop{\mathit{refl}^{-o}_{#1}}}
-\newcommand*{\inl}{\mathop{\mathsf{inl}}}
-\newcommand*{\inr}{\mathop{\mathsf{inr}}}
-\newcommand*{\trp}[2][]{\mathop{\mathrm{trp}^{#1}_{#2}}}
-\newcommand*{\fst}{\mathop{\mathit{fst}}}
-\newcommand*{\snd}{\mathop{\mathit{snd}}}
-\newcommand*{\funext}{\mathop{\mathrm{funext}}}
-\newcommand*{\ptw}{\mathop{\mathrm{ptw}}}
+\newcommand*{\refl}[1]{\mathop{{\constructor{refl}}_{#1}}}
+\newcommand*{\refloi}[1]{\mathop{\constructor{refl}^{-o}_{#1}}}
+\newcommand*{\inl}{\mathop{\constructor{inl}}}
+\newcommand*{\inr}{\mathop{\constructor{inr}}}
+\newcommand*{\mrd}{\operatorname{\constructor{mrd}}}
+\newcommand*{\glue}{\operatorname{\constructor{glue}}}
+\newcommand*{\north}{\constructor{n}}
+\newcommand*{\south}{\constructor{s}}
+\newcommand*{\trp}[2][]{\mathop{\constant{trp}^{#1}_{#2}}}
+\newcommand*{\fst}{\mathop{\constant{fst}}}
+\newcommand*{\snd}{\mathop{\constant{snd}}}
+\newcommand*{\funext}{\mathop{\constant{funext}}}
+\newcommand*{\ptw}{\mathop{\constant{ptw}}}
 \newcommand*{\ap}[1]{\left[{#1}\right]}
 \newcommand*{\ptdto}{\to_\ast}%
 \newcommand*{\ptdweq}{\weq_\ast}%
 \newcommand*{\loopspace}[1]{\mathop{\Omega^{#1}}}%
 
-\newcommand*{\nat}{\mathord{\mathrm{nat}}}
-\newcommand*{\ltr}{\mathord{\mathrm{ltr}}}
-\newcommand*{\rtr}{\mathord{\mathrm{rtr}}}
+\newcommand*{\nat}{\mathord{\constant{nat}}}
+\newcommand*{\ltr}{\mathord{\constant{ltr}}}
+\newcommand*{\rtr}{\mathord{\constant{rtr}}}
 
-\newcommand*{\id}{\mathord{\mathrm{id}}}
-\newcommand*{\pt}{{\mathord{\mathrm{pt}}}}
-\newcommand*{\Type}{\mathord{\mathrm{Type}}}
-\newcommand*{\Prop}{\mathord{\mathrm{Prop}}}
-\newcommand*{\Set}{\mathord{\mathrm{Set}}}
+\newcommand*{\Id}{\mathord{\constant{Id}}}
+\newcommand*{\id}{\mathord{\constant{id}}}
 \newcommand*{\cat}[1]{\mathscr{#1}}
 
-\DeclareMathOperator\Bop{B}         % with extra space
-\newcommand*{\B}{\mathrm B}          % without extra space
-\newcommand*{\N}{\mathrm N}
 \newcommand*{\weq}{\simeq}
 \newcommand*{\QQ}{\mathbb{Q}}
 \newcommand*{\ZZ}{\mathbb{Z}}
@@ -51,9 +54,6 @@
 \newcommand*{\isom}{\cong}
 \newcommand*{\ct}{*}
 \newcommand*{\cto}{*_{\mathrm{o}}}
-\newcommand*{\rrfl}{\mathit{rrfl}}
-\newcommand*{\cp}[1]{\mathit{cp}_{#1}}
-\newcommand*{\dblslash}{\mathbin{/\kern-3pt/}}
 
 %\renewcommand{\equiv}{\simeq}
 %\newcommand*{\liff}{\equiv}
@@ -67,9 +67,6 @@
 
 \DeclareMathOperator\im{im}
 \DeclareMathOperator\Aut{Aut}
-\DeclareMathOperator\Out{Out}
-\DeclareMathOperator\Inn{Inn}
-\DeclareMathOperator\Ker{Ker}
 
 \DeclarePairedDelimiter\Trunc{\lVert}{\rVert}
 \DeclarePairedDelimiter\trunc{\lvert}{\rvert} % truncation
@@ -88,24 +85,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand*{\ie}{{\em i.e.,\xspace}}%\xspace}fixlater
 \newcommand*{\eg}{{\em e.g.,\xspace}}%\xspace}fixlater
-\newcommand*{\ev}{\mathrm{ev}}
-\newcommand*{\ve}{\mathrm{ve}}
-\newcommand*{\el}{\mathrm{elim}}
-\newcommand*{\we}{\overset\sim\to}
+\newcommand*{\ev}{\constant{ev}}
+\newcommand*{\ve}{\constant{ve}}
+\newcommand*{\el}{\constant{elim}}
 
-\newcommand*{\iscontr}{\mathrm{isContr}}
-\newcommand*{\isprop}{\mathrm{isProp}}
-\newcommand*{\isset}{\mathrm{isSet}}
-\newcommand*{\isgrpd}{\mathrm{isGrpd}}
-\newcommand*{\isEq}{\mathrm{isEquiv}}
-\newcommand*{\isonetype}{\mathrm{1Type}}
-\newcommand*{\isconn}{\mathrm{isConn}}
+\newcommand*{\iscontr}{\constant{isContr}}
+\newcommand*{\isprop}{\constant{isProp}}
+\newcommand*{\isset}{\constant{isSet}}
+\newcommand*{\isgrpd}{\constant{isGrpd}}
+\newcommand*{\isequiv}{\constant{isEquiv}}
+\newcommand*{\isonetype}{\constant{1Type}}
+\newcommand*{\isconn}{\constant{isConn}}
+\newcommand*{\istrunc}[1]{\constant{isTrunc}_{#1}}
 
-\newcommand*{\conn}{\mathrm{conn}}
 \newcommand*{\conncomp}[2]{{#1}_{\left(#2\right)}}
-\newcommand*{\aut}{\mathrm{Aut}}
-\newcommand*{\Hom}{\mathrm{Hom}}
-\newcommand*{\setgroup}[1]{||#1||}
 
 \newcommand*{\UU}{\mathcal{U}}
 \newcommand*{\UUp}{\UU_*}
@@ -125,19 +118,13 @@
 \newcommand*{\uc}[1]{{I_{#1}}}%universal set bundle
 \newcommand*{\Sloop}{\mathord{\circlearrowleft}}%loop in circle
 \newcommand*{\bn}[1]{\mathbf{#1}}
-\newcommand*{\Eq}{\mathrm{Eq}}
 \newcommand*{\emptytype}{\emptyset}
-\newcommand*{\istrunc}[1]{\mathsf{istrunc}_{#1}}
-\newcommand*{\ind}{\operatorname{\mathsf{ind}}}
+\newcommand*{\ind}{\operatorname{\constant{ind}}}
 \newcommand*{\susp}{\operatorname{\Sigma}}
-\newcommand*{\mrd}{\operatorname{\mathsf{mrd}}}
-\newcommand*{\glue}{\operatorname{\mathsf{glue}}}
-\newcommand*{\hcomp}{\mathbin{\cdot_h}}
+\newcommand*{\hcomp}{\mathbin{\cdot}} % was : \cdot_h
 
 \newcommand*{\etop}[1]{\bar {#1}}
 \newcommand*{\ptoe}[1]{\tilde {#1}}
-\newcommand*{\cast}{\mathrm{cast}}
-\newcommand*{\ua}{\mathrm{ua}}%univalence inverse
 
 %% fundamental group
 \newcommand*{\hgr}[1]{\uppi_{#1}}
@@ -148,10 +135,6 @@
 %% \newcommand*{\pathover}[4]{#1 \overset{#2}{\underset{#3}=} #4}
 \newcommand*{\pathoverdisplay}[4]{{#1} \overset{#2}{\underset{#3}=} #4}
 \newcommand*{\pathover}[4]{#1 =^{#2}_{#3} #4}
-
-\newcommand*{\pair}{\mathop{\mathrm{pair}}}
-\newcommand*{\rec}{\mathop{\mathrm{rec}}}
-\newcommand*{\pathpair}[2]{\overline{({#1},{#2})}}
 
 %% global tikz styles
 \usetikzlibrary{arrows}

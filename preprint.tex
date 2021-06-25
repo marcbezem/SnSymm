@@ -85,7 +85,7 @@ sphere, as defined in the HoTT-book (cf.~\cite{HoTT}).
 
 To be fully precise and to fix notations, we work inside an
 intuitionistic Martin-Löf's type theory with $\Sigma$-, $\Pi$- and
-$\mathrm{Id}$-types and with a cumulative hierarchy of universes,
+$\Id$-types and with a cumulative hierarchy of universes,
 simply written $\UU$, for which Voevodsky's univalence axiom hold. The
 transport along $p$ in a type family $T:A\to \UU$ is denoted
 $\trp [T] p$, and $\pathover u T p v$ denotes $\trp [T] p {(u)} = v$.
@@ -98,7 +98,7 @@ the function
 denotes the dependent application of $f$. We usually leave out the two
 first arguments of $\ap f$ as they are inferable, and we write simply
 $\ap f (p)$ for a path $p:x=y$. As in \cite{HoTT}, we call a type $A$
-a {\em proposition} if the type $\prod_{x,y\from A} x=y$ contains an
+a \emph{proposition} if the type $\prod_{x,y\from A} x=y$ contains an
 element.
 
 We deviate from \cite{HoTT} in denoting path composition:
@@ -111,12 +111,9 @@ as in \cite[\githubpath core/lib/types/Int.agda]{hott-agda}. The crucial
 property of $\ZZ$ (proved in previously cited file), is that it has decidable
 equality. We allow also several higher inductive types that are defined in
 \cite{HoTT}: propositional and set truncations, suspension, and the circle.
-Considering their importance in this paper, we recall them in full
-%%\footnote{\color{red}Or
-%%  maybe we should make an appendix of that? MB is for an appendix!}
-:
+Considering their importance in this paper, we recall them in full:
 \begin{enumerate}
-\item the {\em propositional truncation} of a type $A$ is a type $\Trunc A$
+\item the \emph{propositional truncation} of a type $A$ is a type $\Trunc A$
   defined by
   \begin{itemize}
   \item a map $\trunc \blank \from A \to \Trunc A$, and
@@ -137,7 +134,7 @@ Considering their importance in this paper, we recall them in full
     \end{displaymath}
     such that $\ind(s)(\trunc a) \jdeq s(a)$ for all $a\from A$.
   \end{quote}
-\item the {\em set truncation} of a type $A$ is a type $\setTrunc A$
+\item the \emph{set truncation} of a type $A$ is a type $\setTrunc A$
   defined by
   \begin{itemize}
   \item a map $\settrunc \blank \from A \to \setTrunc A$, and
@@ -159,18 +156,18 @@ Considering their importance in this paper, we recall them in full
     such that $\ind(s)(\settrunc a) \jdeq s(a)$ for all $a\from A$.
   \end{quote}
 
-\item the {\em suspension} of a type $A$ is a type $\susp A$ defined
+\item the \emph{suspension} of a type $A$ is a type $\susp A$ defined
   by
   \begin{itemize}
-  \item two elements $N,S\from \susp A$, and
-  \item a  map $\mrd \from A \to (N=S)$
+  \item two elements $\north,\south\from \susp A$, and
+  \item a  map $\mrd \from A \to (\north=\south)$
   \end{itemize}
   with the following induction rule:
   \begin{quote}
     given a type family $T\from \susp A \to \UU$, every dependent
     triple of elements
     \begin{displaymath}
-      n\from T(N), \quad s\from T(S),\quad
+      n\from T(\north), \quad s\from T(\south),\quad
       m\from \prod_{a\from A}\pathover n T {\mrd a} s
     \end{displaymath}
     defines a dependent function
@@ -179,11 +176,12 @@ Considering their importance in this paper, we recall them in full
     \end{displaymath}
     such that
     \begin{gather*}
-      \ind(n,s,m)(N) \jdeq n,\quad \ind(n,s,m)(S) \jdeq s,\\
-      \ap{\ind(n,s,m)}(\mrd a) = m(a)\ \text{for all}\ a\from A.
+      \ind(n,s,m)(\north) \jdeq n,\quad
+      \ind(n,s,m)(\south) \jdeq s,\\
+      \ap{\ind(n,s,m)}(\mrd a) = m(a)\ \text{for all $a\from A.$}
     \end{gather*}
   \end{quote}
-\item the {\em circle} $\Sc$ is a type defined by
+\item the \emph{circle} $\Sc$ is a type defined by
   \begin{itemize}
   \item an element $\base \from \Sc$, and
   \item a path $\Sloop: \base = \base$
@@ -206,8 +204,9 @@ Considering their importance in this paper, we recall them in full
   \end{quote}
 \end{enumerate}
 The spheres $\Sn n$ are then defined by induction on $n:\NN$ by
-$\Sn n \defequi \susp {(\Sn {n-1})}$ for all $n\geq 2$.
-
+$\Sn n \defequi \susp(\Sn{n-1})$ for all $n\geq 2$.
+We also set $\Sn{-1} \defequi\emptytype$ and $\Sn{0}\defequi\bn 2$.
+Then we have $\Sn n = \susp(\Sn{n-1})$ for all $n\ge0$.
 
 \paragraph{Plan of the paper.}%
 In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
@@ -228,6 +227,9 @@ In \cref{sec:higher-sphere}, we propagate the result by induction on
 $n\geq 2$: the type $\Sn n = \Sn n$ has exactly two connected
 components, equivalent to one another. Each induction step relies on
 Freudenthal's suspension theorem.
+
+In \cref{sec:structure-components}, we then show that the fundamental group of each component is $\ZZ/2\ZZ$ for $n\ge2$.
+We partly develop an EHP long exact sequence to deal with the case $n=2$.
 
 \section{Symmetries of the circle}
 \label{sec:circle-case}%
@@ -500,7 +502,7 @@ In this section, we will prove that the canonical inclusion:
 \end{equation}
 is an equivalence. The equivalence $-\id_\Sp \from \Sp \to \Sp$ is
 defined by $\Sp$-induction as the function such that
-$-\id_\Sp(N) \jdeq S$, and $-\id_\Sp(S) \jdeq N$ and
+$-\id_\Sp(\north) \jdeq \south$, and $-\id_\Sp(\south) \jdeq \north$ and
 $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
 
 \begin{lem}
@@ -508,12 +510,18 @@ $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
   \label{lem:minus-id-equivalence}
 \end{lem}
 \begin{proof}
-  We are to produce an element of the type $\prod_{x:\Sp}T(x)$ where $T$ is the
-  type family defined by $T(x)\defequi (x= (-\id_\Sp \circ -\id_\Sp)(x))$. Let us
-  use $\Sp$-induction for this purpose. By definition of $-\id_\Sp$, $T(N)
-  \jdeq (N=N)$ and $T(S) \jdeq (S=S)$. Hence one can take $\refl N:T(N)$ and $\refl
-  S:T(S)$. To complete $\Sp$-induction, one should now provide an element of
-  type $\prod_{y:\Sc} \pathover{\refl N} T {\mrd y} {\refl S}$. However,
+  We are to produce an element of the type $\prod_{x:\Sp}T(x)$,
+  where $T$ is the type family defined by
+  $T(x)\defequi (x= (-\id_\Sp \circ -\id_\Sp)(x))$.
+  Let us use $\Sp$-induction for this purpose.
+  By definition of $-\id_\Sp$,
+  $T(\north) \jdeq (\north=\north)$
+  and $T(\south) \jdeq (\south=\south)$.
+  Hence one can take $\refl \north:T(\north)$
+  and $\refl \south:T(\south)$.
+  To complete $\Sp$-induction, one should now provide an element
+  of type $\prod_{y:\Sc} \pathover{\refl \north} T {\mrd y} {\refl \south}$.
+  However,
   transporting over a meridian in the family $T$ is conjugation by the
   meridian: indeed, the transport over any path $p:x=x'$ in $T$ is given by
   $q\mapsto \ap{-\id_\Sp \circ -\id_\Sp}(p) \cdot q \cdot \inv p$, and
@@ -524,19 +532,20 @@ $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
     \\ &= \inv { \left( \inv{\mrd(y)} \right) }
     \\ &= \mrd(y).
   \end{align*}
-  Hence $\pathover{\refl N} T {\mrd(y)} {\refl S}$ is equivalent to
-  $\mrd(y)\refl N \inv {\mrd(y)} = \refl S$, which is indeed inhabited for any
+  Hence $\pathover{\refl \north} T {\mrd(y)} {\refl \south}$
+  is equivalent to
+  $\mrd(y)\refl \north \inv {\mrd(y)} = \refl\south$, which is indeed inhabited for any
   $y:\Sc$ by simple path algebra.
 \end{proof}
 
 We will follow more or less the same road map as
 in~\cref{sec:circle-case}:
 \begin{itemize}
-\item first, we will prove that $\id_\Sp$ and $-\id_\Sp$ are not in
-  the same connected component,
+\item First, we will prove that $\id_\Sp$ and $-\id_\Sp$ are not in
+  the same connected component;
 \item then, we will prove that every equivalence in $\Sp=\Sp$ is
   either in the connected component of $\id_\Sp$ or in the connected
-  component of $-\id_\Sp$,
+  component of $-\id_\Sp$;
 \item finally, we will prove that the connected components of $\id_\Sp$
   and $-\id_\Sp$ are equivalent to each other.
 \end{itemize}
@@ -569,8 +578,8 @@ under the equivalence $\Sc \weq \conncomp{(\Sc=\Sc)}{\id_\Sc}$
 exhibited in~\cref{sec:circle-case}. Now define the type family
 $\hopf\from \Sp \to \UU$ by $\Sp$-induction as the family such that
 \begin{displaymath}
-  \hopf(N) \jdeq \Sc,\quad
-  \hopf(S) \jdeq \Sc,\quad\text{and}\quad
+  \hopf(\north) \jdeq \Sc,\quad
+  \hopf(\south) \jdeq \Sc,\quad\text{and}\quad
   \ap\hopf (\mrd(x)) = \iota_x\ \text{for all}\ x:\Sc.
 \end{displaymath}
 
@@ -584,17 +593,17 @@ We start by carrying out the first step of the road map.
   Suppose $p:\id_\Sp = -\id_\Sp$ and derive a contradiction. Through
   function extensionality, it produces paths
   \begin{displaymath}
-    p(N) \from N = S
+    p(\north) \from \north = \south
     \quad\text{and}\quad
-    p(S) \from S = N,
+    p(\south) \from \south = \north,
   \end{displaymath}
   and for all $x\from\Sc$ a path over
-  $\ap p (\mrd(x))\from \pathover {p(N)} T {\mrd(x)} {p(S)}$ where
+  $\ap p (\mrd(x))\from \pathover {p(\north)} T {\mrd(x)} {p(\south)}$ where
   $T\from \Sp \to \UU$ is the type family
   $T(a)\defequi (\id_\Sp(a) = -\id_\Sp(a))$. Because $\Sp$ is simply
   connected and we are targeting the empty type $\varnothing$, which
-  is a proposition, we might as well assume paths of types $p(N)=\mrd(\base)$
-  and $p(S) = \inv{\mrd(\base)}$. Transporting $\ap p(\mrd(x))$ over
+  is a proposition, we might as well assume paths of types $p(\north)=\mrd(\base)$
+  and $p(\south) = \inv{\mrd(\base)}$. Transporting $\ap p(\mrd(x))$ over
   these two paths, one gets a path of type
   $\pathover {\mrd(\base)} T {\mrd(x)} {\inv{\mrd(\base)}}$.
   Transport over $\mrd(x)$ in the type family $T$ is
@@ -643,7 +652,7 @@ The right hand side of the last equality can be depicted as:
 \begin{center}
   \begin{tikzpicture}
     \matrix (m) [matrix of nodes, column sep=9em] {
-      S & N & S & N \\
+      \south & \north & \south & \north \\
     };%
     \draw[->] (m-1-1.north) to[bend left=60] node[above, name=Afrom] {$\inv{\mrd(\base)}$} (m-1-2.north);
 %
@@ -707,13 +716,13 @@ the first of which is simple:
 \begin{enumerate}
   \item Because we are targeting a proposition, and $\Sp$ is
     connected, one can as well suppose that $\varphi$ is pointed.
-    Let $p:\varphi(N)=N$ be the given path.
+    Let $p:\varphi(\north)=\north$ be the given path.
   \item Construct a degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
     morphism of wild monoids. In particular, it maps pointed equivalences to
     invertible elements in $\ZZ$, that is $1$ or $-1$.
   \item Prove that $d$ is `weakly injective', meaning that $d(f)=d(g)$
     implies $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
-    this will prove either $\Trunc{(\id_\Sp,\refl N)=(\varphi,p)}$
+    this will prove either $\Trunc{(\id_\Sp,\refl\north)=(\varphi,p)}$
     or $\Trunc{(-\id_\Sp,\inv{\mrd(\base)})=(\varphi,p)}$, from which
     one can finally prove that either $\Trunc{\id_\Sp = \varphi}$ or
     $\Trunc{-\id_\Sp = \varphi}$.\label{it:weakly_injective}
@@ -725,7 +734,7 @@ precisely, the second homotopy group $\hgr 2(\Sp)$ is defined as the
 set-truncation $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
 \begin{displaymath}
   \tau: \loopspace\null\Sp \ptdto \Sc, \, p \mapsto \ap\hopf(p)(\base),
-\text{ pointed by $\refl{\base}:\tau(\refl{N})=\base$}.
+\text{ pointed by $\refl{\base}:\tau(\refl\north)=\base$}.
 \end{displaymath}
 Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
@@ -741,19 +750,22 @@ Formally speaking one defines:
   \text{for any}\ f:\Sp\ptdto\Sp.
 \end{displaymath}
 
-Note that the degree of a map is defined only when the map is pointed. However,
+Note that the degree of a map is \emph{a~priori} defined only when the map is pointed. However,
 the following lemma shows that the degree is independent of the choice of such
 a path.
 \begin{lem}
-  Let $f: \Sp \to \Sp$ and two paths $f_0,f_0': f(N) = N$ pointing the map $f$.
+  Let $f: \Sp \to \Sp$ and two paths $f_0,f_0': f(\north) = \north$
+  pointing the map $f$.
   Then the proposition $d(f,f_0) = d(f,f'_0)$ holds.
   \label{lem:deg-independent-path}
 \end{lem}
 \begin{proof}
-  Let us first prove that $x=N$ is connected for every $x:\Sp$. Since being
-  connected is a proposition and $\Sp$ itself is connected, one only
-  has to check that $\isconn(N=N)$, which is \cite[Cor. 8.3.3]{HoTT}.
-  Hence, $d(f,\blank) : (f(N) = N) \to \ZZ$ is a map from a connected type to a set,
+  Let us first prove that $x=\north$ is connected for every $x:\Sp$.
+  Since being connected is a proposition and $\Sp$ itself is connected,
+  one only has to check that $\isconn(\north=\north)$,
+  which is \cite[Cor.~8.3.3]{HoTT}.
+  Hence, $d(f,\blank) : (f(\north) = \north) \to \ZZ$ is a map
+  from a connected type to a set,
   hence it is constant.
 \end{proof}
 
@@ -763,7 +775,7 @@ a path.
   \label{prop:deg-monoid-morphism}
 \end{prop}
 \begin{proof}
-  First, let us prove that $\id_\Sp$, pointed by $\refl N$, has degree $1$.
+  First, let us prove that $\id_\Sp$, pointed by $\refl\north$, has degree $1$.
   This is easy because $\hgr 2(\id_\Sp) = \id_{\hgr 2(\Sp)}$ so that $d(\id_\Sp)
   = \zeta(\inv\zeta(1)) = 1$.
 
@@ -802,16 +814,16 @@ a path.
   \label{cor:degree-equivalences}
 \end{cor}
 \begin{proof}
-  Given an equivalence $\varphi:\Sp \to \Sp$, pointed by $p:\varphi(N) = N$,
+  Given an equivalence $\varphi:\Sp \to \Sp$, pointed by $p:\varphi(\north) = \north$,
   any inverse $\psi$ of $\varphi$ is also pointed by the following path $q$:
   \begin{displaymath}
-    \psi(N) \overset {\ap\psi(\inv p)} = \psi\varphi(N) \overset {\alpha_N}  = N
+    \psi(\north) \overset {\ap\psi(\inv p)} = \psi\varphi(\north) \overset {\alpha_\north}  = \north
   \end{displaymath}
   where $\alpha: \psi\varphi = \id$ is a witness of $\psi$ being a left inverse
   for $\varphi$. In particular, $(\psi, q) \circ (\varphi, p)$ is an
   equivalence whose first component is equal to $\id_\Sp$. In determining the
   degree of this composite equivalence, \cref{lem:deg-independent-path} ensures
-  that the path is irrelevant, and because $d(\id_\Sp, \refl N) = 1$, we can
+  that the path is irrelevant, and because $d(\id_\Sp, \refl\north) = 1$, we can
   conclude that $d((\psi, q) \circ (\varphi, p)) = 1$ also holds. The previous
   result then proves that $d(\varphi, p)$ is a divisor of $1$ in $\ZZ$, which
   is either $1$ or $-1$ by decidability of the equality in $\ZZ$.
@@ -837,13 +849,13 @@ that the following function is an equivalence for each $A,B:\UUptd$ (see
 %%\begin{displaymath}
 %%  \Phi_{A,B}:
 %%\end{displaymath}
-%%that takes a function $f:\susp A \to B$ pointed by $f_0: f(N)=b$ and maps it to
+%%that takes a function $f:\susp A \to B$ pointed by $f_0: f(\north)=b$ and maps it to
 %%\begin{displaymath}
 %%  {f_0}\cdot (\ap f\circ (\inv{\mrd(a)}\mrd(\blank)))\cdot \inv{f_0} : A \to \loopspace\null B
 %%\end{displaymath},
 %%which is pointed by path algebra.
 %%
-%%One has morevover, for each type pointed type $A$, a {\em unit} function
+%%One has morevover, for each type pointed type $A$, a \emph{unit} function
 %%\begin{displaymath}
 %%  \eta_A \defequi \Phi_{A,\susp A}(\id_{\susp A}): A \ptdto \loopspace\null\susp A,
 %% \text{ pointed by $\varpi_{\id_{\susp A}}$}.
@@ -854,7 +866,7 @@ that the following function is an equivalence for each $A,B:\UUptd$ (see
 %%  \loopspace\null(\blank) \circ \eta_A = \Phi_{A,B}
 %%  \label{eq:triangle-identity-unit}
 %%\end{equation}
-%%given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:f(N)=b$
+%%given by simple path algebra: for any map $f:\susp A \to B$ pointed by $f_0:f(\north)=b$
 %%\begin{displaymath}
 %%  \loopspace\null(f) \circ \eta_A \jdeq {f_0} \cdot \ap f (\eta_A(\blank)) \cdot \inv{f_0}
 %%  = {f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(\blank)) \cdot \inv{f_0} \jdeq \Phi_{A,B}(f).
@@ -883,11 +895,13 @@ The function $\eta_{\Sc}$ is a section of $\tau$, that is, $\tau\circ\eta_{\Sc} 
 \label{lem:eta-S1-section-tau}
 \end{lem}
 \begin{proof} For all $z\in\Sc$ we can calculate:
-$\tau(\eta_{\Sc}(z)) =
-\tau(\ap{\id_{\Sp}}(\inv{\mrd(\base)} \mrd(z))) =
-\ap{\hopf}(\inv{\mrd(\base)} \mrd(z))(\base) =
-(\iota_{\base}^{-1} \circ \iota_z) (\base) =
-\id_{\Sc}^{-1}(\iota_z (\base)) = z$.
+  \begin{align*}
+    \tau(\eta_{\Sc}(z))
+    &= \tau(\ap{\id_{\Sp}}(\inv{\mrd(\base)} \mrd(z)))
+      = \ap{\hopf}(\inv{\mrd(\base)} \mrd(z))(\base) \\
+    &= (\iota_{\base}^{-1} \circ \iota_z) (\base)
+      = \id_{\Sc}^{-1}(\iota_z (\base)) = z.\qedhere
+  \end{align*}
 \end{proof}
 
 
@@ -904,17 +918,17 @@ $\tau(\eta_{\Sc}(z)) =
     \begin{tikzcd}
       (\Sp \ptdto \Sp) \ar[r,"\loopspace\null"] \ar[dd,"\Phi_{\Sc,\Sp}"{swap}]
       \drar[phantom,"\circled{1}"{description, near start}]
-      & (\loopspace \null \Sp \ptdto \loopspace\null\Sp) \ar[r,"\loopspace\null"] \ar[ddl,"\blank\circ\eta_{\Sc}"]
+      &[-15pt] (\loopspace \null \Sp \ptdto \loopspace\null\Sp) \ar[r,"\loopspace\null"] \ar[ddl,"\blank\circ\eta_{\Sc}"]
       \dar["\circled{2}", phantom]
-      & (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"]
+      &[-15pt] (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"]
       \ar[r,"\setTrunc\blank"] \dar["\blank\circ \loopspace\null(\eta_{\Sc})"swap]
-      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\circled{5}", phantom] &
-      \\
+      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\circled{5}", phantom] &[-20pt]
+      \\[10pt]
       & {} \drar["\circled{3}"{near end}, phantom]
       & (\loopspace\null\Sc \ptdto \loopspace 2 \Sp) \dar["\blank\circ\eta_{\bn 2}"swap]
       \drar["\circled{4}", phantom] &
       & \hgr 2(\Sp)
-      \\
+      \\[10pt]
       (\Sc \ptdto \loopspace\null\Sp) \ar[rr,"\Phi_{\bn 2,\loopspace\null\Sp}"swap] \ar[urr,"\loopspace\null"] &
       & (\bn 2 \ptdto \loopspace 2 \Sp) \rar["\ev_0"swap] & \loopspace 2 \Sp \urar["\settrunc\blank"swap] &
     \end{tikzcd}
@@ -943,7 +957,7 @@ $\tau(\eta_{\Sc}(z)) =
 \end{proof}
 
 In the following we complete step \ref{it:weakly_injective}.
-Recall that we have pointed $\id_\Sp$ by the path $\refl N$,
+Recall that we have pointed $\id_\Sp$ by the path $\refl\north$,
 and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
 \begin{cor}
   Any pointed equivalence is in the connect component of either $\id_\Sp$ or $-\id_\Sp$.
@@ -1024,14 +1038,14 @@ and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
     \Trunc{\id_\Sp = \varphi} + \Trunc{-\id_\Sp = \varphi}
   \end{displaymath}
   is a proposition by \cref{lemma:S2-id-neq-minusid}. Hence, one can as well
-  assume that $\varphi$ is pointed by a path $p:\varphi(N) = N$. Then from
+  assume that $\varphi$ is pointed by a path $p:\varphi(\north) = \north$. Then from
   \cref{prop:symm-S2-connected-components}, it follows that:
   \begin{displaymath}
-    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} + \Trunc{(-\id_\Sp,\inv{\mrd(\base)}) = (\varphi, p)}.
+    \Trunc{(\id_\Sp,\refl\north) = (\varphi, p)} + \Trunc{(-\id_\Sp,\inv{\mrd(\base)}) = (\varphi, p)}.
   \end{displaymath}
   It is then enough to prove the two following propositions:
   \begin{align*}
-    \Trunc{(\id_\Sp,\refl N) = (\varphi, p)} &\to \Trunc{\id_\Sp = \varphi},
+    \Trunc{(\id_\Sp,\refl\north) = (\varphi, p)} &\to \Trunc{\id_\Sp = \varphi},
     \\
     \Trunc{(-\id_\Sp,\mrd(\base)) = (\varphi, p)} &\to \Trunc{-\id_\Sp = \varphi}.
   \end{align*}
@@ -1067,8 +1081,8 @@ general result.
   \label{prop:susp-components-are-equiv}
 \end{prop}
 \begin{proof}
-  Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $N$
-  to $S$, $S$ to $N$ and each meridian to its inverse as a path of $\susp A$.
+  Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $\north$
+  to $\south$, $\south$ to $\north$ and each meridian to its inverse as a path of $\susp A$.
   %
 
   Now, define $f:{({\susp A} \to {\susp A})} \to ({\susp A} \to {\susp A})$ by mapping
@@ -1076,12 +1090,12 @@ general result.
 %%
 %%  the function defined by ${\susp A}$-induction in the following way:
 %%  \begin{align*}
-%%    &f(\varphi)(N) \jdeq \varphi(S), \quad f(\varphi)(S) \jdeq \varphi(N),\\
+%%    &f(\varphi)(\north) \jdeq \varphi(\south), \quad f(\varphi)(\south) \jdeq \varphi(\north),\\
 %%    &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
 %%  \end{align*}
 %%  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{{\susp A}
 %%  \to {\susp A}}$. Indeed, for any $\varphi:{\susp A} \to {\susp A}$, the function $(f\circ
-%%  f)(\varphi)$ maps definitionally $N$ to $\varphi(N)$ and $S$ to $\varphi(S)$.
+%%  f)(\varphi)$ maps definitionally $\north$ to $\varphi(\north)$ and $\south$ to $\varphi(\south)$.
 %%  Moreover,
 %%  \[
 %%  \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
@@ -1212,8 +1226,8 @@ The equivalence $\Phi$ also satisfies the following lemma:
     This is the content of \cref{def:wild-adj}.
     %
 %%    By calculation.
-%%    %  Starting with $f_0 : \susp X \to A$ and $f_1 : f_0(N) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
-%%    We start in the top left corner with $g_0 : \susp X \to A$ and $g_1 : g_0(N) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
+%%    %  Starting with $f_0 : \susp X \to A$ and $f_1 : f_0(\north) = a_0$ and checking where this pair is mapped if we go first down and then right, we get:
+%%    We start in the top left corner with $g_0 : \susp X \to A$ and $g_1 : g_0(\north) = a_0$. If we go first down, then right, we get the following, where we omit the proofs that the functions are pointed:
 %%    \begin{equation}
 %%    \begin{alignedat}{5}
 %%    &\quad && g_0 : \susp X \to A & \\
@@ -1442,7 +1456,7 @@ We have the following general result:
 %    Composition and identities are preserved by the projection $\pi_1$, and thus also by $\setTrunc{\pi_1}$.
 \end{proof}
 
-Using that every $\Sn n$ (for $n \geq 2$) is $1$-connected, the case $(X,x) \equiv (Y,y) \equiv (\Sn n, N)$ gives the following:
+Using that every $\Sn n$ (for $n \geq 2$) is $1$-connected, the case $(X,x) \equiv (Y,y) \equiv (\Sn n, \north)$ gives the following:
 %\begin{cor} \label{cor:forget-point-iso}
 %    If $X$ is a $1$-connected type and $x:A$, then
 %    \begin{alignat}{2}
@@ -1524,8 +1538,12 @@ Instead of showing $\id \neq -\id$ as in \cref{lemma:S2-id-neq-minusid}, we show
 
 In this subsection, we annotate the constructors of the suspension with their type in order to avoid ambiguity.
 For example, for any type $A$, we have $-\id_A : \susp(A) \to \susp(A)$ defined by
-$N_{\susp(A)} \mapsto S_{\susp(A)}$, $S_{\susp(A)} \mapsto N_{\susp(A)}$, and $\mrd_{\susp(A)}(a) \mapsto \inv{\mrd_{\susp(A)}(a)}$.
-For $f : A \to B$, we have $\susp(f) : \susp(A) \to \susp(B)$ given by $N_{\susp(A)} \mapsto N_{\susp(B)}$, $S_{\susp(A)} \mapsto S_{\susp(B)}$, and $\mrd_{\susp(A)}(a) \mapsto \mrd_{\susp(B)}(f(a))$.
+$\north_{\susp(A)} \mapsto \south_{\susp(A)}$,
+$\south_{\susp(A)} \mapsto \north_{\susp(A)}$,
+and $\mrd_{\susp(A)}(a) \mapsto \inv{\mrd_{\susp(A)}(a)}$.
+For $f : A \to B$, we have $\susp(f) : \susp(A) \to \susp(B)$ given by $\north_{\susp(A)} \mapsto \north_{\susp(B)}$,
+$\south_{\susp(A)} \mapsto \south_{\susp(B)}$,
+and $\mrd_{\susp(A)}(a) \mapsto \mrd_{\susp(B)}(f(a))$.
 Notice that the index of $\mrd$ is redundant when applied to an argument as its type is then inferrable from the type of the argument. We shall then use $\mrd(a)$ instead of $\mrd_{\susp(A)}(a)$ for $a:A$ whenever it make the text more readable.
 Moreover, we use colours to make the connections between formulas and diagrams easier to identify.
 
@@ -1537,44 +1555,48 @@ Here, we give the argument in the style of \cite{HoTT}:
 \begin{proof}
   \def\cg{\color{darkgreen}}
   \def\cb{\color{darkblue}}
-  Using function extensionality and assuming $x : \susp\susp A$, we need to construct $h(x)$ of type $T(x) \defequi ( \susp(-\id_{\susp A})(x) = -\id_{\susp{\susp A}}(x) )$.
+  Using function extensionality and assuming $x : \susp\susp A$,
+  we need to construct $h(x)$ of type
+  $T(x) \defequi ( \susp(-\id_{\susp A})(x) = -\id_{\susp{\susp A}}(x) )$.
   We do induction on $x$ and define:
   \begin{alignat}{2}
-    \cg h(N_{\susp\susp A})
-    & \cg \defequi \mrd(N_{\susp A})
-    && \cg :  N_{\susp\susp A} = S_{\susp\susp A}
+    \cg h(\north_{\susp\susp A})
+    & \cg \defequi \mrd(\north_{\susp A})
+    && \cg : \south_{\susp\susp A} = \south_{\susp\susp A}
     \label{eq:green}
     \\
-    \cb h(S_{\susp\susp A})
-    & \cb \defequi \inv{\left(\mrd(S_{\susp A})\right)}
-    && \cb : S_{\susp\susp A} = N_{\susp\susp A}
+    \cb h(\south_{\susp\susp A})
+    & \cb \defequi \inv{\left(\mrd(\south_{\susp A})\right)}
+    && \cb : \south_{\susp\susp A} = \north_{\susp\susp A}
     \label{eq:blue}
   \end{alignat}
 
-        The last component to be defined is, for all $y : \susp A$, a higher path $\ap h(\mrd(y))$ whose type is $\pathover {h(N_{\susp\susp A})} T {\mrd(y)} {h(S_{\susp\susp A})}$.
-	After rewriting path-overs as path composition using \cite[Lem~2.11.3]{HoTT}, the type of this component is equivalent to the the type of commutativity proofs for the square:
-
+  The last component to be defined is, for all $y : \susp A$,
+  a higher path $\ap h(\mrd(y))$ whose type is
+  $\pathover {h(\north_{\susp\susp A})} T {\mrd(y)} {h(\south_{\susp\susp A})}$.
+	After rewriting path-overs as path composition using \cite[Lem~2.11.3]{HoTT},
+  the type of this component is equivalent to the the type of commutativity proofs for the square:
 	\begin{equation}\label{eq:y-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
-	\node[text=darkgreen] (N1) at (0,0) {$N_{\susp\susp A}$};
-	\node[text=darkgreen] (S1) at (0,1) {$S_{\susp\susp A}$};
-	\node[text=darkblue] (S2) at (1,0) {$S_{\susp\susp A}$};
-	\node[text=darkblue] (N2) at (1,1) {$N_{\susp\susp A}$};
-	\draw[->,text=darkgreen] (N1) to node[left] {$\mrd(N_{\susp A})$} (S1);
-        \draw[->,text=darkblue] (S2) to node[right] {$\inv{\mrd(S_{\susp A})}$} (N2);
+	\node[text=darkgreen] (N1) at (0,0) {$\north_{\susp\susp A}$};
+	\node[text=darkgreen] (S1) at (0,1) {$\south_{\susp\susp A}$};
+	\node[text=darkblue] (S2) at (1,0) {$\south_{\susp\susp A}$};
+	\node[text=darkblue] (N2) at (1,1) {$\north_{\susp\susp A}$};
+	\draw[->,text=darkgreen] (N1) to node[left] {$\mrd(\north_{\susp A})$} (S1);
+        \draw[->,text=darkblue] (S2) to node[right] {$\inv{\mrd(\south_{\susp A})}$} (N2);
 	\draw[->] (N1) to node[above] {$\mrd(-\id_{\susp A}(y))$} (S2);
         \draw[->] (S1) to node[above] {$\inv{\mrd(y)}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
 	To simplify the presentation, we write
 	\begin{align}
-	N & \defequi N_{\susp \susp A} \\
-	S & \defequi S_{\susp \susp A} \\
-	m_N & \defequi \mrd(N_{\susp A}) \\
-	m_S & \defequi \mrd(S_{\susp A})
+	N & \defequi \north_{\susp \susp A} \\
+	S & \defequi \south_{\susp \susp A} \\
+	m_N & \defequi \mrd(\north_{\susp A}) \\
+	m_S & \defequi \mrd(\south_{\susp A})
 	\end{align}
 	We do induction on $y$.
-	For $y \equiv N_{\susp A}$, after simplifying (normalising) the terms, the square \eqref{eq:y-commute} becomes
+	For $y \equiv \north_{\susp A}$, after simplifying (normalising) the terms, the square \eqref{eq:y-commute} becomes
 	\begin{equation}\label{eq:N-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
 	\node[text=darkgreen] (N1) at (0,0) {$N$};
@@ -1587,9 +1609,9 @@ Here, we give the argument in the style of \cite{HoTT}:
         \draw[->] (S1) to node[above] {$\inv{m_N}$} (N2);
 	\end{tikzpicture}
 	\end{equation}
-        with the obvious commutativity proof $c(m_S,m_N) : \inv{m_S} \cdot {m_S} = \inv{m_N} \cdot {m_N}$ (given $p$, $q$, we define $c(p,q) : \inv{p}\cdot p = \inv{q}\cdot q$ by path induction on $p$ and $q$ such that $c(\refl{},\refl{}) \jdeq \refl{}$).
+        with the obvious commutativity proof $c(m_S,m_N) : \inv{m_S} \cdot {m_S} = \inv{m_N} \cdot {m_N}$. (Given $p$, $q$, we define $c(p,q) : \inv{p}\cdot p = \inv{q}\cdot q$ by path induction on $p$ and $q$ such that $c(\refl{},\refl{}) \jdeq \refl{}$.)
 %	 : m_N \cdot \inv{m_N} = m_S \cdot \inv{m_S}$.
-	Similarly, for $y \equiv S_{\susp A}$, the square \eqref{eq:y-commute} becomes
+	Similarly, for $y \equiv \south_{\susp A}$, the square \eqref{eq:y-commute} becomes
 	\begin{equation}\label{eq:S-commute}
 	\begin{tikzpicture}[x=6.5cm,y=-2cm,baseline=(current bounding box.center)]
 	\node[text=darkgreen] (N1) at (0,0) {$N$};
@@ -1663,13 +1685,15 @@ Here, we give the argument in the style of \cite{HoTT}:
         \draw[->,cell, shorten >=3em, shorten <=3em] (S2) to node[midway,fill=white]{$c(m_S,m_N)$} (S1);
 	\end{tikzpicture}
 	\end{equation}
-        The goal is now to show that \eqref{eq:first-square-composed} is equal
-        to the trivial proof $\refl{}$ filling square~\eqref{eq:S-commute},
-        the outer `square' of (\ref{eq:N-commute-with-ears}).
-        Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def} and using standard path
-        algebra steps, we get $\alpha = \inv{\beta}$,
-        and then this task simplifies to showing that the following diagram commutes:
-\begin{equation}\label{eq:3-cell}
+  The goal is now to show that \eqref{eq:first-square-composed}
+  is equal to the trivial proof $\refl{}$
+  filling square~\eqref{eq:S-commute},
+  the outer `square' of (\ref{eq:N-commute-with-ears}).
+  Unfolding the definition of $-\id_{\susp A}$ in~\eqref{eq:alpha-def}
+  and using standard path algebra steps,
+  we get $\alpha = \inv{\beta}$,
+  and then this task simplifies to showing that the following diagram commutes:
+  \begin{equation}\label{eq:3-cell}
   \begin{tikzcd}[column sep=6em,labels={font=\normalsize}]
     m_N^{-1}\cdot {\color{darkgreen}m_N}
       \arrow[Rightarrow, swap]{dd}{\ap{(\blank\cdot {\color{darkgreen}m_N})\circ\inv{}}(\beta)}
@@ -1681,21 +1705,22 @@ Here, we give the argument in the style of \cite{HoTT}:
        \arrow[Leftarrow, swap]{rr}{\refl{}} &&
     {\color{blue}\inv{m_S}}\cdot m_N
   \end{tikzcd}
-\end{equation}
+  \end{equation}
 
-%	\begin{equation}\label{eq:whiskered-square}
- %         (\ap{\inv{}}(\beta) \cdot m_N) \star c(m_S,m_N) \star (\inv{m_S} \cdot \beta)
-%	\end{equation}
 
-	The easiest way to show that (\ref{eq:3-cell}) commutes
-    is to generalise to arbitrary points $N$, $S$ and arbitrary paths $m_N,m_S : N=S$,
-    as well as to an arbitrary higher path $\beta: m_N=m_S$. One starts by doing path
-    induction on $m_N$, reducing the task to the case $S\jdeq N$ and $m_N\jdeq \refl N$,
-    and arbitrary $m_S:N=N$ and $\beta: m_N = m_S$. One can then do path induction on $\beta$,
-    reducing the task to the case $m_S\jdeq m_N$ and $\beta \jdeq \refl{m_N}$.
-    But now, as $m_N \jdeq \refl N$, all paths appearing in the diagram,
-    including $c(m_S,m_N)$, are reflexivity paths.
-    Hence we can conclude by simple path algebra.
+  The easiest way to show that (\ref{eq:3-cell}) commutes
+  is to generalise to arbitrary points $N$, $S$
+  and arbitrary paths $m_N,m_S : N=S$,
+  as well as to an arbitrary higher path $\beta: m_N=m_S$.
+  One starts by doing path induction on $m_N$,
+  reducing the task to the case $S\jdeq N$ and $m_N\jdeq \refl N$,
+  and arbitrary $m_S:N=N$ and $\beta: m_N = m_S$.
+  One can then do path induction on $\beta$,
+  reducing the task to the case $m_S\jdeq m_N$
+  and $\beta \jdeq \refl{m_N}$.
+  But now, as $m_N \jdeq \refl N$, all paths appearing in the diagram,
+  including $c(m_S,m_N)$, are reflexivity paths.
+  Hence we can conclude by simple path algebra.
 \end{proof}
 
 
@@ -1755,8 +1780,10 @@ Here, we give the argument in the style of \cite{HoTT}:
 \end{proof}
 
 \section{The structure of the components}
+\label{sec:structure-components}
 
 \subsection{Interlude on Whitehead products}
+\label{sec:whitehead-interlude}
 
 Before focusing on the components of $\Sn n = \Sn n$,
 we'll need a few general results on Whitehead products.
@@ -1891,7 +1918,7 @@ from \cite[Sec.~3.3]{brunerie:thesis}.
     \cdot (\glue\ast)^{-1} \cdot \ap{\inr}(\sigma_B(b)).
   \]
   The map $W_{A,B}$ is pointed by the path $\inv{(\glue \ast)} : W(\inl(a_0))
-  \jdeq \inr(N) = \inl(N)$.
+  \jdeq \inr(\north) = \inl(\north)$.
 \end{defi}
 The fact that \eqref{eq:def-join-wedge-pushout} is a pushout square is
 deduced using the $3{\times}3$-lemma in \cite[Prop.~3.3.2]{brunerie:thesis}.
@@ -1931,7 +1958,7 @@ defined as $\settrunc{[\alpha,\beta]}$ (where $[\alpha, \beta]$ is defined
 following \cref{defn:gen-Whitehead-product}).
 
 Fix now a pointed map $\beta : \susp B \ptdto X$, whose pointing path is
-$\beta_0:\beta(N) = x_0$, and consider the evaluation fiber sequence
+$\beta_0:\beta(\north) = x_0$, and consider the evaluation fiber sequence
 \[
   \conncomp{(\susp B \ptdto X)}{\beta}
   \ptdto \conncomp{(\susp B \to X)}{\beta}
@@ -2000,29 +2027,29 @@ Here, $\rho_\beta \defequi [\blank,\beta]$ is the Whitehead product,
 explicitly:
 \newcommand*\miniast[2]{\nu_{#1,#2}}
 \begin{align*}
-  \rho_\beta(\alpha)\,(\inl a) &\jdeq \beta(N) \\
-  \rho_\beta(\alpha)\,(\inr b) &\jdeq \alpha(N) \\
+  \rho_\beta(\alpha)\,(\inl a) &\jdeq \beta(\north) \\
+  \rho_\beta(\alpha)\,(\inr b) &\jdeq \alpha(\north) \\
   \ap{\rho_\beta(\alpha)} (\glue(a,b)) &= \ap{\alpha}(\sigma_A\,a) \cdot
                                          \miniast\alpha\beta \cdot
                                          \ap{\beta}(\sigma_B\,b)
 \end{align*}
 Here we write $\miniast\alpha\beta \defequi \alpha_0^{-1} \cdot \beta_0 :
-\beta(N) = \alpha(N)$ for short, where $\alpha_0:\alpha(N) = x_0$ is the path
+\beta(\north) = \alpha(\north)$ for short, where $\alpha_0:\alpha(\north) = x_0$ is the path
 pointing $\alpha$.
 The map $\rho_\beta(\alpha)$ is pointed by the path $\beta_0 :
-\rho_\beta(\alpha) (\inl a) \jdeq \beta(N) = x_0$.
+\rho_\beta(\alpha) (\inl a) \jdeq \beta(\north) = x_0$.
 
 Let us now describe $\xi_\beta$. Since $\susp B \ptdto X$ is equivalent to $B \ptdto \loopspace\null X$, and because $\loopspace\null X$ is a wild group, so is $\susp B \ptdto X$. Its unit is the map $\wunit$ already described. The multiplication of two elements $\gamma$ and $\gamma'$ is defined by induction:
 \begin{equation}
   \begin{aligned}
-    \gamma \times \gamma' (N) &\defequi \gamma(N) \\
-    \gamma \times \gamma' (S) &\defequi \gamma'(S) \\
+    \gamma \times \gamma' (\north) &\defequi \gamma(\north) \\
+    \gamma \times \gamma' (\south) &\defequi \gamma'(\south) \\
     \ap{\gamma \times \gamma'} (\mrd (b) ) &\defis
     \ap{\gamma'}(\mrd(b)) \cdot \miniast{\gamma'}{\gamma} \cdot \ap\gamma(\sigma_B(b))
   \end{aligned}
   \label{eq:wild-group-from-susp-product}
 \end{equation}
-The map $\gamma \times \gamma'$ is pointed by the path $\gamma_0: \gamma(N) =
+The map $\gamma \times \gamma'$ is pointed by the path $\gamma_0: \gamma(\north) =
 x_0$ pointing $\gamma$ itself.
 The inverse of an element $\gamma$ is given by $\gamma \circ (-\id_{\susp B})$
 (where $-\id_{\susp B}$ is pointed by $\inv{\mrd(b_0)}$).  Then, there is an
@@ -2031,8 +2058,8 @@ $\gamma \times \inv \beta$. This equivalence sends the connected component at
 $\beta$ to the connected component at $\wunit$, hence providing the pointed
 equivalence $\xi_\beta$. Explicitly:
 \begin{align}
-  \xi_\beta(\gamma)(N) &\jdeq \gamma(N) \\
-  \xi_\beta(\gamma)(S) &\jdeq \beta(N) \\
+  \xi_\beta(\gamma)(\north) &\jdeq \gamma(\north) \\
+  \xi_\beta(\gamma)(\south) &\jdeq \beta(\north) \\
   \ap{\xi_\beta(\gamma)}(\mrd b)
                           &= \ap{\beta}(\sigma_B\,b)^{-1} \cdot
                             \miniast\beta\gamma \cdot
@@ -2093,12 +2120,12 @@ but with a new pointedness path:
   (\delta_\beta(\alpha)(a))_0 \defequi
   (\loopspace\null(\alpha)\circ\sigma_A)(a) \cdot \beta_0
   = \alpha_0 \cdot \ap{\alpha}(\sigma_A(a)) \cdot \miniast\alpha\beta
-  : \beta(N) = x_0
+  : \beta(\north) = x_0
 \end{equation}
 The map $\delta_\beta(\alpha)$ is itself pointed: the element
 $\delta_\beta(\alpha)(a_0)$ is the map $\beta$ pointed by the path
 $\alpha_0\cdot \ap\alpha(\sigma_A(a_0)) \cdot \miniast \alpha \beta$;
-using the fact that $\sigma_A(a_0) = \refl N$, one finds a path
+using the fact that $\sigma_A(a_0) = \refl\north$, one finds a path
 $(\delta_\beta(\alpha)(a_0))_0 = \beta_0$, providing a element of
 $\delta_\beta(\alpha)(a_0) = \beta$ as pointed functions.
 
@@ -2109,7 +2136,7 @@ identified with $\psi_\beta \defequi \varphi \circ (\xi_\beta \circ \blank)
 Unfolding the above definitions, let us first examine
 $h \defequi \xi_\beta\circ (\delta_\beta(\alpha)) : A \ptdto \conncomp{(\susp B\ptdto X)}{0}$:
 \begin{align*}
-  h(a)(N) &\jdeq h(a)(S) \jdeq \beta(N) \\
+  h(a)(\north) &\jdeq h(a)(\south) \jdeq \beta(\north) \\
   \ap{h(a)}(\mrd(b))
   &= \ap{\beta}(\sigma_B(b))^{-1}
      \cdot \beta_0^{-1}
@@ -2167,9 +2194,9 @@ mere functions such that the type $H(\inl(a_0)) = \beta_0$ has an
 element. We proceed by induction on an element of the join:
 \begin{align*}
   H(\inl a) &\defequi \alpha_0 \cdot \ap{\alpha}(\sigma_A(a))
-              \cdot \miniast\alpha\beta : \beta(N) = x_0 \\
+              \cdot \miniast\alpha\beta : \beta(\north) = x_0 \\
   H(\inr b) &\defequi \beta_0 \cdot \ap{\beta}(\sigma_B(b))^{-1}
-              \cdot \miniast\beta\alpha : \alpha(N) = x_0
+              \cdot \miniast\beta\alpha : \alpha(\north) = x_0
 \end{align*}
 Finally, we must produce an element of
 \begin{equation}\label{eq:big-whitehead-pathover}
@@ -2183,42 +2210,42 @@ which corresponds to filling the square in~\cref{fig:big-whitehead-square}.
   \centering
   \[
   \begin{tikzcd}[column sep=large]
-    \beta(N)\ar[r,"{\miniast\alpha\beta}"]
+    \beta(\north)\ar[r,"{\miniast\alpha\beta}"]
     \ar[ddd,"{\ap{\beta}(\sigma_B\,b)}"']
     \ar[rrrddd,tikzequal,dashed] &
-    \alpha(N)\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"]
+    \alpha(\north)\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"]
     \ar[rrdd,tikzequal,dashed] &
-    \alpha(N)\ar[r,"{\alpha_0}"]
+    \alpha(\north)\ar[r,"{\alpha_0}"]
     \ar[rd,tikzequal,dashed] &
     x_0\ar[d,"{\alpha_0^{-1}}"] \\
     & & &
-    \alpha(N)\ar[d,"{\ap{\alpha}(\sigma_A\,a)^{-1}}"] \\
+    \alpha(\north)\ar[d,"{\ap{\alpha}(\sigma_A\,a)^{-1}}"] \\
     & & &
-    \alpha(N)\ar[d,"{\miniast\beta\alpha}"] \\
-    \beta(N)\ar[ddd,"{\miniast\alpha\beta}"']
+    \alpha(\north)\ar[d,"{\miniast\beta\alpha}"] \\
+    \beta(\north)\ar[ddd,"{\miniast\alpha\beta}"']
     \ar[rrrd,tikzequal,dashed] & & &
-    \beta(N)\ar[d,"{\ap{\beta}(\sigma_B\,b)}"] \\
+    \beta(\north)\ar[d,"{\ap{\beta}(\sigma_B\,b)}"] \\
     & & &
-    \beta(N)\ar[d,"{\miniast\alpha\beta}"] \\
+    \beta(\north)\ar[d,"{\miniast\alpha\beta}"] \\
     & & &
-    \alpha(N)\ar[d,"{\ap{\alpha}(\sigma_A\,a)}"] \\
-    \alpha(N)\ar[ddd,"{\ap{\alpha}(\sigma_A\,a)}"']
+    \alpha(\north)\ar[d,"{\ap{\alpha}(\sigma_A\,a)}"] \\
+    \alpha(\north)\ar[ddd,"{\ap{\alpha}(\sigma_A\,a)}"']
     \ar[rrru,tikzequal,dashed] & & &
-    \alpha(N)\ar[d,"{\miniast\beta\alpha}"] \\
+    \alpha(\north)\ar[d,"{\miniast\beta\alpha}"] \\
     & & &
-    \beta(N)\ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"] \\
+    \beta(\north)\ar[d,"{\ap{\beta}(\sigma_B\,b)^{-1}}"] \\
     & & &
-    \beta(N)\ar[d,"{\beta_0}"] \\
-    \alpha(N)\ar[r,"{\miniast\beta\alpha}"']
+    \beta(\north)\ar[d,"{\beta_0}"] \\
+    \alpha(\north)\ar[r,"{\miniast\beta\alpha}"']
     \ar[rrruuu,tikzequal,dashed] &
-    \beta(N)\ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"']
+    \beta(\north)\ar[r,"{\ap{\beta}(\sigma_B\,b)^{-1}}"']
     \ar[rruu,tikzequal,dashed] &
-    \beta(N)\ar[r,"{\beta_0}"']
+    \beta(\north)\ar[r,"{\beta_0}"']
     \ar[ru,tikzequal,dashed] & x_0
-%\ar[ddd,"{\refl{\beta(N)}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
+%\ar[ddd,"{\refl{\beta(\north)}}"']\ar[r,"{\ap{\beta}(\sigma_B\,b)}"] &[10pt]
 %\ar[r,"{\miniast\alpha\beta}"] &[-15pt]
 %\ar[r,"{\ap{\alpha}(\sigma_A\,a)}"] &[10pt]
-%\ar[rrr,"{\refl{\alpha(N)}}"] &[-15pt]
+%\ar[rrr,"{\refl{\alpha(\north)}}"] &[-15pt]
 %
 %
 %\ar[d,"{\miniast\beta\alpha}"]
@@ -2311,7 +2338,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   {n} (\Sn n)$, defined just before \cref{lem:iterated-ap-Sigma}. Note that
   this is not a pointed equivalence. Indeed, $\phi_{\Sc}^1$ maps $(\id_\Sc,
   \refl\base)$ to $\Sloop: \loopspace\null(\Sc)$ and from there, one can prove by
-  induction that $\phi_{\Sn n}^n$ maps $(\id_{\Sn n}, \refl N)$ to a point in
+  induction that $\phi_{\Sn n}^n$ maps $(\id_{\Sn n}, \refl\north)$ to a point in
   $\loopspace n (\Sn n)$ which is mapped to $\pm 1:\ZZ$ by the set truncation
   $\loopspace n (\Sn n) \to \hgr n (\Sn n) \weq \ZZ$. However, the distinguished
   point of $\loopspace n (\Sn n)$ is the iterated $\refl{}$, which is sent to
@@ -2320,7 +2347,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   Fortunately, there is an equivalence $\psi_n:\loopspace n (\Sn n) \weq
   \loopspace n(\Sn n)$ defined as follows:
   \begin{equation}
-    \psi_n (\alpha) \defequi \inv{\phi_{\Sn n}^n(\id_{\Sn n},\refl N)}\cdot \alpha
+    \psi_n (\alpha) \defequi \inv{\phi_{\Sn n}^n(\id_{\Sn n},\refl\north)}\cdot \alpha
     \label{eq:self-eq-to-refl}
   \end{equation}
   This makes the composite $\psi_n \circ \phi_{\Sn n}^n$ pointed by path algebra.
@@ -2457,8 +2484,8 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   Note that this is following the proof (in classical topology) of \cite{gwwhitehead}.
 
   Let us consider the long exact sequence given by \cref{thm:sort-of-ehp} when
-  specialized to $X \jdeq \Sp$, $q=1$ and $\beta\jdeq (\id_\Sp, \refl N): \Sp
-  \ptdto \Sp$. The element in $\hgr 2(\Sp)$ represented by $(\id_\Sp, \refl N)$
+  specialized to $X \jdeq \Sp$, $q=1$ and $\beta\jdeq (\id_\Sp, \refl\north): \Sp
+  \ptdto \Sp$. The element in $\hgr 2(\Sp)$ represented by $(\id_\Sp, \refl\north)$
   is:
   \begin{equation}
     i_2 \defequi \settrunc{\loopspace{}(\sigma_\Sc)(\Sloop)}
@@ -2519,7 +2546,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%    \label{eq:fgr-ptd-endomap-Sp}
 %%  \end{equation}
 %%  The group $\hgr 2 (\Sp)$ is isomorphic to $\ZZ$ and therefore contains a
-%%  generator, namely $i_2 \defequi \settrunc{\phi_{\Sp}^2(\id_\Sp,\refl N)}$ (we
+%%  generator, namely $i_2 \defequi \settrunc{\phi_{\Sp}^2(\id_\Sp,\refl\north)}$ (we
 %%  are following notation from \cite{brunerie:thesis}).
 %%  As there is also a group isomorpism $\chi: \hgr 3 (\Sp) \weq \ZZ$, we have an
 %%  isomorphism:
@@ -2556,7 +2583,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%    &= \settrunc{\loopspace{}(\psi_2 \circ \phi_\Sp^2 \circ \partial)(\inv{\iota_2})}
 %%  \end{align*}
 %%  However, the map $\psi_2\circ \phi_\Sp^2\circ \partial$ maps an element
-%%  $p:\loopspace{}(\Sp)$ to the element $\inv{\phi_\Sp^2(\id_\Sp,\refl N)}\cdot
+%%  $p:\loopspace{}(\Sp)$ to the element $\inv{\phi_\Sp^2(\id_\Sp,\refl\north)}\cdot
 %%  \phi_\Sp^2(\id_\Sp, p)$. Unfolding the definition of $\phi_\Sp^2$, we find:
 %%  \begin{align}
 %%    \psi_2 \circ \phi_\Sp^2\circ \partial (p) &=
@@ -2594,7 +2621,7 @@ Finally, we note that the result from \cref{sec:circle-case} does not generalise
 	Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
 	Without loss of generality, we can assume that $\varphi(\refl{\Sn n})$ lies in the left summand,
 	i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$.
-	By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $N$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
+	By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $\north$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
 	At the same time, the fundamental group of the left-hand side is non-trivial by
 	\cref{thm:Sp-sym=Z/2,thm:fund-grp-of-symmetries}.
 	Therefore, $\varphi$ cannot be an equivalence.
@@ -2847,15 +2874,15 @@ functor by its first two components only.
 %%      In other words, this provides the witness $c$ of \cref{def:wild-functor}.
 %%
     \item There is a wild functor $\susp \null$ from $\UU$ to $\UUptd$ which
-      maps a type $A$ to $\susp A$ (pointed at the pole $N$), and maps a
+      maps a type $A$ to $\susp A$ (pointed at the pole $\north$), and maps a
       function $f:A\to B$ to the pointed function $\susp (f) : \susp A \ptdto
       \susp B$ defined by induction as follows:
       \begin{displaymath}
-        \susp (f) (N) \defequi N,\quad
-        \susp (f) (S) \defequi S,\quad
+        \susp (f) (\north) \defequi \north,\quad
+        \susp (f) (\south) \defequi \north,\quad
         \ap{\susp (f)} \circ \mrd = \mrd \circ f.
       \end{displaymath}
-      Note that $\susp (f)$ is pointed by $\refl{N}$ as it maps $N$ to $N$
+      Note that $\susp (f)$ is pointed by $\refl{\north}$ as it maps $\north$ to $\north$
       by definition. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
       defined through easy inductions on the suspension, and a
       careful exposition can be found in
@@ -2897,18 +2924,18 @@ functor by its first two components only.
   \end{displaymath}
   together with elements witnessing the naturality of the unit and the counit
   \begin{gather*}
-    \mathrm{nat}_\eta : \prod_{a,a':\cat C} \prod_{f:\hom(a,a')} (R\circ L)(f) \circ \eta(a) = \eta(a') \circ f, \\
-    \mathrm{nat}_\epsilon : \prod_{b,b':\cat D} \prod_{f:\hom(b,b')} f \circ \epsilon(b) = \epsilon(b') \circ (L\circ R)(f),
+    \nat_\eta : \prod_{a,a':\cat C} \prod_{f:\hom(a,a')} (R\circ L)(f) \circ \eta(a) = \eta(a') \circ f, \\
+    \nat_\epsilon : \prod_{b,b':\cat D} \prod_{f:\hom(b,b')} f \circ \epsilon(b) = \epsilon(b') \circ (L\circ R)(f),
   \end{gather*}
   and elements witnessing the triangle identities
   \begin{displaymath}
-    \mathrm{ltr}_{\epsilon,\eta} : \prod_{a:\cat C} \epsilon(L(a)) \circ L(\eta(a)) = \id_{L(a)}, \quad
-    \mathrm{rtr}_{\eta,\epsilon} : \prod_{b:\cat D} R(\epsilon(b)) \circ \eta(R(b)) = \id_{R(b)}.
+    \ltr_{\epsilon,\eta} : \prod_{a:\cat C} \epsilon(L(a)) \circ L(\eta(a)) = \id_{L(a)}, \quad
+    \rtr_{\eta,\epsilon} : \prod_{b:\cat D} R(\epsilon(b)) \circ \eta(R(b)) = \id_{R(b)}.
   \end{displaymath}
 \end{defi}
-Here again, even though the types of $\mathrm{nat}_\eta$,
-$\mathrm{nat}_\epsilon$, $\mathrm{ltr}_{\eta,\epsilon}$ and
-$\mathrm{rtr}_{\eta,\epsilon}$ are not propositions, one only cares about their
+Here again, even though the types of $\nat_\eta$,
+$\nat_\epsilon$, $\ltr_{\eta,\epsilon}$ and
+$\rtr_{\eta,\epsilon}$ are not propositions, one only cares about their
 existence, and therefore one usually omits them when denoting a wild
 adjunctions.
 
@@ -2954,13 +2981,13 @@ paper, hence we rely on this proof.)
   And define $\epsilon(A) : \susp \loopspace \null A \ptdto A$ by induction by
   setting
   \begin{displaymath}
-    \epsilon(A)(N) \defequi a_0,\quad
-    \epsilon(A)(S) \defequi a_0,\quad
+    \epsilon(A)(\north) \defequi a_0,\quad
+    \epsilon(A)(\south) \defequi a_0,\quad
     \ap{\epsilon(A)}\circ \mrd = \id_{\loopspace\null A}.\qedhere
   \end{displaymath}
 %%
 %%  with respective distinguished point $a$ and
-%%  $b$. Given $f:\susp A \ptdto B$ pointed by $f_0:b = f(N)$, define for every
+%%  $b$. Given $f:\susp A \ptdto B$ pointed by $f_0:b = f(\north)$, define for every
 %%  $x:A$
 %%  \begin{displaymath}
 %%    \Phi_{A,B}(f) (x) \defequi \inv{f_0} \cdot \ap f (\inv{\mrd(a)}\mrd(x)) \cdot f_0
@@ -2974,7 +3001,7 @@ paper, hence we rely on this proof.)
 %%  $\Psi_{A,B}$ as the function that maps $f: A\ptdto \loopspace\null B$ to the
 %%  pointed map $\susp A \ptdto B$ defined by induction through
 %%  \begin{displaymath}
-%%    \Psi_{A,B}(f)(N) \defequi b,\quad \Psi_{A,B}(f)(S) \defequi b,\quad
+%%    \Psi_{A,B}(f)(\north) \defequi b,\quad \Psi_{A,B}(f)(\south) \defequi b,\quad
 %%    \ap{\Psi_{A,B}(f)}\circ\mrd = f.
 %%  \end{displaymath}
 %%  The function $\Psi_{A,B}(f)$ is pointed by $\refl b$. For future references,
@@ -3020,12 +3047,12 @@ paper, hence we rely on this proof.)
 %%
 %%  We continue by showing giving an element of $\Psi_{A,B}(\Phi_{A,B}(f)) = f$
 %%  for any pointed map $f: \susp A \ptdto B$, where the path of $f$ is denoted
-%%  $f_0:b = f(N)$.  First let us give an element $p_f$ of
+%%  $f_0:b = f(\north)$.  First let us give an element $p_f$ of
 %%  $\Psi_{A,B}(\Phi_{A,B}(f)) = f$ as (unpointed) functions, by induction on $\susp A$ by
 %%  providing:
 %%  \begin{enumerate}
-%%    \item the path $f_0:\Psi_{A,B}(\Phi_{A,B}(f))(N) \jdeq b = f(N)$,
-%%    \item the path $\ap f(\mrd(a))\cdot f_0:\Psi_{A,B}(\Phi_{A,B}(f))(S) \jdeq b = f(S)$.
+%%    \item the path $f_0:\Psi_{A,B}(\Phi_{A,B}(f))(\north) \jdeq b = f(\north)$,
+%%    \item the path $\ap f(\mrd(a))\cdot f_0:\Psi_{A,B}(\Phi_{A,B}(f))(\south) \jdeq b = f(\south)$.
 %%  \end{enumerate}
 %%  All we need is now a path over $\pathover {f_0} {T}{\mrd(x)} {\ap f{\mrd(a)} \cdot
 %%  f_0}$ for any $x:A$, where $T$ is the type family $(y:\susp A) \mapsto
@@ -3034,15 +3061,15 @@ paper, hence we rely on this proof.)
 %%  \begin{displaymath}
 %%    \begin{tikzcd}[column sep=large]
 %%      b \dar["\inv{f_0}\ap f(\inv{\mrd(a)}\mrd(x)) f_0"swap] \rar["f_0"]
-%%      & f(N) \dar["\ap f (\mrd(x))"]
+%%      & f(\north) \dar["\ap f (\mrd(x))"]
 %%      \\
-%%      b \rar["\ap f (\mrd(a))f_0"swap] & f(S)
+%%      b \rar["\ap f (\mrd(a))f_0"swap] & f(\south)
 %%    \end{tikzcd}
 %%  \end{displaymath}
 %%  The witness is simply provided by path algebra. The last bit of information
 %%  to provide is the compatibility of $p_f$ with the paths pointing
-%%  $\Psi_{A,B}(\Phi_{A,B}(f))$ and $f$: we must show that $p_f(N) \cdot refl b =
-%%  f_0$. This is immediate as we defined $p_f(N)$ to be $f_0$ definitionally.
+%%  $\Psi_{A,B}(\Phi_{A,B}(f))$ and $f$: we must show that $p_f(\north) \cdot refl b =
+%%  f_0$. This is immediate as we defined $p_f(\north)$ to be $f_0$ definitionally.
 %%
 %%  It remains to prove that the equivalence $\Phi_{A,B}$ is natural in $A$ and
 %%  $B$ in the sense of \cref{def:wild-adj}.
@@ -3150,11 +3177,11 @@ paper, hence we rely on this proof.)
 %%\begin{proof}
 %%    The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
 %%    set, i.e.\ $0$-truncated.
-%%    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $N$ is therefore
+%%    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $\north$ is therefore
 %%    $(n-2)$-connected.
 %%    By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
-%%    it suffices to give an element of $P(N)$ to get a
-%%    dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(N)$ is
+%%    it suffices to give an element of $P(\north)$ to get a
+%%    dependent function in $\prod_{x:\Sn n}P(x)$. This element of $P(\north)$ is
 %%    provided by \cref{cor:Sn-pointed-weq-is-bool}.
 %%\end{proof}
 %%
