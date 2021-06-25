@@ -910,7 +910,7 @@ The function $\eta_{\Sc}$ is a section of $\tau$, that is, $\tau\circ\eta_{\Sc} 
   \label{prop:alternative-description-degree}
 \end{prop}
 \begin{proof}
-  Taking the respective definitions of $d$ and $\bar d$ into account,
+  Taking the definitions of $d$ and $\bar d$ into account,
   we have to prove $\hgr 2 (f)({\inv\zeta(1)})= \settrunc {\gamma(f)}$ for all $f$.
   Unfolding definitions,
   we have to prove that the outer diagram commutes in the following:
@@ -922,7 +922,7 @@ The function $\eta_{\Sc}$ is a section of $\tau$, that is, $\tau\circ\eta_{\Sc} 
       \dar["\circled{2}", phantom]
       &[-10pt] (\loopspace 2 \Sp \ptdto \loopspace 2 \Sp) \ar[ddr,"\ev_\ell"]
       \ar[r,"\setTrunc\blank"] \dar["\blank\circ \loopspace\null(\eta_{\Sc})"swap]
-      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\circled{5}", phantom] &[-20pt]
+      & (\hgr 2(\Sp) \to \hgr 2(\Sp)) \drar["\ev_{\inv\zeta(1)}"] \ar[dd,"\circled{5}", phantom] &[-30pt]
       \\[10pt]
       & {} \drar["\circled{3}"{near end}, phantom]
       & (\loopspace\null\Sc \ptdto \loopspace 2 \Sp) \dar["\blank\circ\eta_{\bn 2}"swap]
@@ -1871,7 +1871,7 @@ type pointed at $\inl(a_0)$.
       & \inl(a) \rar["{\glue(a,b)}"] & \inr(b) \rar["\inv{\glue(a_0,b)}"]
       & \inl(a_0)
     \end{tikzcd}
-    \label{eq:def-tau-ab-as-square}
+    \label{eq:def-tau-ab}
   \end{equation}
   Then, to any $g:A*B \ptdto X$, one can map the function $\hat g: a \mapsto
   (b\mapsto \loopspace\null(g)(\tau_{a,b}))$.
@@ -1881,9 +1881,11 @@ type pointed at $\inl(a_0)$.
   The construction $g
   \mapsto \hat g$ provides an inverse to $f \mapsto \bar f$.
   A proof of this has been formalized in cubical Agda~\cite{joinloopadj}.
+  There, it's also checked that this equivalence arises from
+  a wild adjunction, cf.~\cref{prop:join-loop-adjunction}.
 \end{proof}
 
-Also, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$, with
+Finally, the \emph{wedge sum} $A \vee B$ of pointed types $A$ and $B$, with
 respective distinguished points $a_0$ and $b_0$, is the pushout of the
 point inclusions:
 \[
@@ -2882,13 +2884,30 @@ functor by its first two components only.
       \begin{displaymath}
         \susp (f) (\north) \defequi \north,\quad
         \susp (f) (\south) \defequi \north,\quad
-        \ap{\susp (f)} \circ \mrd = \mrd \circ f.
+        \ap{\susp (f)} \circ \mrd \defis \mrd \circ f.
       \end{displaymath}
       Note that $\susp (f)$ is pointed by $\refl{\north}$ as it maps $\north$ to $\north$
       by definition. The witnesses $u$ and $c$ of \cref{def:wild-functor} are
       defined through easy inductions on the suspension, and a
       careful exposition can be found in
       \cite[\githubpath core/lib/types/Suspension.agda]{hott-agda}.
+    \item The join operation ${\blank} * B$ from $\UUptd$ to itself,
+      defined in~\cref{sec:whitehead-interlude},
+      has the structure of a wild functor, mapping $f : A \ptdto A'$
+      to the pointed function $f * B : A * B \ptdto A' * B$
+      defined by induction as follows:
+      \begin{align*}
+        (f * B)(\inl(a)) &\defeq \inl(f(a)),\qquad
+        (f * B)(\inr(b)) \defeq \inr(b),\\
+        \ap{f*B}(\glue(a,b)) &\defis \glue(f(a),b).
+      \end{align*}
+      Note that $f * B$ is pointed by
+      $\ap{\inl}f_0 : \inl(f(a_0)) = \inl(a_0')$,
+      where $a_0$ and $a_0'$ are the base points of $A$ and $A'$,
+      and $f_0 : f(a_0) = a_0'$ witnesses that $f$ is pointed.
+
+      A formalization of $u$ and $c$ of \cref{def:wild-functor}
+      in cubical Agda is in \cite{joinloopadj}.
     \item There is a wild functor $U:\UUptd \to \UU$ that maps a pointed type
       $(A,a_0)$ to $A$ and a pointed maps $(f,f_0)$ to $f$. The witnesses $c$
       and $u$ are both given by reflexivity. In practice, the application of $U$
@@ -2985,7 +3004,7 @@ paper, hence we rely on this proof.)
   \begin{displaymath}
     \epsilon(A)(\north) \defequi a_0,\quad
     \epsilon(A)(\south) \defequi a_0,\quad
-    \ap{\epsilon(A)}\circ \mrd = \id_{\loopspace\null A}.\qedhere
+    \ap{\epsilon(A)}\circ \mrd \defis \id_{\loopspace\null A}.\qedhere
   \end{displaymath}
 %%
 %%  with respective distinguished point $a$ and
@@ -3077,6 +3096,66 @@ paper, hence we rely on this proof.)
 %%  $B$ in the sense of \cref{def:wild-adj}.
 \end{proof}
 
+\begin{prop}
+  Given any pointed type $B$, there is a wild adjunction
+  ${\blank}*B \leftadjto (B \ptdto \loopspace\null\blank)$.
+  \label{prop:join-loop-adjunction}
+\end{prop}
+\noindent Here, the right adjoint is the composition
+of the loop functor $\loopspace\null$
+with the covariant hom-functor from $\UUptd$ to itself.
+\begin{proof}
+  We refer to~\cite{joinloopadj} for a formalization in cubical Agda.
+  Here we just give the unit $\eta$ and the counit $\epsilon$.
+
+  Let $A$ be a pointed type with base point $a_0$. Then define
+  \[
+    \eta(A) : A \ptdto (B \ptdto \loopspace\null(A * B),\quad
+    a \mapsto (b \mapsto \tau_{a,b}),
+  \]
+  where $\tau_{a,b}$ is defined in~\eqref{eq:def-tau-ab}.
+  And if $X$ is a pointed type with base point $x_0$, we define
+  $\epsilon(X) : (B \ptdto \loopspace\null X) * B \ptdto X$
+  by induction by setting,
+  \[
+    \epsilon(X)(\inl(f)) \defequi x_0,\quad
+    \epsilon(X)(\inr(b)) \defequi x_0,\quad
+    \ap{\epsilon(X)}(\glue(f,b)) \defis f(b).\qedhere
+  \]
+\end{proof}
+
+\begin{rem}
+  It is possible to obtain~\cref{prop:join-loop-adjunction}
+  from a more general adjunction on pointed types involving the
+  \emph{smash product}, ${\blank}\wedge B \leftadjto (B \ptdto \blank)$,
+  where the smash product $A \wedge B$ is defined as the following
+  pushout involving the wedge inclusion,
+  \[
+    \begin{tikzcd}
+      A \vee B \ar[r,"i"]\ar[d]\ar[pushout] & A\times B \ar[d,"\inr"] \\
+      1 \ar[r,"\inl"'] & A \wedge B.
+    \end{tikzcd}
+  \]
+  This adjunction is described in details
+  in~\cite[Sec.~4.3.3]{vandoorn:thesis}, and has been formalized in Lean.
+
+  To get~\cref{prop:join-loop-adjunction},
+  we'd also need the natural equivalence $A * B \simeq \susp(A\wedge B)$,
+  and then we could calculate
+  \[
+    (A * B \ptdto X) \simeq (\susp(A\wedge B) \ptdto X)
+    \simeq (A \wedge B \ptdto \loopspace\null X)
+    \simeq (A \ptdto (B \ptdto \loopspace\null X)).
+  \]
+  However, it is considerably less work to establish
+  \cref{prop:join-loop-adjunction} directly,
+  since both $\loopspace\null X$ and $B \ptdto \loopspace\null X$
+  are \emph{homogeneous types},
+  where a pointed type $(X,x_0)$ with base point $x_0:X$ is
+  called homogeneous if $(X,x_0) =_{\UUptd} (X,x)$ for all $x:X$.
+  Indeed, in this case the forgetful map $U : ((A,a_0) \ptdto (X,x_0)) \to (A \to X)$ is an embedding,
+  making it much easier to establish equalities of pointed functions.
+\end{rem}
 %%\subsection{Old section: Symmetries of the $n$-Sphere}
 %%
 %%\todo[inline]{Nicolai: I have replaced the $n\geq 2$ development with my completed approach. I keep the old attempt here, it contains a few ideas which I have not used but which could still be of interest.}
