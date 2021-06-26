@@ -2045,14 +2045,16 @@ equivalence $(\susp B \ptdto X) \weq (\susp B \ptdto X)$ that maps $\gamma$ to
 $\gamma \times \inv \beta$. This equivalence sends the connected component at
 $\beta$ to the connected component at $\wunit$, hence providing the pointed
 equivalence $\xi_\beta$. Explicitly:
-\begin{align}
-  \xi_\beta(\gamma)(\north) &\jdeq \gamma(\north) \\
-  \xi_\beta(\gamma)(\south) &\jdeq \beta(\north) \\
-  \ap{\xi_\beta(\gamma)}(\mrd b)
-                          &= \ap{\beta}(\sigma_B\,b)^{-1} \cdot
-                            \miniast\beta\gamma \cdot
-                            \ap{\gamma}(\sigma_B\,b)
-\end{align}
+\begin{equation}
+  \begin{aligned}
+    \xi_\beta(\gamma)(\north) &\jdeq \gamma(\north) \\
+    \xi_\beta(\gamma)(\south) &\jdeq \beta(\north) \\
+    \ap{\xi_\beta(\gamma)}(\mrd b)
+    &= \ap{\beta}(\sigma_B\,b)^{-1} \cdot
+    \miniast\beta\gamma \cdot
+    \ap{\gamma}(\sigma_B\,b)
+  \end{aligned}
+\end{equation}
 Notice that $\xi_\beta(\gamma)$ is pointed by the path $\gamma_0$ that points
 $\gamma$.
 
@@ -2091,13 +2093,15 @@ equivalences
 %%$\varphi : (A \ptdto \conncomp{(\susp B \ptdto X)}{0})
 %%\to (A * B \ptdto X)$:
 can be identified with the function $\varphi$ defined by induction as follows:
-\begin{align}
+\begin{equation}
+  \begin{aligned}
   \varphi(h) (\inl a) &\defequi x_0 \\
   \varphi(h) (\inr b) &\defequi x_0 \\
   \ap{\varphi(h)} (\glue(a,b))
                       &\defis (h(a))_0 \cdot \ap{h(a)}(\sigma_B(b))
                         \cdot \inv{(h(a))_0}
-\end{align}
+  \end{aligned}
+\end{equation}
 The map $\varphi(h)$ is pointed by the reflexivity path at $x_0$.
 
 Before we can verify the commutativity of \eqref{eq:Whitehead-general},
