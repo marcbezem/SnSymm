@@ -1053,24 +1053,9 @@ and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
   propositional truncations.
 \end{proof}
 
-It seems unreasonable to expect either $\conncomp{(\Sp = \Sp)}{\id_\Sp}$ or
-$\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ to be identifiable with any well-known type.
-%
-\newcommand{\topSp}{S^2}%
-The only result the authors are aware of concerning the shape of these
-components is a result proved in classical topology about the topological
-$2$-sphere in \cite[Thm.~4.1]{hansen}. Write $\topSp$ for the topological
-$2$-sphere, and $\operatorname M(\topSp,\topSp)$ for the space of continuous
-maps from $\topSp$ to $\topSp$ with the uniform topology:
-\begin{thm}
-  The connected component the identity map in $\operatorname M(\topSp,\topSp)$
-  is homotopy equivalent to $\operatorname{SO}(3)\times \Omega$, where $\Omega$
-  is the universal covering space of the connected component of the constant
-  loop in $\loopspace 2 (\topSp)$.
-  \label{thm:hansen}
-\end{thm}
-
-However, one can still establish that both connected components are equivalent.
+Next, we show that the two connected components,
+$\conncomp{(\Sp = \Sp)}{\id_\Sp}$ and
+$\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ are equivalent.
 In fact, it has little to do with $\Sp$ itself, and one can state a more
 general result.
 \begin{prop} \label{prop:equiv-susp-comp}
@@ -2624,7 +2609,7 @@ Finally, we note that the result from \cref{sec:circle-case} does not generalise
 \begin{proof}
 	Assume we have an equivalence $\varphi : (\Sn n = \Sn n) \simeq (\Sn n + \Sn n)$.
 	Without loss of generality, we can assume that $\varphi(\refl{\Sn n})$ lies in the left summand,
-	i.e.\ is of the form $\mathsf{inl}(x)$ with $x : \Sn n$.
+  i.e., is of the form $\inl(x)$ with $x : \Sn n$.
 	By \cite{HoTT}, the fundamental group $\fgr(\Sn n)$ is trivial for the base point $\north$. By $0$-connectedness of $\Sn n$, this is also the case if we consider $\Sn n$ with base point $x$.
 	At the same time, the fundamental group of the left-hand side is non-trivial by
 	\cref{thm:Sp-sym=Z/2,thm:fund-grp-of-symmetries}.
@@ -2635,6 +2620,36 @@ Finally, we note that the result from \cref{sec:circle-case} does not generalise
 
 \todo[inline]{Write me!}
 
+\newcommand{\topSp}{S^2}%
+We have shown that the two connected components of $(\Sn n = \Sn n)$
+are equivalent and have fundamental group $\ZZ/2\ZZ$ for $n\ge2$.
+The only result the authors are aware of that gives
+the complete homotopy type of these
+components is a result proved in classical topology about the topological
+$2$-sphere in \cite[Thm.~4.1]{hansen}. Write $\topSp$ for the topological
+$2$-sphere, and $\operatorname M(\topSp,\topSp)$ for the space of continuous
+maps from $\topSp$ to $\topSp$ with the uniform topology:
+\begin{thm}
+  The connected component the identity map in $\operatorname M(\topSp,\topSp)$
+  is homotopy equivalent to $\operatorname{SO}(3)\times \Omega$, where $\Omega$
+  is the universal covering space of the connected component of the constant
+  loop in $\loopspace 2 (\topSp)$.
+  \label{thm:hansen}
+\end{thm}
+This result can be stated as well in homotopy type theory,
+since $\operatorname{SO}(3) \simeq \RR\mathrm{P}^3$,
+and the real projective $3$-space $\RR\mathrm{P}^3$
+can be defined as in~\cite{BuchholtzRijke2017}.
+We leave the further investigations for future work.
+
+Our proof of \cref{thm:sort-of-ehp} was inspired by
+the similar result~\cite[Theorem~2.7]{lang1973},
+the \emph{$\lambda$-component EHP sequence}.
+As shown there, if we take $\beta\jdeq\id_{\Sn{q+1}}$,
+we obtain an approximation to the classical EHP sequence~\cite{gwwhitehead1953}, valid in the range $n\le3q+1$.
+It would be interesting to construct this in homotopy type theory,
+as well as, of course, more modern refinements such as the various
+EHP spectral sequences for each prime $p$.
 
 \bibliographystyle{alphaurl}
 \bibliography{bib}
