@@ -79,12 +79,36 @@
 
 \section{Introduction}
 
-In this paper, we are interested in the description of the type
-$\Sn n = \Sn n$ ($n\geq 1$) where $\Sn n$ is the $n$-dimensional
-sphere, as defined in the HoTT-book (cf.~\cite{HoTT}).
 
-To be fully precise and to fix notations, we work inside an
-intuitionistic Martin-Löf's type theory with $\Sigma$-, $\Pi$- and
+%6. we: symmetries of sphere
+%7. connection: obvious stuff
+
+
+Martin-L\"of's dependent type theory~\cite{Martin-Lof-1972} can serve as a basis for proof assistants and dependently typed programming languages.
+As pioneered by Voevodsky~\cite{voevodsky_univalentfoundations} as well as by Awodey and Warren~\cite{awodeyWarren_HTmodelsOfIT}, it allows for homotopy-theoretic semantics.
+More concretely, types can be interpreted as $\infty$-groupoids~\cite{Kapulkin2021}, a model which justifies Voevodsky's \emph{univalence axiom}.
+The field that embraces the view of types as spaces is known as \emph{homotopy type theory} (HoTT)~\cite{HoTT}.
+
+It turns out that various results that hold for spaces in standard homotopy theory can be stated and proved for types in homotopy type theory.
+The framework enforces all arguments to be purely axiomatic in nature, and the resulting subfield of homotopy type theory is sometimes called \emph{synthetic homotopy theory}.
+Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite{HoTT}.
+
+A central type of study in synthetic homotopy theory is the $n$-dimensional sphere type $\Sn n$.
+The calculation of the fundamental group of the circle $\Sn 1$ was among the first results in the area~\cite{licataShulman_circle}, and the result was quickly extended to the $n$-th homotopy group of $\Sn n$, i.e.\ to $\pi_n(\Sn n)$~\cite{licataBrunerie_s1again}.
+Further homotopy groups of higher spheres have been studied by Brunerie, showing that $\pi_{n+1}(\Sn n) = \ZZ/2 \ZZ$ for $n \geq 3$~\cite{brunerie:thesis}.
+
+In this paper, we are interested in the type of symmetries, or auto-equivalences, on the sphere $\Sn n$.
+
+\todo[inline]{todo: continue}
+
+
+%In this paper, we are interested in the description of the type
+%$\Sn n = \Sn n$ ($n\geq 1$) where $\Sn n$ is the $n$-dimensional
+%sphere, as defined in the HoTT-book (cf.~\cite{HoTT}).
+
+\paragraph{Setting and assumptions.}
+To be fully precise and to fix notations, we work inside a version of
+intuitionistic Martin-L\"of type theory with $\Sigma$-, $\Pi$- and
 $\Id$-types and with a cumulative hierarchy of universes,
 simply written $\UU$, for which Voevodsky's univalence axiom hold. The
 transport along $p$ in a type family $T:A\to \UU$ is denoted
@@ -208,7 +232,7 @@ $\Sn n \defequi \susp(\Sn{n-1})$ for all $n\geq 2$.
 We also set $\Sn{-1} \defequi\emptytype$ and $\Sn{0}\defequi\bn 2$.
 Then we have $\Sn n = \susp(\Sn{n-1})$ for all $n\ge0$.
 
-\paragraph{Plan of the paper.}%
+\paragraph{Plan of the paper.}
 In \cref{sec:circle-case}, we show carefully that the type $\Sc = \Sc$
 is equivalent to $\Sc + \Sc$. Maybe surprising at first, this result
 is quite straightforward once we unravel the details.
