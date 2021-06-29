@@ -3185,9 +3185,13 @@ with the covariant hom-functor from $\UUptd$ to itself.
   since both $\loopspace\null X$ and $B \ptdto \loopspace\null X$
   are \emph{homogeneous types},
   where a pointed type $(X,x_0)$ with base point $x_0:X$ is
-  called homogeneous if $(X,x_0) =_{\UUptd} (X,x)$ for all $x:X$.
-  Indeed, in this case the forgetful map $U : ((A,a_0) \ptdto (X,x_0)) \to (A \to X)$ is an embedding,
-  making it much easier to establish equalities of pointed functions.
+  called (strongly) homogeneous if $(X,x_0) =_{\UUptd} (X,x)$ for all $x:X$.
+  Indeed, in this case, two pointed maps $(A,a_0) \ptdto (X,x_0)$
+  are equal as long as the underlying maps $A\to X$ are.
+  (This notion of strong homogeneity is closely related to being an H-space,
+  so we don't expect the $2$-sphere $\Sp$ to be strongly homogeneous,
+  even though it is weakly homogeneous in the sense that for any point $z:\Sp$,
+  we have $\Trunc{(\Sp,\north)=_{\UUptd}(\Sp,z)}$.)
 \end{rem}
 %%\subsection{Old section: Symmetries of the $n$-Sphere}
 %%
