@@ -94,20 +94,29 @@ The field that embraces the view of types as spaces is known as \emph{homotopy t
 
 It turns out that various results that hold for spaces in standard homotopy theory can be stated and proved for types in homotopy type theory.
 The framework enforces all arguments to be purely axiomatic in nature, and the resulting subfield of homotopy type theory is sometimes called \emph{synthetic homotopy theory}.
-Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite{HoTT}.
+Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite[Chp.~8.5]{HoTT}.
 
 A central type of study in synthetic homotopy theory is the $n$-dimensional sphere type $\Sn n$.
 The calculation of the fundamental group of the circle $\Sn 1$ was among the first results in the area~\cite{licataShulman_circle}, and the result was quickly extended to the $n$-th homotopy group of $\Sn n$, i.e.\ to $\pi_n(\Sn n)$~\cite{licataBrunerie_s1again}.
 Further homotopy groups of higher spheres have been studied by Brunerie, showing that $\pi_{n+1}(\Sn n) = \ZZ/2 \ZZ$ for $n \geq 3$~\cite{brunerie:thesis}.
 
 In this paper, we are interested in the type of symmetries, or auto-equivalences, on the sphere $\Sn n$.
+By univalence, this type can be written simply as $\Sn n = \Sn n$.
+For $n = 1$, a relatively simple calculation shows that $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$.
+For $n \geq 2$, a similarly elegant answer does not seem to be possible.
+Our main result for this case is that the type $(\Sn n = \Sn n)$ has two equivalent connected components, each of which has fundamental group $\ZZ / 2 \ZZ$.
+Maybe somewhat surprisingly, this turns out to be easier to prove for $n \geq 3$ than it is for $n = 2$.
 
-\todo[inline]{todo: continue}
+Our study is closely related to the calculation of homotopy groups mentioned above.
+Recall that the $n$-th homotopy group of $\Sn n$ is, by definition, the set-truncation of the loop space $\Omega^n(\Sn n)$.
+The latter type is known to be equivalent to $\Sn n \ptdto \Sn n$, the type of \emph{pointed} endofunctions on $\Sn n$.
+The type of symmetries that we study consists of such functions as well, but the pointedness condition is dropped and replaced by the property that all considered functions are equivalences.
+Many of our arguments use similar techniques are the ones used in the calculation of higher homotopy groups, such as Freudenthal's suspension theorem~\cite[Thm 8.6.4]{HoTT} or the Hopf fibration.
+For the characterisation of the components of $\Sn 2 = \Sn 2$, Brunerie's~\cite{brunerie:thesis} calculation of $\pi_4(\Sn 3)$ is of great use.
 
+The symmetries of the 2-sphere have been studied by Hansen~\cite{hansen} in classical topology, and the conclusions of the current paper discuss this.
+Other than that, however, we are not aware of studies similar to ours outside the realm of type theory.
 
-%In this paper, we are interested in the description of the type
-%$\Sn n = \Sn n$ ($n\geq 1$) where $\Sn n$ is the $n$-dimensional
-%sphere, as defined in the HoTT-book (cf.~\cite{HoTT}).
 
 \paragraph{Setting and assumptions.}
 To be fully precise and to fix notations, we work inside a version of
@@ -257,6 +266,8 @@ Freudenthal's suspension theorem.
 
 In \cref{sec:structure-components}, we then show that the fundamental group of each component is $\ZZ/2\ZZ$ for $n\ge2$.
 We partly develop an EHP long exact sequence to deal with the case $n=2$.
+
+Final remarks are made in \cref{sec:conclusions}.
 
 \section{Symmetries of the circle}
 \label{sec:circle-case}%
@@ -2638,6 +2649,7 @@ Let us summarise the results of the current section, putting \cref{thm:higher-sp
 \end{rem}
 
 \section{Conclusion}
+\label{sec:conclusions}
 
 \todo[inline]{Write me!}
 
