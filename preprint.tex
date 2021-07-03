@@ -105,7 +105,7 @@ By univalence, this type can be written simply as $\Sn n = \Sn n$.
 The trivial cases occur for $n = -1$,
 where $\Sn{-1}=\emptytype$, the empty type, so $(\Sn{-1} = \Sn{-1}) = \bn 1$,
 and for $n= 0$,
-where $\Sn{-2}=\bn 2$, the type of booleans, so $(\Sn 0 = \Sn 0) = \bn 2 = \bn 1+\bn 1$.
+where $\Sn 0=\bn 2$, the type of booleans, so $(\Sn 0 = \Sn 0) = \bn 2 = (\bn 1+\bn 1)$.
 For $n = 1$, a relatively simple calculation shows that $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$.
 For $n \geq 2$, a similarly elegant answer does not seem to be possible.
 Our main result for this case is that the type $(\Sn n = \Sn n)$ has two equivalent connected components, each of which has fundamental group $\ZZ / 2 \ZZ$.
@@ -760,7 +760,9 @@ the first of which is simple:
     connected, one can as well suppose that $\varphi$ is pointed.
     Let $p:\varphi(\north)=\north$ be the given path.
   \item Construct a degree function $d: (\Sp \ptdto \Sp) \to \ZZ$, which is a
-    morphism of wild monoids. In particular, it maps pointed equivalences to
+    morphism of wild monoids,
+    where the operations are given by composition and multiplication, respectively.
+    In particular, it maps pointed equivalences to
     invertible elements in $\ZZ$, that is $1$ or $-1$.
   \item Prove that $d$ is `weakly injective', meaning that $d(f)=d(g)$
     implies $\Trunc{f=g}$. By Lemma~\ref{lemma:S2-id-neq-minusid},
@@ -811,8 +813,9 @@ a path.
   hence it is constant.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\label{prop:degree-monoid-morphism}
   The degree function $d$ is a morphism of wild monoids from $\Sp \ptdto \Sp$
+  under composition
   to the multiplicative monoid $\ZZ$.
   \label{prop:deg-monoid-morphism}
 \end{prop}
@@ -850,6 +853,15 @@ a path.
   gets $\inv\zeta(n) = {\inv\zeta(1)}^n$ in $\hgr 2(\Sp)$ (where the group
   operation is denoted multiplicatively).
 \end{proof}
+
+\begin{rem}
+  As in~\cite{Buchholtz2018CellularCI}, one can also put a group structure
+  on $\Sp \ptdto \Sp$ such that the degree function becomes a
+  group isomorphism onto $\ZZ$ with its additive structure.
+  Together with \cref{prop:degree-monoid-morphism},
+  the degree function then becomes a ring isomorphism.
+  In general, pointed maps $\susp X \ptdto \susp X$ only form a wild \emph{near-ring}.
+\end{rem}
 
 \begin{cor}
   The degree of a pointed equivalence is either $1$ or $-1$.
@@ -1155,7 +1167,8 @@ general result.
 %%}
 
 Having discussed the cases $n = 1$ and $n = 2$ in some detail, we finally wish to establish the result that $\Sn n = \Sn n$ has two connected components, for all $n \geq 1$.
-The main ideas for the proof are already contained in the result that $\pi_n(\Sn n) = \ZZ$ \cite{licataBrunerie_s1again} and the definition of degrees by Buchholtz and Favonia \cite{Buchholtz2018CellularCI}, but the argument that we need does not seem to have been spelled out in detail so far.
+The main ideas for the proof are already contained in the result that $\pi_n(\Sn n) = \ZZ$ \cite{licataBrunerie_s1again} and the definition of degrees by Buchholtz and Favonia \cite{Buchholtz2018CellularCI}, but the argument that we need does not seem to have been written out
+informally in detail so far, though it has been formalized.
 
 The core ingredient is the following statement,
 where we use that the suspension $\susp$ acts like a functor on morphisms:
@@ -1165,7 +1178,7 @@ where we use that the suspension $\susp$ acts like a functor on morphisms:
     \begin{equation} \label{eq:susp-monoid-morphism}
     (\Sn n \to_* \Sn n) \xrightarrow{\susp} (\Sn {n+1} \to_* \Sn {n+1})
     \end{equation}
-    is a $0$-connected morphism of wild monoids.
+    is a $0$-connected morphism of wild monoids under composition.
 \end{restatable}
 
 As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see
@@ -1174,7 +1187,7 @@ an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n
 \to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, we will be able
 to conclude that $\Sn n = \Sn n$ has two connected components.
 
-\subsection{Connectedness of the morphism of wild monoids}
+\subsection{Connectedness of the suspension morphism}
 %
 The goal of this subsection is to prove \cref{thm:susp-is-monoid-iso}. We need
 some preparation.  First of all, recall that we have a wild adjunction $\susp
