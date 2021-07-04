@@ -391,18 +391,17 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
 \end{prop}
 \begin{proof}
   Let $\varphi$ be a symmetry of the circle, and let $\psi$ denote a
-  quasi-inverse of $\varphi$. The type $\Sc$ being connected, one
-  has $\Trunc{\varphi(\base) = \base}$ and
+  quasi-inverse of $\varphi$.
+  By assumption, we have an identification $\pi : \varphi\circ\psi =_{\Sc\to\Sc} \id_\Sc$.
+  The type $\Sc$ being connected, we have
   $\Trunc{\psi(\base) = \base}$. Because the goal $P(\varphi)$ is
-  propositional, one can instead suppose actual paths
-  $\varphi_0\from \varphi(\base) = \base$ and
-  $\psi_0\from \psi(\base) = \base$. In other words, we can suppose that
-  $\varphi$ and its quasi-inverse $\psi$ are pointed maps. Denote
-  $\pi$ for a path of type $\varphi\psi = \id_\Sc$. Then one can craft a
-  path $(\pi,)$ of type
-  $(\varphi,\varphi_0) \circ (\psi,\psi_0) =
-  (\id_\Sc, \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}})$. Now, consider the
-  induced applications
+  propositional, we can instead assume we have an actual path
+  $\psi_0\from \psi(\base) = \base$.
+  In other words, we can suppose that $\psi$ is a pointed map.
+  Setting $\varphi_0 \defequi \pi_{\base} \inv{\ap \varphi(\psi_0)} : \varphi(\base) = \base$,
+  we obtain an identification of pointed maps,
+  $(\varphi,\varphi_0) \circ (\psi,\psi_0) =_{\Sc\ptdto\Sc} (\id_\Sc, \refl\base)$.
+  Now, consider the induced applications
   \begin{displaymath}
     \loopspace{} (\varphi,\varphi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc
     \quad\text{and}\quad
@@ -415,42 +414,36 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   $\Sloop^\ell$ respectively. Then the following chain of propositions
   holds:
   \begin{align*}
-    \Sloop^{k\ell} &= (\Sloop^k)^\ell\\
-    &= \loopspace{} (\varphi,\varphi_0) \left(
-      \loopspace{} (\psi,\psi_0) (\Sloop)
-    \right)\\
-    &= \loopspace{} (\id_\Sc,
-    \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} (\Sloop))
-    \\
-    &=
-    \left( \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} \right)
-    \cdot \Sloop \cdot
-    \inv {\left( \varphi_0 \cdot \ap \varphi (\psi_0) \cdot \inv {\pi_{\base}} \right)}
-    \\
-    &= \Sloop
+    \Sloop
+    &= \loopspace\null(\id_\Sc, \refl\base) (\Sloop)
+    = \loopspace\null\bigl((\varphi,\varphi_0) \circ (\psi,\psi_0)\bigr) (\Sloop)
+    = \loopspace\null(\varphi,\varphi_0)\bigl( \loopspace\null (\psi,\psi_0)(\Sloop) \bigr) \\
+    &= \loopspace\null(\varphi,\varphi_0)(\Sloop^\ell)
+    = \bigl(\loopspace\null(\varphi,\varphi_0)(\Sloop)\bigr)^\ell
+    = \bigl(\Sloop^k\bigr)^\ell
+    = \Sloop^{k\ell}
   \end{align*}
-  where the last equality exploits commutativity of path composition
-  in the loop space $(\base = \base)$. Through the equivalence
+  Through the equivalence
   of~\cref{eq:loopspace-circle-Z}, we get that $k\ell=1$ in $\ZZ$,
-  and by the decidability of equality in $\ZZ$ we get an element of $(k=1)+(k=-1)$.
+  and by elementary arithmetic we get an element of $(k=1)+(k=-1)$.
   From $k=1$, and because
-  $\loopspace{} (\varphi,\varphi_0) \jdeq \varphi_0
-  \ap\varphi(\Sloop) \inv {\varphi_0}$, one gets an element
+  $\loopspace{} (\varphi,\varphi_0)(\Sloop) \jdeq \varphi_0
+  \ap\varphi(\Sloop) \inv {\varphi_0}$, we get an element
   \begin{displaymath}
     b\from \varphi_0 \ap\varphi(\Sloop) \inv {\varphi_0} = \Sloop.
   \end{displaymath}
   One can then construct an element $\kappa\from \varphi = \id_\Sc$ by
   $\Sc$-induction by taking $\kappa(\base)$ to be
-  $\varphi_0 \from (\varphi(\base) = \base)$ and $\ap \kappa(\Sloop)$
+  $\varphi_0 \from \varphi(\base) = \base$ and $\ap \kappa(\Sloop)$
   the element $b$ just defined, transported back over the equivalence
   \begin{displaymath}
     (\pathover {\varphi_0} {\varphi(\blank) = \id_\Sc(\blank)} \Sloop {\varphi_0}) \weq
     ( \Sloop \varphi_0 \inv {\ap\varphi(\Sloop)} = \varphi_0)
     \weq (\varphi_0 \ap\varphi(\Sloop) \inv {\varphi_0} = \Sloop)
   \end{displaymath}
-  By taking $\trunc{\kappa}$, we get an element of
-  $\Trunc{\varphi = \id_\Sc}$. Similarly, from $k=-1$, one gets an
-  element of $\Trunc{\varphi = -\id_\Sc}$. So in both cases, one gets
+  Hence $\trunc{\kappa} : \Trunc{\varphi = \id_\Sc}$.
+  Similarly, from $k=-1$, we get an
+  element of $\Trunc{\varphi = -\id_\Sc}$. So in both cases, we get
   an element of $P(\varphi)$.
 \end{proof}
 
