@@ -282,7 +282,7 @@ In this section, we will prove the following result.
   \label{thm:symmetries-of-S1}
   There is an equivalence
   \begin{equation}
-    \label{eq:symm-cricle}%
+    \label{eq:symm-circle}%
     (\Sc = \Sc) \weq \Sc+\Sc.
   \end{equation}
 \end{thm}
@@ -291,7 +291,7 @@ $f:\Sc\weq \Sc$ will be treated as elements of $\Sc=\Sc$ without any
 warning. In particular, we shall write as if
 ``$\refl \Sc \jdeq \id_\Sc$''.
 
-To provide an equivalence of type \cref{eq:symm-cricle}, we proceed
+To provide an equivalence of type \cref{eq:symm-circle}, we proceed
 in several steps:
 \begin{itemize}
 \item First, we will describe two elements of $\Sc=\Sc$;
@@ -461,7 +461,7 @@ there is an element of the type:
   (\Sc=\Sc) \weq \conncomp{(\Sc=\Sc)}{\id_\Sc} + \conncomp{(\Sc=\Sc)}{-\id_\Sc}.
 \end{displaymath}
 
-In order to prove our goal (cf.~\cref{eq:symm-cricle}), it remains to
+In order to prove our goal (cf.~\cref{eq:symm-circle}), it remains to
 exhibit equivalences from $\Sc$ to both
 $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ and
 $\conncomp{(\Sc=\Sc)}{-\id_\Sc}$. First note that because $\Sc=\Sc$ is
@@ -489,7 +489,7 @@ to $\ZZ$ (cf.~\cref{eq:loopspace-circle-Z}), it gives an equivalence
 $\varepsilon_x\from (x=x) \weq \ZZ$ for any $x\from\Sc$. We can now
 exhibit an equivalence:
 \begin{displaymath}
-  \begin{tikzcd}
+  \begin{tikzcd}[row sep=tiny]
     \left(\Sc \to \Sc\right) \rar["\weq"] & (\sum_{x\from\Sc}x=x)
     \rar["\weq"] & \Sc \times \ZZ
     \\
@@ -499,22 +499,21 @@ exhibit an equivalence:
     \right)%
 \end{tikzcd}
 \end{displaymath}
-In particular, one can verify that $\id_\Sc$ is mapped to $(\base,1)$
+In particular, we see that $\id_\Sc$ is mapped to $(\base,1)$
 and $-\id_\Sc$ is mapped to $(\base,-1)$ through this
 equivalence. Because $\ZZ$ is a set and $\Sc$ is connected, the
 connected components of $\Sc\times\ZZ$ are easy to understand: for
 every $x:\Sc$ and $k:\ZZ$, the connected component of $(x,k)$ is
 equivalent to the type of all pairs $(x',k)$ for
 $x'\from\Sc$. In particular, every connected component of
-$\Sc\times\ZZ$ is equivalent to $\Sc$. In particular, one gets
+$\Sc\times\ZZ$ is equivalent to $\Sc$. In particular, we get
 equivalences:
 \begin{displaymath}
   \conncomp{\left(\Sc \to \Sc\right)}{\id_\Sc} \weq \Sc
   \quad\text{and}\quad
   \conncomp{\left(\Sc \to \Sc\right)}{-\id_\Sc} \weq \Sc
 \end{displaymath}
-
-Finally, one can compose all the equivalences that we exhibited:
+Finally, we compose all the equivalences that we exhibited,
 \begin{align*}
   (\Sc=\Sc)
   & \weq \conncomp{\left(\Sc = \Sc\right)}{\id_\Sc}
@@ -523,8 +522,9 @@ Finally, one can compose all the equivalences that we exhibited:
   & \weq \conncomp{\left(\Sc \to \Sc\right)}{\id_\Sc}
     + \conncomp{\left(\Sc \to \Sc\right)}{-\id_\Sc}
   \\
-  & \weq \Sc + \Sc.
+  & \weq \Sc + \Sc,
 \end{align*}
+completing the proof of \cref{thm:symmetries-of-S1}.
 
 \section{Symmetries of the \texorpdfstring{$2$}{2}-sphere}
 \label{sec:sphere}
