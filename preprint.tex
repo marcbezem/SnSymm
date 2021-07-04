@@ -150,7 +150,7 @@ composition by $qp$, or by $q\cdot p$.
 We postulate a type $\NN$ of natural numbers with its inductive property
 (cf.~\cite[Chapter 1.9]{HoTT}), from which is crafted a type $\ZZ$ of integers
 as in \cite[\githubpath core/lib/types/Int.agda]{hott-agda}. The crucial
-property of $\ZZ$ (proved in previously cited file), is that it has decidable
+property of $\ZZ$ (proved in the cited file), is that it has decidable
 equality. We allow also several higher inductive types that are defined in
 \cite{HoTT}: propositional and set truncations, suspension, and the circle.
 Considering their importance in this paper, we recall them in full:
@@ -219,7 +219,7 @@ Considering their importance in this paper, we recall them in full:
     such that
     \begin{gather*}
       \ind(n,s,m)(\north) \jdeq n,\quad
-      \ind(n,s,m)(\south) \jdeq s,\\
+      \ind(n,s,m)(\south) \jdeq s,\quad\text{and} \\
       \ap{\ind(n,s,m)}(\mrd a) = m(a)\ \text{for all $a\from A.$}
     \end{gather*}
   \end{quote}
@@ -241,7 +241,8 @@ Considering their importance in this paper, we recall them in full:
     \end{displaymath}
     such that
     \begin{displaymath}
-      \ind(b,\ell)(\base) \jdeq b,\quad \ap{\ind(b,\ell)}(\Sloop) = \ell \,.
+      \ind(b,\ell)(\base) \jdeq b\quad\text{and}
+      \quad \ap{\ind(b,\ell)}(\Sloop) = \ell \,.
     \end{displaymath}
   \end{quote}
 \end{enumerate}
@@ -261,16 +262,14 @@ being an abelian group, we can not expect to generalize the proof for
 $n=2$. However, a careful analysis of Brunerie's proof of
 $\pi_2(\Sp) \weq \ZZ$ allows us to prove that the type $\Sp=\Sp$ has
 exactly two connected components, equivalent to one another.
-Determining a type with a simple description that is
-equivalent to these components is a challenge in itself, still open,
-to the authors' knowledge.
 
 In \cref{sec:higher-sphere}, we propagate the result by induction on
 $n\geq 2$: the type $\Sn n = \Sn n$ has exactly two connected
 components, equivalent to one another. Each induction step relies on
 Freudenthal's suspension theorem.
 
-In \cref{sec:structure-components}, we then show that the fundamental group of each component is $\ZZ/2\ZZ$ for $n\ge2$.
+In \cref{sec:structure-components}, we then show that the fundamental group
+of each component of $\Sn n = \Sn n$ is $\ZZ/2\ZZ$ for $n\ge2$.
 We partly develop an EHP long exact sequence to deal with the case $n=2$.
 
 Final remarks are made in \cref{sec:conclusions}.
@@ -295,9 +294,9 @@ warning. In particular, we shall write as if
 To provide an equivalence of type \cref{eq:symm-cricle}, we proceed
 in several steps:
 \begin{itemize}
-\item first, we will describe two elements of $\Sc=\Sc$;
+\item First, we will describe two elements of $\Sc=\Sc$;
 \item next, we will prove that these two elements are not equal (and
-hence in different connected components);
+hence lie in different connected components);
 \item then, we will prove that every equivalence in $\Sc=\Sc$ is
   merely equal to one of these two elements;
 \item finally, we will conclude by exhibiting an equivalence between
@@ -319,7 +318,7 @@ that:
 Let us note that $-\id_\Sc$ is an equivalence. It is indeed its own inverse, as
 it is shown in the following. In order to construct a proof of $-\id_\Sc \circ
 -\id_\Sc = \id_\Sc$, we use function extensionality and $\Sc$-induction.
-$\refl\base$ is an element of $-\id_\Sc\circ -\id_\Sc (\base) = \base$, and
+Since $\refl\base$ is an element of $-\id_\Sc\circ -\id_\Sc (\base) = \base$,
 we only need to provide an element of $\pathover {\refl\base} T \Sloop
 {\refl\base}$ where $T$ is the type family $x \mapsto -\id_\Sc \circ -\id_\Sc (x)
 = x$. The transport in the type family $T$ over $\Sloop$ is given by
@@ -328,14 +327,14 @@ we only need to provide an element of $\pathover {\refl\base} T \Sloop
 \end{displaymath}
 By definition of $-\id_\Sc$, the formula can be rewritten as $\Sloop \cdot p
 \cdot \inv \Sloop$.  Hence $\trp[T] \Sloop (\refl\base) = \refl\base$ by simple
-path algebra, as wanted.
+path algebra, as we wanted.
 
 \begin{lem}
   \label{lemma:S1-id-neq-minusid}%
   The proposition $\id_\Sc \neq -\id_\Sc$ holds.
 \end{lem}
 \begin{proof}
-  Suppose a path $p\from\id_\Sc = -\id_\Sc$ and derive a
+  We assume we have a path $p\from\id_\Sc = -\id_\Sc$ and derive a
   contradiction. Through function extensionality, and because
   $\id_\Sc(\base) \jdeq \base \jdeq -\id_\Sc(\base)$, one gets a path
   $p(\base) \from \base = \base$, and a $2$-path
@@ -343,9 +342,10 @@ path algebra, as wanted.
   $T(x)\defequi (\id_\Sc(x) = -\id_\Sc(x))$ for all $x:\Sc$. One can
   easily find by induction on $q\from x=y$ a 2-path of type
   \begin{displaymath}
-    \trp [T] q (\blank) = \ap{-\id_\Sc}(q) \blank \inv{\ap{\id_\Sc}(q)}.
+    \trp [T] q (r) = \ap{-\id_\Sc}(q)\, r \inv{\ap{\id_\Sc}(q)},
+    \quad\text{for all $r : T(x)$.}
   \end{displaymath}
-  By composition, $\ap p (\Sloop)$ provides a 2-path of type
+  Applied to $r \defequi p(\base)$, we get that $\ap p(\Sloop)$ provides a 2-path of type
   $\inv\Sloop p(\base) \inv\Sloop = p(\base)$. Now recall that
   the function
   \begin{equation}
@@ -409,8 +409,8 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
     \loopspace{} (\psi,\psi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc.
   \end{displaymath}
   The elements $\loopspace{} (\varphi,\varphi_0) (\Sloop)$ and
-  $\loopspace{} (\psi,\psi_0) (\Sloop)$ of $(\base=\base)$ must be a
-  power of $\Sloop$ by the equivalence
+  $\loopspace{} (\psi,\psi_0) (\Sloop)$ of $(\base=\base)$ must be
+  powers of $\Sloop$ by the equivalence
   of~\cref{eq:loopspace-circle-Z}. We denote them $\Sloop^k$ and
   $\Sloop^\ell$ respectively. Then the following chain of propositions
   holds:
