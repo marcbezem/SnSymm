@@ -67,7 +67,7 @@
 
 \begin{abstract}
   Working in univalent foundations,
-  we investigate the symmetries of spheres, i.e.\ the types of the form
+  we investigate the symmetries of spheres, i.e., the types of the form
   $\Sn n = \Sn n$.
   The case of the circle has a slick answer:
   the symmetries of the circle form two copies of the circle.
@@ -97,7 +97,7 @@ The framework enforces all arguments to be purely axiomatic in nature, and the r
 Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite[Chp.~8.5]{HoTT}.
 
 A central type of study in synthetic homotopy theory is the $n$-dimensional sphere type $\Sn n$.
-The calculation of the fundamental group of the circle $\Sn 1$ was among the first results in the area~\cite{licataShulman_circle}, and the result was quickly extended to the $n$-th homotopy group of $\Sn n$, i.e.\ to $\pi_n(\Sn n)$~\cite{licataBrunerie_s1again}.
+The calculation of the fundamental group of the circle $\Sn 1$ was among the first results in the area~\cite{licataShulman_circle}, and the result was quickly extended to the $n$-th homotopy group of $\Sn n$, i.e., to $\pi_n(\Sn n)$~\cite{licataBrunerie_s1again}.
 Further homotopy groups of higher spheres have been studied by Brunerie, showing that $\pi_{n+1}(\Sn n) = \ZZ/2 \ZZ$ for $n \geq 3$~\cite{brunerie:thesis}.
 
 In this paper, we are interested in the type of symmetries, or auto-equivalences, on the sphere $\Sn n$.
@@ -1324,7 +1324,7 @@ The above lemmas allow us to formulate a connection between the maps $\susp$ in
 %, which will be needed in order to use \cref{thm:freudenthal} for \cref{thm:susp-is-monoid-iso}:
 
 \begin{lem} \label{lem:sigma-susp}
-  The maps $\sigma_{\Sn n}$ and $\susp$ are equal up to canonical isomorphism, i.e.\ the square
+  The maps $\sigma_{\Sn n}$ and $\susp$ are equal up to canonical isomorphism, i.e., the square
   \begin{equation} \label{eq:needs-to-commute}
     \begin{tikzpicture}[x=6cm,y=-2cm,baseline=(current bounding box.center)]
     \tikzset{arrow/.style={shorten >=0.1cm,shorten <=.1cm,->}}
@@ -1368,7 +1368,7 @@ The top triangle commutes by \cref{lem:adj-prop}.
 The bottom quadrangle commutes by \cref{lem:iterated-ap-Sigma}.
 \end{proof}
 
-\cref{lem:sigma-susp} characterises the function \eqref{eq:susp-monoid-morphism}
+\cref{lem:sigma-susp} characterizes the function \eqref{eq:susp-monoid-morphism}
 in terms of $\sigma$.
 Our motivation for this characterisation is that we know something about $\sigma$ through the following result:
 
@@ -1573,8 +1573,8 @@ We now see that there are two connected components of symmetries of spheres:
 
 As in the cases of $\Sc$ and $\Sp$, we want to construct one concrete element for each of the two connected components of symmetries on $\Sn n$ that were established in \cref{thm:higher-spheres-2}.
 As before, these two elements are given as $\id$ and $-\id : \Sn n \to \Sn n$.
-It is clear that they are symmetries (i.e.\ equivalences), as each is self-inverse.
-What is less obvious is that they are distinguishable, i.e.\ represent the two different components in \cref{thm:higher-spheres-2} rather than the same.
+It is clear that they are symmetries (i.e., equivalences), as each is self-inverse.
+What is less obvious is that they are distinguishable, i.e., represent the two different components in \cref{thm:higher-spheres-2} rather than the same.
 Instead of showing $\id \neq -\id$ as in \cref{lemma:S2-id-neq-minusid}, we show that suspension and ``negation'' commute in \cref{lem:susp-neg-commute}.
 
 In this subsection, we annotate the constructors of the suspension with their type in order to avoid ambiguity.
@@ -1586,7 +1586,7 @@ For $f : A \to B$, we have $\susp(f) : \susp(A) \to \susp(B)$ given by $\north_{
 $\south_{\susp(A)} \mapsto \south_{\susp(B)}$,
 and $\mrd_{\susp(A)}(a) \mapsto \mrd_{\susp(B)}(f(a))$.
 Notice that the index of $\mrd$ is redundant when applied to an argument as its type is then inferrable from the type of the argument. We shall then use $\mrd(a)$ instead of $\mrd_{\susp(A)}(a)$ for $a:A$ whenever it make the text more readable.
-Moreover, we use colours to make the connections between formulas and diagrams easier to identify.
+Moreover, we use colors to make the connections between formulas and diagrams easier to identify.
 
 \begin{lem} \label{lem:susp-neg-commute}
 	For any type $A$, the two functions $\susp(-\id_{\susp(A)})$ and $-\id_{\susp(\susp(A))}$ of type $\susp(\susp(A)) \to \susp(\susp(A))$ are equal.
@@ -1673,7 +1673,7 @@ Here, we give the argument in the style of \cite{HoTT}:
           U(y) \defequi \left( \inv{m_S} \cdot \mrd(-\id_{\susp A}(y)) = \inv{\mrd(y)} \cdot m_N\right)
         \end{displaymath}
         In other words, one needs to show an equality between the ``fillers'' of the two squares \eqref{eq:N-commute} and \eqref{eq:S-commute}, and this equality lies over $\mrd(z)$ in the type family $U$ given at each point $y$ by square~\eqref{eq:y-commute}.
-%%      (i.e.\ depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
+%%      (i.e., depends on) the two equalities that stem from the top horizontal arrow and the bottom horizontal arrow in \eqref{eq:y-commute} (note that the two vertical arrows in \cref{eq:y-commute} do not depend on $y$).
         We first need to understand transport in $U$ over a path $p$ in $\susp A$. %
         The intuition is that the top and bottom arrows of square~\eqref{eq:y-commute}
         can be deformed by $p$ while the vertical arrows remain constant.
@@ -1750,7 +1750,7 @@ Here, we give the argument in the style of \cite{HoTT}:
 
 
   The easiest way to show that (\ref{eq:3-cell}) commutes
-  is to generalise to arbitrary points $N$, $S$
+  is to generalize to arbitrary points $N$, $S$
   and arbitrary paths $m_N,m_S : N=S$,
   as well as to an arbitrary higher path $\beta: m_N=m_S$.
   One starts by doing path induction on $m_N$,
@@ -1801,7 +1801,7 @@ Here, we give the argument in the style of \cite{HoTT}:
 	The front square is \eqref{eq:N-commute}, the back square is \eqref{eq:S-commute},
         the left and right are $\refl{}$, the top is $\alpha$, and the bottom is $\beta$,
         each appropriately oriented.
-	The colours indicate the squares that came from the
+	The colors indicate the squares that came from the
         definitions in \eqref{eq:green} and \eqref{eq:blue}.
 \end{rem}
 
@@ -2372,7 +2372,7 @@ The first observation we make is simple:
 \end{proof}
 
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
-The rest of this subsection is devoted to calculating the fundamental group of this type, which also allows us to see that the equivalence $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise for $n > 1$.
+The rest of this subsection is devoted to calculating the fundamental group of this type, which also allows us to see that the equivalence $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalize for $n > 1$.
 
 \begin{lem}
   For any $n\geq 1$, there is a group isomorphism:
@@ -2519,7 +2519,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %%%note: these results are NOT in Guillaume's thesis, but only in the paper. I only checked the arxiv version, the published on is behind a paywall.
 %%\cite[Corollaries 3 and 4 of the arXiv version]{brunerie2019james}, the fundamental groups on the right-hand side is $\ZZ \slash 2\ZZ$.
 %%
-%%The calculation above a priori only shows an equivalence of types (i.e.\ $\fgr(\Sn n = \Sn n) = \bn 2$).
+%%The calculation above a priori only shows an equivalence of types (i.e., $\fgr(\Sn n = \Sn n) = \bn 2$).
 %%The equivalence of groups follows as the group structure on $\bn 2$ is unique once the unit element is fixed.
 %%\end{proof}
 
@@ -2648,11 +2648,10 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 \end{proof}
 
 
-Let us summarise the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries} together:
+Let us summarize the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries} together:
 
 \begin{thm}
     For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\ZZ \slash 2\ZZ$. \qed
-%    The characterisation $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalise.
 \end{thm}
 
 
@@ -2801,7 +2800,7 @@ One makes the abuse to denote a wild category by only its carrier type $\cat C$ 
 all the remaining data are clear from context.
 
 \begin{rem}
-  To be fully rigourous, one must say a word about the levels of universe one
+  To be fully rigorous, one must say a word about the levels of universe one
   allows in the definition of wild categories. Assuming we have a cumulative
   hierarchy of universes $\UU_0 : \UU_1 : \ldots$, we choose to consider
   locally small wild categories, by which are meant wild categories such that
@@ -3327,7 +3326,7 @@ with the covariant hom-functor from $\UUptd$ to itself.
 %%\end{lem}
 %%\begin{proof}
 %%    The type $P(x) \defequi \setTrunc{(\Sn n, N) \ptdweq (\Sn n, x)} \simeq \bn 2$ is a
-%%    set, i.e.\ $0$-truncated.
+%%    set, i.e., $0$-truncated.
 %%    Further, the sphere $\Sn n$ is $(n-1)$-connected and the map $1\to \Sn n$ selecting the point $\north$ is therefore
 %%    $(n-2)$-connected.
 %%    By \cite[Lemma 7.5.7]{HoTT} and by the assumption $n \geq 2$,
