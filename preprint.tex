@@ -1109,47 +1109,29 @@ $\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ are equivalent.
 In fact, it has little to do with $\Sp$ itself, and one can state a more
 general result.
 \begin{prop} \label{prop:equiv-susp-comp}
-  Let $A$ be a type. Then:
+  Let $A$ be a type with a point $a$ and a loop $p : a = a$. Then:
   \begin{displaymath}
-    \conncomp{(\susp A = \susp A)}{\id_{\susp A}} \weq \conncomp{(\susp A = \susp A)}{-\id_{\susp A}}
+    \conncomp{(a = a)}{\refl{a}} \weq \conncomp{(a = a)}{p}
   \end{displaymath}
 \end{prop}
 \begin{proof}
-  Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $\north$
-  to $\south$, $\south$ to $\north$ and each meridian to its inverse as a path of $\susp A$.
-  %
+  Define $f:{(a = a)} \to (a = a)$ by mapping
+  $q$ to $qp$.
+  Then $f$ is an equivalence with pseudo-inverse given by mapping $r$ to $r\inv p$.
+  Moreover, we have $f(\refl a) = p$.
 
-  Now, define $f:{({\susp A} \to {\susp A})} \to ({\susp A} \to {\susp A})$ by mapping
-  $\varphi$ to $\varphi\circ(-\id_{\susp A})$.
-%%
-%%  the function defined by ${\susp A}$-induction in the following way:
-%%  \begin{align*}
-%%    &f(\varphi)(\north) \jdeq \varphi(\south), \quad f(\varphi)(\south) \jdeq \varphi(\north),\\
-%%    &\ap{f(\varphi)}(\mrd(x)) = \inv{\ap{\varphi}(\mrd(x))}\quad \text{for all}\ x:\Sc
-%%  \end{align*}
-%%  One can see that $f$ is its own pseudo-inverse, meaning $f\circ f = \id_{{\susp A}
-%%  \to {\susp A}}$. Indeed, for any $\varphi:{\susp A} \to {\susp A}$, the function $(f\circ
-%%  f)(\varphi)$ maps definitionally $\north$ to $\varphi(\north)$ and $\south$ to $\varphi(\south)$.
-%%  Moreover,
-%%  \[
-%%  \ap{f(f(\varphi))}(\mrd(x)) = \inv{\ap{f(\varphi)}(\mrd(x))}
-%%  = \inv{\inv{\ap{\varphi}(\mrd(x))}} = \ap{\varphi}(\mrd(x)),
-%%  \]
-%%  so an easy ${\susp A}$-induction shows that $(f\circ f)(\varphi) = \varphi$.
-%%  %
-%%  Another easy ${\susp A}$-induction shows that $f(\id_{\susp A}) = -\id_{\susp A}$.
-  As $-\id_{\susp A}\circ -\id_{\susp A} = \id_{\susp A}$, the function $f$ is
-  an equivalence which is its own pseudo-inverse. Moreover, one has that
-  $f(\id_{\susp A}) = -\id_{\susp A}$.
-  %
-  The equivalence $f$ restricts then into an equivalence between the connected
-  component of $\id_{\susp A}$ and the connected component of $-\id_{\susp A}$.
-  Being an equivalence is a property, so that the connected component of an
-  equivalence $\varphi$ in $\susp A = \susp A$ is equivalent to the connected
-  component of $\varphi$ in ${\susp A} \to {\susp A}$. This provides the
-  equivalence of the statement.
-  %
+  The equivalence $f$ then restricts to an equivalence between the connected
+  component of $\refl a$ and the connected component of $p$.
 \end{proof}
+\begin{rem}
+  Another way to state this result is that for any $\infty$-group $G$
+  with an element $g$, we get an equivalence $\conncomp Ge \weq \conncomp Gg$
+  by mapping $h$ to $hg$.
+  Indeed, the point $a$ in $A$ has an $\infty$-group of automorphisms,
+  whose elements form the type $a=a$.
+
+  Of course, a similar result holds generally for wild groups.
+\end{rem}
 
 \section{Symmetries of the \texorpdfstring{$n$}{n}-sphere}
 \label{sec:higher-sphere}
@@ -2092,7 +2074,8 @@ x_0$ pointing $\gamma$ itself.
 The inverse of an element $\gamma$ is given by $\gamma \circ (-\id_{\susp B})$
 (where $-\id_{\susp B}$ is pointed by $\inv{\mrd(b_0)}$).  Then, there is an
 equivalence $(\susp B \ptdto X) \weq (\susp B \ptdto X)$ that maps $\gamma$ to
-$\gamma \times \inv \beta$. This equivalence sends the connected component at
+$\gamma \times \inv \beta$, cf.~\cref{prop:equiv-susp-comp}.
+This equivalence sends the connected component at
 $\beta$ to the connected component at $\wunit$, hence providing the pointed
 equivalence $\xi_\beta$. Explicitly:
 \begin{equation}
