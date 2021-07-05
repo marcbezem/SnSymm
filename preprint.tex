@@ -554,9 +554,9 @@ $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
   By definition of $-\id_\Sp$,
   $T(\north) \jdeq (\north=\north)$
   and $T(\south) \jdeq (\south=\south)$.
-  Hence one can take $\refl \north:T(\north)$
+  Hence we can take $\refl \north:T(\north)$
   and $\refl \south:T(\south)$.
-  To complete $\Sp$-induction, one should now provide an element
+  To complete $\Sp$-induction, we need to provide an element
   of type $\prod_{y:\Sc} \pathover{\refl \north} T {\mrd y} {\refl \south}$.
   However,
   transporting over a meridian in the family $T$ is conjugation by the
@@ -565,7 +565,7 @@ $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
   \begin{align*}
     \ap{-\id_\Sp \circ -\id_\Sp} (\mrd(y))
      &= \ap{-\id_\Sp}(\inv {\mrd(y)})
-    \\ &= \inv {\left( \ap{-\id_\Sp}(\mrd(y)) \right)}
+    \\ &= \inv {\bigl( \ap{-\id_\Sp}(\mrd(y)) \bigr)}
     \\ &= \inv { \left( \inv{\mrd(y)} \right) }
     \\ &= \mrd(y).
   \end{align*}
@@ -588,10 +588,11 @@ in~\cref{sec:circle-case}:
 \end{itemize}
 Notice that the last step is less ambitious than in the case of $\Sc$,
 where the two connected components were proven equivalent to each
-other but also each equivalent to $\Sc$ itself. Although we do not
-have any counter-argument for it, we do not expect that the connected
-components of $\id_\Sp$ and $-\id_\Sp$ are each equivalent to $\Sp$
-itself. Indeed, the proof in the case of $\Sc$ relies heavily on two
+other but also each equivalent to $\Sc$ itself.
+As we shall see in~\cref{sec:structure-components}, the connected
+components of $\id_\Sp$ and $-\id_\Sp$ are not equivalent to $\Sp$
+itself.
+And indeed, the proof in the case of $\Sc$ relied heavily on two
 facts: $\Sc$ is $1$-truncated and $\Sc$ is the classifying type of an
 abelian group. In other words, the homotopy structure of $\Sc$ is very
 well understood. This is not the case for $\Sp$: for example, it is
@@ -603,7 +604,7 @@ in~\cite{brunerie:thesis}, to get an analog in HoTT of the Hopf
 fibration in topology. First, let us define, uniformly in $x\from\Sc$, a
 function $\iota_x\from \Sc\to\Sc$ by $\Sc$-induction, putting
 $\iota_x(\base) \jdeq x$ and $\ap{\iota_x}(\Sloop) = f_x(\Sloop)$.
-Here $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
+Here, $f\from \prod_{x\from\Sc} (\base=\base) \weq (x=x)$ is the
 dependent function defined in~\cref{eq:S1-loopspace-Z-at-each-x}.
 Clearly, $\iota_{\base}=\id_{\Sc}$ and hence, since $\Sc$ is connected,
 every $\iota_x$ is merely equal to $\id_{\Sc}$ and thus an equivalence.
@@ -634,8 +635,8 @@ We start by carrying out the first step of the road map.
     \quad\text{and}\quad
     p(\south) \from \south = \north,
   \end{displaymath}
-  and for all $x\from\Sc$ a path over
-  $\ap p (\mrd(x))\from \pathover {p(\north)} T {\mrd(x)} {p(\south)}$ where
+  and for all $x\from\Sc$ a path over,
+  $\ap p (\mrd(x))\from \pathover {p(\north)} T {\mrd(x)} {p(\south)}$, where
   $T\from \Sp \to \UU$ is the type family
   $T(a)\defequi (\id_\Sp(a) = -\id_\Sp(a))$. Because $\Sp$ is simply
   connected and we are targeting the empty type $\varnothing$, which
@@ -1112,7 +1113,6 @@ general result.
   \begin{displaymath}
     \conncomp{(\susp A = \susp A)}{\id_{\susp A}} \weq \conncomp{(\susp A = \susp A)}{-\id_{\susp A}}
   \end{displaymath}
-  \label{prop:susp-components-are-equiv}
 \end{prop}
 \begin{proof}
   Recall that $-\id_{\susp A}$ is defined by induction as follows: it maps $\north$
@@ -1372,7 +1372,7 @@ Our motivation for this characterisation is that we know something about $\sigma
 \end{thm}
 
 
-Choosing $X$ to be $\Sn n$ and using that $\Sn n$ is $(n-1)$-truncated \cite[Corollary 8.2.2]{HoTT}, we get in particular the following instantiation:
+Choosing $X$ to be $\Sn n$ and using that $\Sn n$ is $(n-1)$-connected~\cite[Corollary 8.2.2]{HoTT}, we get in particular the following instantiation:
 
 
 \begin{cor} \label{cor:sigma-truncated}
@@ -1380,7 +1380,7 @@ For $n \geq 1$, the map
 \begin{equation}
   \sigma_{\Sn n} : \Sn n \to \Omega(\Sn {n+1})
 \end{equation}
-is $2(n-1)$-truncated.
+is $2(n-1)$-connected.
 \end{cor}
 
 
