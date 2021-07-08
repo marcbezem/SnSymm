@@ -4,7 +4,7 @@
 
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{enumitem}
-\usepackage{tikz,tikz-cd}
+\usepackage{tikz,tikz-cd,quiver}
 \usepackage{microtype}
 \usepackage[mathscr]{euscript}
 \usepackage{mathtools}
@@ -772,10 +772,10 @@ In order to perform the second and the third step, we first recall the result
 from \cite[Cor. 8.5.2]{HoTT}: the second homotopy group of $\Sp$ is $\ZZ$. More
 precisely, the second homotopy group $\hgr 2(\Sp)$ is defined as the
 set-truncation $\setTrunc{\loopspace 2 \Sp}$, and one can exhibit the map
-\begin{displaymath}
+\begin{equation}\label{eq:tau}
   \tau: \loopspace\null\Sp \ptdto \Sc, \, p \mapsto \ap\hopf(p)(\base),
 \text{ pointed by $\refl{\base}:\tau(\refl\north)=\base$}.
-\end{displaymath}
+\end{equation}
 Then \cite[Section 8.4 and 8.5]{HoTT} proves that the map $\loopspace\null\tau :
 \loopspace 2 \Sp \to \loopspace \null \Sc$ induces an isomorphism of groups
 $\setTrunc{\loopspace\null\tau}: \hgr 2(\Sp) \to \hgr 1(\Sc)$ on the set-truncations.
@@ -1016,7 +1016,7 @@ and $-\id_\Sp$ by the path $\inv{\mrd(\base)}$.
 \begin{proof}
   The previous result shows that $d(f) = \bar d(f) \jdeq
   \zeta(\settrunc{\gamma(f)})$ with $\gamma, \zeta$ equivalences. As
-  $\trunc\blank$ is $0$-connected, so is $d$, being a composition of
+  $\trunc\blank_0$ is $0$-connected, so is $d$, being a composition of
   $0$-connected maps. That is:
   \begin{displaymath}
     d(f) = d(g) \quad \text{if and only if}\quad
@@ -1797,6 +1797,142 @@ Here, we give the argument in the style of \cite{HoTT}:
 	Therefore, the two symmetries lie in different components, and any symmetry lies in one of the two components given by \cref{thm:higher-spheres-2}.
 \end{proof}
 
+\section{Summary and comparisons with other approaches}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[baseline=(a).base]
+  \node[scale=0.8] (a) at (0,0){
+  \begin{tikzcd}[cramped, column sep=tiny]
+  & \Sn0\ptdto\Sn0 &&[-5pt] \Sc\ptdto\Sc &&[-5pt] \Sp\ptdto\Sp &&[-5pt] \cdots && {\Omega^\infty\Sn\infty}
+  &[5pt] \\
+	{\{0,1\}} && {\pi_0\Sn0} && {\pi_1\Sc} && {\pi_2\Sp} && \cdots && \ZZ \\
+	& \Sn0\to\Sn0 && \Sc\to\Sc && \Sp\to\Sp && \cdots && {\Omega^\infty\Sn\infty} \\
+	{\{\pm0,\pm1\}} && {\setTrunc{\Sn0\to\Sn0}} && {\setTrunc{\Sc\to\Sc}} && {\setTrunc{\Sp\to\Sp}} && \cdots && \ZZ \\
+	& {\Sn0=\Sn0} && {\Sc=\Sc} && {\Sp=\Sp} && \cdots && {\mathrm{G}} \\
+	{\{\pm1\}} && {\setTrunc{\Sn0=\Sn0}} && {\setTrunc{\Sc=\Sc}} && {\setTrunc{\Sp=\Sp}} && \cdots && {\{\pm1\}}
+	\arrow[from=1-2, to=1-4]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=1-2, to=3-2, hook']
+	\arrow[from=1-4, to=1-6]
+	\arrow[from=1-4, to=2-5]
+	\arrow[from=1-4, to=3-4]
+	\arrow[from=1-6, to=1-4, curve={height=12pt}, dashed]
+	\arrow[from=1-6, to=1-8]
+	\arrow[from=1-6, to=2-7]
+	\arrow[from=1-6, to=3-6]
+	\arrow[from=1-8, to=1-10]
+	\arrow[from=1-10, to=2-11]
+	\arrow[from=1-10, to=3-10]
+	\arrow[from=3-2, to=1-4, curve={height=15pt}, dotted]
+	\arrow[from=3-2, to=3-4]
+	\arrow[from=3-2, to=4-3]
+	\arrow[from=3-4, to=1-6, curve={height=15pt}, dotted]
+	\arrow[from=3-4, to=3-6]
+	\arrow[from=3-4, to=4-5]
+	\arrow[from=3-6, to=3-8]
+	\arrow[from=3-6, to=4-7]
+	\arrow[from=3-6, to=1-8, curve={height=22pt}, dotted]
+	\arrow[from=3-8, to=3-10]
+	\arrow[from=3-10, to=4-11]
+	\arrow[from=5-2, to=3-2, hook]
+	\arrow[from=5-2, to=5-4]
+	\arrow[from=5-2, to=6-3]
+	\arrow[from=5-4, to=3-4, hook]
+	\arrow[from=5-4, to=5-6]
+	\arrow[from=5-4, to=6-5]
+	\arrow[from=5-6, to=3-6, hook]
+	\arrow[from=5-6, to=5-8]
+	\arrow[from=5-6, to=6-7]
+	\arrow[from=5-8, to=5-10]
+	\arrow[from=5-10, to=3-10, hook]
+	\arrow[from=5-10, to=6-11]
+	\arrow[from=2-1, to=1-2]
+	\arrow[from=2-1, to=4-1, hook']
+	\arrow[from=2-1, to=2-3, crossing over, "\sim"'{pos=.3}]
+	\arrow[from=2-3, to=2-5, crossing over, hook]
+	\arrow[from=2-3, to=4-3, crossing over, hook']
+	\arrow[from=2-5, to=2-7, crossing over, "\sim"'{pos=.3}]
+	\arrow[from=2-5, to=4-5, crossing over, "\sim"{pos=0.3,rottwoseventy}]
+	\arrow[from=2-7, to=2-9, crossing over]
+	\arrow[from=2-7, to=4-7, crossing over, "\sim"{pos=0.3,rottwoseventy}]
+	\arrow[from=2-9, to=2-11, crossing over, "\sim"'{pos=.6}]
+	\arrow[from=2-11, to=4-11, "\sim"{pos=0.3,rottwoseventy}]
+	\arrow[from=4-1, to=3-2]
+	\arrow[from=4-1, to=4-3, crossing over, "\sim"'{pos=.3}]
+	\arrow[from=4-3, to=4-5, crossing over]
+	\arrow[from=4-5, to=4-7, crossing over, "\sim"'{pos=.3}]
+	\arrow[from=4-7, to=4-9]
+	\arrow[from=4-9, to=4-11, crossing over, "\sim"'{pos=.6}]
+	\arrow[from=6-1, to=4-1, hook]
+	\arrow[from=6-1, to=5-2]
+	\arrow[from=6-1, to=6-3, "\sim"'{pos=.4}]
+	\arrow[from=6-3, to=4-3, crossing over, hook]
+	\arrow[from=6-3, to=6-5, "\sim"']
+	\arrow[from=6-5, to=4-5, crossing over, hook]
+	\arrow[from=6-5, to=6-7, "\sim"'{pos=.3}]
+	\arrow[from=6-7, to=4-7, crossing over, hook]
+	\arrow[from=6-7, to=6-9]
+	\arrow[from=6-9, to=6-11, "\sim"'{pos=.6}]
+	\arrow[from=6-11, to=4-11, hook]
+  \end{tikzcd}
+  };
+  \end{tikzpicture}
+  \caption{Relating pointed endomaps, endomaps, and self-identifications of spheres.}
+  \label{fig:comparisons}
+\end{figure}
+In \cref{fig:comparisons} we depict some relationships between the types studied so far.
+In the back, we see the types of pointed maps $\Sn n \ptdto \Sn n$ on the top,
+the types of maps $\Sn n\to\Sn n$ in the middle,
+and the types of identifications $\Sn n = \Sn n$ on the bottom,
+each related by suspension as we go left-to-right.
+In the front, we see the set truncations thereof,
+with the set truncation maps going back-to-front.
+Additionally, we see on the front left concrete monoids that are equivalent
+to the types involving the $0$-sphere.
+(The map $-0 : \Sn0\to\Sn0$ is the constant map at the non-base point;
+this becomes identified with $0$ after one suspension.)
+
+On the right, we see the sequential colimits.
+Since the top two sequences in the back are cofinal,
+as indicated by the dotted arrows,
+they have the same colimit, which we identify with the elements
+of the sphere spectrum, $\loopspace\infty\Sn\infty$.
+The sequential colimit of the self-identification groups
+$\mathrm{G}(n+1) \jdeq (\Sn n=\Sn n)$
+is the group of units of the sphere spectrum,
+$\mathrm{G} \jdeq \mathrm{GL}_1(\mathbb{S})$.
+
+The dashed arrow takes a pointed map $f : \Sp\ptdto\Sp$
+to the composite $\tau \circ \loopspace\null(f) \circ \eta_{\Sc} : \Sc\ptdto\Sc$,
+where $\tau : \loopspace\null\Sp \ptdto \Sc$ comes from the H-space structure
+on the circle, cf.~\cref{eq:tau}.
+This is a retraction of the suspension operation, because
+if $f \jdeq \susp(g)$, then
+\[
+  \tau \circ \loopspace\null \susp(g) \circ \eta_{\Sc}
+  = \tau \circ \eta_{\Sc} \circ g = g
+\]
+by \cref{lem:eta-S1-section-tau}.
+Relative to the equivalences $(\Sc\ptdto\Sc)\weq\loopspace\null\Sc$
+and $(\Sp\ptdto\Sp)\weq\loopspace2\Sp$, the dashed map
+can be identified with
+$\loopspace\null(\tau) : \loopspace2\Sp \ptdto \loopspace\null\Sc$,
+which is a $0$-equivalence.
+
+The homotopy groups of $\loopspace\infty\Sn\infty$ are of course
+the stable homotopy groups of the spheres, $\pi^s_k$.
+Since the type of units $\mathrm{G}$ embeds into $\loopspace\infty\Sn\infty$,
+it has the same homotopy groups, except for the connected components:
+\[
+  \pi_k(\mathrm{G}) =
+  \begin{cases}
+    \ZZ/2\ZZ, &\text{for $k=0$,} \\
+    \pi^s_k, &\text{otherwise.}
+  \end{cases}
+\]
+\todo[inline]{Is this helpful? \ldots Discuss how our approach to degrees is similar/different from \cite{Buchholtz2018CellularCI}.}
+
 \section{The structure of the components}
 \label{sec:structure-components}
 
@@ -2352,12 +2488,11 @@ The first observation we make is simple:
 \cref{prop:general-case-conn-comp-equiv} means that we can restrict ourselves to the connected component of $\id$ (or $\refl{}$) in $(\Sn n = \Sn n)$. From now on, we use $\id$ as the implicit base point of $(\Sn n = \Sn n)$.
 The rest of this subsection is devoted to calculating the fundamental group of this type, which also allows us to see that the equivalence $(\Sn 1 = \Sn 1) = (\Sn 1 + \Sn 1)$ does not generalize for $n > 1$.
 
-\begin{lem}
+\begin{lem}\label{lem:fgr-ptd-endomaps-Sn}
   For any $n\geq 1$, there is a group isomorphism:
   \begin{displaymath}
     \xi_n: \fgr(\Sn n \ptdto \Sn n, \id) \weq \hgr {n+1} (\Sn n)
   \end{displaymath}
-  \label{lem:fgr-ptd-endomaps-Sn}
 \end{lem}
 \begin{proof}
   Recall the equivalence $\phi_{\Sn n}^n : (\Sn n \ptdto \Sn n) \to \loopspace
@@ -2395,8 +2530,8 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     \conncomp{(\Sn n \ptdto \Sn n)}{\alpha} \weq
     \conncomp{(\Sn n \ptdto \Sn n)}{\beta}.
   \]
-  This is given by $\gamma \mapsto \gamma + \beta - \alpha$,
-  where we write the group operation additively.
+  This is given by $\gamma \mapsto \gamma - \alpha + \beta$,
+  where we write the group operation additively, cf.~\cref{prop:equiv-susp-comp}.
   This induces group isomorphisms
   \[
     \fgr(\Sn n \ptdto \Sn n, \alpha) \weq
@@ -2526,7 +2661,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
     \overset\kappa \to \fgr (\Sp \to \Sp, \id_\Sp) \to \fgr (\Sp)
     \label{eq:exact-seq-compute-pi1-S2eqS2}
   \end{equation}
-  We consider the type $\Sp \to \Sp$ as pointed at the elemnt $\id_\Sp$. Hence,
+  We consider the type $\Sp \to \Sp$ as pointed at the element $\id_\Sp$. Hence,
   we write only $\fgr(\Sp \to \Sp)$ instead of $\fgr(\Sp\to\Sp,\id_\Sp)$.
   %
   The sphere $\Sp$ is simply connected, that is $\fgr(\Sp) = 0$. By exactness,
@@ -2545,7 +2680,6 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   \end{equation}
   We now invoke the main result from \cite{brunerie:thesis} to conclude that
   $\fgr (\Sp = \Sp) = \ZZ/2\ZZ$ (as groups).
-
 %% --- OLD PARTIAL PROOF ---
 %% Maybe make a remark about the alternative presentation of Brunerie's number.
 %%
@@ -2677,6 +2811,16 @@ we obtain an approximation to the classical EHP sequence~\cite{gwwhitehead1953},
 It would be interesting to construct this in homotopy type theory,
 as well as, of course, more modern refinements such as the various
 EHP spectral sequences for each prime $p$.
+
+We have focused on the self-identification types $\Sn n = \Sn n$,
+but we could of course also look at the other components of
+the function type $\Sn n \to \Sn n$.
+For $n\ge3$, we don't get anything new by the proof of \cref{thm:fund-grp-of-symmetries}.
+However, for $n=2$, from the proof of \cref{thm:Sp-sym=Z/2},
+the fundamental group of a component of $\Sp \to \Sp$
+depends on the corresponding degree.
+Once we know that the Whitehead product is linear,
+we can conclude that $\fgr(\Sp \to \Sp, f) = \ZZ/2\lvert d(f)\rvert$.
 
 \bibliographystyle{alphaurl}
 \bibliography{bib}
