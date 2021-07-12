@@ -93,7 +93,7 @@ The field that embraces the view of types as spaces qua homotopy types is known 
 
 It turns out that various results that hold for spaces in standard homotopy theory can be stated and proved for types in homotopy type theory.
 The framework enforces all arguments to be purely axiomatic in nature, and the resulting subfield of homotopy type theory is sometimes called \emph{synthetic homotopy theory}.
-Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite[Chp.~8.5]{HoTT}.
+Examples of results are the type-theoretic Seifert-van Kampen theorem~\cite{houfavonia_et_al:LIPIcs:2016:6562}, the Blakers-Massey connectivity theorem~\cite{favonia_blakers}, and the construction of the Hopf fibration~\cite[Ch.~8.5]{HoTT}.
 
 A central type of study in synthetic homotopy theory is the $n$-dimensional sphere type $\Sn n$.
 The calculation of the fundamental group of the circle $\Sn 1$ was among the first results in the area~\cite{licataShulman_circle}, and the result was quickly extended to the $n$\th{} homotopy group of $\Sn n$, i.e., to $\pi_n(\Sn n)$~\cite{licataBrunerie_s1again}.
@@ -148,8 +148,8 @@ if $p:x=y$ and $q:y=z$ are paths, then we denote their
 composition by $qp$, or by $q\cdot p$.
 
 We postulate a type $\NN$ of natural numbers with its inductive property
-(cf.~\cite[Chapter 1.9]{HoTT}), from which is crafted a type $\ZZ$ of integers
-as in \cite[\githubpath core/lib/types/Int.agda]{hott-agda}. The crucial
+(cf.~\cite[Ch.~1.9]{HoTT}), from which is crafted a type $\ZZ$ of integers
+as in \cite[\githubpath core/lib/types/Int.agda]{hott-agda}. One important
 property of $\ZZ$ (proved in the cited file), is that it has decidable
 equality. We allow also several higher inductive types that are defined in
 \cite{HoTT}: propositional and set truncations, suspension, and the circle.
@@ -267,6 +267,8 @@ In \cref{sec:higher-sphere}, we propagate the result by induction on
 $n\geq 2$: the type $\Sn n = \Sn n$ has exactly two connected
 components, equivalent to one another. Each induction step relies on
 Freudenthal's suspension theorem.
+
+\todo[inline]{New Section 5 TBD}
 
 In \cref{sec:structure-components}, we then show that the fundamental group
 of each component of $\Sn n = \Sn n$ is $\ZZ/2\ZZ$ for $n\ge2$.
@@ -401,7 +403,7 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   Setting $\varphi_0 \defequi \pi_{\base} \inv{\ap \varphi(\psi_0)} : \varphi(\base) = \base$,
   we obtain an identification of pointed maps,
   $(\varphi,\varphi_0) \circ (\psi,\psi_0) =_{\Sc\ptdto\Sc} (\id_\Sc, \refl\base)$.
-  Now, consider the induced applications
+  The wild functor $\loopspace \null$ (see \cref{ex:loop-sus-wild-functors}) induces:
   \begin{displaymath}
     \loopspace{} (\varphi,\varphi_0) \from \loopspace{} \Sc \to \loopspace{} \Sc
     \quad\text{and}\quad
@@ -438,7 +440,7 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
   the element $b$ just defined, transported back over the equivalence
   \begin{displaymath}
     (\pathover {\varphi_0} {\varphi(\blank) = \id_\Sc(\blank)} \Sloop {\varphi_0}) \weq
-    ( \Sloop \varphi_0 \inv {\ap\varphi(\Sloop)} = \varphi_0)
+    ( {\Sloop} \varphi_0 \inv {\ap\varphi(\Sloop)} = \varphi_0)
     \weq (\varphi_0 \ap\varphi(\Sloop) \inv {\varphi_0} = \Sloop)
   \end{displaymath}
   Hence $\trunc{\kappa} : \Trunc{\varphi = \id_\Sc}$.
@@ -448,7 +450,7 @@ the following consequence of \cref{lemma:S1-id-neq-minusid}.
 \end{proof}
 
 For any type $A$, and an element $a\from A$, let us write $\conncomp A a$
-for the connected component of $a$ in $A$. In other words,
+for the connected component of $a$ in $A$. In a formula,
 \begin{displaymath}
   \conncomp A a \defequi \sum_{x\from A}\Trunc{a=x}.
 \end{displaymath}
@@ -596,7 +598,7 @@ And indeed, the proof in the case of $\Sc$ relied heavily on two
 facts: $\Sc$ is $1$-truncated and $\Sc$ is the classifying type of an
 abelian group. In other words, the homotopy structure of $\Sc$ is very
 well understood. This is not the case for $\Sp$: for example, it is
-certainly not $2$-truncated (\cite{brunerie:thesis}), and it expected
+certainly not $2$-truncated (\cite{brunerie:thesis}), and is expected
 to be provably not $n$-truncated for any $n$.
 
 The main tool for this section is the Hopf family, as defined by Brunerie
@@ -1548,7 +1550,7 @@ We now see that there are two connected components of symmetries of spheres:
 
 \subsection{Concrete symmetries of \texorpdfstring{$\Sn n$}{Sn}}
 
-As in the cases of $\Sc$ and $\Sp$, we want to construct one concrete element for each of the two connected components of symmetries on $\Sn n$ that were established in \cref{thm:higher-spheres-2}.
+As in the cases of $\Sc$ and $\Sp$, we want to construct one concrete element for each of the two connected components of symmetries of $\Sn n$ that were established in \cref{thm:higher-spheres-2}.
 As before, these two elements are given as $\id$ and $-\id : \Sn n \to \Sn n$.
 It is clear that they are symmetries (i.e., equivalences), as each is self-inverse.
 What is less obvious is that they are distinguishable, i.e., represent the two different components in \cref{thm:higher-spheres-2} rather than the same.
@@ -2539,7 +2541,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
   \]
 \end{rem}
 %\begin{thm}
-%    The fundamental group of the type of symmetries on $\Sn n$ is
+%    The fundamental group of the type of symmetries of $\Sn n$ is
 %    as follows.
 %    If $n \in \{1,2\}$, then $\pi_1(\Sn n = \Sn n)$ is $\ZZ$;
 %    if $n \geq 3$, then $\pi_1(\Sn n = \Sn n)$
@@ -2551,7 +2553,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 %\end{proof}
 
 \begin{thm} \label{thm:fund-grp-of-symmetries}
-    For $n \geq 3$, the fundamental group of the type of symmetries on $\Sn n$ is the cyclic group of order $2$:
+    For $n \geq 3$, the fundamental group of the type of symmetries of $\Sn n$ is the cyclic group of order $2$:
     \begin{equation}
     \fgr(\Sn n = \Sn n, \id) = \ZZ \slash 2\ZZ
     \end{equation}
@@ -2763,7 +2765,7 @@ The rest of this subsection is devoted to calculating the fundamental group of t
 Let us summarize the results of the current section, putting \cref{thm:higher-spheres-2,prop:general-case-conn-comp-equiv,thm:fund-grp-of-symmetries} together:
 
 \begin{thm}
-    For $n \geq 3$, the type of symmetries on $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\ZZ \slash 2\ZZ$. \qed
+    For $n \geq 3$, the type of symmetries of $\Sn n$ has two connected components. The two components are equivalent and both have fundamental group $\ZZ \slash 2\ZZ$. \qed
 \end{thm}
 
 
