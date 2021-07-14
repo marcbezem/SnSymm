@@ -128,7 +128,11 @@ We refer to Smith~\cite{smith2010} for a general survey of the homotopy theory o
 To be fully precise and to fix notations, we work inside a version of
 intuitionistic Martin-L\"of type theory with $\Sigma$-, $\Pi$- and
 $\Id$-types and with a cumulative hierarchy of universes,
-simply written $\UU$, for which Voevodsky's univalence axiom hold. The
+simply written $\UU$, for which Voevodsky's univalence axiom hold. 
+Our type theory corresponds to the one developed in the book \cite{HoTT}, although we only assume those higher inductive types that we specify below, and higher inductive-inductive constructions are not assumed at all.
+
+The internal equality type is denoted by $=$, while judgmental equality is written as $\equiv$.
+The
 transport along $p$ in a type family $T:A\to \UU$ is denoted
 $\trp [T] p$, and $\pathover u T p v$ denotes $\trp [T] p {(u)} = v$.
 For any dependent function $f\from\prod_{x\from A}T(x)$,
@@ -258,9 +262,9 @@ is quite straightforward once we unravel the details.
 
 In \cref{sec:sphere}, we deal with the case $n=2$. Because the
 equivalence of the case $n=1$ relies heavily on $\Omega(\Sc)\weq \ZZ$
-being an abelian group, we can not expect to generalize the proof for
+being an abelian group, that argument cannot be directly adapted to the case
 $n=2$. However, a careful analysis of Brunerie's proof of
-$\pi_2(\Sp) \weq \ZZ$ allows us to prove that the type $\Sp=\Sp$ has
+$\pi_2(\Sp) \weq \ZZ$ \cite{TODO} allows us to prove that the type $\Sp=\Sp$ has
 exactly two connected components, equivalent to one another.
 
 In \cref{sec:higher-sphere}, we propagate the result by induction on
@@ -285,7 +289,7 @@ In this section, we will prove the following result.
   There is an equivalence
   \begin{equation}
     \label{eq:symm-circle}%
-    (\Sc = \Sc) \weq \Sc+\Sc.
+    (\Sc = \Sc) \weq (\Sc+\Sc).
   \end{equation}
 \end{thm}
 We will treat univalence as transparent, so that equivalences
@@ -322,7 +326,7 @@ it is shown in the following. In order to construct a proof of $-\id_\Sc \circ
 -\id_\Sc = \id_\Sc$, we use function extensionality and $\Sc$-induction.
 Since $\refl\base$ is an element of $-\id_\Sc\circ -\id_\Sc (\base) = \base$,
 we only need to provide an element of $\pathover {\refl\base} T \Sloop
-{\refl\base}$ where $T$ is the type family $x \mapsto -\id_\Sc \circ -\id_\Sc (x)
+{\refl\base}$ where $T$ is the type family $x \mapsto \left(-\id_\Sc \circ -\id_\Sc \right)(x)
 = x$. The transport in the type family $T$ over $\Sloop$ is given by
 \begin{displaymath}
   p \mapsto \Sloop \cdot p \cdot \inv{[-\id_\Sc \circ -\id_\Sc](\Sloop)}.
@@ -341,20 +345,20 @@ path algebra, as we wanted.
   $\id_\Sc(\base) \jdeq \base \jdeq -\id_\Sc(\base)$, one gets a path
   $p(\base) \from \base = \base$, and a $2$-path
   $\ap p (\Sloop) \from \pathover {p(\base)} T \Sloop {p(\base)}$ where
-  $T(x)\defequi (\id_\Sc(x) = -\id_\Sc(x))$ for all $x:\Sc$. One can
-  easily find by induction on $q\from x=y$ a 2-path of type
+  $T(x)\defequi (\id_\Sc(x) = -\id_\Sc(x))$ for all $x:\Sc$.
+  For any $r : T(x)$ and $q : x = y$, we have a 2-path of type
   \begin{displaymath}
     \trp [T] q (r) = \ap{-\id_\Sc}(q)\, r \inv{\ap{\id_\Sc}(q)},
-    \quad\text{for all $r : T(x)$.}
   \end{displaymath}
-  Applied to $r \defequi p(\base)$, we get that $\ap p(\Sloop)$ provides a 2-path of type
+  constructed by path induction on $q$.
+  Applied to $r \defequi p(\base)$ and $q \defequi \Sloop$, we get that $\ap p(\Sloop)$ provides a 2-path of type
   $\inv\Sloop p(\base) \inv\Sloop = p(\base)$. Now recall that
   the function
   \begin{equation}
     \label{eq:loopspace-circle-Z}%
     \ZZ\to(\base=\base),\quad k \mapsto \Sloop^k
   \end{equation}
-  is an equivalence. In particular, it shows that path-composition in
+  is an equivalence~\cite{licataShulman_circle}. In particular, it shows that path-composition in
   $\base=\base$ is commutative, and $\ap p (\Sloop)$ together with
   path algebra provide then a path of type $\Sloop = \inv\Sloop$. This
   is a contradiction, as it would yield a path of type $1=-1$ in $\ZZ$
@@ -466,8 +470,10 @@ there is an element of the type:
 In order to prove our goal (cf.~\cref{eq:symm-circle}), it remains to
 exhibit equivalences from $\Sc$ to both
 $\conncomp{(\Sc=\Sc)}{\id_\Sc}$ and
-$\conncomp{(\Sc=\Sc)}{-\id_\Sc}$. First note that because $\Sc=\Sc$ is
-a subtype of $\Sc\to\Sc$, the connected component of any equivalence
+$\conncomp{(\Sc=\Sc)}{-\id_\Sc}$.
+Note that the canonical map $(\Sc = \Sc) \to (\Sc \to \Sc)$ is $(-1)$-truncated, i.e.\ $\Sc=\Sc$ is a \emph{subtype} of $\Sc\to\Sc$.
+This implies that
+the connected component of any equivalence
 $\varphi$ in $\Sc=\Sc$ is equivalent to the connected component of
 $\varphi$ seen as a function in $\Sc \to \Sc$. In particular,
 \begin{displaymath}
@@ -507,8 +513,9 @@ equivalence. Because $\ZZ$ is a set and $\Sc$ is connected, the
 connected components of $\Sc\times\ZZ$ are easy to understand: for
 every $x:\Sc$ and $k:\ZZ$, the connected component of $(x,k)$ is
 equivalent to the type of all pairs $(x',k)$ for
-$x'\from\Sc$. In particular, every connected component of
-$\Sc\times\ZZ$ is equivalent to $\Sc$. In particular, we get
+$x'\from\Sc$, implying that every connected component of
+$\Sc\times\ZZ$ is equivalent to $\Sc$. Therefore, %%% (avoid repeating 'in particular' too often)
+we get
 equivalences:
 \begin{displaymath}
   \conncomp{\left(\Sc \to \Sc\right)}{\id_\Sc} \weq \Sc
@@ -545,7 +552,7 @@ $-\id_\Sp(\north) \jdeq \south$, and $-\id_\Sp(\south) \jdeq \north$ and
 $\ap{-\id_\Sp}(\mrd(x)) = \inv{(\mrd(x))}$ for all $x\from\Sc$.
 
 \begin{lem}
-  The function $-\id_\Sp$ is an equivalence.
+  The function $-\id_\Sp$ is self-inverse and thus an equivalence.
   \label{lem:minus-id-equivalence}
 \end{lem}
 \begin{proof}
