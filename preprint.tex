@@ -324,7 +324,7 @@ that:
 Let us note that $-\id_\Sc$ is an equivalence. It is indeed its own inverse, as
 it is shown in the following. In order to construct a proof of $-\id_\Sc \circ
 -\id_\Sc = \id_\Sc$, we use function extensionality and $\Sc$-induction.
-Since $\refl\base$ is an element of $-\id_\Sc\circ -\id_\Sc (\base) = \base$,
+Since $\refl\base$ is an element of $(-\id_\Sc\circ -\id_\Sc)(\base) = \base$,
 we only need to provide an element of $\pathover {\refl\base} T \Sloop
 {\refl\base}$ where $T$ is the type family $x \mapsto \left(-\id_\Sc \circ -\id_\Sc \right)(x)
 = x$. The transport in the type family $T$ over $\Sloop$ is given by
@@ -1118,7 +1118,7 @@ $\conncomp{(\Sp = \Sp)}{-\id_\Sp}$ are equivalent.
 In fact, it has little to do with $\Sp$ itself, and one can state a more
 general result.
 \begin{prop} \label{prop:equiv-susp-comp}
-  Let $A$ be a type with a point $a$ and a loop $p : a = a$. Then:
+  Let $A$ be a type with a point $a:A$ and a loop $p : a = a$. Then:
   \begin{displaymath}
     \conncomp{(a = a)}{\refl{a}} \weq \conncomp{(a = a)}{p}
   \end{displaymath}
@@ -1167,10 +1167,12 @@ where we use that the suspension $\susp$ acts like a functor on morphisms:
     is a $0$-connected morphism of wild monoids under composition.
 \end{restatable}
 
+The proof of this theorem will be elaborated in the next subsection.
 As we will discuss later, \cref{thm:susp-is-monoid-iso} makes it easy to see
-that $\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$ is
-an isomorphism of monoids, which by induction implies that $\setTrunc {\Sn n
-\to \Sn n}$ is as a monoid isomorphic to $(\ZZ, \times)$. Then, we will be able
+that $\susp$ induces an isomorphism 
+$\setTrunc {\Sn n \to \Sn n} \to \setTrunc {\Sn {n+1} \to \Sn {n+1}}$
+of monoids, which by induction implies that $\setTrunc {\Sn n \to \Sn n}$ 
+is as a monoid isomorphic to $(\ZZ, \times)$. Then, we will be able
 to conclude that $\Sn n = \Sn n$ has two connected components.
 
 \subsection{Connectedness of the suspension morphism}
