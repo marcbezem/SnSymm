@@ -1937,13 +1937,39 @@ the stable homotopy groups of the spheres, $\pi^s_k$.
 Since the type of units $\mathrm{G}$ embeds into $\loopspace\infty\Sn\infty$,
 it has the same homotopy groups, except for the connected components:
 \[
-  \pi_k(\mathrm{G}) =
+  \hgr k(\mathrm{G}) =
   \begin{cases}
     \ZZ/2\ZZ, &\text{for $k=0$,} \\
-    \pi^s_k, &\text{otherwise.}
+    \hgr k^{\mathrm s}, &\text{otherwise.}
   \end{cases}
 \]
-\todo[inline]{Is this helpful? \ldots Discuss how our approach to degrees is similar/different from \cite{Buchholtz2018CellularCI}.}
+
+Though not shown in \cref{fig:comparisons}, the types of pointed identifications
+$\Sn n=_*\Sn n$ are equivalent to pullbacks of the vertical cospans in the back.
+We have embeddings
+$(\Sn n=_*\Sn n) \hookrightarrow \loopspace n\Sn n$ onto the subtypes
+$\Omega^n_{\pm1}\Sn n$ corresponding to the generators
+$\{\pm1\}$ in $\hgr n\Sn n\simeq \ZZ$. Hence the homotopy groups
+of $\Sn n=_*\Sn n$ are the unstable homotopy groups of spheres,
+except at degree $0$:
+\[
+  \hgr k(\Sn n=_* \Sn n,\pm\id) =
+  \begin{cases}
+    \ZZ/2\ZZ, &\text{for $k=0$,} \\
+    \hgr{n+k}\Sn n, &\text{otherwise.}
+  \end{cases}
+\]
+
+Our construction of degree functions establishing the above picture
+follows in most respects the approach outlined in \cite[Sec.~5]{Buchholtz2018CellularCI}.
+The difference is that we focus on the (wild) monoid structures given by composition
+instead of the group structures given either by the cogroup structures on the spheres
+or by transport from the wild groups $\loopspace n\Sn n$.
+We thus give a direct proof of~\cref{cor:id-not-minus-id} that is interesting
+its own right,
+even though one could also conclude that $d(-\id_{\Sn n})=-1$ from
+the facts that $-\id_{\Sn n}$ is the additive inverse of $\id_{\Sn n}$
+and that the degree is a $0$-equivalence sending $\id_{\Sn n}$ to $1$.
 
 \section{The structure of the components}
 \label{sec:structure-components}
